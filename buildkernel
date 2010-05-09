@@ -1,0 +1,34 @@
+#!/bin/bash
+set -x
+
+#export KCFLAGS="-march=k8 -O2 -pipe"
+
+ARCH=x86
+BUILD="/media/Sentinel/zen/zen-stable/"
+echo "Copy your config file to $BUILD as .config"
+read
+make prepare
+echo "Running menuconfig"
+read
+make menuconfig
+#echo "Running general config"
+#read
+#make config
+read
+kernver="$(make kernelrelease)"
+echo "Kernel version $kernver"
+read
+echo "Building bzImage!"
+read
+make -j3 bzImage
+echo "Building modules!"
+read
+make -j3 modules
+
+echo "Steps after this affects ur system"
+read
+echo "Sure?"
+read
+
+sudo ./installkernel "$kernver"
+set +x
