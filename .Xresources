@@ -1,0 +1,10 @@
+Xcursor.size:	18
+Xcursor.theme_core:	true
+Xcursor.theme: whiteglass
+
+Xft.antialias:	true
+Xft.dpi:	101
+Xft.hinting:	false
+Xft.hintstyle:	hintnone
+Xft.rgba:	rgba
+Xft.lcdfilter: lcddefault
