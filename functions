@@ -1,0 +1,278 @@
+# set ft=sh
+map(){
+    local command i rep
+    if [ $# -lt 2 ] || [[ ! "$@" =~ :[[:space:]] ]];then
+        echo "Invalid syntax." >&2; return 1
+    fi
+    until [[ $1 =~ : ]]; do
+        command="$command $1"; shift
+    done
+    command="$command ${1%:}"; shift
+    for i in "$@"; do
+        if [[ $command =~ \{\} ]];then
+            rep="${command//\{\}/\"$i\"}"
+            eval "${rep//\\/\\\\}"
+        else
+            eval "${command//\\/\\\\} \"${i//\\/\\\\}\""
+        fi
+    done
+}
+
+function click(){
+sleep 5
+scrot
+notify-send "Done!"
+ls *.png
+}
+
+function mpl() 
+{
+$HOME/bin/mplayer "$@"
+}
+
+function mutt()
+{
+LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so  /usr/bin/mutt 
+}
+
+function download(){
+aria2rpc addUri "$@"
+}
+
+function pkgsearch(){
+#set -x
+term="$1"
+shift
+pkg="$@"
+for i in $pkg
+do
+ for j in `pacman -Ql $i | cut -d " " -f 2`
+ do
+	grep -l -i $term $j
+ done
+done
+#set +x
+}
+
+function getmovie (){
+/usr/bin/get_movie.py `/usr/bin/search_movie.py "$@" | head -3  | tail -1 | cut -d ":" -f 2`
+}
+function man2pdf(){ 
+man -t ${1:?Specify man as arg} | ps2pdf -dCompatibility=1.3 - - > ${1}.pdf 
+}
+
+function torrent(){
+screen -c $HOME/.rtorrent/.screenrc -S torrent rtorrent
+}
+
+function randbash(){
+curl -s http://bash.org/?random1|grep -oE "<p class=\"quote\">.*</p>.*</p>"|grep -oE "<p class=\"qt.*?</p>"|sed -e 's/<\/p>/\n/g' -e 's/<p class=\"qt\">//g' -e 's/<p class=\"qt\">//g'|perl -ne 'use HTML::Entities;print decode_entities($_),"\n"'| head -1  
+#awk 'length($0)>0 {printf( $0 "\n%%\n" )}' > ~/bash_quotes.txt
+}
+
+
+function ifind(){
+find . -iname "*$@*"
+}
+
+
+apod(){
+DATE=`date +%s`
+wget -q -O ~/.cache/apod:$DATE.jpg -c http://apod.nasa.gov/apod/$(curl -s http://apod.nasa.gov/apod/ | grep IMG  | cut -d "\"" -f 2)
+feh ~/.cache/apod:$DATE.jpg
+}
+
+geoip () { curl -s "http://www.geoiptool.com/?IP=$1" | html2text | egrep --color 'City:|IP Address:|Country:'; }
+
+bbcradio() { local s;echo "Select a station:";select s in 1 1x 2 3 4 5 6 7 "Asian Network an" "Nations & Local lcl";do break;done;s=($s);mplayer -playlist "http://www.bbc.co.uk/radio/listen/live/r"${s[@]: -1}".asx";}
+
+
+
+function flushmac(){
+rm -rf $HOME/.macromedia/Flash_Player/*;
+mkdir -p ~/.macromedia/Flash_Player/macromedia.com/support/flashplayer/sys
+cp ~/Arch/settings.sol ~/.macromedia/Flash_Player/macromedia.com/support/flashplayer/sys/
+}
+
+function def(){
+ 
+ wn $1 -over
+ if [ $? != "0" ];then echo $1 >> ~/wordlist;fi               
+                                                              
+}
+
+function disappear(){
+sudo /etc/rc.d/tor start
+sudo /etc/rc.d/privoxy start
+}
+
+function igrep(){
+FILENAME=$1
+PATTERN=$2
+find . -iname "$FILENAME" -exec grep -il "$PATTERN" {} \;
+}
+
+function lookup(){
+links -dump http://wordnet.princeton.edu/perl/webwn?s=$1 | grep -i --word-regexp --color=always -B 2 -A 5 $1 | sed '$d'
+}
+
+function checkup() { curl -s dict://dict.org/d:"$@" | tail +4; }
+
+function lessc() { /usr/share/vim/vim72/macros/less.sh "$@";}
+function stemp() { 
+echo `acpi -t | awk -F ',' '{ print $2 }' | cut -d " " -f 2`
+echo `nvidia-settings -q gpucoretemp | grep Supernova | cut -d ":" -f 3`
+#echo `sudo hddtemp SATA:/dev/sda | cut -d ":" -f 3`;
+ }
+
+
+
+function ncm(){
+#if [ ! -f /var/run/daemons/mpd ];then sudo /etc/rc.d/mpd start;fi
+ncmpcpp
+}
+
+
+function rcstart(){
+if [[ -f /var/run/daemons/$1 ]];then
+    sudo /etc/rc.d/$1 stop; sleep 2; sudo /etc/rc.d/$1 start
+else
+    sudo /etc/rc.d/$1 start
+fi
+}
+
+function cscore()
+{
+    curl -s -e "http://www.google.com" -A "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.1) Gecko/20061204 Firefox/2.0.0.1" "http://livechat.rediff.com:80/sports/score/score.txt"
+}
+
+function whichpack(){
+pacman -Q | grep "$@"
+}
+
+function rsize() {
+wget --spider "$@" -o /tmp/wget_tmp; grep -i Length /tmp/wget_tmp; rm /tmp/wget_tmp
+}
+
+function buildabs()
+{
+    DIR="/var/abs/" 
+    path=`find -O3 $DIR -name "$1" -maxdepth 2 -type d | head -1`
+    cp -Rv $path /dev/shm
+    cd /dev/shm/$1
+    clear
+}   
+
+function vpdf(){
+pdftohtml -q -stdout -noframes "$@" | w3m -T text/html
+}
+
+function view()
+{
+if [[ -z "$@" ]];then
+thunar ~/Documents
+else
+nohup evince "$@" & &>/dev/null
+fi
+}
+
+function rcstop(){
+sudo /etc/rc.d/$1 stop
+}
+
+
+function _prompt {
+  _dir_abbr=$(temp=$(echo "${PWD/$HOME/~}" |sed -r 's/(\/.)[^/]*/\1/g'); echo ${temp:0:$(( ${#temp} - 1 ))})
+  _ps1="$(basename "${PWD/$HOME/~}")"
+  if [ ${#_ps1} -gt 25 ]; then
+      _ps1="${_ps1:0:7}...${_ps1: -7}"
+  fi
+  echo -n "$_dir_abbr$_ps1"
+}
+
+
+function whoru() { echo "Path:"`which $@`; which $1 |  xargs -i pacman -Qo {} ; }
+
+function fdz() { ls -lth |  egrep "[0-9](M|G)" | sort -k 5 -n | cut -d " " -f 5,6-; }
+
+function dz() { find . -maxdepth $1 -type d -exec du {} \; | sort -n | awk '{ print $2,"\t",$1/1024,"MB" }' | uniq; }
+function psp() { ps auxww | /bin/grep -i "$@"; }
+function svim() { sudo vim "$@";}
+function bkp() 
+{   
+    rstr=`date +%s`; dest=~/Backup/`basename "$@"`.$rstr
+    cp "$@" $dest; echo "Enter description"; read desc
+    if [ -n "${desc}" ]
+    then
+       echo "$@: "`date`    >> ~/Backup/bjournal
+       echo "----------------------------------------" >> ~/Backup/bjournal
+       echo "Backup filename: "`basename $dest` >>  ~/Backup/bjournal
+       echo "Description:" >>  ~/Backup/bjournal
+       echo $desc >> ~/Backup/bjournal
+       echo " " >> ~/Backup/bjournal
+    fi
+}
+
+
+function get_rss(){
+	rsstail -u http://rss.slashdot.org/Slashdot/slashdot -u http://www.reddit.com/.rss
+}
+
+function newcnd() { echo "$@" >> ~/newcomies; }
+
+function restorrent(){ 
+screen -c $HOME/.rtorrent/.screenrc -r torrent;
+}
+
+extract() {    
+  if [ -f "$1" ] ; then
+    case "$1" in
+      *.tar.bz2) tar xvjf "$1"   ;;
+      *.tar.gz)  tar xvzf "$1"   ;;
+      *.bz2)     bunzip2 "$1"    ;;
+      *.rar)     unrar x "$1"    ;;
+      *.gz)      gunzip "$1"     ;;
+      *.tar)     tar xvf "$1"    ;;
+      *.tbz2)    tar xvjf "$1"   ;;
+      *.tgz)     tar xvzf "$1"   ;;
+      *.zip)     unzip "$1"      ;;
+      *.Z)       uncompress "$1" ;;
+      *.7z)      7z x "$1"       ;;
+      *)
+      echo "'$1' cannot be extracted"
+      return 1
+      ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+    return 1
+  fi
+  return 0
+}
+
+
+calc() {
+  echo "scale=5; $@" | bc
+}
+
+define() {
+  local LNG=$(echo $LANG | cut -d '_' -f 1)
+  local CHARSET=$(echo $LANG | cut -d '.' -f 2)
+  lynx -accept_all_cookies -dump -hiddenlinks=ignore -nonumbers -assume_charset="$CHARSET" -display_charset="$CHARSET" "http://www.google.com/search?hl=${LNG}&q=define%3A+${1}&btnG=Google+Search" | grep -m 5 -C 2 -A 5 -w "*" > /tmp/define
+  if [ ! -s /tmp/define ]; then
+    echo "Sorry, google doesn't know this one..."
+    rm -f /tmp/define
+    return 1
+  else
+    cat /tmp/define | grep -v Search
+    echo ""
+  fi
+  rm -f /tmp/define
+  return 0
+}
+
+
+
+function myip(){
+upnpc -s | grep External | cut -d "=" -f 2
+}
