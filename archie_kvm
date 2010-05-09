@@ -1,0 +1,10 @@
+#!/bin/bash
+~/bin/ssh_expect
+$LOCK/qemu qemu-system-x86_64 -name Archie -enable-kvm -nographic -usb -usbdevice host:1d6b:0001 -monitor telnet:127.0.0.1:6666,server,nowait -m 1024 -hda /media/Sentinel/Arch64.qcow -net nic,model=virtio,vlan=1 -net user,vlan=1 -redir tcp:2222::22  -daemonize
+echo "All done; use alias archie to login if required"
+#sleep 10
+set -x
+echo 1 > /sys/kernel/mm/ksm/run
+sleep 5
+$LOCK/sshfs sshfs -p 2222 raghu@localhost:/home/raghu /media/Archie
+set +x
