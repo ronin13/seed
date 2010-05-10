@@ -1,0 +1,44 @@
+"~/bin/toggle"
+   release + alt + b:1
+
+"xdotool key --window $(xdotool search --pid `pidof mplayer`) shift+u"
+   Control + m
+
+"mpc next"
+   release + alt + b:2
+
+"mpc pause &>/dev/null; echo pause > $MPSOCKET"
+  release + alt + b:3
+
+"~/bin/brightness.sh 1"
+   release + Control + b:1
+
+"~/bin/brightness.sh 2"
+   release + Control + b:3
+
+"~/bin/volchange 3"
+   F9
+
+#"xset +dpms;sleep 1;xset dpms force off"
+#   Menu
+
+"~/bin/volchange 1"
+   release + Mod4 + b:1
+
+"~/bin/volchange 2"
+   release + Mod4 + b:3
+
+#"~/bin/volchange 1"
+#   release + Shift + b:1
+
+#"~/bin/volchange 2"
+#   release + Shift + b:3
+
+"dmenu_run"
+   F4
+
+"$HOME/sandbox/jiffy.py 2"
+  Control + Return
+
+"/home/raghavendra/bin/suz"
+  shift + Up
