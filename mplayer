@@ -1,0 +1,14 @@
+#!/bin/bash
+$LOCK/mplayer /usr/bin/mplayer -slave -idle -input file=$MPSOCKET &>/tmp/mplayer.lock  & 
+
+if [ -z "$1" ];then
+	FILE=`tail -1 ~/.mplayer.hist`
+else
+	prefix="`pwd`/"
+    if [[ "$@" =~ ^/.* ]];then prefix=;fi
+	FILE="${prefix}$@"
+fi
+
+echo "$FILE" >> $HOME/.mplayer.hist
+mpc pause &>/dev/null
+echo "loadfile \"$FILE\"" > $MPSOCKET
