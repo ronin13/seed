@@ -1,0 +1,45 @@
+#!/bin/bash
+
+if [ "$1" = "rehash" ]
+then
+
+	mkdir -p /dev/shm/create_list
+	cd /dev/shm/create_list
+	#ALL ads-trackers-and-bad-pr0n dshield   ipset_rules  level2 spyware  templist
+	#badpeers bogon  hijacked  level1(AVOID)  spider
+	LISTS="ads-trackers-and-bad-pr0n hijacked badpeers Microsoft bogon"
+	for list in $LISTS
+	do
+	wget http://www.bluetack.co.uk/config/$list.gz
+	done
+	#http://www.maeyanie.com/2008/12/efficient-iptables-peerguardian-blocklist/
+    gunzip -c *.gz | pg2ipse - - ads1 > ADS   
+	echo "Reading into ipset"
+	read
+	cat ADS |  grep -v ":" | /bin/grep -E '([0-9\.]+|^COMMIT)' | sudo ipset -R
+
+	echo "Applying to iptables"
+	read
+	sudo iptables -A INPUT -m set --set ads1 src -j DROP
+	sudo iptables -A FORWARD -m set --set ads1 src -j DROP
+	sudo iptables -A FORWARD -m set --set ads1 dst -j REJECT
+	sudo iptables -A OUTPUT -m set --set ads1 dst -j REJECT
+
+elif [ "$1" = "unload" ];then
+
+	sudo iptables -D INPUT -m set --set ads1 src -j DROP
+	sudo iptables -D FORWARD -m set --set ads1 src -j DROP
+	sudo iptables -D FORWARD -m set --set ads1 dst -j REJECT
+	sudo iptables -D OUTPUT -m set --set ads1 dst -j REJECT
+
+elif [ "$1" = "load" ];then
+
+	cat ~/config/BLOCK | sudo ipset -R
+	sleep 4
+	sudo iptables -A INPUT -m set --set ads1 src -j DROP
+	sudo iptables -A FORWARD -m set --set ads1 src -j DROP
+	sudo iptables -A FORWARD -m set --set ads1 dst -j REJECT
+	sudo iptables -A OUTPUT -m set --set ads1 dst -j REJECT
+
+fi
+set +x
