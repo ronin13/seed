@@ -1,0 +1,13 @@
+#bindkey -k F1 prev
+#bindkey -k F2 next
+bindkey ^[^[[C prev
+bindkey ^[^[[D next
+altscreen on
+startup_message off
+defscrollback 10000
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m%{W}%c %{g}]'
+vbell off
+#screen -t bash 0
+#screen -t bash 0
+#screen -t bash 0

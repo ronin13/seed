@@ -1,0 +1,22 @@
+bindkey -k F1 prev
+bindkey -k F2 next
+altscreen on
+attrcolor b ".I"
+#nethack on
+#msgwait 4
+#defbce on
+#shell "-/bin/bash"
+startup_message off
+#nonblock 10
+term screen-256color
+defscrollback 1000
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m%{W}%c %{g}]'
+vbell off
+bell_msg "W00t! ^G"
+screen -t bash 0
+screen -t bash 0
+screen -t bash 0
+bufferfile /tmp/scr.buf
+bind y eval "writebuf" "exec /home/raghavendra/bin/scrcopy /tmp/scr.buf"
+#caption always "%{-b ..}%-w%{+b ..}[[%n%f*%t]]%{-}%+w"

@@ -1,0 +1,40 @@
+#!/usr/bin/python
+import xmlrpc2scgi as xs
+import os
+import glob
+import stat
+import time
+import shutil
+
+# scgi host and port
+rtorrent_host="scgi://~/.rtorrent/rpc.socket"
+# watch and queue folders
+watch = "~/.rtorrent/watch"
+queue = "~/.rtorrent/queue"
+# total number of downloads allowed
+max_downloads = 1
+# download rate in kbp/s
+max_download_rate = 30000
+# how often to recheck to add more (in seconds)
+recheck_time = 300
+#strikes=0
+
+rtc = xs.RTorrentXMLRPCClient(rtorrent_host)
+while True:
+    infohashes = rtc.download_list('incomplete')
+    #print repr(infohashes), rtc.get_down_rate()
+    if (len(infohashes) < max_downloads) or (rtc.get_down_rate() < max_download_rate):
+        print "Current downloads: "+str(len(infohashes)) + "Current download rate: "+ str(rtc.get_down_rate())
+        download = []
+        for file in glob.glob(queue + '/*.torrent'):
+            download.append((os.stat(file)[stat.ST_MTIME], file))
+        if len(download) > 0:
+            download.sort()
+            if os.path.exists(watch + '/' + str(download[0][1]).split('/')[-1]):
+                print "%s already exists, deleting from queue folder" % (download[0][1])
+                os.remove(download[0][1])
+            else:
+                print "%s -> %s" % (download[0][1], watch)
+                shutil.move(download[0][1], watch)
+
+    time.sleep(recheck_time)

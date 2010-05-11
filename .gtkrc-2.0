@@ -1,0 +1,8 @@
+# DO NOT EDIT!  This file will be overwritten by LXAppearance.
+# Any customization should be done in ~/.gtkrc-2.0.mine
+
+gtk-theme-name="Clearlooks"
+gtk-icon-theme-name="gnome-wine"
+gtk-font-name="Bitstream Vera Sans 11"
+gtk-toolbar-style=0
+include "/home/raghavendra/.gtkrc-2.0.mine"

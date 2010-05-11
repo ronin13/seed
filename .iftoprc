@@ -1,0 +1,5 @@
+interface: eth0
+line-display: one-line-received
+use-bytes: yes
+sort: 2s
+
