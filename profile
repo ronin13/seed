@@ -1,0 +1,11 @@
+# vim: set ft=sh :et
+export BROWSER=opera
+export PATH="$HOME/bin:$PATH"
+export VIMRUNTIME="/usr/share/vim/vim72"
+export GDK_USE_XFT=1
+export VISUAL="vim"
+export WINEDEBUG=-all
+export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+export CSCOPE_DB="$HOME/Arch/cscope/cscope.out"
+export LESS="-R -i -M -s --quit-if-one-screen"
+export MOZ_DISABLE_PANGO=1
