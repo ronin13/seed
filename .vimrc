@@ -1,26 +1,23 @@
-" Author: John Anderson (sontek@gmail.com)
-
-" Don't load plugins if we aren't in Vim7
-if version < 700
-	set noloadplugins
-endif
-"" Skip this file unless we have +eval
-if 1
-""set t_ti= t_te=
-""" Settings 
-"" set nocompatible						" Don't be compatible with vi
+let mapleader = ","
 set mouse-=a
-"""" Movement
 " work more logically with wrapped lines
 noremap j gj
 noremap k gk
-
+set ruler 
+set title
+set scrolloff=3
+set backup
+set dictionary+=/usr/share/dict/words
+set shortmess=atI
+set backupdir=~/.vim-tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,/var/tmp,/tmp
+set backspace=indent,eol,start
 """" Searching and Patterns
 set ignorecase							" search is case insensitive
 set smartcase							" search case sensitive if caps on 
 set incsearch							" show best match so far
 set hlsearch							" Highlight matches to the search 
-
+set diffopt+=iwhite 
 """" Display
 set background=dark						" I use dark background
 set lazyredraw							" Don't repaint when scripts are running
@@ -39,90 +36,85 @@ set confirm								" Y-N-C prompt if closing with unsaved changes
 set vb t_vb=							" Disable visual bell!  I hate that flashing.
 
 """" Editing
-set backspace=2							" Backspace over anything! (Super backspace!)
+""set backspace=2							" Backspace over anything! (Super backspace!)
 set showmatch							" Briefly jump to the previous matching paren
 set matchtime=2							" For .2 seconds
 set formatoptions-=tc					" I can format for myself, thank you very much
+set textwidth=80
 set tabstop=4							" Tab stop of 4
 set shiftwidth=4						" sw 4 spaces (used on auto indent)
 set softtabstop=4						" 4 spaces as a tab for bs/del
-
+set expandtab
+set hidden
 " we don't want to edit these type of files
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
+""=========================================================================
 
 """" Coding
-set history=100							" 100 Lines of history
+set history=1000							" 100 Lines of history
 set showfulltag							" Show more information while completing tags
+filetype on
 filetype plugin on                      " Enable filetype plugins
 filetype plugin indent on               " Let filetype plugins indent for me
 syntax on                               " Turn on syntax highlighting
 
-" set up tags
-" set tags=tags;/
-"" set tags+=$HOME/.vim/tags/python.ctags
 
-""""" Folding
-""""" set foldmethod=syntax					" By default, use syntax to determine folds
 set foldmethod=marker
-""""" set foldlevelstart=99					" All folds open by default
-""""" au BufWinLeave * mkview
-""""" au BufWinEnter * silent loadview
 
-"""" Command Line
 set wildmenu                            " Autocomplete features in the status bar
+set wildmode=list:longest
+set wildignore=*.o
 au BufRead,BufNewFile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=mail 
 
 let g:pydiction_location = '$HOME/Arch/pydiction/complete-dict'
-"""" Autocommands
-if has("autocmd")
-augroup vimrcEx
-au!
-	" In plain-text files and svn commit buffers, wrap automatically at 78 chars
-	au FileType text,svn setlocal tw=78 fo+=t
+set tags +=~/.vim/tags/python.ctags
+"map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
+map <C-F12> :!ctags -R .<CR>
 
-	" In all files, try to jump back to the last spot cursor was in before exiting
-	au BufReadPost *
-		\ if line("'\"") > 0 && line("'\"") <= line("$") |
-		\   exe "normal g`\"" |
-		\ endif
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
 
-	" Use :make to check a script with perl
-	au FileType perl set makeprg=perl\ -c\ %\ $* errorformat=%f:%l:%m
+""================================================================================================================
+""
+" In plain-text files and svn commit buffers, wrap automatically at 78 chars
+au FileType text,svn setlocal tw=78 fo+=t
 
-	" Use :make to compile c, even without a makefile
-	au FileType c,cpp if glob('Makefile') == "" | let &mp="gcc -o %< %" | endif
+" In all files, try to jump back to the last spot cursor was in before exiting
+au BufReadPost *
+	\ if line("'\"") > 0 && line("'\"") <= line("$") |
+	\   exe "normal g`\"" |
+	\ endif
 
-	" Switch to the directory of the current file, unless it's a help file.
-	au BufEnter * if &ft != 'help' | silent! cd %:p:h | endif
+" Use :make to check a script with perl
+au FileType perl set makeprg=perl\ -c\ %\ $* errorformat=%f:%l:%m
 
-	" Insert Vim-version as X-Editor in mail headers
-	au FileType mail sil 1  | call search("^$")
-				 \ | sil put! ='X-Editor: Vim-' . Version()
+" Use :make to compile c, even without a makefile
+au FileType c,cpp if glob('Makefile') == "" | let &mp="gcc -o %< %" | endif
 
-	" smart indenting for python
-	au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+" Switch to the directory of the current file, unless it's a help file.
+au BufEnter * if &ft != 'help' | silent! cd %:p:h | endif
 
-	" allows us to run :make and get syntax errors for our python scripts
-	au FileType python set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
-	" setup file type for code snippets
-	au FileType python if &ft !~ 'django' | setlocal filetype=python.django_tempate.django_model | endif
-	au FileType python set expandtab
+" Insert Vim-version as X-Editor in mail headers
+"au FileType mail sil 1  | call search("^$")
+"			 \ | sil put! ='X-Editor: Vim'
 
-	" kill calltip window if we move cursor or leave insert mode
-	au CursorMovedI * if pumvisible() == 0|pclose|endif
-	au InsertLeave * if pumvisible() == 0|pclose|endif
+" smart indenting for python
+au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
-	augroup END
-endif
+" allows us to run :make and get syntax errors for our python scripts
+au FileType python set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
 
-"""" Key Mappings
-" bind ctrl+space for omnicompletion
-inoremap <expr> <a-Space> pumvisible() \|\| &omnifunc == '' ?
-			\ "\<lt>C-n>" :
-			\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-			\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-			\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-imap <C-@> <C-Space>
+" setup file type for code snippets
+au FileType python if &ft !~ 'django' | setlocal filetype=python.django_tempate.django_model | endif
+au FileType python set expandtab
+
+" kill calltip window if we move cursor or leave insert mode
+
+""========================================================================================================
 
 " Toggle the tag list bar
 nmap <F5> :TlistToggle<CR>
@@ -135,7 +127,7 @@ nnoremap  <A-left>   gT
 nnoremap  <C-up>     {
 nnoremap  <C-down>   }
 nnoremap  <C-right>  El
-nnoremap  <C-down>   Bh
+nnoremap  <C-left>   Bh
 
 " Shift + Arrows - Visually Select text
 nnoremap  <s-up>     Vk
@@ -180,7 +172,6 @@ nnoremap <space> za
 vnoremap <space> zf
 
 " allow arrow keys when code completion window is up
-inoremap <Down> <C-R>=pumvisible() ? "\<lt>C-N>" : "\<lt>Down>"<CR>
 
 """ Abbreviations
 function! EatChar(pat)
@@ -192,14 +183,8 @@ iabbr _me Raghavendra D Prabhu (raghu.prabhu13@gmail.com)<C-R>=EatChar('\s')<CR>
 iabbr _t  <C-R>=strftime("%H:%M:%S")<CR><C-R>=EatChar('\s')<CR>
 iabbr _d  <C-R>=strftime("%a, %d %b %Y")<CR><C-R>=EatChar('\s')<CR>
 iabbr _dt <C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR><C-R>=EatChar('\s')<CR>
-
-" , #perl # comments
-map ,# :s/^/#/<CR>
-set ruler 
-
-" " ,/ C/C++/C#/Java // comments
-map ,/ :s/^/\/\//<CR>
+iabbr _bang #!/bin/bash<C-R>=EatChar('\s')<CR>
+iabbr _pbang #!/usr/bin/python<C-R>=EatChar('\s')<CR> 
 
 nnoremap <F3> :BufExplorer<CR>
-endif
 
