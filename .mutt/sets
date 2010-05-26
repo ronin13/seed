@@ -1,0 +1,40 @@
+#-*-muttrc-*-
+set sidebar_width=30
+set sidebar_visible=yes
+set pager_stop=yes
+set quit=ask-no
+set mbox_type=maildir
+set folder=<maildir>
+set spoolfile=+"INBOX"
+set move=no
+set header_cache=~/.mutt/.hcache
+set tilde
+set markers
+set sig_dashes
+set smart_wrap 
+set pager_context=5 
+set fast_reply=yes
+set mark_old=no
+set ispell="aspell -e -c"
+set pager_index_lines=15
+set realname=<name>
+set from=<mailid>
+set envelope_from=yes
+set use_from=yes
+set record=+Sent
+set postponed=+Drafts
+set edit_headers=yes
+set signature=~/.mutt/.signature
+set alias_file=~/.mutt/aliases
+set editor="vim +/^$ ++1"
+#set delete=no
+set sort_browser=reverse-date
+set sort=threads
+set sort_aux=reverse-last-date-received
+set reverse_name=yes
+set sendmail="/usr/bin/msmtp"
+set text_flowed
+set display_filter="~/bin/mail-to-filter 2>/dev/null"
+set signature=~/.mutt/.signature
+set include=yes
+set confirmappend=no

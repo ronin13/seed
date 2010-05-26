@@ -1,0 +1,14 @@
+#-*-muttrc-*-
+macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
+macro index,pager A "<pipe-message>abook --add-email-quiet<return>" "add the sender address to abook"
+macro index b '<enter-command>toggle sidebar_visible<enter>'
+macro pager b '<enter-command>toggle sidebar_visible<enter>'
+macro pager <Up> '<exit><previous-undeleted>'
+macro pager <Down> '<exit><next-undeleted>'
+macro index V <collapse-all>
+macro generic ,f "<shell-escape>mairix " "search via mairix"
+macro index \Ci "<copy-message>=Important<enter>"
+macro pager \Ci "<copy-message>=Important<enter>"
+macro index \Ct "<copy-message>=Todo<enter>"
+macro pager \Ct "<copy-message>=Todo<enter>"
+macro index .c "T.\n;WN^T.\n" "mark all messages as read"

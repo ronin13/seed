@@ -1,0 +1,11 @@
+#-*-muttrc-*-
+
+source ~/.mutt/hooks
+source ~/.mutt/aliases
+auto_view text/html
+alternative_order text/html text/plain
+mailboxes `find <maildir> -type d -name cur -printf '%h '`
+source ~/.mutt/colors
+source ~/.mutt/macros
+source ~/.mutt/binds
+source ~/.mutt/sets

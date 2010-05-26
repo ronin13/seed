@@ -1,0 +1,2 @@
+folder-hook . "exec collapse-all"
+folder-hook =Search "set delete=yes"
