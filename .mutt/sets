@@ -4,21 +4,23 @@ set sidebar_visible=yes
 set pager_stop=yes
 set quit=ask-no
 set mbox_type=maildir
-set folder=<maildir>
+set folder=$HOME/Mail
 set spoolfile=+"INBOX"
 set move=no
 set header_cache=~/.mutt/.hcache
+#set header_cache=/dev/shm/.hcache
 set tilde
 set markers
-set sig_dashes
+set sig_dashes=no
 set smart_wrap 
 set pager_context=5 
 set fast_reply=yes
 set mark_old=no
 set ispell="aspell -e -c"
 set pager_index_lines=15
-set realname=<name>
-set from=<mailid>
+set realname='Raghavendra D Prabhu'
+set from="raghu.prabhu13@gmail.com"
+#set sendmail="/usr/bin/msmtp -C /home/raghavendra/wormole/.msmtprc -a gmail"
 set envelope_from=yes
 set use_from=yes
 set record=+Sent
@@ -34,7 +36,7 @@ set sort_aux=reverse-last-date-received
 set reverse_name=yes
 set sendmail="/usr/bin/msmtp"
 set text_flowed
-set display_filter="~/bin/mail-to-filter 2>/dev/null"
 set signature=~/.mutt/.signature
 set include=yes
 set confirmappend=no
+set print_comm
