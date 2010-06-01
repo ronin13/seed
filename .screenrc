@@ -1,22 +1,36 @@
+#http://www.softpanorama.org/Utilities/Screen/screenrc_examples.shtml#Gentoo
+multiuser off
+defutf8 on
 bindkey -k F1 prev
 bindkey -k F2 next
+#escape ``
+#escape ^\\
 altscreen on
 attrcolor b ".I"
-#nethack on
-#msgwait 4
-#defbce on
-#shell "-/bin/bash"
+nethack on
+msgwait 4
+defbce on
 startup_message off
-#nonblock 10
+nonblock 10
 term screen-256color
-defscrollback 1000
+defscrollback 8192
 hardstatus alwayslastline
 hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m%{W}%c %{g}]'
 vbell off
 bell_msg "W00t! ^G"
+#bell_msg "bell  in %n (%t) [%w:%s]~^G"
 screen -t bash 0
 screen -t bash 0
 screen -t bash 0
-bufferfile /tmp/scr.buf
-bind y eval "writebuf" "exec /home/raghavendra/bin/scrcopy /tmp/scr.buf"
-#caption always "%{-b ..}%-w%{+b ..}[[%n%f*%t]]%{-}%+w"
+bufferfile $HOME/.screen_exchange
+bind y eval "writebuf" "exec /home/raghavendra/bin/scrcopy HOME/.screen_exchange"
+
+bind "^j" focus down
+bind "^k" focus up
+#bind "^" focus
+#bind "^" focus
+bind "^=" resize +1
+bind "^-" resize -1
+
+#rendition so =B kk
+sorendition =B kk

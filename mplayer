@@ -1,5 +1,10 @@
 #!/bin/bash
-$LOCK/mplayer /usr/bin/mplayer -slave -idle -input file=$MPSOCKET &>/tmp/mplayer.lock  & 
+#if [[ -z $DISPLAY ]];then
+#    mpc pause 2>/dev/null
+#    /usr/bin/mplayer -vo fbdev  "$@"
+#    exit
+#fi
+$LOCK/mplayer /usr/bin/mplayer -slave -idle -input file=$MPSOCKET &>/dev/null  & 
 
 if [ -z "$1" ];then
 	FILE=`tail -1 ~/.mplayer.hist`

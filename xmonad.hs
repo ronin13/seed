@@ -38,7 +38,7 @@ import qualified Data.Map        as M
 import qualified XMonad.Layout.Magnifier as Mag
 --}}}
 
---{{{ Variables
+--{{{ Variables 
 myTerminal      = "urxvt"
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
@@ -61,7 +61,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
      [ ((controlMask, xK_q     ), kill)
 
-    , ((shiftMask, xK_Up), scratchpadSpawnActionCustom "$HOME/bin/scratcher")
+    , ((mod1Mask, xK_space), scratchpadSpawnActionCustom "$HOME/bin/scratcher")
    
     , ((modm, xK_period), toggleWS )
 
@@ -97,7 +97,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     --, ((modm .|. shiftMask, xK_Left     ), windows W.swapUp    )
 
-    , ((controlMask, xK_0), spawn "xset +dpms;sleep 1;xset dpms force off")
+    , ((modm, xK_0), spawn "xset +dpms;sleep 1;xset dpms force off")
 
     , ((modm,               xK_h     ), sendMessage Shrink)
 
@@ -138,11 +138,11 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 --}}}  
 
 --{{{ Layout
-myLayout =  onWorkspace "4:video" vidLayout $ onWorkspace "7:games" Full $ defLayout
+myLayout =  onWorkspace "4:video" vidLayout $ onWorkspace "7:games" vidLayout $ defLayout
       where
           defLayout = avoidStruts $ Mag.magnifier (tiled ||| Full ||| Mirror tiled)
           tiled   = smartBorders (ResizableTall 1 (2/100) (1/2) [])
-          vidLayout =  noBorders (GridRatio (4/3) False ||| Full)
+          vidLayout =  noBorders (Grid False ||| Full)
 --}}}
 
 --{{{ Workspaces
@@ -150,9 +150,12 @@ myWorkspaces :: [WorkspaceId]
 myWorkspaces    = ["1:norm","2:term","3:browser","4:video","5:pdf","6:note","7:thunar","8:games","9:torrent"]
 myManageHook = composeAll
     [ className =? "MPlayer" --> doFloat 
+    , isFullscreen --> doFullFloat
     , className =? "Wine" --> doShift "8:games"
     , resource  =? "desktop_window" --> doIgnore
     , className =? "Opera"  --> doShift "3:browser"
+    , className =? "Gpodder" --> doShift "5:pdf"
+    , className =? "Chromium"  --> doShift "3:browser"
     , className =? "Thunar" --> doShift "7:thunar"
     , className =? "Rednotebook" --> doShift "6:note"
 	, isDialog  --> doCenterFloat
@@ -172,12 +175,7 @@ myEventHook = mempty
 myStartupHook = startup
 startup :: X()
 startup = do
-	--spawn "$LOCK/xail $HOME/bin/xail"
-	--do
-	  spawnOn "2:term" "$LOCK/term xterm -bg '#2e2e2e' -fs 12 -e 'screen -d -R -S term'" 
-	  spawnOn "9:torrent" "$LOCK/torrent xterm  -bg '#2e2e2e' -fs 12 -fg black"
-		--spawnOn "3:browser" "$LOCK/browser xterm"
-		--spawnOn "4:mail" "xterm -e 'screen -d -R'"
+	  spawnOn "2:term" "~/bin/tst" 
 
 main = do
     xmproc <- spawnPipe "xmobar"
@@ -203,7 +201,7 @@ main = do
         logHook            = dynamicLogWithPP $ xmobarPP
                                          { ppOutput = hPutStrLn xmproc
 										 , ppUrgent = xmobarColor "red" "" . wrap "*" "*" 
-                                         , ppTitle = xmobarColor "green" "" . shorten 10      
+                                         , ppTitle = xmobarColor "green" "" . shorten 20      
                                          }, 
         startupHook        = myStartupHook
     }

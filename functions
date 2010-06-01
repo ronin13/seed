@@ -1,4 +1,31 @@
 # set ft=sh
+
+runb(){
+   nohup bash -c "$@" &>/dev/null
+}
+
+ins(){
+if [[ $1 =~ .+xz$ ]];then
+sudo pacman -U $1
+else
+sudo pacman -S "$@"
+fi
+}
+
+
+pacfilter(){
+#set -x
+case $1 in
+*ti*)
+clyde -Ss $2 | /bin/grep -A 1 --color -E ".*/.*$2.*(\)|\])$"
+;;
+*tx*)
+clyde -Ss $2 |  /bin/grep -B 1 --color -E  '.*$2.*[^0-9]+.*'
+;;
+esac
+#set +x
+}
+
 map(){
     local command i rep
     if [ $# -lt 2 ] || [[ ! "$@" =~ :[[:space:]] ]];then
@@ -32,11 +59,26 @@ $HOME/bin/mplayer "$@"
 
 function mutt()
 {
+#if [ ! -d ~/.mutt/.hcache ]
+#then
+# mkdir -p /dev/shm/.hcache
+#else
+#cp -R ~/.mutt/.hcache /dev/shm
+#fi
+mount | grep -q wormole || echo "CRITICAL: The rc directory is not mounted"
+#LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so  screen -c /home/raghavendra/.mutt/.screenrc -S mutt  /usr/bin/mutt 
 LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so  /usr/bin/mutt 
 }
 
 function download(){
-aria2rpc addUri "$@"
+if [[ "$@" =~ *.torrent.* ]];then
+    pidof -s rtorrent  &>/dev/null || ~/bin/torrent
+    [[ $1 =~ ^http.* ]] && wget -q $1 > ~/.rtorrent/watch/${1##*/} && exit
+    cp "$@" ~/.rtorrent/watch/
+    mv "$@" ~/.torrents/
+else
+    aria2rpc addUri "$@"
+fi
 }
 
 function pkgsearch(){
@@ -62,7 +104,22 @@ man -t ${1:?Specify man as arg} | ps2pdf -dCompatibility=1.3 - - > ${1}.pdf
 }
 
 function torrent(){
-screen -c $HOME/.rtorrent/.screenrc -S torrent rtorrent
+pidof rtorrent &>/dev/null || rm ~/.rtorrent/rpc.socket 2>/dev/null
+rtorrent
+#~/.rtorrent/rscheduler 1>~/.rtorrent/scheduler.log 2>&1 &
+#screen -c /home/raghavendra/.rtorrent/.screenrc -S torrent rtorrent
+}
+
+#function vim(){
+#if [[ ! -f "$@" ]];then return;fi
+#vim "$@"
+#}
+
+function cnkt(){
+TERM=xterm
+#ssh -D 1080 rprabhu@proxy.eglbp.corp.yahoo.com 
+#-L 6891:socks.yahoo.com:1080
+ssh rprabhu@proxy.eglbp.corp.yahoo.com -L 1080:socks.yahoo.com:1080
 }
 
 function randbash(){
@@ -73,6 +130,14 @@ curl -s http://bash.org/?random1|grep -oE "<p class=\"quote\">.*</p>.*</p>"|grep
 
 function ifind(){
 find . -iname "*$@*"
+}
+
+mountole(){
+#sudo sed -i -e '/.*ecryptfs.*/s|^#\(.*\)$|\1|g' /etc/fstab 1>/dev/null
+keyctl list @u | grep -q e90  || ecryptfs-add-passphrase #&>/dev/null
+keyctl list @u | grep -q e90 && mount -i /home/raghavendra/wormole
+#sudo sed -i -e '/.*ecryptfs.*/s|^/\(.*\)$|#&|g' /etc/fstab 1>/dev/null  
+[[ $? = "0" ]] && echo "Done!"
 }
 
 
@@ -87,9 +152,20 @@ geoip () { curl -s "http://www.geoiptool.com/?IP=$1" | html2text | egrep --color
 bbcradio() { local s;echo "Select a station:";select s in 1 1x 2 3 4 5 6 7 "Asian Network an" "Nations & Local lcl";do break;done;s=($s);mplayer -playlist "http://www.bbc.co.uk/radio/listen/live/r"${s[@]: -1}".asx";}
 
 
+function pactest(){
+	sourcefile="/home/raghavendra/config/pacman.conf.testing"
+	if [[ $1 = "kmod" ]];then sourcefile=/home/raghavendra/config/pacman.conf.kdemod;elif [[ $1 = "non" ]];then sourcefile=/home/raghavendra/config/pacman.conf.nonstandard;elif [[ $1 = "rollback" ]];then sourcefile=/home/raghavendra/config/pacman.conf.rollback;fi
+	shift
+	sudo cp -v $sourcefile /etc/pacman.conf
+	sudo pacman -q -Sy
+	sudo pacman -Ss "$@"
+	read
+	sudo cp -v /home/raghavendra/config/pacman.conf.standard /etc/pacman.conf
+	sudo pacman -q -Sy 1>/dev/null
+}
 
 function flushmac(){
-rm -rf $HOME/.macromedia/Flash_Player/*;
+rm -rf /home/raghavendra/.macromedia/Flash_Player/*;
 mkdir -p ~/.macromedia/Flash_Player/macromedia.com/support/flashplayer/sys
 cp ~/Arch/settings.sol ~/.macromedia/Flash_Player/macromedia.com/support/flashplayer/sys/
 }
@@ -125,6 +201,9 @@ echo `nvidia-settings -q gpucoretemp | grep Supernova | cut -d ":" -f 3`
 #echo `sudo hddtemp SATA:/dev/sda | cut -d ":" -f 3`;
  }
 
+function clifu(){
+wget -O - "http://www.commandlinefu.com/commands/browse/rss" 2>/dev/null | awk '/\s*<title/ {z=match($0, /CDATA\[([^\]]*)\]/, b);print b[1]} /\s*<description/ {c=match($0, /code>(.*)<\/code>/, d);print d[1]"\n"} '
+}
 
 
 function ncm(){
@@ -172,7 +251,7 @@ function view()
 if [[ -z "$@" ]];then
 thunar ~/Documents
 else
-nohup evince "$@" & &>/dev/null
+detach evince "$@" 
 fi
 }
 
@@ -214,6 +293,11 @@ function bkp()
 }
 
 
+function mpd_album(){
+	rm -f ~/Albums/*
+	avatar-factory --icon-size 60 --name 2 -g music /home/raghavendra/mpd/music ~/Albums
+}
+
 function get_rss(){
 	rsstail -u http://rss.slashdot.org/Slashdot/slashdot -u http://www.reddit.com/.rss
 }
@@ -221,7 +305,8 @@ function get_rss(){
 function newcnd() { echo "$@" >> ~/newcomies; }
 
 function restorrent(){ 
-screen -c $HOME/.rtorrent/.screenrc -r torrent;
+#(ps auxww | grep -q scheduler) &&  ~/.rtorrent/rscheduler 1>~/.rtorrent/scheduler.log 2>&1 &
+screen -c /home/raghavendra/.rtorrent/.screenrc -r torrent;
 }
 
 extract() {    
@@ -272,6 +357,12 @@ define() {
 }
 
 
+#function getweather()
+#{ 
+#   declare -a WEATHERARRAY 
+#   WEATHERARRAY=( `elinks -dump "http://www.google.com/search?hl=en&lr=&client=firefox-a&rls=org.mozilla%3Aen-US%3Aofficial&q=weather+71822&btnG=Search" | grep -A 5 -m 1 "Weather for" | grep -v "Add to "`) 
+#   echo ${WEATHERARRAY[@]} 
+#}
 
 function myip(){
 upnpc -s | grep External | cut -d "=" -f 2

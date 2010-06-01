@@ -16,8 +16,8 @@
 "~/bin/brightness.sh 2"
    release + Control + b:3
 
-"~/bin/volchange 3"
-   F9
+#"~/bin/volchange 3"
+#   F9
 
 #"xset +dpms;sleep 1;xset dpms force off"
 #   Menu
@@ -35,7 +35,7 @@
 #   release + Shift + b:3
 
 "dmenu_run"
-   F4
+   control + Space
 
 "$HOME/sandbox/jiffy.py 2"
   Control + Return
