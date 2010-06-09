@@ -1,0 +1,74 @@
+# Set colors using the options below in .rtorrent.rc:</br>
+# Options: done_fg_color, done_bg_color, active_fg_color, active_bg_color</br>
+# Colors: 0 = black 1 = red 2 = green 3 = yellow 4 = blue 5 = magenta 6 = cyan 7 = white</br>
+# Example: done_fg_color = 1</br>
+#</br>
+################################################################################</br>
+# The filter files are the ones from bluetack.co.uk. Multiple files can be used.</br>
+# Overlapping ranges are merged automatically. Both incoming and outgoing</br>
+# connections are checked against the filter. Exclusions are not  supported, so</br>
+# connection to/from IPs in all the loaded ranges will be disallowed and dropped.</br>
+#</br>
+# Include "ip_filter=<file,...>" directive in .rtorrent.rc. For example mine looks like:</br>
+#</br>
+### ip_filter=ipfilter/level1,ipfilter/level2,ipfilter/bogon,ipfilter/dshield,ipfilter/Microsoft,ipfilter/templist</br>
+#</br>
+# It is probably a good idea to reload files once in a while, so you can also include "reload_ip_filter" directive on schedule to refresh the filter. The same files named in "ip_filter" will be reloaded.</br>
+### schedule = filter,18:30:00,24:00:00,reload_ip_filter=</br>
+#</br>
+# http://libtorrent.rakshasa.no/ticket/239</br>
+#</br>
+#################################################################################</br>
+# Automated handling of leechers and other uncooperative peers.</br>
+#</br>
+# Adds the following commands:</br>
+# d.snub_leechers=snub_ratio,unsnub_ratio,min_transfer</br>
+#      Snub peers (i.e. stop uploading to them) who download far more than they</br>
+#      upload. They're snubbed when their ratio exceeds the snub_ratio,</br>
+#      and unsnubbed when they drop below the unsnub_ratio again. For example,</br>
+#      a snub_ratio of 10 means the peer gets snubbed if we send more than</br>
+#      ten times the amount that we've received from them. Don't set</br>
+#      snub_ratio too low, a value of 5-10 seems to work best. The first</br>
+#      min_transfer bytes is uploaded for "free" without snubbing.</br>
+# d.unsnub_peers=</br>
+#      Unsnub all snubbed peers, e.g. for use when the download is finished</br>
+#      and we no longer have anything we want to download anyway.</br>
+# d.ban_slow_peers=min_seeds,min_rate,amount1,time1[,amount2,time2[,...]]</br>
+#      Ban peers whose upload is too slow, for instance hacked peers, badly</br>
+#      throttled connections or ISPs with excessive bandwidth shaping. This</br>
+#      clears up the peer list and allows connecting to better peers, to</br>
+#      prevent staying connected forever to peers that never send data.</br>
+#      Always keeps at least the set min_peers for the download, and at least</br>
+#      as many seeds as min_seeds as well as all peers currently sending at a</br>
+#      rate of min_rate or above. A peer is too slow if after time1 has elapsed,</br>
+#      it has sent less than amount1, or amount2 after time2, etc.</br>
+# d.unban_peers=</br>
+#      Unban all peers, including those banned manually with shift-B.</br>
+#</br>
+# Note that peers marked as friends (if you have applied that patch) will</br>
+# never be snubbed or banned by these commands.</br>
+#</br>
+# There are also global "snub_leechers" and "ban_slow_peers" commands which</br>
+# take the same arguments and apply them to all unfinished downloads (except</br>
+# those set to ignore commands).</br>
+#</br>
+# Note that the commands usually don't work well for poorly seeded torrents</br>
+# or those being seeded initially, then unreasonably many peers will be</br>
+# snubbed/banned. You should set the ignore_commands flag for such downloads,</br>
+# or avoid using the global commands and instead only apply the</br>
+# download-specific commands to the particular downloads that need them (e.g.</br>
+# using d.multicall on a custom view that only contains appropriate downloads).</br>
+#</br>
+# Example: (this seems to work fine for a typical ADSL line)</br>
+# schedule = snub_leechers,120,120,"snub_leechers=10,5,1M"</br>
+# schedule = ban_slow_peers,120,120,"ban_slow_peers=5,2K,64K,5,128K,10,1M,30"</br>
+# on_finished = unban,"d.unban_peers="</br>
+# on_finished = unsnub,"d.unsnub_peers="</br>
+#</br>
+# Snub peers after sending 1MB to them if they don't upload at least 1/10th in return.</br>
+# Unsnub them when they upload to a ratio of 1/5th, and when the download finishes.</br>
+#</br>
+# Ban peers after 5 minutes unless they've uploaded less than 64KB, after 10 min</br>
+# and less than 128 K or after 30 min and under 1MB upload. Keep at least 5 seeds,</br>
+# and all peers currently uploading at 2KB/s or faster.</br>
+# Unban peers when the download finishes.</br>

@@ -1,3 +1,12 @@
+
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor = "latex"
+""set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+
+"" http://amix.dk/vim/vimrc.html
+set magic
+set wrapscan
+set t_Co=256
 let mapleader = ","
 set mouse-=a
 " work more logically with wrapped lines
@@ -25,7 +34,7 @@ set scrolloff=3							" Keep 3 lines below and above the cursor
 set numberwidth=1						" Use 1 col + 1 space for numbers
 " tab labels show the filename without path(tail)
 set guitablabel=%N/\ %t\ %M
-" colorscheme tango
+colorscheme tango
 
 """" Messages, Info, Status
 set shortmess+=a						" Use [+] [RO] [w] for modified, read-only, modified
@@ -119,6 +128,18 @@ au FileType python set expandtab
 " Toggle the tag list bar
 nmap <F5> :TlistToggle<CR>
 
+if &term == "screen-256color"
+    map [1;3C <A-right>
+    map [1;3D <A-left>
+    map ^[[1;5A <C-up>
+    map [1;5B <C-down>
+    map [1;5D <C-left>
+    map [1;5C <C-right>
+    map [1;2D <S-left>
+    map [1;2C <S-right>
+    map [1;2A <S-up>
+    map [1;2B <S-down>
+endif
 
 " tab navigation (next tab) with alt left / alt right
 nnoremap  <A-right>  gt
@@ -130,10 +151,12 @@ nnoremap  <C-right>  El
 nnoremap  <C-left>   Bh
 
 " Shift + Arrows - Visually Select text
-nnoremap  <s-up>     Vk
-nnoremap  <s-down>   Vj
-nnoremap  <s-right>  vl
-nnoremap  <s-left>   vh
+"nnoremap  <s-up>     Vk
+"nnoremap  <s-down>   Vj
+"nnoremap  <s-right>  vl
+"nnoremap  <s-left>   vh
+
+"" nnoremap V 
 
 if &diff
 " easily handle diffing 

@@ -1,5 +1,8 @@
 # set ft=sh
 
+function translate(){
+wget -qO - "http://ajax.googleapis.com/ajax/services/language/translate?langpair=|en&v=1.0&q=`xsel`" |cut -d \" -f 6
+}
 runb(){
    nohup bash -c "$@" &>/dev/null
 }
@@ -71,7 +74,7 @@ LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so  /usr/bin/mutt
 }
 
 function download(){
-if [[ "$@" =~ *.torrent.* ]];then
+if [[ "$@" =~ .*torrent$ ]];then
     pidof -s rtorrent  &>/dev/null || ~/bin/torrent
     [[ $1 =~ ^http.* ]] && wget -q $1 > ~/.rtorrent/watch/${1##*/} && exit
     cp "$@" ~/.rtorrent/watch/
@@ -149,7 +152,7 @@ feh ~/.cache/apod:$DATE.jpg
 
 geoip () { curl -s "http://www.geoiptool.com/?IP=$1" | html2text | egrep --color 'City:|IP Address:|Country:'; }
 
-bbcradio() { local s;echo "Select a station:";select s in 1 1x 2 3 4 5 6 7 "Asian Network an" "Nations & Local lcl";do break;done;s=($s);mplayer -playlist "http://www.bbc.co.uk/radio/listen/live/r"${s[@]: -1}".asx";}
+bbcradio() { local s;echo "Select a station:";select s in 1 1x 2 3 4 5 6 7 "Asian Network an" "Nations & Local lcl";do break;done;s=($s);/usr/bin/mplayer -playlist "http://www.bbc.co.uk/radio/listen/live/r"${s[@]: -1}".asx";}
 
 
 function pactest(){

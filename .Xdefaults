@@ -2,35 +2,48 @@ URxvt.underlineURLs: true
 URxvt.urlLauncher: /usr/bin/opera
 URxvt.perl-ext-common: default,matcher,selection,mark-yank-urls
 URxvt.matcher.button: 1
+!URxvt.fadeColor: White
+!URxvt.fading: 30
+!URxvt.transparent: on
+!URxvt.tintColor: cyan
+!URxvt.shading: 10
 URxvt.cursorBlink: true
 URxvt.visualBell: false
 URxvt.scrollBar: false
 URxvt.saveLines: 1000
 URxvt.cursorUnderline: true
+!URxvt.cursorBlink: true
 URxvt.foreground: White
 URxvt.urgentOnBell: True
 URxvt.depth: 32
 URxvt.background: rgba:0000/0000/0000/dddd
 URxvt.font: xft:Bitstream Vera Sans Mono:pixelsize=14
 URxvt.boldFont:xft:Bitstream Vera Sans Mono:bold:pixelsize=14
+! URxvt.keysym.M-Left:\033[1;3D
+! URxvt.keysym.M-Right:\033[1;3C
 URxvt.keysym.M-u: perl:mark-yank-urls:activate_mark_mode
 URxvt.perl-lib: /home/raghavendra/.urxvt/
 
 xterm*foreground: white
 xterm*background: black
 !xterm*font: -misc-fixed-*-*-*-*-*-200-*-*-*-*-*
-xterm*cursorBlink:true
-xterm*eightBitInput:false
+xterm*cursorBlink: true
+!xterm*eightBitInput:false
 !xterm*background: #2e2e2e
-xterm*altSendsEscape:true
+xterm*altSendsEscape: true
 xterm*cursorUnderLine: true
 xterm*faceName:Liberation Mono
 xterm*bellIsUrgent: true
-xterm*highlightColor: red
+xterm*highlightColor: green
+xterm*highlightTextColor: black
 xterm*dynamicColors: true
-xterm*faceSize:10
-xterm*termName:xterm-color
+xterm*faceSize: 10
+xterm*termName: xterm-color
 xterm*trimSelection: true
-xterm*charClass:33:48,35-38:48,39:43,42-47:48,58-59:48,61:48,63-64:48,126:48
+xterm*charClass:33:48,35:48,37-38:48,39:43,42-47:48,58-59:48,61:48,63-64:48,124:1,126:48
 xterm*renderFont: true
+xterm*utf8: 3
 xterm*metaSendsEscape: true
+xterm*backarrowKey: false
+xterm*on4Clicks: group
+xterm*on5Clicks: page

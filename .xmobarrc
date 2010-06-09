@@ -1,18 +1,18 @@
-Config { font = "xft:DejaVu Sans:size=8"
+Config { font = "xft:DejaVu Sans:size=9"
        , bgColor = "#000000"
        , fgColor = "#00FFFF"
        , position = Top
        , lowerOnStart = True
-       , commands = [ Run Network "eth0" ["-L","0","-H","100","--normal","green","--high","red"] 100
-					, Run Cpu ["-L","3","-H","50","--high","#f0c040"] 100
-                    , Run Memory ["-t","Mem: <usedratio>%"] 100
-                    , Run Com "cat /proc/loadavg | cut -d ' ' -f 1-3 " [] "loadavg" 100
+       , commands = [ Run Network "eth0" ["-L","0","-H","100","--normal","green","--high","red"] 50
+					, Run Cpu ["-L","3","-H","50","--high","#f0c040"] 50
+                    , Run Memory ["-t","Mem: <usedratio>%"] 50
+                    , Run Com "cat /proc/loadavg | cut -d ' ' -f 1-3 " [] "loadavg" 50
                     , Run Com "date +'%b %d %H:%M'" [] "mdate" 60
                     , Run Com  "mpc  -f [%artist%]-[%title%]:[%time%] | head -1" [] "mpd" 50
-                    , Run Swap [] 100
+                    , Run Com "~/bin/battery_mon" [] "battery" 50
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader%}{<fc=cyan>%mpd%</fc> | <fc=green>%loadavg%</fc>-%eth0% | %cpu%|%memory%.%swap%|<fc=green>%mdate%</fc>"
+       , template = "%StdinReader%}{<fc=cyan>%mpd%</fc> | <fc=red>%battery%</fc> <fc=green>%loadavg%</fc> |%eth0% | %cpu%|%memory%|<fc=yellow>%mdate%</fc>"
        }

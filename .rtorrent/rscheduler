@@ -7,10 +7,10 @@ import time
 import shutil
 
 # scgi host and port
-rtorrent_host="scgi://~/.rtorrent/rpc.socket"
+rtorrent_host="scgi:///home/raghavendra/.rtorrent/rpc.socket"
 # watch and queue folders
-watch = "~/.rtorrent/watch"
-queue = "~/.rtorrent/queue"
+watch = "/home/raghavendra/.rtorrent/watch"
+queue = "/home/raghavendra/.rtorrent/queue"
 # total number of downloads allowed
 max_downloads = 1
 # download rate in kbp/s

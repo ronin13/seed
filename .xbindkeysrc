@@ -1,8 +1,14 @@
 "~/bin/toggle"
    release + alt + b:1
 
-"xdotool key --window $(xdotool search --pid `pidof mplayer`) shift+u"
-   Control + m
+"kill -INT $(pidof rtorrent)"
+ Control + Shift + t 
+
+"screen -d torrent"
+ Control + t
+
+"echo 'stop' > $MPSOCKET"
+ Control + m
 
 "mpc next"
    release + alt + b:2
@@ -16,29 +22,17 @@
 "~/bin/brightness.sh 2"
    release + Control + b:3
 
-#"~/bin/volchange 3"
-#   F9
-
-#"xset +dpms;sleep 1;xset dpms force off"
-#   Menu
-
 "~/bin/volchange 1"
    release + Mod4 + b:1
 
 "~/bin/volchange 2"
    release + Mod4 + b:3
 
-#"~/bin/volchange 1"
-#   release + Shift + b:1
-
-#"~/bin/volchange 2"
-#   release + Shift + b:3
-
 "dmenu_run"
-   control + Space
+   Control + space
 
-"$HOME/sandbox/jiffy.py 2"
+"$HOME/Arch/Jiffy/jiffy.py 2"
   Control + Return
 
 "/home/raghavendra/bin/suz"
-  shift + Up
+  Shift + End 

@@ -1,8 +1,8 @@
 #!/bin/bash
 geom="125x21+5+165"
 term="xterm -name scratchpad -class xterm -fs 11 -geom $geom"
-if tmux has-session -t uake;then 
-    $term -e tmux attach-session -d -t uake 
+if ~/bin/tmux has-session -t uake;then 
+    $term -e ~/bin/tmux attach-session -d -t uake 
 else
-    $term -e tmux new-session -s uake
+    $term -e ~/bin/tmux new-session -s uake
 fi

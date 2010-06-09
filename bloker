@@ -1,18 +1,22 @@
 #!/bin/bash
 
+set -x
+
 if [ "$1" = "rehash" ]
 then
 
 	mkdir -p /dev/shm/create_list
 	cd /dev/shm/create_list
 	#ALL ads-trackers-and-bad-pr0n dshield   ipset_rules  level2 spyware  templist
-	#badpeers bogon  hijacked  level1(AVOID)  spider
+	#badpeers bogon  hijacked  level1(AVOID)  Microsoft  spider
 	LISTS="ads-trackers-and-bad-pr0n hijacked badpeers Microsoft bogon"
 	for list in $LISTS
 	do
 	wget http://www.bluetack.co.uk/config/$list.gz
 	done
+	#gunzip *.gz
 	#http://www.maeyanie.com/2008/12/efficient-iptables-peerguardian-blocklist/
+	#cat ads-trackers-and-bad-pr0n hijacked badpeers Microsoft bogon |  pg2ipse - - ads1 > ADS
     gunzip -c *.gz | pg2ipse - - ads1 > ADS   
 	echo "Reading into ipset"
 	read

@@ -1,19 +1,18 @@
 "\e[A":history-search-backward
 "\e[B":history-search-forward
-
-"\C-W":beginning-of-line
-"\C-E":unix-word-rubout
-"\C-R":end-of-line
-"\eOR":"clear\C-M"
+#"\C-W":beginning-of-line
+#"\C-E":unix-word-rubout
+#"\C-R":end-of-line
+"\eOR":"tput clear\C-M"
 
 $if term=screen
-	"\eOR":"clear\C-M"
+	"\eOR":"tput clear\C-M"
 $endif
 
 "\e\e[C":forward-word
 "\e\e[D":backward-word
 
-set meta-flag on
-set convert-meta off
-set output-meta on
+#set meta-flag on
+#set convert-meta off
+#set output-meta on
 #"\e[OA":"ls\C-M"

@@ -1,13 +1,14 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
-
+#export HISTCONTROL=ignoredups
 export HISTCONTROL=ignoreboth
 shopt -s checkwinsize
 shopt -s histappend
 . ~/.bash_colors
 PS1="\[$bldblu\]\t \[$bldcyn\]\W\[$txtrst\]\$"
 
-
+stty erase ^?
+stty -echoctl
 if [ -f ~/.bash_aliases ]; then
     source $HOME/.bash_aliases
 fi
@@ -25,7 +26,7 @@ shopt -s checkwinsize
 
 #autocd
 shopt -s autocd
-
+set +m
 export HISTTIMEFORMAT="%F %T "
 export INPUTRC=/etc/inputrc
 
