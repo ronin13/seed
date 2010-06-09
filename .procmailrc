@@ -1,0 +1,8 @@
+VERBOSE=off
+MAILDIR=$HOME/Mail/ 
+PMDIR=$HOME/.procmail
+DEFAULT=$HOME/Mail/INBOX/
+LOGFILE=$HOME/logs/procmail.log
+INCLUDERC=$PMDIR/rule.1
+INCLUDERC=$PMDIR/rule.2
+
