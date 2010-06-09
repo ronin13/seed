@@ -28,7 +28,7 @@ weechat.register("wetwit.py", "0.1.0", "",
 
 # To be SET by you, VERIFY 3 TIMES !!! :)
 user = "randomsurfer"
-pwd = "curl-Itwitter.com"
+pwd = ""
 
 # -----------------------------------------------------------
 # Do not modify below this line------------------------------

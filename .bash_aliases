@@ -36,7 +36,7 @@ alias rcm="sudo /etc/rc.d"
 alias pinfo='pacman -Qi'
 alias frames='/usr/bin/mplayer -vo jpeg -sstep 0'
 alias locate='/usr/bin/locate -i'
-alias mitter='mitter -u randomsurfer -p curl-Itwitter.com -i cmd -s'
+alias mitter='mitter -u randomsurfer -p -i cmd -s'
 alias sdown='sudo shutdown -h now'
 alias getweather='weatherget -s INXX0012 -m'
 #calias cnkt='TERM=xterm; ssh rprabhu@proxy.eglbp.corp.yahoo.com -L 6891:socks.yahoo.com:1080'
