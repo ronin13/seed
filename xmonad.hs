@@ -59,7 +59,7 @@ myXPConfig = defaultXPConfig
 --{{{ Keybindings 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
-     [ ((controlMask, xK_q     ), kill)
+     [ ((modm, xK_q     ), kill)
 
     , ((mod1Mask, xK_space), scratchpadSpawnActionCustom "$HOME/bin/scratcher")
    
@@ -97,7 +97,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     --, ((modm .|. shiftMask, xK_Left     ), windows W.swapUp    )
 
-    , ((modm, xK_0), spawn "xset +dpms;sleep 1;xset dpms force off")
+    , ((controlMask, xK_0), spawn "xset +dpms;sleep 1;xset dpms force off")
 
     , ((modm,               xK_h     ), sendMessage Shrink)
 
@@ -111,7 +111,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modm .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
     ]
     ++
 
