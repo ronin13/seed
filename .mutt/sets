@@ -39,4 +39,16 @@ set text_flowed
 set signature=~/.mutt/.signature
 set include=yes
 set confirmappend=no
-set print_comm
+
+set print_command="muttprint"
+set print_split
+
+# Dump all headers
+macro index p "<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
+macro pager p "<display-toggle-weed> <print-message> <display-toggle-weed>"
+
+# No confirmation before printing
+set print="yes"
+set query_command="abook --mutt-query '%s'"
+set  attribution = "* On %d, %n <%a> wrote:"
+set autoedit="yes"

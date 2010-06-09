@@ -1,2 +1,5 @@
 folder-hook . "exec collapse-all"
+#message-hook . "exec toggle-quoted"
+#folder-hook =Search "l ~N<enter>"
 folder-hook =Search "set delete=yes"
+#set folder-hook =Arch$ "set signature=
