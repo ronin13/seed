@@ -1,0 +1,20 @@
+#!/bin/bash
+RT="$HOME/Arch/Hub"
+COPYCMD="rsync -rv --delete --delete-excluded --exclude-from '$RT/exclude'"
+for f in `cat $RT/seed/filelist`;do
+    sep=$(echo $f | cut -d ":" -f 1)
+    if [[ $sep = "#" ]];then
+        continue
+    fi
+    file=`echo $f | tr -d ':'`
+    diff -r $RT/seed/$(basename $file) $file &>/dev/null
+    if [[ $? != "0" ]];then
+        echo  "Copying $file (y/N)"
+        read -n 1 yesno
+        [[ -n $yesno ]] && $COPY $file $RT/seed/ && continue
+        echo -e "\nDiff for $file remains"
+    else
+        echo -e "\nNo diff for $file"
+    fi
+    echo "=================================================="
+done
