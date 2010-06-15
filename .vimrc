@@ -1,8 +1,9 @@
 
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
-""set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+set runtimepath=~/.vim,~/.vim/after,/usr/share/vim/vim72
 
+set nocompatible
 "" http://amix.dk/vim/vimrc.html
 set magic
 set wrapscan
@@ -210,4 +211,9 @@ iabbr _bang #!/bin/bash<C-R>=EatChar('\s')<CR>
 iabbr _pbang #!/usr/bin/python<C-R>=EatChar('\s')<CR> 
 
 nnoremap <F3> :BufExplorer<CR>
-
+let g:BASH_AuthorName   = 'Raghavendra D Prabhu'
+let g:BASH_Email        = "raghu dot prabhu 13 AT google's mail service"
+let $LOGNAME            = "Raghavendra"
+let $TZ                 = "IST"
+let g:rvSaveDirectoryType = 1
+let g:rvSaveDirectoryName = "~/.rcs/"

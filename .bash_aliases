@@ -37,7 +37,7 @@ alias pinfo='pacman -Qi'
 alias frames='/usr/bin/mplayer -vo jpeg -sstep 0'
 alias locate='/usr/bin/locate -i'
 alias mitter='mitter -u randomsurfer -p -i cmd -s'
-alias sdown='sudo shutdown -h now'
+alias sdown='echo "sure?"; read; shutdown -h now'
 alias getweather='weatherget -s INXX0012 -m'
 #calias cnkt='TERM=xterm; ssh rprabhu@proxy.eglbp.corp.yahoo.com -L 6891:socks.yahoo.com:1080'
 #alias torrent="screen -S torrent rtorrent"
@@ -71,3 +71,4 @@ alias startx="startx &>~/logs/X.log"
 #alias cscope="cscope -d"
 alias gthub="cd $HOME/Arch/Hub"
 alias psync='sudo pacman -Sy'
+alias build="cd ~/Arch/Build/"

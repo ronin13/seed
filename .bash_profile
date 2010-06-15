@@ -14,7 +14,7 @@ ulimit -c unlimited
 
 flushmac &
 [ -e $MPSOCKET ] || mkfifo $MPSOCKET
-$LOCK/polipo polipo -c ~/.poliporc &>/dev/null &
+#$LOCK/polipo polipo -c ~/.poliporc &>/dev/null &
 
 $LOCK/emacs /usr/bin/emacs --daemon &>/dev/null &
 pidof ssh-agent &>/dev/null || eval `/usr/bin/ssh-agent`

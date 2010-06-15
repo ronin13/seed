@@ -1,4 +1,5 @@
 # If not running interactively, don't do anything
+
 [ -z "$PS1" ] && return
 #export HISTCONTROL=ignoredups
 export HISTCONTROL=ignoreboth

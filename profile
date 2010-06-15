@@ -1,6 +1,7 @@
 # vim: set ft=sh :et
 export BROWSER=opera
-export DMENU="$HOME/bin/dmenu/dmenu -i -l 3 -nb #303030 -nf black -sb #303030 -p :"
+#export DMENU="$HOME/bin/dmenu/dmenu -i -l 3 -nb #303030 -nf black -sb #303030 -p :"
+export DMENU="$HOME/bin/dmenu/dmenu -i -l 3 -nb black -nf yellow -sb black -p :"
 export PATH="$HOME/bin:$PATH"
 export VIMRUNTIME="/usr/share/vim/vim72"
 export GDK_USE_XFT=1

@@ -1,4 +1,13 @@
+#!/bin/bash
 # set ft=sh
+
+pronounce(){ 
+if [[ ! -f $XDG_CACHE_HOME/pronounce/$1 ]];then 
+    wget -qO- $(wget -qO- "http://dictionary.reference.com/browse/$@" | grep 'soundUrl' | head -n 1 | sed 's|.*soundUrl=\([^&]*\)&.*|\1|' | sed 's/%3A/:/g;s/%2F/\//g') | tee $XDG_CACHE_HOME/pronounce/$1 |  /usr/bin/mplayer -really-quiet -cache 8192 -  
+else
+    mplayer $XDG_CACHE_HOME/pronounce/$1
+fi
+}
 
 function translate(){
 wget -qO - "http://ajax.googleapis.com/ajax/services/language/translate?langpair=|en&v=1.0&q=`xsel`" |cut -d \" -f 6
@@ -146,8 +155,13 @@ keyctl list @u | grep -q e90 && mount -i /home/raghavendra/wormole
 
 apod(){
 DATE=`date +%s`
-wget -q -O ~/.cache/apod:$DATE.jpg -c http://apod.nasa.gov/apod/$(curl -s http://apod.nasa.gov/apod/ | grep IMG  | cut -d "\"" -f 2)
-feh ~/.cache/apod:$DATE.jpg
+FILE=~/.cache/apod/apod:$DATE.jpg;
+wget -q -O $FILE -c http://apod.nasa.gov/apod/$(curl -s http://apod.nasa.gov/apod/ | grep IMG  | cut -d "\"" -f 2)
+feh $FILE
+echo "Set as wallpaper: y/n"
+read yesno
+[[ $yesno = "y" ]] && set_wall $FILE
+
 }
 
 geoip () { curl -s "http://www.geoiptool.com/?IP=$1" | html2text | egrep --color 'City:|IP Address:|Country:'; }
@@ -356,6 +370,7 @@ define() {
     echo ""
   fi
   rm -f /tmp/define
+  echo $1 >> ~/wordlist
   return 0
 }
 

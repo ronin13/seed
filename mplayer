@@ -5,10 +5,10 @@
 #    exit
 #fi
 HIST="$HOME/.mplayer.hist"
-$LOCK/mplayer /usr/bin/mplayer -slave -idle -input file=$MPSOCKET &>/dev/null  & 
+$LOCK/mplayer /usr/bin/mplayer -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  & 
 
 if [[ -z "$1" ]];then
-      num=$(awk '{ print NR":"$0 }' $HIST | tac | $DMENU | cut -d ":" -f 1)
+      num=$(awk '{ print NR" "$0 }' $HIST | uniq -f 1 | tac | $DMENU | cut -d " " -f 1)
       if [[ -z "$num" ]];then
         FILE=`tail -1 $HIST`
       else

@@ -164,6 +164,7 @@ myManageHook = composeAll
     , className =? "Apvlv"		--> doShift "5:pdf"
     , className =? "torrent"    --> doShift "9:torrent"
     , className =? "Evince"		-->  doShift "5:pdf"
+    , className =? "Zathura"		-->  doShift "5:pdf"
     , className =? "xterm"          --> doFloat ]
 --}}}
 
