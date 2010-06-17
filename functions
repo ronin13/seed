@@ -1,6 +1,12 @@
 #!/bin/bash
 # set ft=sh
 
+pacman-color(){
+BIN="/usr/bin/pacman"
+[[ -x /usr/bin/pacman-color ]] && BIN="/usr/bin/pacman-color"
+$BIN "$@"
+}
+
 pronounce(){ 
 if [[ ! -f $XDG_CACHE_HOME/pronounce/$1 ]];then 
     wget -qO- $(wget -qO- "http://dictionary.reference.com/browse/$@" | grep 'soundUrl' | head -n 1 | sed 's|.*soundUrl=\([^&]*\)&.*|\1|' | sed 's/%3A/:/g;s/%2F/\//g') | tee $XDG_CACHE_HOME/pronounce/$1 |  /usr/bin/mplayer -really-quiet -cache 8192 -  
@@ -252,9 +258,9 @@ wget --spider "$@" -o /tmp/wget_tmp; grep -i Length /tmp/wget_tmp; rm /tmp/wget_
 
 function buildabs()
 {
-    DIR="/var/abs/" 
-    path=`find -O3 $DIR -name "$1" -maxdepth 2 -type d | head -1`
-    cp -Rv $path /dev/shm
+    ABDIR="/var/abs/" 
+    abpath=$(find -O3 /var/abs/ -maxdepth 2 -name "vim" -type d | head -1)
+    cp -Rv $abpath /dev/shm/
     cd /dev/shm/$1
     clear
 }   
@@ -293,7 +299,7 @@ function fdz() { ls -lth |  egrep "[0-9](M|G)" | sort -k 5 -n | cut -d " " -f 5,
 
 function dz() { find . -maxdepth $1 -type d -exec du {} \; | sort -n | awk '{ print $2,"\t",$1/1024,"MB" }' | uniq; }
 function psp() { ps auxww | /bin/grep -i "$@"; }
-function svim() { sudo vim "$@";}
+function svim() { LD_PRELOAD=/usr/lib/libjemalloc.so sudo vim "$@";}
 function bkp() 
 {   
     rstr=`date +%s`; dest=~/Backup/`basename "$@"`.$rstr

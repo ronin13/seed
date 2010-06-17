@@ -8,7 +8,7 @@ set nocompatible
 set magic
 set wrapscan
 set t_Co=256
-let mapleader = ","
+"" let mapleader = ","
 set mouse-=a
 " work more logically with wrapped lines
 noremap j gj

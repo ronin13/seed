@@ -7,7 +7,7 @@
 "screen -d torrent"
  Control + t
 
-"echo 'stop' > $MPSOCKET"
+"~/bin/mplayerStop"
  Control + m
 
 "mpc next"

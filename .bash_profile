@@ -2,7 +2,7 @@
 [ -f /etc/profile ] && . /etc/profile
 [ -f $HOME/Arch/etc/profile ] && . $HOME/Arch/etc/profile
 . $HOME/.bashrc
-
+export LD_PRELOAD=/usr/lib/libjemalloc.so
 #set -u
 export LOCKDIR="/tmp/locks"
 mkdir -p $LOCKDIR
@@ -16,7 +16,7 @@ flushmac &
 [ -e $MPSOCKET ] || mkfifo $MPSOCKET
 #$LOCK/polipo polipo -c ~/.poliporc &>/dev/null &
 
-$LOCK/emacs /usr/bin/emacs --daemon &>/dev/null &
+#$LOCK/emacs /usr/bin/emacs --daemon &>/dev/null &
 pidof ssh-agent &>/dev/null || eval `/usr/bin/ssh-agent`
 pidof gpg-agent &>/dev/null || eval "$(gpg-agent --daemon)"
 $LOCK/aria2c  aria2c -D -d $HOME/Downloads -U Opera --enable-xml-rpc &>/dev/null &

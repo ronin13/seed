@@ -5,14 +5,19 @@
 #    exit
 #fi
 HIST="$HOME/.mplayer.hist"
-$LOCK/mplayer /usr/bin/mplayer -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  & 
+unset LD_PRELOAD
+$LOCK/mplayer /usr/bin/mplayer -geometry 97%:97% -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  & 
 
 if [[ -z "$1" ]];then
-      num=$(awk '{ print NR" "$0 }' $HIST | uniq -f 1 | tac | $DMENU | cut -d " " -f 1)
-      if [[ -z "$num" ]];then
-        FILE=`tail -1 $HIST`
+      fnum=$(awk '{ print NR" "$0 }' $HIST | cut -d ":" -f 1 | uniq -f 1 | tac | $DMENU)
+      if [[ -z "$fnum" ]];then
+          FILE=$(tail -1 $HIST | cut -d ":" -f 1)
       else
-        FILE=$(head -${num} $HIST | tail -1)
+          num=`echo $fnum | cut -d " " -f 1`
+          FILE=$(head -${num} $HIST | tail -1 | cut -d ":" -f 1)
+      fi
+      if [[ "$fnum" =~ .*@$ ]];then
+            POSITION=$(grep $FILE $HIST | tail -1 | cut -d ":" -f 2)
       fi
 else
 	prefix="`pwd`/"
@@ -20,6 +25,8 @@ else
 	FILE="${prefix}$@"
 fi
 
-echo "$FILE" >> $HOME/.mplayer.hist
+#echo "$FILE" >> $HOME/.mplayer.hist
+
 mpc pause &>/dev/null
 echo "loadfile \"$FILE\"" > $MPSOCKET
+echo "set_property time_pos $POSITION" > $MPSOCKET 

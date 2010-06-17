@@ -22,7 +22,7 @@ xmodmap -e 'add mod4 = 0xff67'
 #screen -md -c .rtorrent/.screenrc &
 unclutter -idle 4 -reset &
 xbindkeys &
-$LOCK/mplayer /usr/bin/mplayer -quiet -slave -idle -input file=$MPSOCKET &>/dev/null &
+#$LOCK/mplayer /usr/bin/mplayer -quiet -slave -idle -input file=$MPSOCKET &>/dev/null &
 /usr/lib/notify-osd/notify-osd &
 #export DISPLAY=:0.0 
 $LOCK/tmux tmux start-server
