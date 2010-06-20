@@ -1,0 +1,46 @@
+compile=(all clean compile disclean install remove uninstall)
+compctl -k compile make
+
+
+compctl -g '*.ebuild' ebuild
+compctl -g '*.tex' + -g '*(-/)' latex
+compctl -g '*.dvi' + -g '*(-/)' dvipdf dvipdfm
+compctl -g '*.tar.bz2 *.tar.gz *.bz2 *.gz *.jar *.rar *.xz *.tar *.tbz2 *.tgz *.zip *.Z' + -g '*(-/)' extract
+compctl -g '*.mp3 *.ogg *.mod *.wav *.avi *.mpg *.mpeg *.mp4 *.wmv' + -g '*(-/)' mplayer mpl 
+compctl -g '*.py' python
+compctl -g '*(-/D)' cd
+compctl -g '*(-/)' mkdir
+
+
+#http://zsh.sourceforge.net/Doc/Release/zsh_20.html
+compctl -z fg
+#compctl -j kill
+compctl -j disown
+compctl -u chown
+compctl -u su
+compctl -c sudo
+compctl -c which
+compctl -c type
+compctl -c hash
+compctl -c unhash
+compctl -o setopt
+compctl -o unsetopt
+compctl -a alias
+compctl -a unalias
+compctl -A shift
+compctl -v export
+compctl -v unset
+compctl -v echo
+compctl -b bindkey
+
+daemons=(`/bin/ls -A /etc/rc.d/`)
+compctl -k daemons rcstart
+sdaemons=(`/bin/ls -A /var/run/daemons/`)
+compctl -k sdaemons rcstop
+
+pids=(`ps aux | perl -lane 'print $F[1] if $. > 1 and not $F[9] =~ "^\Q[\E.*"'`)
+compctl -k pids kill 
+
+#processes=(`ps -A | perl -lane 'print $F[3] if $. > 1' | sort | uniq`)
+#compctl -k processes killall
+
