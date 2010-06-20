@@ -9,7 +9,7 @@ alias tiddly='google-chrome --enable-file-cookies "/home/raghavendra/Pwiki/empty
 #alias screen='screen -dRR'
 #alias rm='rm -i'
 alias archie='ssh -p 2222 raghu@localhost'
-alias grep='LC_ALL="C" grep -i'
+alias grep='LC_ALL="C" grep -i --color'
 #alias grep='grep -i'
 #alias mv='ionice -c3 mv -v'
 alias shownice='ps -eo nice,command | tail +1 | sort -n -k 1'
@@ -72,3 +72,4 @@ alias startx="startx &>~/logs/X.log"
 alias gthub="cd $HOME/Arch/Hub"
 alias psync='sudo pacman -Sy'
 alias build="cd ~/Arch/Build/"
+alias tree="tree -L 1 -C"

@@ -2,7 +2,7 @@
 
 alias ls='ls --color=always'
 alias archie='ssh -p 2222 raghu@localhost'
-alias grep='LC_ALL="C" grep -i'
+alias grep='LC_ALL="C" grep -i --color'
 alias shownice='ps -eo nice,command | tail +1 | sort -n -k 1'
 alias idden='ls -ld \.*'
 alias aria="aria2c --file-allocation=falloc --enable-direct-io=true "
@@ -48,3 +48,4 @@ alias startx="startx &>~/logs/X.log"
 alias gthub="cd $HOME/Arch/Hub"
 alias psync='sudo pacman -Sy'
 alias build="cd ~/Arch/Build/"
+alias tree="tree -L 1 -C"

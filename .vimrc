@@ -29,13 +29,14 @@ set incsearch							" show best match so far
 set hlsearch							" Highlight matches to the search 
 set diffopt+=iwhite 
 """" Display
-set background=dark						" I use dark background
 set lazyredraw							" Don't repaint when scripts are running
 set scrolloff=3							" Keep 3 lines below and above the cursor
 set numberwidth=1						" Use 1 col + 1 space for numbers
 " tab labels show the filename without path(tail)
+
 set guitablabel=%N/\ %t\ %M
-colorscheme tango
+colorscheme peaksea
+set background=dark
 
 """" Messages, Info, Status
 set shortmess+=a						" Use [+] [RO] [w] for modified, read-only, modified
@@ -161,6 +162,7 @@ nnoremap  <C-left>   Bh
 
 if &diff
 " easily handle diffing 
+   colorscheme peaksea 
    vnoremap < :diffget<CR>
    vnoremap > :diffput<CR>
 else
@@ -217,3 +219,8 @@ let $LOGNAME            = "Raghavendra"
 let $TZ                 = "IST"
 let g:rvSaveDirectoryType = 1
 let g:rvSaveDirectoryName = "~/.rcs/"
+
+command DiffOrig vertical new | set buftype=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
+nnoremap \ch :DiffOrig
+
+

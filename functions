@@ -236,11 +236,13 @@ ncmpcpp
 
 
 function rcstart(){
-if [[ -f /var/run/daemons/$1 ]];then
-    sudo /etc/rc.d/$1 stop; sleep 2; sudo /etc/rc.d/$1 start
-else
-    sudo /etc/rc.d/$1 start
-fi
+for d in $@;do
+    if [[ -f /var/run/daemons/$d ]];then
+        sudo /etc/rc.d/$d stop; sleep 2; sudo /etc/rc.d/$d start
+    else
+        sudo /etc/rc.d/$d start
+    fi
+done
 }
 
 function cscore()
@@ -279,7 +281,9 @@ fi
 }
 
 function rcstop(){
-sudo /etc/rc.d/$1 stop
+for d in $@;do
+    sudo /etc/rc.d/$d stop
+done
 }
 
 

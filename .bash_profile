@@ -2,7 +2,7 @@
 [ -f /etc/profile ] && . /etc/profile
 [ -f $HOME/Arch/etc/profile ] && . $HOME/Arch/etc/profile
 . $HOME/.bashrc
-export LD_PRELOAD=/usr/lib/libjemalloc.so
+#export LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so
 #set -u
 export LOCKDIR="/tmp/locks"
 mkdir -p $LOCKDIR

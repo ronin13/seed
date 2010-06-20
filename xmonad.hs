@@ -12,11 +12,14 @@ import XMonad.Actions.SpawnOn
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Magnifier
 import XMonad.Hooks.ManageDocks
-
+import XMonad.Actions.OnScreen
 import XMonad.Util.Scratchpad (scratchpadSpawnActionCustom)
+import XMonad.Actions.CopyWindow
 
+import XMonad.Layout.LayoutHints (layoutHintsWithPlacement)
 --centerFloat
 import XMonad.Hooks.ManageHelpers
+import XMonad.Actions.SinkAll
 
 import XMonad.Prompt
 import XMonad.Prompt.Window
@@ -27,45 +30,73 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.PerWorkspace  (onWorkspace)
 import XMonad.Layout.LayoutCombinators
 import XMonad.Util.Run(spawnPipe)
-import XMonad.Util.EZConfig(additionalKeys)
+import XMonad.Util.EZConfig
 import System.IO
-
 import XMonad.Actions.CycleWS
 -- import XMonad.Layout.Monitor
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import qualified XMonad.Layout.Magnifier as Mag
+
+--}}} 
+
+--{{{ Testing 
+toggleOrViewNoSP = toggleOrDoSkip ["NSP"]  W.greedyView
+--}}}
+--
+--{{{ Core
+main = do
+    xmproc <- spawnPipe "xmobar"
+    xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
+        terminal           = myTerminal,
+        focusFollowsMouse  = myFocusFollowsMouse,
+        borderWidth        = myBorderWidth,
+        modMask            = myModMask,
+        workspaces         = myWorkspaces,
+        normalBorderColor  = myNormalBorderColor,
+        focusedBorderColor = myFocusedBorderColor,
+        mouseBindings      = myMouseBindings,
+        keys               = myKeys,
+        layoutHook         = myLayout,
+        manageHook         = composeAll [ myManageHook, manageSpawn ],
+        handleEventHook    = myEventHook,
+        logHook            = myLogHook xmproc, 
+        startupHook        = myStartupHook
+        }
+ 
 --}}}
 
---{{{ Variables 
-myTerminal      = "urxvt"
+--{{{ Variabl es 
+myTerminal      = "xterm"
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
-myBorderWidth   = 0
+myBorderWidth   = 1
 myModMask       = mod4Mask
-myNormalBorderColor  = "#dddddd"
-myFocusedBorderColor = "#ff0000"
+myNormalBorderColor  = "green"
+myFocusedBorderColor = "white"
+
 
 myXPConfig = defaultXPConfig                                    
     { 
-	font  = "xft:Bitstream Vera Sans Mono:pixelsize=14" 
-	,fgColor = "white"
-	, bgColor = "black"
-	, position = Top
+	font  = "xft:Bitstream Vera Sans Mono:pixelsize=14:bold" 
+	, fgColor = "Black"
+	, bgColor = "White"
+	, position = Bottom
     }
 --}}}
 
---{{{ Keybindings 
+--{{{ Keyb indings 
+--myKeys conf = mkKeymap conf $
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
-     [ ((modm, xK_q     ), kill)
+     [ ((modm, xK_q     ), kill1)
 
     , ((mod1Mask, xK_space), scratchpadSpawnActionCustom "$HOME/bin/scratcher")
-   
+
     , ((modm, xK_period), toggleWS )
 
-    , ((modm, xK_slash), windowPromptGoto myXPConfig)
+    , ((modm, xK_slash), windowPromptGoto myXPConfig { autoComplete = Just 5000000 } )
 
     , ((modm,               xK_space ), sendMessage NextLayout)
 
@@ -78,21 +109,23 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_n     ), refresh)
 
     , ((modm .|. shiftMask, xK_Right),  nextWS)
-   
-    , ((modm, xK_Up),  shiftToNext)
 
-    , ((modm, xK_Down),    shiftToPrev)
+    , ((modm, xK_Up),  moveTo Next NonEmptyWS)
+
+    , ((modm, xK_Down), moveTo Next NonEmptyWS)
 
     , ((modm .|. shiftMask, xK_Left),   prevWS)
-  
+
     , ((modm,               xK_Right     ), windows W.focusDown)
 
     , ((modm,               xK_Left     ), windows W.focusUp  )
 
     , ((modm,               xK_m     ), windows W.focusMaster  )
 
-    , ((modm,               xK_Return), windows W.swapMaster)
+    , ((modm .|. shiftMask, xK_t     ), sinkAll)
 
+    , ((modm,               xK_Return), windows W.swapMaster)
+    
     --, ((modm .|. shiftMask, xK_Right     ), windows W.swapDown  )
 
     --, ((modm .|. shiftMask, xK_Left     ), windows W.swapUp    )
@@ -112,17 +145,19 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
     , ((modm .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
+
     ]
     ++
+     [((m .|. modm, k), f i)
+     | (i, k) <- zip (XMonad.workspaces conf) [xK_1 ..]
+     , (f, m) <- [(windows . W.view, 0), (windows . W.shift, shiftMask), (windows . copy, mod1Mask),(toggleOrViewNoSP,controlMask)]]
+ 
 
-    [((m .|. modm, k), windows $ f i)
-        | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    ++
+   -- ++
 
-    [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
-        , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
+   -- [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+     --   | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
+      --  , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
 
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 
@@ -137,73 +172,63 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     ]
 --}}}  
 
---{{{ Layout
+--{{{ Layout 
 myLayout =  onWorkspace "4:video" vidLayout $ onWorkspace "7:games" vidLayout $ defLayout
       where
           defLayout = avoidStruts $ Mag.magnifier (tiled ||| Full ||| Mirror tiled)
-          tiled   = smartBorders (ResizableTall 1 (2/100) (1/2) [])
-          vidLayout =  noBorders (Grid False ||| Full)
+          tiled     = hinted (smartBorders (ResizableTall 1 (2/100) (1/2) []))
+          vidLayout = smartBorders (Grid False ||| Full)
+          hinted l  = layoutHintsWithPlacement (0,0) l
 --}}}
 
 --{{{ Workspaces
 myWorkspaces :: [WorkspaceId]
-myWorkspaces    = ["1:norm","2:term","3:browser","4:video","5:pdf","6:note","7:thunar","8:games","9:torrent"]
-myManageHook = composeAll
-    [ className =? "MPlayer" --> doFloat 
-    , isFullscreen --> doFullFloat
-    , className =? "Wine" --> doShift "8:games"
-    , resource  =? "desktop_window" --> doIgnore
-    , className =? "Opera"  --> doShift "3:browser"
-    , className =? "Gpodder" --> doShift "5:pdf"
-    , className =? "Chromium"  --> doShift "3:browser"
-    , className =? "Thunar" --> doShift "7:thunar"
-    , className =? "Rednotebook" --> doShift "6:note"
-	, isDialog  --> doCenterFloat
-    , className =? "Xmessage" --> doCenterFloat
-    , className =? "feh"	--> doCenterFloat 
-    , className =? "Apvlv"		--> doShift "5:pdf"
-    , className =? "torrent"    --> doShift "9:torrent"
-    , className =? "Evince"		-->  doShift "5:pdf"
-    , className =? "Zathura"		-->  doShift "5:pdf"
-    , className =? "xterm"          --> doFloat ]
+myWorkspaces    = ["1:norm","2:term","3:browser","4:video","5:pdf","6:note","7:thunar","8:games","9:misc"]
+myManageHook = composeAll . concat $
+    [ [     className =? a                --> doFloat               | a <- myFloats          ]
+    , [     isFullscreen                  --> doFullFloat                                    ]  
+    , [     className =? "Wine"           --> doShift "8:games"                              ]
+    , [     resource  =? c                --> doIgnore              | c <- myIgnores         ]
+    , [     className =? "Gpodder"        --> doShift "9:misc"                               ]
+    , [     className =? b                --> doShift "3:browser"   | b <- myBrowsers        ]
+    , [     className =? "Thunar"         --> doShift "7:thunar"                             ]
+    , [     className =? "Rednotebook"    --> doShift "6:note"                               ]
+	, [     className =? d  <||> isDialog --> doCenterFloat         | d <- myCenterFloats    ]
+    , [     className =? e 		          --> doShift "5:pdf"       | e <- myPDF             ] ]
+    where 
+      myFloats =  ["MPlayer"] 
+      myCenterFloats = ["Xmessage","feh"]
+      myBrowsers = ["Opera","Firefox","Shiretoko","Chromium","Google-chrome"]
+      myPDF = ["Evince","Zathura","Apvlv"]
+      myIgnores = ["desktop_window","desktop"]
 --}}}
 
 --{{{ Events
 myEventHook = mempty
 --}}}
 
---{{{ Core
+--{{{ Startup
 myStartupHook = startup
 startup :: X()
 startup = do
 	  spawnOn "2:term" "~/bin/tst" 
+--}}}
 
-main = do
-    xmproc <- spawnPipe "xmobar"
-    xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
-        terminal           = myTerminal,
-        focusFollowsMouse  = myFocusFollowsMouse,
-        borderWidth        = myBorderWidth,
-        modMask            = myModMask,
-        workspaces         = myWorkspaces,
-        normalBorderColor  = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
-
-        keys               = myKeys,
-        mouseBindings      = myMouseBindings,
-
-        layoutHook         = myLayout,
-
-        manageHook         = composeAll 
-                               [ myManageHook
-                                ,manageSpawn 
-                               ],
-        handleEventHook    = myEventHook,
-        logHook            = dynamicLogWithPP $ xmobarPP
-                                         { ppOutput = hPutStrLn xmproc
-										 , ppUrgent = xmobarColor "red" "" . wrap "*" "*" 
-                                         , ppTitle = xmobarColor "green" "" . shorten 20      
-                                         }, 
-        startupHook        = myStartupHook
-    }
---}}} 
+--{{{ LogHook
+myLogHook :: Handle -> X ()
+myLogHook h = dynamicLogWithPP $ customPP { ppOutput = hPutStrLn h }
+ 
+---- Looks --
+---- bar
+customPP :: PP
+customPP = defaultPP { 
+                ppHidden = xmobarColor "#00FF00" "" . noScratchPad
+              , ppCurrent = xmobarColor "blue" "" . wrap "[" "]"
+              , ppUrgent = xmobarColor "red" "" . wrap "*" "*"
+              , ppLayout = xmobarColor "Yellow" ""
+              , ppTitle = xmobarColor "green" "" . shorten 20
+              , ppSep = "<fc=#0033FF> | </fc>"
+            }
+        where 
+            noScratchPad ws = if ws == "NSP" then "" else pad ws 
+--}}}
