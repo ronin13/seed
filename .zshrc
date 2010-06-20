@@ -13,7 +13,7 @@ autoload -U colors && colors
 #promptinit 
 #prompt elite
 
-
+export PAGER="vimpager"
 
 PROMPT="%{$fg[green]%}(%2d)%{$reset_color%}:$"
 RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[blue]%}[%?:%!])%{$reset_color%}%"
@@ -94,3 +94,10 @@ bash_source ~/.zsh/.zsh_aliases
 bash_source ~/.zsh/functions
 bash_source ~/.zsh/apparix.sh
 source ~/.zsh/mpc_complete
+
+
+#unalias run-help
+autoload run-help
+HELPDIR=~/.zsh_help
+
+setopt completealiases

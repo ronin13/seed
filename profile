@@ -10,6 +10,7 @@ export EDITOR="vim"
 export WINEDEBUG=-all
 export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
 export CSCOPE_DB="/home/raghavendra/Arch/cscope/cscope.out"
+export PAGER="vimpager"
 #export LD_PRELOAD="/usr/lib/libtcmalloc_minimal.so"
 export LESS="-R -i -M -s"
 #export PERL5LIB=/usr/share/perl5/vendor_perl/Any

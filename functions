@@ -1,6 +1,10 @@
 #!/bin/bash
 # set ft=sh
 
+pal(){
+   pacman -Ql "$@"
+}
+
 pacman-color(){
 BIN="/usr/bin/pacman"
 [[ -x /usr/bin/pacman-color ]] && BIN="/usr/bin/pacman-color"

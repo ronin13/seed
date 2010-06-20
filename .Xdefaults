@@ -34,16 +34,18 @@ xterm*altSendsEscape: true
 xterm*cursorUnderLine: true
 xterm*faceName:Liberation Mono
 xterm*bellIsUrgent: true
+xterm*highlightColorMode: true
+xterm*highlightReverse: true
+xterm*highlightTextColor: red
 xterm*highlightColor: green
-xterm*highlightTextColor: black
 xterm*dynamicColors: true
 xterm*faceSize: 9
-xterm*termName: xterm-color
+xterm*termName: xterm-256color
 xterm*trimSelection: true
 xterm*charClass:33:48,35:48,37-38:48,39:43,42-47:48,58-59:48,61:48,63-64:48,124:1,126:48
 xterm*renderFont: true
 xterm*utf8: 3
 xterm*metaSendsEscape: true
 xterm*backarrowKey: false
-xterm*on4Clicks: group
-xterm*on5Clicks: page
+!xterm*on4Clicks: group
+!xterm*on5Clicks: page

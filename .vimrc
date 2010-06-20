@@ -1,7 +1,7 @@
 
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
-set runtimepath=~/.vim,~/.vim/after,/usr/share/vim/vim72
+set runtimepath=~/.vim,~/.vim/after,/usr/share/vim/vim72,/usr/share/vim/vimfiles
 
 set nocompatible
 "" http://amix.dk/vim/vimrc.html
@@ -15,7 +15,6 @@ noremap j gj
 noremap k gk
 set ruler 
 set title
-set scrolloff=3
 set backup
 set dictionary+=/usr/share/dict/words
 set shortmess=atI

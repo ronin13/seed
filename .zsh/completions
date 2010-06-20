@@ -44,3 +44,6 @@ compctl -k pids kill
 #processes=(`ps -A | perl -lane 'print $F[3] if $. > 1' | sort | uniq`)
 #compctl -k processes killall
 
+pkgs=(`pacman -Q | cut -d " " -f 1`)
+compctl -k pkgs pal
+compctl -k pkgs pinfo 

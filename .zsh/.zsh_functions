@@ -1,5 +1,24 @@
 wiki() { dig +short txt $1.wp.dg.cx }
 
+less_vim() {
+    vim -R \
+    -c 'let no_plugin_maps = 1' \
+    -c 'set scrolloff=5' \
+    -c 'runtime! macros/less.vim' \
+    -c 'set foldlevel=999' \
+    -c 'set mouse=h' \
+    -c 'set nonu' \
+    -c 'nmap <ESC>u :nohlsearch<cr>' \
+    "$@"
+}
+
+mangrep(){
+   PAGER=less /usr/bin/man "$1" | grep -5 "$2"
+}
+
+
+help(){ run-help "$@" || less_vim -c ":/$@/" ~/.zshguide.txt }
+
 disassemble() {
         emulate -L zsh
             gcc -pipe -S -o - -O -g $* | as -aldh -o /dev/null
