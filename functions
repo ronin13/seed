@@ -1,9 +1,9 @@
 #!/bin/bash
 # set ft=sh
 
-pal(){
-   pacman -Ql "$@"
-}
+#pal(){
+#   pacman -Ql "$@"
+#}
 
 pacman-color(){
 BIN="/usr/bin/pacman"
@@ -265,10 +265,10 @@ wget --spider "$@" -o /tmp/wget_tmp; grep -i Length /tmp/wget_tmp; rm /tmp/wget_
 function buildabs()
 {
     ABDIR="/var/abs/" 
-    abpath=$(find -O3 /var/abs/ -maxdepth 2 -name "vim" -type d | head -1)
+    abpath=$(find -O3 /var/abs/ -maxdepth 2 -name "$@" -type d | head -1)
     cp -Rv $abpath /dev/shm/
     cd /dev/shm/$1
-    clear
+    #clear
 }   
 
 function vpdf(){

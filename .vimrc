@@ -1,14 +1,23 @@
 
+"noremap <C-w> <Nop>
+"nnoremap <S-Insert> "+p
+set sidescrolloff=5
+nnoremap <F1> :wq<CR>
+inoremap <F1> <ESC>:wq<CR>
+nnoremap `` :q<CR>
+map <MouseMiddle> <esc>"+p
+
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
 set runtimepath=~/.vim,~/.vim/after,/usr/share/vim/vim72,/usr/share/vim/vimfiles
 
+set linebreak
 set nocompatible
 "" http://amix.dk/vim/vimrc.html
 set magic
 set wrapscan
 set t_Co=256
-"" let mapleader = ","
+let mapleader = ","
 set mouse-=a
 " work more logically with wrapped lines
 noremap j gj
@@ -34,7 +43,8 @@ set numberwidth=1						" Use 1 col + 1 space for numbers
 " tab labels show the filename without path(tail)
 
 set guitablabel=%N/\ %t\ %M
-colorscheme peaksea
+""colorscheme peaksea
+colorscheme wombat256
 set background=dark
 
 """" Messages, Info, Status
@@ -57,7 +67,6 @@ set softtabstop=4						" 4 spaces as a tab for bs/del
 set expandtab
 set hidden
 " we don't want to edit these type of files
-set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
 ""=========================================================================
 
 """" Coding
@@ -72,9 +81,9 @@ syntax on                               " Turn on syntax highlighting
 set foldmethod=marker
 
 set wildmenu                            " Autocomplete features in the status bar
-set wildmode=list:longest
-set wildignore=*.o
+set wildmode=list:longest,full
 au BufRead,BufNewFile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=mail 
+set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
 
 let g:pydiction_location = '$HOME/Arch/pydiction/complete-dict'
 set tags +=~/.vim/tags/python.ctags
@@ -129,7 +138,7 @@ au FileType python set expandtab
 " Toggle the tag list bar
 nmap <F5> :TlistToggle<CR>
 
-if &term == "screen-256color"
+if &term == "screen-256color" || &term == "xterm-256color"
     map [1;3C <A-right>
     map [1;3D <A-left>
     map ^[[1;5A <C-up>
@@ -143,8 +152,8 @@ if &term == "screen-256color"
 endif
 
 " tab navigation (next tab) with alt left / alt right
-nnoremap  <A-right>  gt
-nnoremap  <A-left>   gT
+nnoremap  <A-Right>  gt
+nnoremap  <A-Left>   gT
 " Ctrl + Arrows - Move around quickly
 nnoremap  <C-up>     {
 nnoremap  <C-down>   }
@@ -157,13 +166,12 @@ nnoremap  <C-left>   Bh
 "nnoremap  <s-right>  vl
 "nnoremap  <s-left>   vh
 
-"" nnoremap V 
 
 if &diff
 " easily handle diffing 
    colorscheme peaksea 
-   vnoremap < :diffget<CR>
-   vnoremap > :diffput<CR>
+   noremap < :diffget<CR>
+   noremap > :diffput<CR>
 else
 " visual shifting (builtin-repeat)
    vnoremap < <gv                       
@@ -196,7 +204,6 @@ nnoremap <space> za
 " <space> in visual mode creates a fold over the marked range
 vnoremap <space> zf
 
-" allow arrow keys when code completion window is up
 
 """ Abbreviations
 function! EatChar(pat)
@@ -204,12 +211,6 @@ function! EatChar(pat)
   return (c =~ a:pat) ? '' : c
 endfunc
 
-iabbr _me Raghavendra D Prabhu (raghu.prabhu13@gmail.com)<C-R>=EatChar('\s')<CR>
-iabbr _t  <C-R>=strftime("%H:%M:%S")<CR><C-R>=EatChar('\s')<CR>
-iabbr _d  <C-R>=strftime("%a, %d %b %Y")<CR><C-R>=EatChar('\s')<CR>
-iabbr _dt <C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR><C-R>=EatChar('\s')<CR>
-iabbr _bang #!/bin/bash<C-R>=EatChar('\s')<CR>
-iabbr _pbang #!/usr/bin/python<C-R>=EatChar('\s')<CR> 
 
 nnoremap <F3> :BufExplorer<CR>
 let g:BASH_AuthorName   = 'Raghavendra D Prabhu'
@@ -222,4 +223,40 @@ let g:rvSaveDirectoryName = "~/.rcs/"
 command DiffOrig vertical new | set buftype=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 nnoremap \ch :DiffOrig
 
+source ~/.vim/vimrc.spell
+source ~/.vim/vimrc.abbrev
 
+:setlocal spell spelllang=en
+set spellfile=~/.vim/spellfile.add
+
+
+"noremap <M-Down> ]s
+"noremap <M-Up> [s
+
+nnoremap <C-w><Up>  <C-w>k
+nnoremap <C-w><Down>  <C-w>j
+nnoremap <C-w><Right>  <C-w>l
+nnoremap <C-w><Left>  <C-w>h
+
+
+nnoremap Q @q
+
+nnoremap v V
+nnoremap V v
+inoremap <C-Del> <C-\><C-O>D
+let g:SuperTabDefaultCompletionType = "context"
+
+
+function! CleverTab()
+   if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+      return "\<Tab>"
+   else
+      return "\<C-N>"
+   endif
+endfunction
+
+inoremap <Tab> <C-R>=CleverTab()<CR>
+noremap <F2> :silent SuperTabHelp<CR>
+set nospell
+
+au BufRead,BufNewFile *.viki set ft=viki

@@ -39,6 +39,7 @@ alias -g :n='&> /dev/null'
 
 limit coredumpsize 10m
 setopt correct
+setopt autolist automenu
 
 setopt autopushd pushdminus pushdtohome pushdignoredups
 setopt autocd extendedglob
@@ -66,27 +67,30 @@ autoload -U insert-unicode-char
 zle -N insert-unicode-char
 bindkey '^Xi' insert-unicode-char
 
-## The following lines were added by compinstall
-##By me
-#zstyle ':completion:*' accept-exact '*(N)'
-#zstyle ':completion:*:(cp|mv|rm):*' ignore-line yes
-#zstyle ':completion:*:cd:*' ignore-parents parent pwd
-#zstyle ':completion:*:processes' command 'ps -A'
-##/By me
+# The following lines were added by compinstall
+#By me
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*:(cp|mv|rm):*' ignore-line yes
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
+zstyle ':completion:*:processes' command 'ps -A'
+#/By me
 
-#zstyle ':completion:*' completer _complete _ignored _correct _approximate
-#zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-#zstyle ':completion:*' menu select=long-list select=0
-#zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-#zstyle ':completion:*' use-compctl true
-#zstyle :compinstall filename '/home/raghavendra/.zshrc'
+zstyle ':completion:*' completer _complete _ignored _correct _approximate
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' menu select=long-list select=0
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl true
+zstyle :compinstall filename '/home/raghavendra/.zshrc'
 
-#autoload -Uz compinit
-#compinit
-## End of lines added by compinstall
+autoload -U url-quote-magic
+zle -N self-insert url-quote-magic
 
-#autoload -Uz bashcompinit
-#bashcompinit
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+autoload -Uz bashcompinit
+bashcompinit
 
 source ~/.zsh/.zsh_functions
 source ~/.zsh/completions
