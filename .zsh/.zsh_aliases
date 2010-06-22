@@ -1,5 +1,6 @@
 # vim:set ft=sh
 
+alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
 alias ls='ls --color=always'
 alias archie='ssh -p 2222 raghu@localhost'
 alias grep='LC_ALL="C" grep -i --color'
@@ -30,7 +31,7 @@ alias pal="pacman -Ql "
 alias redradio="mplayer -playlist http://radioreddit.com:8000/listen.pls"
 alias showtorrent="aria2c -S "
 alias wget="wget -c --content-disposition"
-alias less="vimpager"
+#alias less="vimpager"
 
 if [ "$TERM" != "dumb" ]; then
     alias ls='ls --color=always'
@@ -45,7 +46,7 @@ alias emacs="emacsclient"
 alias xcolors='cat  /usr/share/X11/rgb.txt | sort -nr'
 alias les='less'
 alias vim="LD_PRELOAD=/usr/lib/libjemalloc.so vim -X"
-alias startx="startx &>~/logs/X.log"
+alias startx="startx &>!~/logs/X.log"
 alias gthub="cd $HOME/Arch/Hub"
 alias psync='sudo pacman -Sy'
 alias build="cd ~/Arch/Build/"

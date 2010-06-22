@@ -16,9 +16,12 @@ function playpos() { mpc play "$@"; mpc status; }
 function status()  { mpc status;}
 function playlist() { mpc playlist; }
 
+OLDIFS="$IFS"
+IFS='
+'
 complete_artist=(`mpc list artist`)
 compctl -k complete_artist artist 
 
 complete_artist=(`mpc list album`)
 compctl -k complete_album album
-
+IFS="$OLDIFS"

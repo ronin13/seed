@@ -13,11 +13,11 @@ less_vim() {
 }
 
 mangrep(){
-   PAGER=less /usr/bin/man "$1" | grep -5 "$2"
+    man "$1" | grep -5 "$2"
 }
 
 
-help(){ run-help "$@" || less_vim -c ":/$@/" ~/.zshguide.txt }
+help(){  run-help "$@" || less_vim -c ":/$@/" ~/.zshguide.txt }
 
 disassemble() {
         emulate -L zsh

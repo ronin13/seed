@@ -10,6 +10,7 @@ compctl -g '*.mp3 *.ogg *.mod *.wav *.avi *.mpg *.mpeg *.mp4 *.wmv' + -g '*(-/)'
 compctl -g '*.py' python
 compctl -g '*(-/D)' cd
 compctl -g '*(-/)' mkdir
+compctl -g "*.pdf *.dvi" + -g '*(-/)' zathura evince apvlv epdfview 
 
 
 #http://zsh.sourceforge.net/Doc/Release/zsh_20.html
@@ -19,7 +20,7 @@ compctl -j disown
 compctl -u chown
 compctl -u su
 compctl -c sudo
-compctl -c which
+compctl -c which whence where 
 compctl -c type
 compctl -c hash
 compctl -c unhash
@@ -31,6 +32,7 @@ compctl -A shift
 compctl -v export
 compctl -v unset
 compctl -v echo
+compctl -v getln getopts read unset vared
 compctl -b bindkey
 
 daemons=(`/bin/ls -A /etc/rc.d/`)
@@ -47,3 +49,13 @@ compctl -k pids kill
 pkgs=(`pacman -Q | cut -d " " -f 1`)
 compctl -k pkgs pal
 compctl -k pkgs pinfo 
+compctl -k pkgs whichpack 
+
+syncpkgs=(`pacman --config /etc/pacman.conf.testing -Sql core extra community community-testing testing arch-games archlinuxfr`)
+compctl -k syncpkgs ins
+
+compctl -l '' -x 'p[1]' -f -- . source
+compctl -s '${^fpath}/*(N:t)' autoload
+compctl -k hosts ftp lftp ncftp ssh w3m lynx links elinks nc telnet rlogin host
+compctl -k hosts -P '@' finger
+compctl -x 'C[-1,-*e]' -c - 'C[-1,-[ARWI]##]' -f -- fc

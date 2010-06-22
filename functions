@@ -1,16 +1,6 @@
 #!/bin/bash
 # set ft=sh
 
-#pal(){
-#   pacman -Ql "$@"
-#}
-
-pacman-color(){
-BIN="/usr/bin/pacman"
-[[ -x /usr/bin/pacman-color ]] && BIN="/usr/bin/pacman-color"
-$BIN "$@"
-}
-
 pronounce(){ 
 if [[ ! -f $XDG_CACHE_HOME/pronounce/$1 ]];then 
     wget -qO- $(wget -qO- "http://dictionary.reference.com/browse/$@" | grep 'soundUrl' | head -n 1 | sed 's|.*soundUrl=\([^&]*\)&.*|\1|' | sed 's/%3A/:/g;s/%2F/\//g') | tee $XDG_CACHE_HOME/pronounce/$1 |  /usr/bin/mplayer -really-quiet -cache 8192 -  
@@ -278,9 +268,14 @@ pdftohtml -q -stdout -noframes "$@" | w3m -T text/html
 function view()
 {
 if [[ -z "$@" ]];then
-thunar ~/Documents
+    thunar ~/Documents
+elif [[ $1 =~ ^http:.* ]];then
+    url=${1#*=}   # for urls like http://docs.google.com/viewer?url=<pdfurl>
+    dest="$HOME/Documents/${1##*/}"
+    wget -O - -q $url > $dest
+    detach evince $dest
 else
-detach evince "$@" 
+    detach evince "$@" 
 fi
 }
 
