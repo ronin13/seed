@@ -1,4 +1,4 @@
-unalias run-help
+unalias -m '*'
 autoload run-help
 HELPDIR=~/.zsh_help
 # Lines configured by zsh-newuser-install
@@ -39,6 +39,7 @@ alias -s py=vim
 alias -g zsource="source ~/.zshrc"
 alias -g :g=' |& /bin/grep -i'
 alias -g :n='&> /dev/null'
+alias -g :l=' |& less'
 
 setopt correct
 setopt autolist automenu
@@ -127,3 +128,7 @@ setopt nomatch
 setopt pathdirs
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.(^1*)' insert-sections true
+
+hash -d shm="/dev/shm"
+hash -d tmp="/tmp/"
+

@@ -39,15 +39,14 @@ fi
 alias tmp="cd /tmp/"
 alias ..='cd ..'
 alias ...='cd ../..'
-alias cursemap="offlineimap -u Curses.Blinkenlight"
 #alias xev="xev -id `xdotool getactivewindow`"
 alias sendmail="msmtp -C $HOME/wormole/.msmtprc"
 alias emacs="emacsclient"
 alias xcolors='cat  /usr/share/X11/rgb.txt | sort -nr'
 alias les='less'
-alias vim="LD_PRELOAD=/usr/lib/libjemalloc.so vim -X"
 alias startx="startx &>!~/logs/X.log"
 alias gthub="cd $HOME/Arch/Hub"
 alias psync='sudo pacman -Sy'
 alias build="cd ~/Arch/Build/"
 alias tree="tree -L 1 -C"
+alias lvared="IFS=\$'\n' vared"

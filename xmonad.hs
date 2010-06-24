@@ -114,6 +114,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     , ((modm, xK_Down), moveTo Next NonEmptyWS)
 
+    , ((modm .|. mod1Mask, xK_Up),  moveTo Next EmptyWS)
+
+    , ((modm .|. mod1Mask, xK_Down), moveTo Next EmptyWS)
+
     , ((modm .|. shiftMask, xK_Left),   prevWS)
 
     , ((modm,               xK_Right     ), windows W.focusDown)
@@ -198,7 +202,7 @@ myManageHook = composeAll . concat $
     where 
       myFloats =  ["MPlayer"] 
       myCenterFloats = ["Xmessage","feh"]
-      myBrowsers = ["Opera","Firefox","Shiretoko","Chromium","Google-chrome"]
+      myBrowsers = ["Opera","Firefox","Shiretoko","Chromium","Google-chrome"] -- Namoroka
       myPDF = ["Evince","Zathura","Apvlv"]
       myIgnores = ["desktop_window","desktop"]
 --}}}

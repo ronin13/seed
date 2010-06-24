@@ -1,4 +1,4 @@
-wiki() { dig +short txt $1.wp.dg.cx }
+wiki() { w=$(dig +short txt $1.wp.dg.cx); echo $w }
 
 less_vim() {
     vim -R \

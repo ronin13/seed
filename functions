@@ -122,10 +122,10 @@ rtorrent
 #screen -c /home/raghavendra/.rtorrent/.screenrc -S torrent rtorrent
 }
 
-#function vim(){
-#if [[ ! -f "$@" ]];then return;fi
-#vim "$@"
-#}
+function vim(){
+if [[ ! -f "$@" ]];then echo "File not found";return 1;fi
+LD_PRELOAD=/usr/lib/libjemalloc.so /usr/bin/vim "$@"
+}
 
 function cnkt(){
 TERM=xterm

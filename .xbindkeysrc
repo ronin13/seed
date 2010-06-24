@@ -1,5 +1,5 @@
 "~/bin/toggle"
-   release + alt + b:1
+   alt + Scroll_Lock
 
 "kill -INT $(pidof rtorrent)"
  Control + Shift + t 
@@ -10,11 +10,36 @@
 "~/bin/mplayerStop"
  Control + m
 
-"mpc next"
-   release + alt + b:2
+#"mpc next"
+#   alt + b:2
 
 "mpc pause &>/dev/null; echo pause > $MPSOCKET"
-  release + alt + b:3
+  alt + Pause
+
+"~/bin/brightness.sh 1"
+   Control + Scroll_Lock
+
+"~/bin/brightness.sh 2"
+   Control + Pause
+
+"~/bin/volchange 1"
+   Mod4 + Scroll_Lock
+
+"~/bin/volchange 2"
+   Mod4 + Pause
+
+"dmenu_run"
+   Control + space
+
+"$HOME/Arch/Jiffy/jiffy.py 2"
+  Control + Return
+
+"/home/raghavendra/bin/suz"
+  Shift + End 
+
+############################### Mouse based (Not used generally) #############################################################
+"~/bin/toggle"
+   release + alt + b:1
 
 "~/bin/brightness.sh 1"
    release + Control + b:1
@@ -28,11 +53,9 @@
 "~/bin/volchange 2"
    release + Mod4 + b:3
 
-"dmenu_run"
-   Control + space
+"mpc next"
+   release + alt + b:2
 
-"$HOME/Arch/Jiffy/jiffy.py 2"
-  Control + Return
+"mpc pause &>/dev/null; echo pause > $MPSOCKET"
+  release + alt + b:3
 
-"/home/raghavendra/bin/suz"
-  Shift + End 
