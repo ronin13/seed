@@ -110,7 +110,7 @@ zstyle ':completion:*' special-dirs true
 #autoload -Uz vcs_info
 
 function precmd { 
-out=(`dirs`)
+out=(`dirs | tr ' ' '\n' | xargs -I {} basename {}`)
 RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[blue]%}[%?:$out[1,3]])%{$reset_color%}%"
 }
 

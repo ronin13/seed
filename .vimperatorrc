@@ -1,0 +1,35 @@
+"2.3.1 (created: 2010/04/07 18:25:13)
+
+command! -nargs=* afs tabopen afs <args>
+command! -nargs=* aur tabopen aur <args>
+command! -nargs=* aw tabopen aw <args>
+command! -nargs=* g open google <args>
+command! good noscript toggleperm
+command! -nargs=* hub tabopen hub <args>
+command! -nargs=* w tabopen w <args>
+command! -nargs=* wi tabopen w <args>
+command! -nargs=* y tabopen y <args>
+command! -nargs=* yt tabopen yt <args>
+nnoremap <A-Right> gt
+nnoremap <A-Left> gT
+nnoremap F f
+nnoremap f F
+nnoremap S <C-c>
+nnoremap b <C-o>
+nnoremap n <C-i>
+nnoremap P p
+nnoremap p P
+nnoremap <C-p> <C-^>
+nnoremap w <C-u>
+nnoremap s <C-d>
+nnoremap <A-Down> <M-i>
+nnoremap <A-/> :bnext<Space>
+nnoremap ` :bnext<Space>
+set defsearch=g
+set editor=geany
+set mainecoon=am
+set runtimepath=/home/raghavendra/.vimperator
+set wildoptions=auto
+source! /home/raghavendra/.vimperatorrc.local
+
+" vim: set ft=vimperator:
