@@ -1,0 +1,28 @@
+#!/bin/bash
+# vim: set ft=sh
+data="$@"
+
+echo "Current session or all (c|a)"
+read -n 1 var
+echo 
+
+if [[ "$var" == "a" ]];then
+    for sess in `tmux list-sessions | cut -d ":" -f 1`;do
+        tmux set-buffer -t $sess  "$data"
+        for window in `tmux list-windows -t $sess | tr -d ' '`;do
+            if grep -q -E "(zsh|bash)" <<< $window;then
+               tmux paste-buffer -t $sess:${window%:*}
+               #tmux send-keys -t $sess:$window "C-c"
+               tmux send-keys -t $sess:${window%:*} "Enter"
+            fi
+        done
+    done
+else
+        tmux set-buffer  "$data"
+        for window in `tmux list-windows | tr -d ' '`;do
+            if grep -q -E "(zsh|bash)" <<< $window;then
+               tmux paste-buffer -t ${window%:*}
+               tmux send-keys -t ${window%:*} "Enter"
+            fi
+        done
+fi
