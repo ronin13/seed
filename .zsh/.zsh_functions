@@ -1,7 +1,24 @@
+function cd () {
+if [[ -z $2 ]]; then
+  if [[ -f $1 ]]; then
+    builtin cd $1:h
+  else
+    builtin cd $1
+  fi
+else
+  if [[ -z $3 ]]; then
+    builtin cd $1 $2
+  else
+    echo cd: too many arguments
+  fi
+fi
+}
+
+
 wiki() { w=$(dig +short txt $1.wp.dg.cx); echo $w }
 
 less_vim() {
-    vim -R \
+    =vim -R \
     -c 'let no_plugin_maps = 1' \
     -c 'set scrolloff=5' \
     -c 'runtime! macros/less.vim' \

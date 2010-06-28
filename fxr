@@ -1,0 +1,89 @@
+#!/usr/bin/perl
+#firefox-remote
+#http://trapd00r.se/all/os/2010/05/19/control-firefox-remotely/
+use strict;
+use encoding 'utf-8';
+use Data::Dumper;
+use WWW::Mechanize;
+use WWW::Mechanize::Firefox;
+
+my $w = WWW::Mechanize->new(
+  agent_alias => 'Windows Mozilla',
+);
+
+my $m = WWW::Mechanize::Firefox->new(
+    #launch      => 'firefox',
+  tab         => 'current',
+  agent_alias => 'Linux Mozilla',
+);
+
+
+{
+  no strict;
+  my $options = {
+    load      => sub {$u = shift; $m->get($u);},
+    refresh   => sub {$m->reload([BYPASS_CACHE]);},
+    back      => sub {$m->back;},
+    forward   => sub {$m->forward;},
+    uri       => sub {print $m->uri,"\n";},
+    save      => sub {$f = $_[0];$m->save_content($f);},
+    #save      => sub {$f = shift // $m->uri.'.html';$m->save_content($f);},
+    info      => sub {fmt($m->uri, $m->title,$m->content_type, onoff($m->is_html));},
+    links     => sub {extrurl();},
+    click     => sub {$m->click;},
+    pic       => sub {pic()},
+    dumpimg   => sub {$w->get($m->uri) && dumpimg()},
+    local     => sub {$m->get_local($option2);},
+    
+#    showclick => sub {extrhash($m->clickables)},
+  };
+  if(!@ARGV) {
+    print "OPTIONS:\n";
+    print "  $_\n" for sort(keys(%$options));
+  }
+  my ($option,$option2) = @ARGV;
+  defined $options->{$option} && $options->{$option}->($option2);
+}
+
+sub dumpimg {
+  #foreach my $img($w->links) {
+  #  if($img->url_abs =~ /.+\.png|jpg|jpeg|gif/) {
+  #    print $img->url_abs, "\n";
+  #  }
+  #  else {
+  #    print "foo: ", $img->url_abs, "\n";
+  #  }
+  #}
+  print $_->url_abs, "\n" for ($w->find_all_images);
+}
+
+sub pic {
+  my $url = $m->uri;
+  my $img = $m->content_as_png;
+  my $fname = $m->title.'.png';
+  $fname =~ s/:/-/g;
+  $fname =~ s/\s+/_/g;
+  $fname =~ s#/|\\|\||'|"##; # no /|\'"? :
+  open(my $fh, '>', $fname) or die "Cant save to $fname: $!";
+  binmode($fh);
+  print $fh $img;
+  close $fh;
+  print "$url saved to $fname\n";
+}
+
+sub fmt {
+  my @text = @_;
+  print "$_\n" for @text;
+}
+
+sub extrurl {
+  my @links = $m->find_all_links;
+  print $_->url_abs,"\n" for @links
+}
+
+sub onoff {
+  my $i = shift;
+  $i = 'yes' if $i > 0;
+  $i = 'no'  if $i == 1;
+  return $i;
+}

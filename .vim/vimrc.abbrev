@@ -2,5 +2,5 @@ iabbr _me Raghavendra D Prabhu (raghu.prabhu13@gmail.com)<C-R>=EatChar('\s')<CR>
 iabbr _t  <C-R>=strftime("%H:%M:%S")<CR><C-R>=EatChar('\s')<CR>
 iabbr _d  <C-R>=strftime("%a, %d %b %Y")<CR><C-R>=EatChar('\s')<CR>
 iabbr _dt <C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR><C-R>=EatChar('\s')<CR>
-iabbr _bang #!/bin/bash<C-R>=EatChar('\s')<CR>
-iabbr _pbang #!/usr/bin/python<C-R>=EatChar('\s')<CR> 
+iabbr _bang #!_bin_bash<C-R>=EatChar('\s')<CR>
+iabbr _pbang #!_usr_bin_python<C-R>=EatChar('\s')<CR> 

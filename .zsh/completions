@@ -1,3 +1,4 @@
+# vim: set ft=sh
 compile=(all clean compile disclean install remove uninstall)
 compctl -k compile make
 
@@ -6,7 +7,7 @@ compctl -g '*.ebuild' ebuild
 compctl -g '*.tex' + -g '*(-/)' latex
 compctl -g '*.dvi' + -g '*(-/)' dvipdf dvipdfm
 compctl -g '*.tar.bz2 *.tar.gz *.bz2 *.gz *.jar *.rar *.xz *.tar *.tbz2 *.tgz *.zip *.Z' + -g '*(-/)' extract
-compctl -g '*.mp3 *.ogg *.mod *.wav *.avi *.mpg *.mpeg *.mp4 *.wmv' + -g '*(-/)' mplayer mpl 
+compctl -g '*.mp3 *.ogg *.mod *.wav *.avi *.mpg *.mpeg *.mp4 *.wmv *flv' + -g '*(-/)' mplayer mpl 
 compctl -g '*.py' python
 compctl -g '*(-/D)' cd
 compctl -g '*(-/)' mkdir
@@ -52,7 +53,7 @@ compctl -k pkgs pinfo
 compctl -k pkgs whichpack 
 
 syncpkgs=(`pacman --config /etc/pacman.conf.testing -Sql core extra community community-testing testing arch-games archlinuxfr`)
-compctl -k syncpkgs ins
+compctl  -g "*.pkg.tar.*" + -k syncpkgs ins
 
 compctl -l '' -x 'p[1]' -f -- . source
 compctl -s '${^fpath}/*(N:t)' autoload

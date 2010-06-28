@@ -126,6 +126,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     , ((modm,               xK_m     ), windows W.focusMaster  )
 
+    , ((modm , xK_g    ), sendMessage Toggle)
+
     , ((modm .|. shiftMask, xK_t     ), sinkAll)
 
     , ((modm,               xK_Return), windows W.swapMaster)
@@ -179,7 +181,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 --{{{ Layout 
 myLayout =  onWorkspace "4:video" vidLayout $ onWorkspace "7:games" vidLayout $ defLayout
       where
-          defLayout = avoidStruts $ Mag.magnifier (tiled ||| Full ||| Mirror tiled)
+          defLayout = avoidStruts $ Mag.magnifiercz 1.4 (tiled ||| Full ||| Mirror tiled)
           tiled     = hinted (smartBorders (ResizableTall 1 (2/100) (1/2) []))
           vidLayout = smartBorders (Grid False ||| Full)
           hinted l  = layoutHintsWithPlacement (0,0) l
@@ -202,7 +204,7 @@ myManageHook = composeAll . concat $
     where 
       myFloats =  ["MPlayer"] 
       myCenterFloats = ["Xmessage","feh"]
-      myBrowsers = ["Opera","Firefox","Shiretoko","Chromium","Google-chrome"] -- Namoroka
+      myBrowsers = ["Opera","Firefox","Shiretoko","Chromium","Google-chrome","Namoroka"] -- Namoroka
       myPDF = ["Evince","Zathura","Apvlv"]
       myIgnores = ["desktop_window","desktop"]
 --}}}

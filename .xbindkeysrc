@@ -1,5 +1,5 @@
 "~/bin/toggle"
-   alt + Scroll_Lock
+   alt + F11
 
 "kill -INT $(pidof rtorrent)"
  Control + Shift + t 
@@ -17,16 +17,16 @@
   alt + Pause
 
 "~/bin/brightness.sh 1"
-   Control + Scroll_Lock
+   Control + F11
 
 "~/bin/brightness.sh 2"
-   Control + Pause
+   Control + F12
 
 "~/bin/volchange 1"
-   Mod4 + Scroll_Lock
+   Mod4 + F11
 
 "~/bin/volchange 2"
-   Mod4 + Pause
+   Mod4 + F12
 
 "dmenu_run"
    Control + space

@@ -7,6 +7,7 @@ inoremap <F1> <ESC>:wq<CR>
 nnoremap `` :q<CR>
 map <MouseMiddle> <esc>"+p
 
+
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
 set runtimepath=~/.vim,~/.vim/after,/usr/share/vim/vim72,/usr/share/vim/vimfiles
@@ -44,7 +45,9 @@ set numberwidth=1						" Use 1 col + 1 space for numbers
 
 set guitablabel=%N/\ %t\ %M
 ""colorscheme peaksea
-colorscheme wombat256
+"colorscheme wombat
+"colorscheme desert256
+colorscheme candycode 
 set background=dark
 
 """" Messages, Info, Status
@@ -260,3 +263,23 @@ noremap <F2> :silent SuperTabHelp<CR>
 set nospell
 
 au BufRead,BufNewFile *.viki set ft=viki
+
+nnoremap <silent> <PageUp> 1000<C-U>
+nnoremap <silent> <PageDown> 1000<C-D>
+inoremap <silent> <PageUp> <C-O>1000<C-U>
+inoremap <silent> <PageDown> <C-O>1000<C-D>
+set nostartofline
+
+nnoremap <C-L> gqap
+nnoremap Y "+y
+
+"use :set list! to toggle visible whitespace on/off
+set listchars=tab:>-,trail:.,extends:>
+
+noremap p p`[
+noremap P P`[
+
+highlight RedundantSpaces term=standout ctermbg=red guibg=red
+match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces highlighted
+
+nnoremap <BS> <Left><Del>

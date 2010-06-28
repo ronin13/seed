@@ -1,0 +1,74 @@
+#!/bin/zsh
+
+function ninit(){
+text="$(xsel -o)"
+info=("${(f)$($binary info)}")
+uri="$info[1]"
+
+[[ -z "$uri" ]] && zenity --timeout 5 --info --text "Unable to obtain uri information. Retry" && exit 1
+domain="$(awk -F/ '{print $3 }' <<< $uri)"
+
+filename="$(cut -d '|' -f 1 <<< $info[2] | tr -s ' ' | tr ' ' '-' | tr -dc '[[:alnum:]]\-.')"
+fullpath="${noteroot}$domain/"
+
+filename="${fullpath}${filename}"
+}
+
+matches(){
+IFS=$'\0'
+cp $(/bin/grep -ilZr $1 $noteroot) /tmp/$$/
+          
+}
+noteroot="/home/raghavendra/Documents/fnotes/"
+binary="$HOME/bin/fxr"
+
+
+if [[ $1 =~ a.* ]];then
+    ninit || return 1
+    [[ ! -d $fullpath ]] && mkdir -p $fullpath
+    #while :;do
+        #temp="${filename}.${RANDOM}"
+        #[[ -f "$temp" ]] && continue
+        #filename="$temp"
+        #break
+    #done
+    if [[ -f "$filename.data" ]];then 
+        if [[ "$(grep URI $filename.data | cut -d ":" -f 2)" == "$uri" ]];then
+ 
+        else          #False positive
+            touch $filename.{data,html}
+            $binary save ${filename}.html || exit 1
+        fi
+    else
+        touch $filename.{data,html}
+        $binary save ${filename}.html || exit 1
+    fi
+    echo -e "\n\n=================================`date +%F`=========================" >> "${filename}.data" || exit 1
+    echo "URI:$info[1]" >> "${filename}.data" || exit 1
+    echo "TITLE: $info[2]" >> "${filename}.data" || exit 1
+    echo "$text" >> "${filename}.data" || exit 1
+    echo -e "====================================End Of note============================\n\n" >> "${filename}.data" || exit 1
+
+    notify-send "$uri successfully added!"
+
+elif [[ $1 =~ r.* ]];then
+     ninit || return 1
+     uzbl-browser $filename.html &>/dev/null &
+     cat $filename.data |  zenity --text-info --height 400 --width 900 
+
+elif [[ $1 =~ e.* ]];then 
+    tags=($(zenity  --title "Enter" --entry --text "Enter the tags"))
+    [[ -z $tags ]] && exit 1
+    zmodload zsh/files
+    mkdir -p /tmp/$$/
+    for t in $tags;do
+        matches $t 
+    done
+    for fil in /tmp/$$/*.data;do 
+        cat $fil | zenity --text-info --height 400 --width 900
+        zenity --question --text "Satisified ?" || break
+    done
+else
+    notify-send "Invalid function"
+fi
+

@@ -10,6 +10,7 @@ schedule = watch_directory,5,10,load_start=~/.rtorrent/watch/*.torrent
 schedule = low_diskspace,5,60,close_low_diskspace=100M
 schedule = session_save,300,300,session_save=
 schedule = untied_directory,5,5,stop_untied=
+system.method.set_key = event.download.finished,notify_me,"execute=/home/raghavendra/bin/notifier,'rtorrent',$d.get_name="
 port_range = 25200-25200
 check_hash = yes
 use_udp_trackers = yes

@@ -83,13 +83,23 @@ LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so  /usr/bin/mutt
 }
 
 function download(){
+histfile="$HOME/.download_history"
+
 if [[ "$@" =~ .*torrent$ ]];then
+
     pidof -s rtorrent  &>/dev/null || ~/bin/torrent
-    [[ $1 =~ ^http.* ]] && wget -q $1 > ~/.rtorrent/watch/${1##*/} && exit
+
+    [[ $1 =~ ^http.* ]] && wget -q $1 > ~/.rtorrent/watch/${1##*/} && echo "$@ ============ $(aria2c -S ~/.rtorrent/watch/${1##*/})===========$(date)" >> $histfile && exit
+
     cp "$@" ~/.rtorrent/watch/
+    echo "$@ ============ $(aria2c -S $@ | grep Name) ====================$(date)" >> $histfile
     mv "$@" ~/.torrents/
+
 else
-    aria2rpc addUri "$@"
+
+    gid=$(aria2rpc addUri "$@")
+    echo "$gid:$@ =============== $(date)" >> $histfile 
+    #aria2rpc tellStatus gid
 fi
 }
 
@@ -109,7 +119,9 @@ done
 }
 
 function getmovie (){
-/usr/bin/get_movie.py `/usr/bin/search_movie.py "$@" | head -3  | tail -1 | cut -d ":" -f 2`
+
+    /usr/bin/get_movie.py `/usr/bin/search_movie.py "$@" | head -3  | tail -1 | cut -d ":" -f 2`
+
 }
 function man2pdf(){ 
 man -t ${1:?Specify man as arg} | ps2pdf -dCompatibility=1.3 - - > ${1}.pdf 
@@ -118,8 +130,6 @@ man -t ${1:?Specify man as arg} | ps2pdf -dCompatibility=1.3 - - > ${1}.pdf
 function torrent(){
 pidof rtorrent &>/dev/null || rm ~/.rtorrent/rpc.socket 2>/dev/null
 rtorrent
-#~/.rtorrent/rscheduler 1>~/.rtorrent/scheduler.log 2>&1 &
-#screen -c /home/raghavendra/.rtorrent/.screenrc -S torrent rtorrent
 }
 
 function vim(){

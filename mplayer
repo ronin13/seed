@@ -6,7 +6,7 @@
 #fi
 HIST="$HOME/.mplayer.hist"
 unset LD_PRELOAD
-$LOCK/mplayer /usr/bin/mplayer -geometry 97%:97% -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  & 
+$LOCK/mplayer /usr/bin/mplayer -geometry 100% -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  & 
 
 if [[ -z "$1" ]];then
       fnum=$(awk '{ print NR" "$0 }' $HIST | cut -d ":" -f 1 | uniq -f 1 | tac | $DMENU)

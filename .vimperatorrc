@@ -4,7 +4,7 @@ command! -nargs=* afs tabopen afs <args>
 command! -nargs=* aur tabopen aur <args>
 command! -nargs=* aw tabopen aw <args>
 command! -nargs=* g open google <args>
-command! good noscript toggleperm
+"command! good noscript toggleperm
 command! -nargs=* hub tabopen hub <args>
 command! -nargs=* w tabopen w <args>
 command! -nargs=* wi tabopen w <args>
@@ -15,7 +15,8 @@ nnoremap <A-Left> gT
 nnoremap F f
 nnoremap f F
 nnoremap S <C-c>
-nnoremap b <C-o>
+nnoremap B :bmarks! -k<Space>
+nnoremap b :bmark -tags<Space>
 nnoremap n <C-i>
 nnoremap P p
 nnoremap p P
@@ -25,11 +26,12 @@ nnoremap s <C-d>
 nnoremap <A-Down> <M-i>
 nnoremap <A-/> :bnext<Space>
 nnoremap ` :bnext<Space>
+nnoremap <BS> <C-o>
 set defsearch=g
-set editor=geany
+set editor="xterm -e /usr/bin/vim -f"
 set mainecoon=am
 set runtimepath=/home/raghavendra/.vimperator
-set wildoptions=auto
+"set wildoptions=auto
 source! /home/raghavendra/.vimperatorrc.local
 
 " vim: set ft=vimperator:

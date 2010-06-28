@@ -26,6 +26,7 @@ xbindkeys &
 /usr/lib/notify-osd/notify-osd &
 #export DISPLAY=:0.0 
 $LOCK/tmux tmux start-server
+parcellite &
 #~/bin/tst &
 #exec dwm
 exec xmonad

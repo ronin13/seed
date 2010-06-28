@@ -1,3 +1,5 @@
+setopt nonotify nohup shwordsplit no_bgnice
+zmodload zsh/complist
 unalias -m '*'
 autoload run-help
 HELPDIR=~/.zsh_help
@@ -19,22 +21,17 @@ autoload -U colors && colors
 PROMPT="%{$fg[green]%}(%2d)%{$reset_color%}:$"
 #RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[blue]%}[%?:%!])%{$reset_color%}%"
 
-
-
-bindkey "\e[A" history-search-backward
-bindkey "\e[B" history-search-forward
-bindkey "\C-W" beginning-of-line
-bindkey "\C-E" unix-word-rubout
-bindkey "\C-R" end-of-line
-bindkey -s "\eOR" $"tput clear\n"
+bindkey "^Q" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "\eOR" clear-screen
 bindkey ' ' magic-space
 
 alias -s png=feh
 alias -s jpg=feh
 alias -s gif=feh
-alias -s conf=$EDITOR
-alias -s pl=vim
-alias -s py=vim
+#alias -s conf=$EDITOR
+#alias -s pl=vim
+#alias -s py=vim
 
 alias -g zsource="source ~/.zshrc"
 alias -g :g=' |& /bin/grep -i'
@@ -46,12 +43,11 @@ setopt autolist automenu
 
 setopt autopushd pushdminus pushdtohome pushdignoredups
 setopt autocd extendedglob
-unsetopt caseglob
 setopt inc_append_history
 #setopt share_history
 setopt hist_ignore_dups
 setopt hist_reduce_blanks
-unsetopt caseglob
+setopt no_case_glob
 
 unsetopt clobber
 setopt multios
@@ -71,7 +67,7 @@ bindkey '^Xi' insert-unicode-char
 # The following lines were added by compinstall
 #By me
 zstyle ':completion:*' accept-exact '*(N)'
-zstyle ':completion:*:(cp|mv|rm):*' ignore-line yes
+zstyle ':completion:*:(cp|mv|rm|diff|kill):*' ignore-line yes
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:processes' command 'ps -A'
 #/By me
@@ -120,7 +116,7 @@ zle -N        edit-command-line
 bindkey '\ee' edit-command-line
 
 
-setopt menucomplete
+#setopt menucomplete
 setopt listtypes
 setopt chaselinks
 setopt globdots
@@ -131,4 +127,20 @@ zstyle ':completion:*:manuals.(^1*)' insert-sections true
 
 hash -d shm="/dev/shm"
 hash -d tmp="/tmp/"
+
+#exec 2>>(while read line; do
+#  print "$fg[red]ERROR:$fg[blue]${(q)line}$reset_color" > /dev/tty; print -n $'\0'; done &)
+
+setopt short_loops
+setopt list_ambiguous 
+setopt rec_exact 
+bindkey "^K" kill-whole-line
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+bindkey "^U" undo
+
+stty -ixon -ixoff
+#stty erase ^?
+bindkey    "^[[3~"          delete-char
+bindkey    "^[3;5~"         delete-char
 
