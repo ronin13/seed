@@ -5,6 +5,7 @@ set sidescrolloff=5
 nnoremap <F1> :wq<CR>
 inoremap <F1> <ESC>:wq<CR>
 nnoremap `` :q<CR>
+nnoremap ``` :q!<CR>
 map <MouseMiddle> <esc>"+p
 
 
@@ -283,3 +284,17 @@ highlight RedundantSpaces term=standout ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces highlighted
 
 nnoremap <BS> <Left><Del>
+au CursorHoldI * stopinsert
+" set 'updatetime' to 15 seconds when in insert mode
+au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
+au InsertLeave * let &updatetime=updaterestore
+nnoremap <silent> <ESC>y :YRShow<CR> 
+nnoremap <silent> <Esc>n :NERDTreeToggle<CR>
+set wrap
+
+map <leader>sn ]s
+map <leader>sp [s
+map <leader>sa zg
+map <leader>s? z=
+
+let g:yankring_history_dir="~/.vim-tmp/"

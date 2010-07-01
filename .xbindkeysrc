@@ -1,5 +1,8 @@
+#"~/bin/noter"
+#   + 
+
 "~/bin/toggle"
-   alt + F11
+ alt + F11
 
 "kill -INT $(pidof rtorrent)"
  Control + Shift + t 

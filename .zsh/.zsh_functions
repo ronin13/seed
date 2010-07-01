@@ -1,19 +1,22 @@
-function cd () {
-if [[ -z $2 ]]; then
-  if [[ -f $1 ]]; then
-    builtin cd $1:h
-  else
-    builtin cd $1
-  fi
-else
-  if [[ -z $3 ]]; then
-    builtin cd $1 $2
-  else
-    echo cd: too many arguments
-  fi
-fi
-}
+#function cd () {
+#if [[ -z $2 ]]; then
+  #if [[ -f $1 ]]; then
+    #builtin cd $1:h
+  #else
+    #builtin cd $1
+  #fi
+#else
+  #if [[ -z $3 ]]; then
+    #builtin cd $1 $2
+  #else
+    #echo cd: too many arguments
+  #fi
+#fi
+#}
 
+xpaste(){
+xsel -o >> $1
+}
 
 wiki() { w=$(dig +short txt $1.wp.dg.cx); echo $w }
 

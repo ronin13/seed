@@ -1,0 +1,5 @@
+command! -nargs=* tw tabopen tw <args>
+hi CmdLine font-family: "Lucida Console"; font-size: 10pt; font-weight: normal;
+set complete=sl
+set guioptions=rb
+

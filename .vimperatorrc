@@ -17,12 +17,12 @@ nnoremap f F
 nnoremap S <C-c>
 nnoremap B :bmarks! -k<Space>
 nnoremap b :bmark -tags<Space>
-nnoremap n <C-i>
+"nnoremap n <C-i>
 nnoremap P p
 nnoremap p P
 nnoremap <C-p> <C-^>
-nnoremap w <C-u>
-nnoremap s <C-d>
+nnoremap w <C-b>
+nnoremap s <Space>
 nnoremap <A-Down> <M-i>
 nnoremap <A-/> :bnext<Space>
 nnoremap ` :bnext<Space>

@@ -143,4 +143,18 @@ stty -ixon -ixoff
 #stty erase ^?
 bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
+zstyle ':completion:*' users {raghavendra,root}
+zstyle ':completion:*:correct:*'   insert-unambiguous true
+
+hash -d linux=/lib/modules/$(command uname -r)/
+hash -d src=/usr/src/linux-$(command uname -r)/
+
+autoload -U predict-on && \
+  zle -N predict-on         && \
+  zle -N predict-off        && \
+  bindkey "^X^Z" predict-on && \
+  bindkey "^Z" predict-off
+
+insert-last-typed-word() { zle insert-last-word -- 0 -1 }; \
+zle -N insert-last-typed-word; bindkey "\e." insert-last-typed-word
 

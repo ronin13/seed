@@ -112,7 +112,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     , ((modm, xK_Up),  moveTo Next NonEmptyWS)
 
-    , ((modm, xK_Down), moveTo Next NonEmptyWS)
+    , ((modm, xK_Down), moveTo Prev NonEmptyWS)
 
     , ((modm .|. mod1Mask, xK_Up),  moveTo Next EmptyWS)
 
@@ -214,10 +214,11 @@ myEventHook = mempty
 --}}}
 
 --{{{ Startup
-myStartupHook = startup
-startup :: X()
-startup = do
-	  spawnOn "2:term" "~/bin/tst" 
+myStartupHook = mempty
+-- myStartupHook = startup
+-- startup :: X()
+-- startup = do
+-- 	  spawnOn "2:term" "~/bin/tst" 
 --}}}
 
 --{{{ LogHook

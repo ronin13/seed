@@ -4,9 +4,10 @@
 #    /usr/bin/mplayer -vo fbdev  "$@"
 #    exit
 #fi
+#set -x
 HIST="$HOME/.mplayer.hist"
 unset LD_PRELOAD
-$LOCK/mplayer /usr/bin/mplayer -geometry 100% -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  & 
+$LOCK/mplayer /usr/bin/mplayer -geometry 100% -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  &
 
 if [[ -z "$1" ]];then
       fnum=$(awk '{ print NR" "$0 }' $HIST | cut -d ":" -f 1 | uniq -f 1 | tac | $DMENU)
@@ -16,8 +17,8 @@ if [[ -z "$1" ]];then
           num=`echo $fnum | cut -d " " -f 1`
           FILE=$(head -${num} $HIST | tail -1 | cut -d ":" -f 1)
       fi
-      if [[ "$fnum" =~ .*@$ ]];then
-            POSITION=$(grep $FILE $HIST | tail -1 | cut -d ":" -f 2)
+      if [[ $fnum =~ .*:$ ]];then
+          POSITION=$(grep $(cut -d " " -f 1 <<< $FILE) $HIST | tail -1 | cut -d ":" -f 2)
       fi
 else
 	prefix="`pwd`/"
@@ -29,4 +30,5 @@ fi
 
 mpc pause &>/dev/null
 echo "loadfile \"$FILE\"" > $MPSOCKET
-echo "set_property time_pos $POSITION" > $MPSOCKET 
+echo "aset_property time_pos $POSITION" > $MPSOCKET 
+#set +x
