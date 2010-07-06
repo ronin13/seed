@@ -21,6 +21,10 @@ autoload -U colors && colors
 PROMPT="%{$fg[green]%}(%2d)%{$reset_color%}:$"
 #RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[blue]%}[%?:%!])%{$reset_color%}%"
 
+bindkey "\e[A" history-search-backward
+bindkey "\e[B" history-search-forward
+#bindkey "\e[A" history-incremental-pattern-search-backward
+#bindkey "\e[B" history-incremental-pattern-search-forward
 bindkey "^Q" beginning-of-line
 bindkey "^E" end-of-line
 bindkey "\eOR" clear-screen
@@ -109,6 +113,7 @@ zstyle ':completion:*' special-dirs true
 function precmd { 
 out=(`dirs | tr ' ' '\n' | xargs -I {} basename {}`)
 RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[blue]%}[%?:$out[1,3]])%{$reset_color%}%"
+print -Pn "\e]2;%N"
 }
 
 autoload -U   edit-command-line
@@ -133,7 +138,7 @@ hash -d tmp="/tmp/"
 
 setopt short_loops
 setopt list_ambiguous 
-setopt rec_exact 
+#setopt rec_exact 
 bindkey "^K" kill-whole-line
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
@@ -144,7 +149,7 @@ stty -ixon -ixoff
 bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
 zstyle ':completion:*' users {raghavendra,root}
-zstyle ':completion:*:correct:*'   insert-unambiguous true
+#zstyle ':completion:*:correct:*'   insert-unambiguous true
 
 hash -d linux=/lib/modules/$(command uname -r)/
 hash -d src=/usr/src/linux-$(command uname -r)/
@@ -156,5 +161,5 @@ autoload -U predict-on && \
   bindkey "^Z" predict-off
 
 insert-last-typed-word() { zle insert-last-word -- 0 -1 }; \
-zle -N insert-last-typed-word; bindkey "\e." insert-last-typed-word
+zle -N insert-last-typed-word; bindkey "\el" insert-last-typed-word
 

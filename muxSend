@@ -1,12 +1,20 @@
 #!/bin/bash
 # vim: set ft=sh
+if [[ $# < 2 ]];then
+    exit
+fi
+
+var=$1
+shift
 data="$@"
 
-echo "Current session or all (c|a)"
-read -n 1 var
-echo 
+#echo "Current session or all (c|a)"
+#read -n 1 var
+#echo
 
-if [[ "$var" == "a" ]];then
+
+
+if [[ $var =~ ^a.* ]];then
     for sess in `tmux list-sessions | cut -d ":" -f 1`;do
         tmux set-buffer -t $sess  "$data"
         for window in `tmux list-windows -t $sess | tr -d ' '`;do

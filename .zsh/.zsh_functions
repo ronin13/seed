@@ -13,12 +13,57 @@
   #fi
 #fi
 #}
+isurl(){
+echo "${@#*//}" | perl -lne '
+    use Data::Validate::URI qw(is_uri);
+    if(is_uri("http://".$_)){
+        exit 0
+    }
+    else{
+        exit 1
+    }'
+}
+
+mecho(){
+    #detect if being invoked through dmenu or terminal - use zenity or stdout
+    #based on that
+    if [[ -t 1 ]];then
+        output="cat"
+    else
+        output="zenity --text-info --height 400 --width 680"
+    fi
+    echo "$@" | ${=output}
+}
+
+task()
+{
+if [[ -z $1 || $1 == "add" ]];then
+    echo "Name"
+    read name
+    file="$HOME/.tasks/${name// /-}"
+    #touch $file
+    echo "Description:"
+    read desc
+    echo "$desc" >! "${=file}.remain"
+else
+    echo "Task list"
+    counter=1
+    for i in $(ls -A ~/.tasks/*.remain);do
+        echo -e "\n\nTask #$counter: ${=i}"
+        echo "Description:"
+        cat "${=i}"
+        echo -e "\n\n"
+        echo "Is this task done?(y/N)"
+        read -q && mv ${=i} ${=i:r}.done
+    done
+fi
+}
 
 xpaste(){
 xsel -o >> $1
 }
 
-wiki() { w=$(dig +short txt $1.wp.dg.cx); echo $w }
+wiki() { w=$(dig +short txt $1.wp.dg.cx); echo "$w" }
 
 less_vim() {
     =vim -R \
@@ -30,6 +75,14 @@ less_vim() {
     -c 'set nonu' \
     -c 'nmap <ESC>u :nohlsearch<cr>' \
     "$@"
+}
+
+
+dfilter(){
+    # Should return array
+    dchoice=$( eval $@ | awk '{ print NR,$0 }' | ${=DMENU} | awk '{ print $2 }')
+    echo "$dchoice"
+
 }
 
 mangrep(){
@@ -44,6 +97,9 @@ disassemble() {
             gcc -pipe -S -o - -O -g $* | as -aldh -o /dev/null
         }
 
+xev(){
+    xev -id `xdotool getactivewindow`
+}
 bash_source() {
   alias shopt=':'
   alias _expand=_bash_expand
@@ -51,6 +107,10 @@ bash_source() {
   emulate -L sh
   setopt kshglob noshglob braceexpand
   source "$@"
+}
+
+search(){
+    surfraw google "$@"
 }
 
 extract() {

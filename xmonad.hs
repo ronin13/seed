@@ -15,7 +15,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Actions.OnScreen
 import XMonad.Util.Scratchpad (scratchpadSpawnActionCustom)
 import XMonad.Actions.CopyWindow
-
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Layout.LayoutHints (layoutHintsWithPlacement)
 --centerFloat
 import XMonad.Hooks.ManageHelpers
@@ -48,7 +48,7 @@ toggleOrViewNoSP = toggleOrDoSkip ["NSP"]  W.greedyView
 --{{{ Core
 main = do
     xmproc <- spawnPipe "xmobar"
-    xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
+    xmonad $ ewmh $ withUrgencyHook NoUrgencyHook $ defaultConfig {
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
         borderWidth        = myBorderWidth,
@@ -211,6 +211,7 @@ myManageHook = composeAll . concat $
 
 --{{{ Events
 myEventHook = mempty
+--myEventHook = ewmhDesktopsEventHook
 --}}}
 
 --{{{ Startup

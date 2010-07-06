@@ -1,0 +1,5 @@
+#!/bin/zsh
+url=$(awk '{ print NR" "$0 }' ~/.speed | ${=DMENU} | awk '{ print $2 }')
+[[ -z $url ]] && exit
+#uzbl-browser $url &>/dev/null
+$BROWSER $url

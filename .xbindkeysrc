@@ -1,5 +1,8 @@
-#"~/bin/noter"
-#   + 
+"~/bin/mmove"
+   Control + Shift + s
+
+"~/bin/noter"
+   Pause
 
 "~/bin/toggle"
  alt + F11
@@ -10,14 +13,20 @@
 "screen -d torrent"
  Control + t
 
-"~/bin/mplayerStop"
+"~/bin/mplayeraux stop"
  Control + m
+
+"~/bin/mplayeraux bookmark"
+ Control + b
+
+"~/bin/mplayeraux extract"
+ Control + Shift + b
 
 #"mpc next"
 #   alt + b:2
 
 "mpc pause &>/dev/null; echo pause > $MPSOCKET"
-  alt + Pause
+  alt + F12
 
 "~/bin/brightness.sh 1"
    Control + F11

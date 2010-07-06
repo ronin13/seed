@@ -11,6 +11,10 @@ $LOCK/mplayer /usr/bin/mplayer -geometry 100% -identify -quiet -slave -idle -inp
 
 if [[ -z "$1" ]];then
       fnum=$(awk '{ print NR" "$0 }' $HIST | cut -d ":" -f 1 | uniq -f 1 | tac | $DMENU)
+       #source ~/.zsh/.zsh_functions
+       #fnum=$(dfilter "cat $HIST | tac")
+       #echo "$fnum"
+       #exit
       if [[ -z "$fnum" ]];then
           FILE=$(tail -1 $HIST | cut -d ":" -f 1)
       else
@@ -30,5 +34,5 @@ fi
 
 mpc pause &>/dev/null
 echo "loadfile \"$FILE\"" > $MPSOCKET
-echo "aset_property time_pos $POSITION" > $MPSOCKET 
+echo "set_property time_pos $POSITION" > $MPSOCKET 
 #set +x

@@ -29,6 +29,7 @@ nnoremap ` :bnext<Space>
 nnoremap <BS> <C-o>
 set defsearch=g
 set editor="xterm -e /usr/bin/vim -f"
+loadplugins
 set mainecoon=am
 set runtimepath=/home/raghavendra/.vimperator
 "set wildoptions=auto

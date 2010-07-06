@@ -1,0 +1,17 @@
+#!/bin/zsh
+#set -x
+tasks="$(/bin/ls -A ~/.tasks/*.remain 2>/dev/null | wc -l)"
+cookie="$(fortune -s debian perl startrek science linux linuxcookie wisdom)"
+notify-send "Tasks left: <b>$tasks</b>
+Time now is <i>$(date -R)</i>
+----------------------
+$cookie"
+sleep 5
+
+if [[ $tasks > 0 ]];then
+    for t in ~/.tasks/*.remain;do
+        ~/bin/notify-send "Task: ${t:r:t}
+        $(cat $t)
+        "
+    done
+fi

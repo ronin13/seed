@@ -283,9 +283,9 @@ elif [[ $1 =~ ^http:.* ]];then
     url=${1#*=}   # for urls like http://docs.google.com/viewer?url=<pdfurl>
     dest="$HOME/Documents/${1##*/}"
     wget -O - -q $url > $dest
-    detach evince $dest
+    detach zathura $dest
 else
-    detach evince "$@" 
+    detach zathura "$@" 
 fi
 }
 
@@ -403,4 +403,37 @@ define() {
 
 function myip(){
 upnpc -s | grep External | cut -d "=" -f 2
+}
+
+
+function lowmode(){
+echo "This will kill many daemons ..... "
+read
+for daemon in `cat ~/.daemons`
+do
+    sudo /etc/rc.d/$daemon stop
+done
+
+echo "This will unmount many drives..........."
+read
+~/bin/unmount-removables
+sudo umount /media/System /media/Sentinel /media/Colossus /media/Vanguard /home/raghavendra/wormole /var/lib/pacman.db /proc/bus/usb
+
+echo "Backlight to zero"
+echo 0 > /sys/devices/virtual/backlight/acpi_video0/brightness
+echo "Remove usb cables and start atd if needed"
+}
+
+function highmode(){
+echo "This will start many daemons ..... "
+read
+for daemon in `cat .daemons`
+do
+    sudo /etc/rc.d/$daemon start
+done
+
+echo "Backlight to maximum"
+echo 10 > /sys/devices/virtual/backlight/acpi_video0/brightness
+sudo mount -a
+
 }

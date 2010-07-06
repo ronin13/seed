@@ -89,7 +89,7 @@ set wildmode=list:longest,full
 au BufRead,BufNewFile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=mail 
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
 
-let g:pydiction_location = '$HOME/Arch/pydiction/complete-dict'
+let g:pydiction_location = '$HOME/Arch/vim/pydiction/complete-dict'
 set tags +=~/.vim/tags/python.ctags
 "map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 map <C-F12> :!ctags -R .<CR>
@@ -222,7 +222,7 @@ let g:BASH_Email        = "raghu dot prabhu 13 AT google's mail service"
 let $LOGNAME            = "Raghavendra"
 let $TZ                 = "IST"
 let g:rvSaveDirectoryType = 1
-let g:rvSaveDirectoryName = "~/.rcs/"
+let g:rvSaveDirectoryName = "$HOME/Arch/vim/.rcs/"
 
 command DiffOrig vertical new | set buftype=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 nnoremap \ch :DiffOrig
@@ -277,8 +277,8 @@ nnoremap Y "+y
 "use :set list! to toggle visible whitespace on/off
 set listchars=tab:>-,trail:.,extends:>
 
-noremap p p`[
-noremap P P`[
+noremap p ]p
+noremap P ]P
 
 highlight RedundantSpaces term=standout ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces highlighted
@@ -288,8 +288,8 @@ au CursorHoldI * stopinsert
 " set 'updatetime' to 15 seconds when in insert mode
 au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
 au InsertLeave * let &updatetime=updaterestore
-nnoremap <silent> <ESC>y :YRShow<CR> 
-nnoremap <silent> <Esc>n :NERDTreeToggle<CR>
+nnoremap <silent> <leader>y :YRShow<CR> 
+nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 set wrap
 
 map <leader>sn ]s
