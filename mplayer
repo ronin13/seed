@@ -1,38 +1,53 @@
-#!/bin/bash
-#if [[ -z $DISPLAY ]];then
-#    mpc pause 2>/dev/null
-#    /usr/bin/mplayer -vo fbdev  "$@"
-#    exit
-#fi
-#set -x
+#!/bin/zsh
+# add url loading [DONE]
+# multiple sockets multiplexing 0MQ kind of stuff
+set -x
 HIST="$HOME/.mplayer.hist"
-unset LD_PRELOAD
-$LOCK/mplayer /usr/bin/mplayer -geometry 100% -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  &
+maxplayers=2
+randnum=$((${RANDOM}%${maxplayers}))
+MPSOCKET="/tmp/mplayer/$randnum.fif"
+[[  -e $MPSOCKET ]] || mkfifo $MPSOCKET
+
+xord=$(($RANDOM%1200))
+yord=$(($RANDOM%800))
+${=LOCK}/mplayer.$randnum /usr/bin/mplayer -geometry +$xord+$yord -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  &
+
+#if [[ $? != "0" ]];then
+#    exit 1
+#fi
+ln -sf $MPSOCKET /tmp/mplayer.fif || exit 1
 
 if [[ -z "$1" ]];then
-      fnum=$(awk '{ print NR" "$0 }' $HIST | cut -d ":" -f 1 | uniq -f 1 | tac | $DMENU)
-       #source ~/.zsh/.zsh_functions
-       #fnum=$(dfilter "cat $HIST | tac")
-       #echo "$fnum"
-       #exit
+      fnum=$(awk '{ print NR" "$0 }' $HIST | cut -d ":" -f 1 | uniq -f 1 | tac | ${=DMENU})
       if [[ -z "$fnum" ]];then
           FILE=$(tail -1 $HIST | cut -d ":" -f 1)
       else
-          num=`echo $fnum | cut -d " " -f 1`
+          num=$(echo "$fnum" | cut -d " " -f 1)
           FILE=$(head -${num} $HIST | tail -1 | cut -d ":" -f 1)
       fi
-      if [[ $fnum =~ .*:$ ]];then
-          POSITION=$(grep $(cut -d " " -f 1 <<< $FILE) $HIST | tail -1 | cut -d ":" -f 2)
+      if [[ $fnum == *: ]];then
+          name="$(cut -d ' ' -f 1 <<< $FILE)"
+          POSITION="$(grep $name $HIST | tail -1 | cut -d ':' -f 2)"
       fi
+
 else
-	prefix="`pwd`/"
-    if [[ "$@" =~ ^/.* ]];then prefix=;fi
-	FILE="${prefix}$@"
+    source ~/.zsh/.zsh_functions
+
+    if isurl "$1";then
+        FILE="$1"
+    else
+        if [[ "$@" == /* ]];then 
+            prefix=
+        else
+            prefix="`pwd`/"
+        fi
+        FILE="${prefix}$@"
+    fi
 fi
 
-#echo "$FILE" >> $HOME/.mplayer.hist
 
 mpc pause &>/dev/null
 echo "loadfile \"$FILE\"" > $MPSOCKET
-echo "set_property time_pos $POSITION" > $MPSOCKET 
-#set +x
+[[ ! -z $POSITION ]] &&  echo "set_property time_pos $POSITION" > $MPSOCKET
+#echo "pause" > $MPSOCKET
+set +x

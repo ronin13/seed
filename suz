@@ -1,0 +1,76 @@
+#!/bin/zsh
+set -x
+source ~/.zsh/.zsh_functions
+BROWSER="/usr/bin/uzbl-browser"
+exec &>/dev/null
+
+if [[ -z $1 ]]
+then
+	ARG="$(xsel -o)"
+	isurl "$ARG" && ($BROWSER $ARG) && exit
+	$BROWSER "http://www.google.com/search?q=$ARG"
+	exit
+fi
+
+isurl "$ARG" && ($BROWSER $1) && exit
+
+case "$1" in
+g) 
+shift;URL="http://www.google.com/search?q=$@"
+;;
+aur)
+shift;URL="http://aur.archlinux.org/packages.php?O=0&L=0&C=0&K=$@&SeB=nd&SB=n&SO=a&PP=25&do_Search=Go"
+;;
+w)
+shift;URL="http://en.wikipedia.org/w/index.php?title=Special%3ASearch&search=$@&go=Go"
+;;
+ar)
+shift;URL="http://www.archlinux.org/packages/?q=$@"
+;;
+dic)
+shift;URL="http://dictionary.reference.com/dic?q=$@&search=search"
+;;
+pb)
+shift;URL="http://thepiratebay.org/s/?q=$@&page=0&orderby=99"
+;;
+tw)
+shift;URL="http://search.twitter.com/search?q=$@"
+;;
+im)
+shift;URL="http://www.imdb.com/find?s=all&q=$@&x=0&y=0"
+;;
+afs)
+shift;URL="http://bbs.archlinux.org/search.php?action=search&keywords=$@&author=&forum=-1&search_in=all&sort_by=0&sort_dir=DESC&show_as=topics&search=Submit"
+;;
+yt)
+shift;URL="http://www.youtube.com/results?search_type=&search_query=$@&aq=f"
+;;
+aw)
+shift;URL="http://wiki.archlinux.org/index.php/Special:Search?search=$@&go=Go"
+;;
+flip)
+shift;URL="http://www.flipkart.com/search.php?query=$@&x=0&y=0"
+;;
+dem)
+shift;URL="http://www.demonoid.com/files/?query=$@"
+;;
+ety)
+shift;URL="http://www.etymonline.com/index.php?search=$@&searchmode=none"
+;;
+mnova)
+shift;URL="http://www.mininova.org/search/?search=$@&cat=0"
+;;
+lxr)
+shift;URL="http://lxr.linux.no/linux+v2.6.30.4/+search"
+;;
+whois)
+shift;URL="http://www.domaintools.com/go/?service=whois&q=$@"
+;;
+wolf)
+shift;URL="http://www.wolframalpha.com/input/?i=$@"
+;;
+*) URL="http://www.google.com/search?q=$@"
+esac
+
+$BROWSER "$URL" &>/dev/null
+set +x

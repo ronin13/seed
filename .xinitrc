@@ -13,10 +13,7 @@ xset m 2 1
 xset r rate 217 76
 xrdb -merge ~/.Xresources
 setxkbmap -option terminate:ctrl_alt_bksp
-xmodmap -e 'keycode 135 = Super_L'
-#xmodmap -e 'keycode 78 = Super_L'
-#xmodmap -e 'keycode 127 = Alt_L'
-xmodmap -e 'add mod4 = 0xff67'
+xmodmap  ~/.Xmodmap 
 
 unclutter -idle 4 -reset &
 xbindkeys &

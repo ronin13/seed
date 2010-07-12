@@ -53,7 +53,8 @@ compctl -k pkgs pinfo
 compctl -k pkgs whichpack 
 
 syncpkgs=(`pacman --config /etc/pacman.conf.testing -Sql core extra community community-testing testing arch-games archlinuxfr`)
-compctl  -g "*.pkg.tar.*" + -k syncpkgs ins
+#compctl  -g "*.pkg.tar.*" + -k syncpkgs ins
+compctl  -g "*.pkg.tar.*" ins
 
 compctl -l '' -x 'p[1]' -f -- . source
 compctl -s '${^fpath}/*(N:t)' autoload

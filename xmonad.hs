@@ -179,10 +179,12 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 --}}}  
 
 --{{{ Layout 
-myLayout =  onWorkspace "4:video" vidLayout $ onWorkspace "7:games" vidLayout $ defLayout
+myLayout = onWorkspace "3:browser" brLayout $ onWorkspace "4:video" vidLayout $ onWorkspace "7:games" vidLayout $ defLayout
       where
-          defLayout = avoidStruts $ Mag.magnifiercz 1.4 (tiled ||| Full ||| Mirror tiled)
-          tiled     = hinted (smartBorders (ResizableTall 1 (2/100) (1/2) []))
+          defLayout = avoidStruts $ Mag.magnifiercz 1.4 (htiled ||| Full ||| Mirror htiled)
+          htiled    = hinted (smartBorders (ResizableTall 1 (2/100) (1/2) []))
+          tiled     = smartBorders (ResizableTall 1 (2/100) (1/2) [])
+          brLayout  = avoidStruts $ Mag.magnifiercz 1.4 (tiled ||| Full ||| Mirror tiled)
           vidLayout = smartBorders (Grid False ||| Full)
           hinted l  = layoutHintsWithPlacement (0,0) l
 --}}}
@@ -231,10 +233,11 @@ myLogHook h = dynamicLogWithPP $ customPP { ppOutput = hPutStrLn h }
 customPP :: PP
 customPP = defaultPP { 
                 ppHidden = xmobarColor "#00FF00" "" . noScratchPad
-              , ppCurrent = xmobarColor "blue" "" . wrap "[" "]"
+              , ppOrder = \(ws:_:t:_) ->  [t,ws]
+              , ppCurrent = xmobarColor "white" "" . shorten 6 . wrap "[" "]"
               , ppUrgent = xmobarColor "red" "" . wrap "*" "*"
-              , ppLayout = xmobarColor "Yellow" ""
-              , ppTitle = xmobarColor "green" "" . shorten 20
+              , ppLayout = xmobarColor "Yellow" "". shorten 4
+              , ppTitle = xmobarColor "green" "" . shorten 7
               , ppSep = "<fc=#0033FF> | </fc>"
             }
         where 

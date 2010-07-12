@@ -1,8 +1,8 @@
 "~/bin/mmove"
    Control + Shift + s
 
-"~/bin/noter"
-   Pause
+#"~/bin/noter"
+#   Pause
 
 "~/bin/toggle"
  alt + F11
@@ -17,10 +17,10 @@
  Control + m
 
 "~/bin/mplayeraux bookmark"
- Control + b
+ Control + Shift + b
 
 "~/bin/mplayeraux extract"
- Control + Shift + b
+ Control + Shift + e
 
 #"mpc next"
 #   alt + b:2

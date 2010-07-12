@@ -3,7 +3,6 @@ http://lwn.net/headlines/newrss
 http://lambda-the-ultimate.org/rss.xml
 http://blogs.intel.com/research/atom.xml
 http://zenhabits.net/feed/
-http://dailyvim.blogspot.com/feeds/posts/default
 http://www.theoremoftheday.org/Utilities/feed.xml
 http://golem.ph.utexas.edu/category/atom10.xml
 http://mindyourdecisions.com/blog/feed/
@@ -28,3 +27,4 @@ http://www.npr.org/rss/podcast.php?id=35
 http://downloads.bbc.co.uk/podcasts/worldservice/scia/rss.xml
 http://leo.am/podcasts/sn
 http://feeds.feedburner.com/tedtalks_video
+http://www.archlinux.org/feeds/packages/

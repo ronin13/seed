@@ -1,11 +1,9 @@
-
+"http://vimdoc.sourceforge.net/cgi-bin/vimfaq2html3.pl#23.5
 "noremap <C-w> <Nop>
 "nnoremap <S-Insert> "+p
 set sidescrolloff=5
 nnoremap <F1> :wq<CR>
 inoremap <F1> <ESC>:wq<CR>
-nnoremap `` :q<CR>
-nnoremap ``` :q!<CR>
 map <MouseMiddle> <esc>"+p
 
 
@@ -86,7 +84,9 @@ set foldmethod=marker
 
 set wildmenu                            " Autocomplete features in the status bar
 set wildmode=list:longest,full
-au BufRead,BufNewFile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=mail 
+au BufRead,BufNewFile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=mail
+" mail from http://cedricduval.free.fr/download/mail.vim
+autocmd BufRead /tmp/mutt* :source ~/.vim/mail.vim
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
 
 let g:pydiction_location = '$HOME/Arch/vim/pydiction/complete-dict'
@@ -153,8 +153,11 @@ if &term == "screen-256color" || &term == "xterm-256color"
     map [1;2C <S-right>
     map [1;2A <S-up>
     map [1;2B <S-down>
+    map ^[[H <Home>
 endif
 
+nnoremap `` :q<CR>
+nnoremap ``` :q!<CR>
 " tab navigation (next tab) with alt left / alt right
 nnoremap  <A-Right>  gt
 nnoremap  <A-Left>   gT
@@ -298,3 +301,4 @@ map <leader>sa zg
 map <leader>s? z=
 
 let g:yankring_history_dir="~/.vim-tmp/"
+autocmd FocusLost * wall

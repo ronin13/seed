@@ -1,20 +1,20 @@
-browser "/usr/bin/opera %u"`
-refresh-on-startup yes
+browser "/usr/bin/firefox -remote 'openurl(%u)'"
 color   background      default default
 color   listnormal      default default
 color   listfocus       black   white   bold reverse
 color   info            black   white   reverse bold
 color   article         default default
-download-path "~/media/podcasts/"
-max-downloads 3
-player "mplayer -cache 4096"
+download-path "~/media/newsbeuter/podcasts/"
+max-downloads 1
+player "/usr/bin/mplayer -cache 4096"
 text-width 75
 feedlist-format "%n %9u [%t]"
 articlelist-format  "%f %D   %?T?|%-17T|  ?%t"
-auto-reload yes
-reload-time 120
 notify-format "RSS - %d new/%n unread articles"
 notify-xterm yes
+save-path ~/media/newsbeuter/
+# notify-program ""
+# notify-screen no
 bind-key j down
 bind-key k up
 unbind-key r
@@ -24,10 +24,17 @@ bind-key R reload
 bind-key d delete-article
 bind-key i toggle-article-read
 bind-key x reload-all
+bind-key up prev-unread
+bind-key down next-unread
 highlight feedlist "^(N)" yellow default
 highlight articlelist "^(N)" yellow default
 highlight article "^Link[s:]|http[s:]//.*" magenta default
 highlight article "^Title:.*" green default bold
 highlight article ".*URL:" magenta default bold
 highlight article "^Feed:.*" green default
-
+goto-next-feed no
+confirm-exit yes
+cache-file "~/.local/share/newsbeuter/cache.db"
+browser w3m
+bookmark-cmd "~/bin/booktwit"
+always-display-description true

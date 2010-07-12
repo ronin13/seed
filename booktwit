@@ -1,23 +1,26 @@
 #!/bin/zsh
 # vim: ft=sh et:
 user=emptyvacuum
-pass=h3ll0ninternet
-set -x
+pass=$(cat $HOME/.booktwit)
+#set -x
 source ~/.zsh/.zsh_functions
 
 if [[ $1 == "search" ]];then
     ~/bin/searchtwit.py "" $pass 
     exit
-else
-    if [[ $1 == "all" || $1 == "list" ]];then
+elif [[ $1 == "all" || $1 == "list" ]];then
     #curl --basic --user $user:$pass http://twitter.com/$user
     #expr="~/bin/searchtwit.py all $pass  | tr ',' '\n' | tr -d \' |  perl -lne 'print $1 if /.*?u(.+)$/'"
     url=$(~/bin/searchtwit.py all $pass  | tr ',' '\n' | tr -d \' |  perl -lne 'print $1 if /.*?u(.+)$/' |  ${=DMENU} | cut -d " " -f 1)
     [[ ! -z $url ]] && $BROWSER $url
     exit
-    fi
+
+elif [[ $1 == "list" ]];then
+    url=$( cat ~/.bookmarks | ${=DMENU} | cut -d "|" -f 1)
+    [[ ! -z $url ]] && $BROWSER $url
+    exit
 fi
-set +x
+#set +x
 
 if [[ -z $1 ]];then
     url=$(xsel -o)
@@ -31,12 +34,15 @@ fi
 #echo "Enter URL"
 #read url
 #echo "Description"
-shift
+#shift
 if [[ -z $2 ]];then
     desc="$(zenity  --title 'Booktwit' --entry --text 'Enter the description')"
 else
+    title="$2"
+    shift
     desc="$@"
 fi
 
-echo -e "${url}\n$desc" >> ~/.bookmarks
+echo -e "\n\n${url}|$title|$desc\n\n" >> ~/.bookmarks
 curl -s --basic --user $user:$pass --data status="$url $desc" http://twitter.com/statuses/update.xml &>/dev/null
+#set +x

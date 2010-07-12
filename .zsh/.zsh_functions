@@ -1,3 +1,5 @@
+
+
 #function cd () {
 #if [[ -z $2 ]]; then
   #if [[ -f $1 ]]; then
@@ -13,15 +15,23 @@
   #fi
 #fi
 #}
+#isurl(){
+#echo "${@#*//}" | perl -lne '
+    #use Data::Validate::URI qw(is_uri);
+    #if(is_uri("http://".$_)){
+        #exit 0
+    #}
+    #else{
+        #exit 1
+    #}'
+#}
+
 isurl(){
-echo "${@#*//}" | perl -lne '
-    use Data::Validate::URI qw(is_uri);
-    if(is_uri("http://".$_)){
-        exit 0
-    }
-    else{
-        exit 1
-    }'
+url="$@"
+zmodload zsh/regex
+#$url -regex-match ".+\..+/.+"
+[[ $url -regex-match "^http://.+\..{2,3}$" || $url -regex-match ".+\..{2,3}$" || $url -regex-match ".+\..+/.+" ]] && return 0
+return 1
 }
 
 mecho(){
@@ -33,6 +43,12 @@ mecho(){
         output="zenity --text-info --height 400 --width 680"
     fi
     echo "$@" | ${=output}
+}
+
+spath(){
+    for dir in $(tr ':' '\n' <<< $PATH);do
+        find $dir -maxdepth 1 -type f | /bin/grep -i --color ".*lock.*"
+    done
 }
 
 task()
@@ -55,12 +71,14 @@ else
         echo -e "\n\n"
         echo "Is this task done?(y/N)"
         read -q && mv ${=i} ${=i:r}.done
+        counter=$(($counter+1))
     done
 fi
 }
 
 xpaste(){
-xsel -o >> $1
+var="$(xsel -o)"
+echo -e "\n $var" >> $1
 }
 
 wiki() { w=$(dig +short txt $1.wp.dg.cx); echo "$w" }
@@ -97,20 +115,38 @@ disassemble() {
             gcc -pipe -S -o - -O -g $* | as -aldh -o /dev/null
         }
 
+profile() {
+        ZSH_PROFILE_RC=1 $SHELL "$@"
+}
+
+
 xev(){
-    xev -id `xdotool getactivewindow`
+    =xev -id `xdotool getactivewindow`
 }
 bash_source() {
   alias shopt=':'
   alias _expand=_bash_expand
   alias _complete=_bash_comp
-  emulate -L sh
+  #emulate -L sh
   setopt kshglob noshglob braceexpand
   source "$@"
 }
 
+rsudo(){
+echo "$@" | sudo tee
+}
+
 search(){
     surfraw google "$@"
+}
+
+
+ins(){
+   if [[ $1 == *xz || $1 == *pkg.tar ]];then
+      sudo pacman -U $1
+  else
+     sudo pacman -S "$@"
+ fi
 }
 
 extract() {
@@ -148,3 +184,45 @@ pacnews()
         fi 
     done
 }
+
+
+H-Glob() {
+    echo -e "
+    /      directories
+    .      plain files
+    @      symbolic links
+    =      sockets
+    p      named pipes (FIFOs)
+    *      executable plain files (0100)
+    %      device files (character or block special)
+    %b     block special files
+    %c     character special files
+    r      owner-readable files (0400)
+    w      owner-writable files (0200)
+    x      owner-executable files (0100)
+    A      group-readable files (0040)
+    I      group-writable files (0020)
+    E      group-executable files (0010)
+    R      world-readable files (0004)
+    W      world-writable files (0002)
+    X      world-executable files (0001)
+    s      setuid files (04000)
+    S      setgid files (02000)
+    t      files with the sticky bit (01000)
+
+  print *(m-1)          # Files modified up to a day ago
+  print *(a1)           # Files accessed a day ago
+  print *(@)            # Just symlinks
+  print *(Lk+50)        # Files bigger than 50 kilobytes
+  print *(Lk-50)        # Files smaller than 50 kilobytes
+  print **/*.c          # All *.c files recursively starting in \$PWD
+  print **/*.c~file.c   # Same as above, but excluding 'file.c'
+  print (foo|bar).*     # Files starting with 'foo' or 'bar'
+  print *~*.*           # All Files that do not contain a dot
+  chmod 644 *(.^x)      # make all plain non-executable files publically readable
+  print -l *(.c|.h)     # Lists *.c and *.h
+  print **/*(g:users:)  # Recursively match all files that are owned by group 'users'
+  echo /proc/*/cwd(:h:t:s/self//) # Analogous to >ps ax | awk '{print $1}'<"
+}
+alias help-zshglob=H-Glob
+

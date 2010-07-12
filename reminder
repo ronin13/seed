@@ -1,17 +1,24 @@
 #!/bin/zsh
-#set -x
 tasks="$(/bin/ls -A ~/.tasks/*.remain 2>/dev/null | wc -l)"
-cookie="$(fortune -s debian perl startrek science linux linuxcookie wisdom)"
+cookie="$(fortune -c  -a -s matrix archlinux debian goedel literature tbbt perl startrek the-godfather science linux linuxcookie wisdom)"
 notify-send "Tasks left: <b>$tasks</b>
 Time now is <i>$(date -R)</i>
 ----------------------
 $cookie"
-sleep 5
+#sleep 2
+mtasks="
+"
+counter=1
 
 if [[ $tasks > 0 ]];then
     for t in ~/.tasks/*.remain;do
-        ~/bin/notify-send "Task: ${t:r:t}
+        mtasks="$mtasks
+        Task#$counter: ${t:r:t}
         $(cat $t)
         "
+        counter=$(($counter+1))
+        if [[ $counter > 4 ]];then break;fi
     done
 fi
+~/bin/notify-send "$mtasks"
+

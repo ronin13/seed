@@ -47,7 +47,7 @@ if [[ -z $1 ||  $1 =~ a.* ]];then
     echo "TITLE: $info[2]" >> "${filename}.data" || exit 1
     echo "$text" >> "${filename}.data" || exit 1
     echo -e "====================================End Of note============================\n\n" >> "${filename}.data" || exit 1
-    ~/bin/booktwit $uri "$info" &
+    ~/bin/booktwit "info[1]" "$info[2]" "$info[3,-1]" &
     #notify-send -u critical "$uri successfully added!"
     echo "${filename}.data"
 
@@ -72,7 +72,7 @@ elif [[ $1 =~ e.* ]];then
         file=$(zenity --list --title "Search Results" --text "Search results" --column "Files" $dir)
     done
 else
-    notify-send -u critical "Invalid function"
+    notify-send "Invalid function"
     exit 1
 fi
 

@@ -41,6 +41,7 @@ alias -g zsource="source ~/.zshrc"
 alias -g :g=' |& /bin/grep -i'
 alias -g :n='&> /dev/null'
 alias -g :l=' |& less'
+alias -g :x=" |& tr '\n' '\0' | xargs -0 "
 
 setopt correct
 setopt autolist automenu
@@ -70,13 +71,13 @@ bindkey '^Xi' insert-unicode-char
 
 # The following lines were added by compinstall
 #By me
-zstyle ':completion:*' accept-exact '*(N)'
+#zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*:(cp|mv|rm|diff|kill):*' ignore-line yes
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:processes' command 'ps -A'
 #/By me
 
-zstyle ':completion:*' completer _complete _ignored _correct _approximate
+zstyle ':completion:*' completer _complete _ignored _correct _approximate _files
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' menu select=long-list select=0
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
@@ -92,6 +93,9 @@ compinit
 
 autoload -Uz bashcompinit
 bashcompinit
+
+zstyle ':completion:*:*:killall:*' menu yes select
+zstyle ':completion:*:killall:*'   force-list always
 
 source ~/.zsh/.zsh_functions
 source ~/.zsh/completions
@@ -113,7 +117,7 @@ zstyle ':completion:*' special-dirs true
 function precmd { 
 out=(`dirs | tr ' ' '\n' | xargs -I {} basename {}`)
 RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[blue]%}[%?:$out[1,3]])%{$reset_color%}%"
-print -Pn "\e]2;%N"
+[[ $TERM != "linux" ]] && print -Pn "\e]2;%N"
 }
 
 autoload -U   edit-command-line
@@ -149,7 +153,11 @@ stty -ixon -ixoff
 bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
 zstyle ':completion:*' users {raghavendra,root}
-#zstyle ':completion:*:correct:*'   insert-unambiguous true
+
+
+zstyle ':completion:*:corrections' format $'%{\e[0;31m%}%d (errors: %e)%{\e[0m%}'
+zstyle ':completion:*:correct:*' original true
+zstyle ':completion:*:correct:*'   insert-unambiguous true
 
 hash -d linux=/lib/modules/$(command uname -r)/
 hash -d src=/usr/src/linux-$(command uname -r)/
@@ -163,3 +171,11 @@ autoload -U predict-on && \
 insert-last-typed-word() { zle insert-last-word -- 0 -1 }; \
 zle -N insert-last-typed-word; bindkey "\el" insert-last-typed-word
 
+zstyle ':completion:*:*:*:*' list-suffixes yes
+zstyle :completion::complete:cd:: tag-order local-directories path-directories
+
+zstyle ':vcs_info:*' disable bzr cdv darcs mtn svk tla hg
+zstyle ':completion::(^approximate*):*:functions' ignored-patterns '_*'
+zstyle ':acceptline:*' rehash true
+
+zstyle ':completion:*' matcher-list 'm:{A-Z}={a-z}' 'm:{a-z}={A-Z}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'

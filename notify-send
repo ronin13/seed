@@ -4,7 +4,7 @@ xnotify(){
     heading="$1"
     shift
     rest="$@"
-    /usr/bin/notify-send -u critical $heading "$rest"
+    /usr/bin/notify-send  -u critical $heading "$rest"
 }
 
 cnotify(){
