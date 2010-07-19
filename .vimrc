@@ -1,11 +1,13 @@
 "http://vimdoc.sourceforge.net/cgi-bin/vimfaq2html3.pl#23.5
 "noremap <C-w> <Nop>
 "nnoremap <S-Insert> "+p
+scriptencoding utf-8
+
 set sidescrolloff=5
 nnoremap <F1> :wq<CR>
 inoremap <F1> <ESC>:wq<CR>
 map <MouseMiddle> <esc>"+p
-
+autocmd!
 
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
@@ -17,7 +19,7 @@ set nocompatible
 set magic
 set wrapscan
 set t_Co=256
-let mapleader = ","
+"let mapleader = ","
 set mouse-=a
 " work more logically with wrapped lines
 noremap j gj
@@ -94,13 +96,13 @@ set tags +=~/.vim/tags/python.ctags
 "map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 map <C-F12> :!ctags -R .<CR>
 
+"set omnifunc=
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
-
 ""================================================================================================================
 ""
 " In plain-text files and svn commit buffers, wrap automatically at 78 chars
@@ -142,7 +144,7 @@ au FileType python set expandtab
 " Toggle the tag list bar
 nmap <F5> :TlistToggle<CR>
 
-if &term == "screen-256color" || &term == "xterm-256color"
+if &term == "screen-256color-s" || &term == "xterm-256color"
     map [1;3C <A-right>
     map [1;3D <A-left>
     map ^[[1;5A <C-up>
@@ -252,7 +254,7 @@ nnoremap v V
 nnoremap V v
 inoremap <C-Del> <C-\><C-O>D
 let g:SuperTabDefaultCompletionType = "context"
-
+let g:SuperTabRetainCompletionDuration = "session"
 
 function! CleverTab()
    if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
@@ -302,3 +304,19 @@ map <leader>s? z=
 
 let g:yankring_history_dir="~/.vim-tmp/"
 autocmd FocusLost * wall
+
+"autocmd BufWritePost * let test=fugitive#statusline() if test
+set statusline= " clear the statusline for when vimrc is reloaded
+set statusline+=%-3.3n\ " buffer number
+set statusline+=%f\ " file name
+set statusline+=%h%m%r%w " flags
+set statusline+=[%{strlen(&ft)?&ft:'none'}, " filetype
+set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
+set statusline+=%{&fileformat}] " file format
+set statusline+=%= " right align
+set statusline+=%{fugitive#statusline()}
+set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\ " highlight
+" set statusline+=%b,0x%-8B\ " current char
+set statusline+=%-14.(%l,%c%V%)\ %<%P " offset
+
+"let g:yankring_enabled = 0

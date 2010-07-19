@@ -1,0 +1,102 @@
+#!/usr/bin/perl 
+#===============================================================================
+#
+#         FILE:  mpd.pl
+#
+#        USAGE:  ./mpd.pl  
+#
+#  DESCRIPTION:  
+#
+#      OPTIONS:  ---
+# REQUIREMENTS:  ---
+#         BUGS:  ---
+#        NOTES:  ---
+#       AUTHOR:  Raghavendra Prabhu (), 
+#      COMPANY:  
+#      VERSION:  1.0
+#      CREATED:  07/17/2010 05:06:23 PM
+#     REVISION:  ---
+#===============================================================================
+
+#use strict;
+#use warnings;
+use Data::Dumper;
+use Encode 'decode_utf8';
+use Term::ANSIColor qw(:constants);
+
+my $query;
+
+$Term::ANSIColor::AUTORESET = 1;
+if ($#ARGV < 0){
+    print STDERR "Assuming album as the query and mtime as the sorter\n";
+    $query='Album';
+    #die "Supply one of the  query strings: $!\n"; 
+}
+else{
+    $query=$ARGV[0];
+}
+
+my $sorter = 'mtime';
+my %bucket=();
+
+my $mpd="~/mpd/mpd.db";
+open(FH,'<',glob($mpd)) or die "Opening failed: $!";
+
+#{{{
+sub strip {
+    @temp=split /:/,$_[0];
+    chomp @temp;
+    $temp[1]=~ s/^\s+//;
+    return $temp[1];
+}
+
+sub sortb{
+
+my @current=();
+my $key;
+my $predicate = $_[0];
+while(<FH>){
+        if(/^$predicate/../^$sorter/){
+            if (/^$predicate/) { 
+                @current=();
+                push(@current,strip $_);
+            }
+            elsif (/^$sorter/){
+                $key = strip $_; 
+                #if ($query eq "Artist"){
+                    $bucket{$predicate}->{$key}=join " | ",@current[0..2]; 
+                    #}
+                    #else{
+                    #$bucket{$predicate}->{$key}=join " | ",@current[0,3];
+                    #}
+            }
+            else
+            {
+                push(@current,strip $_);
+            }
+            
+        }
+    }
+
+}
+#}}}
+
+sortb($query,$sorter);
+close(FH);
+
+my $hash = $bucket{$query};
+
+my @tmp;
+my %dup;
+
+foreach my $key (sort {$a <=> $b}  (keys %$hash)){
+    #print $bucket{$query}->{$key}."\n";
+    #next;
+    @tmp = split / | /, $bucket{$query}->{$key};
+    #print @tmp[0];
+    if (!defined $dup{$tmp[0]}) { print "\n\n Added on ".localtime($key)."\n"; $dup{$tmp[0]} = 1; } 
+    print BLUE "@tmp\n";
+    #print BLUE @tmp[0];
+    #print join " ",@tmp[1..$#tmp]."\n";
+}
+

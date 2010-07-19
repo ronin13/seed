@@ -1,15 +1,15 @@
 #!/bin/zsh
 # add url loading [DONE]
 # multiple sockets multiplexing 0MQ kind of stuff
-set -x
+#set -x
 HIST="$HOME/.mplayer.hist"
 maxplayers=2
 randnum=$((${RANDOM}%${maxplayers}))
 MPSOCKET="/tmp/mplayer/$randnum.fif"
 [[  -e $MPSOCKET ]] || mkfifo $MPSOCKET
 
-xord=$(($RANDOM%1200))
-yord=$(($RANDOM%800))
+xord=$(($RANDOM%800))
+yord=$(($RANDOM%450))
 ${=LOCK}/mplayer.$randnum /usr/bin/mplayer -geometry +$xord+$yord -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  &
 
 #if [[ $? != "0" ]];then
@@ -33,10 +33,10 @@ if [[ -z "$1" ]];then
 else
     source ~/.zsh/.zsh_functions
 
-    if isurl "$1";then
+    if isurl "$(tr -d '.' <<< $1)";then # Fix /a/b/c/d type
         FILE="$1"
     else
-        if [[ "$@" == /* ]];then 
+        if [[ "$@" == /* ]];then
             prefix=
         else
             prefix="`pwd`/"
@@ -50,4 +50,4 @@ mpc pause &>/dev/null
 echo "loadfile \"$FILE\"" > $MPSOCKET
 [[ ! -z $POSITION ]] &&  echo "set_property time_pos $POSITION" > $MPSOCKET
 #echo "pause" > $MPSOCKET
-set +x
+#set +x

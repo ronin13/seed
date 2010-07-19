@@ -1,3 +1,8 @@
+http://www.archlinux.org/feeds/packages/
+http://feeds.feedburner.com/PerlTips
+http://feeds.feedburner.com/DougHellmann
+http://feeds.feedburner.com/c4ss
+http://feeds.feedburner.com/HighScalability
 http://rss.feedsportal.com/c/32569/f/491734/index.rss
 http://lwn.net/headlines/newrss
 http://lambda-the-ultimate.org/rss.xml
@@ -27,4 +32,121 @@ http://www.npr.org/rss/podcast.php?id=35
 http://downloads.bbc.co.uk/podcasts/worldservice/scia/rss.xml
 http://leo.am/podcasts/sn
 http://feeds.feedburner.com/tedtalks_video
-http://www.archlinux.org/feeds/packages/
+http://journals.cambridge.org/data/rss/feed_JFP_rss_2.0.xml
+http://www.defmacro.org/rss/news.xml
+http://my.opera.com/desktopteam/xml/rss/blog/
+http://rsspect.com/rss/qwantz.xml
+http://www.hackitlinux.com/index.rss
+http://feeds.feedburner.com/InnovationZen
+http://www.kdedevelopers.org/blog/feed
+http://codecs.multimedia.cx/?feed=rss2
+http://feeds.feedburner.com/LinuxByExamples
+http://feeds.feedburner.com/linuxscrew
+http://groups.google.com/group/ML-news/feed/rss_v2_0_msgs.xml
+http://www.networkworld.com/rss/firewalls.xml
+http://www.oed.com/rss.xml
+http://planet.scipy.org/atom.xml
+http://labs.trolltech.com/blogs/feed/
+http://recursed.blogspot.com/feeds/posts/default
+http://feeds.feedburner.com/MatthewPodwysocki
+http://www.stackless.com/search_rss?meta_type=NewsItem&review_state=published&sort_on=Date&sort_order=reverse
+http://feeds.feedburner.com/zenhabits
+http://groups.google.com/group/comp.text.tex/feed/rss_v2_0_msgs.xml "Tex"
+http://www.blackhat.com/BlackHatRSS.xml "Hacking"
+http://www.darkreading.com/rss_simple.asp?f_s=296&f_ln=Dark+Reading+News+Analysis "Hacking"
+http://services.devx.com/outgoing/devxfeed.xml "Hacking"
+http://research.eeye.com/rss/zeroday.rss "Hacking"
+http://www.itportal.org/index2.php?option=com_rss&feed=RSS2.0&no_html=1 "Hacking"
+http://www.offensivecomputing.net/?q=node/feed "Hacking"
+http://herbsutter.spaces.live.com/feed.rss "Hacking"
+http://feeds.feedburner.com/Tech-RecipesMain "Hacking"
+http://feeds.feedburner.com/digitalpbk "Hacking"
+http://www.animenewsnetwork.com/newsfeed/rss.xml "Anime"
+http://that.animeblogger.net/feed/ "Anime"
+http://feeds.feedburner.com/AcceleratingFuture "Thinkers"
+http://gladwell.typepad.com/gladwellcom/atom.xml "Thinkers"
+http://www.joelonsoftware.com/rss.xml "Thinkers"
+http://www.kottke.org/remainder/index.rdf "Thinkers"
+http://itre.cis.upenn.edu/~myl/languagelog/index.rdf "Thinkers"
+http://www.languagehat.com/index.rdf "Thinkers"
+http://www.marginalrevolution.com/marginalrevolution/index.rdf "Thinkers"
+http://www.npr.org/rss/podcast.php?id=4538138 "Thinkers"
+http://www.aaronsw.com/2002/feeds/pgessays.rss "Thinkers"
+http://feeds.salon.com/salon/index "Thinkers"
+http://tedblog.typepad.com/tedblog/atom.xml "Thinkers"
+http://packetstormsecurity.org/headlines.xml "Cryptography"
+http://www.topix.net/rss/science/cryptography "Cryptography"
+https://financialcryptography.com/index.rdf "Cryptography"
+http://www.networkworld.com/rss/security.xml "Cryptography"
+http://www.schneier.com/blog/index.rdf "Cryptography"
+http://sayspy.blogspot.com/feeds/posts/default "python"
+http://www.pythonware.com/daily/rss.xml "python"
+http://diveintopython.org/history.xml "python"
+http://www.oreillynet.com/pub/feed/13 "python"
+http://aspn.activestate.com/ASPN/Cookbook/Python/index_rss "python"
+http://planet.python.org/rss20.xml
+http://www.comedycentral.com/rss/colbertvideos.jhtml "Fun"
+http://www.comedycentral.com/rss/tdsvideos.jhtml "Fun"
+http://www.quotationspage.com/data/qotd.rss "Fun"
+http://www.devshed.com/index2.php?option=mos_rss&no_html=1 "perl"
+http://johnbokma.com/index.rss "perl"
+http://planet.perl.org/rss20.xml "perl"
+http://use.perl.org/index.rss "perl"
+http://www.ebookshare.net/feed/ "War"
+http://www.flazx.com/rss/last10.xml "War"
+http://feeds.feedburner.com/ebookee "War"
+http://mathsresource.blogspot.com/atom.xml "War"
+http://feeds.feedburner.com/progarchives/reviews "Music"
+http://www.metalhammer.co.uk/rss "Music"
+http://www.metalunderground.com/tools/newsfeeds/news.cfm "Music"
+http://gooberzilla.wordpress.com/feed/ "Music"
+http://www.ytsejam.com/backend.php "Music"
+http://www.cricinfo.com/rss/column_index.rdf "Cricket"
+http://outsidetheline.typepad.com/outside_the_line/atom.xml "Cricket"
+http://www.bbc.co.uk/blogs/tms/index.xml "Cricket"
+http://www.cricket.mailliw.com/feed/ "Cricket"
+http://feeds.feedburner.com/CoolTools "Geeky"
+http://dictionary.reference.com/wordoftheday/wotd.rss "Geeky"
+http://lifehacker.com/index.xml "Geeky"
+http://feeds.feedburner.com/slashdot/audio "Geeky"
+http://code.google.com/feeds/featured.xml "googlr"
+http://googleblog.blogspot.com/atom.xml "googlr"
+http://sigfpe.blogspot.com/feeds/posts/default "Compmat"
+http://ai-depot.com/feed/ "Compmat"
+http://andysresearch.blogspot.com/feeds/posts/default "Compmat"
+http://texblog.wordpress.com/feed/ "Compmat"
+http://weblog.fortnow.com/rss.xml "Compmat"
+http://abbottanalytics.blogspot.com/feeds/posts/default "Compmat"
+http://datamining.typepad.com/data_mining/atom.xml "Compmat"
+http://www.datawrangling.com/feed/ "Compmat"
+http://eccc.hpi-web.de/feeds/reports
+http://emergentchaos.com/feed
+http://www.f-secure.com/weblog/weblog.rdf "Compmat"
+http://front.math.ucdavis.edu/atom/math.NT "Compmat"
+http://aigamedev.com/feed/ "Compmat"
+http://godplaysdice.blogspot.com/feeds/posts/default "Compmat"
+http://gowers.wordpress.com/feed/ "Compmat"
+http://www.gpgpu.org/cgi-bin/blosxom.cgi/index.rss "Compmat"
+http://herselfsai.com/feed "Compmat"
+http://feeds2.feedburner.com/IeeeSpectrum
+http://feeds.feedburner.com/Insidehpc "Compmat"
+http://hunch.net/?feed=rss2 "Compmat"
+http://medal.cs.umsl.edu/blog/?feed=rss2 "Compmat"
+http://web.mit.edu/newsoffice/topic/mitcomputers-rss.xml "Compmat"
+http://web.mit.edu/newsoffice/topic/mitrobotics-rss.xml "Compmat"
+http://multiagent.com/feeds/posts/default?alt=rss
+http://mysliceofpizza.blogspot.com/feeds/posts/default "Compmat"
+http://www.math.columbia.edu/~woit/wordpress/?feed=rss2 "Compmat"
+http://www.linuxtechdaily.com/feed/ "Compmat"
+http://www.sciencedaily.com/rss/computers_math/artificial_intelligence.xml "Compmat"
+http://sbseminar.wordpress.com/feed/ "Compmat"
+http://scottaaronson.com/blog/?feed=rss2 "Compmat"
+http://skepchick.org/blog/?feed=rss2 "Compmat"
+http://www.anandtech.com/rss/
+http://feeds.feedburner.com/StatisticalModelingCausalInferenceAndSocialScience "Compmat"
+http://wadler.blogspot.com/atom.xml "Compmat"
+http://terrytao.wordpress.com/feed/ "Compmat"
+http://xkcd.com/rss.xml "Compmat"
+http://emotion.inrialpes.fr/spip.php/IMG/pdf/ecrire/laemi/ecrire/laemi/WG-Conclusions/ecrire/IMG/pdf/spip.php?page=backend
+http://targetgoogle.blogspot.com/feeds/posts/default "Miscellaneous"
+http://feeds.wired.com/wired/index "Miscellaneous"

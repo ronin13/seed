@@ -1,0 +1,26 @@
+#!/bin/zsh
+setopt shwordsplit
+#tail="rsstail -ldHP -b 100 -n 2 -i 800 -u "
+tail="rsstail -ldHP  -n 2 -i 800 -u "
+urls=$(cat ~/.rurls)
+command="multitail -D  "
+counter=1
+for x in $urls[(f)1,-1]
+do
+    #if [[ ! $x == *rss* || ! $x == *xml ]];then
+    #    rssurl=$(~/bin/autorss.py "$x")
+    #else
+        rssurl="$x"
+    #fi
+    xtail="$tail $rssurl"
+    if [[ $counter == 1 ]];then
+        command="$command  -cS rsstail -l \"${xtail}\""
+    else
+        command="$command  -cS rsstail -L \"${xtail}\""
+    fi
+    counter=$(($counter+1))
+done
+
+#echo "${=command}"
+#read
+eval "${=command}"

@@ -1,37 +1,33 @@
 
+apod(){
+    #set -x
+    DATE=`date +%s`
+    FILE="$HOME/.cache/apod/apod:$DATE.jpg"
+    url="$(curl -s http://apod.nasa.gov/apod/ | grep IMG  | cut -d "\"" -f 2)"
+    wget -q -O "$FILE" -c http://apod.nasa.gov/apod/${=url}
+    feh $FILE
+    echo "Set as wallpaper: y/n"
+    read -q  && set_wall $FILE
+    #set +x
 
-#function cd () {
-#if [[ -z $2 ]]; then
-  #if [[ -f $1 ]]; then
-    #builtin cd $1:h
-  #else
-    #builtin cd $1
-  #fi
-#else
-  #if [[ -z $3 ]]; then
-    #builtin cd $1 $2
-  #else
-    #echo cd: too many arguments
-  #fi
-#fi
-#}
-#isurl(){
-#echo "${@#*//}" | perl -lne '
-    #use Data::Validate::URI qw(is_uri);
-    #if(is_uri("http://".$_)){
-        #exit 0
-    #}
-    #else{
-        #exit 1
-    #}'
-#}
+}
+
+server(){
+python -m SimpleHTTPServer 9914 &>~/logs/server.log &
+}
 
 isurl(){
-url="$@"
-zmodload zsh/regex
-#$url -regex-match ".+\..+/.+"
-[[ $url -regex-match "^http://.+\..{2,3}$" || $url -regex-match ".+\..{2,3}$" || $url -regex-match ".+\..+/.+" ]] && return 0
-return 1
+    #set -x
+    url="$@"
+    zmodload zsh/regex
+    #$url -regex-match ".+\..+/.+"
+    #[[ $url -regex-match "^http://.+\..{2,3}$" || $url -regex-match ".+\..{2,3}$" || $url -regex-match ".+\..+/.+" ]] && return 0
+    [[ $url -regex-match "^http://.+\..{2,3}$" || $url -regex-match ".+\..{2,3}$" || $url -regex-match ".+\..+/.+" ]] \
+        && [[ ! $url == /*   ]] \
+        && [[ ! $url == ./* ]] \
+        && return 0
+    return 1
+    #set +x
 }
 
 mecho(){
@@ -77,6 +73,7 @@ fi
 }
 
 xpaste(){
+[[ -z $1 ]] && return
 var="$(xsel -o)"
 echo -e "\n $var" >> $1
 }
@@ -140,6 +137,9 @@ search(){
     surfraw google "$@"
 }
 
+#$firefox(){
+#$LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so /usr/bin/firefox
+#}
 
 ins(){
    if [[ $1 == *xz || $1 == *pkg.tar ]];then
@@ -224,5 +224,5 @@ H-Glob() {
   print **/*(g:users:)  # Recursively match all files that are owned by group 'users'
   echo /proc/*/cwd(:h:t:s/self//) # Analogous to >ps ax | awk '{print $1}'<"
 }
-alias help-zshglob=H-Glob
+#alias help-zshglob=H-Glob
 

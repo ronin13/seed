@@ -2,8 +2,8 @@
 export BROWSER=firefox
 export SBROWSER=uzbl-browser
 #export DMENU="$HOME/bin/dmenu/dmenu -i -l 3 -nb #303030 -nf black -sb #303030 -p :"
-export DMENU="$HOME/bin/dmenu -p : -i -l 5 -nb black -nf white -sb purple"
-export PATH="$HOME/bin:$PATH"
+export DMENU="$HOME/bin/dmenu -p : -i -l 5 -nb black -nf white -sb purple -fa 'xft:Bitstream:pixelsize=14'"
+export PATH="$HOME/bin:/usr/local/bin:$PATH:$HOME/.cabal/bin"
 export VIMRUNTIME="/usr/share/vim/vim72"
 export GDK_USE_XFT=1
 export VISUAL="vim"
@@ -30,7 +30,7 @@ bash_source() {
   alias shopt=':'
   alias _expand=_bash_expand
   alias _complete=_bash_comp
-  emulate -L sh
+  #emulate -L sh
   setopt kshglob noshglob braceexpand
   source "$@"
 }

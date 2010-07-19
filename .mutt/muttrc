@@ -12,7 +12,7 @@ source ~/.mutt/sets
 source ~/.mutt/t-prot
 source ~/.mutt/muttrc.gpg
 
-my_hdr X-Operating-System: `echo -n "Archlinux x86_64"; uname -r`
+my_hdr X-Operating-System: `echo -n "Archlinux x86_64 "; uname -r`
 my_hdr X-Editor: `vim --version | head -1 | cut -d' ' -f-5`
 
 

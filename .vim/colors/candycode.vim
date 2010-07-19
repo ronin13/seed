@@ -64,8 +64,8 @@ hi PmenuSbar    guifg=NONE          guibg=#555555       gui=NONE
 hi PmenuThumb   guifg=NONE          guibg=#cccccc       gui=NONE
             \   ctermfg=gray        ctermbg=gray        cterm=NONE
 
-hi StatusLine   guifg=#000000       guibg=#c2bfa5       gui=bold    
-            \   ctermfg=black       ctermbg=white       cterm=bold
+"hi StatusLine   guifg=#000000       guibg=#c2bfa5       gui=bold    
+"            \   ctermfg=black       ctermbg=white       cterm=bold
 hi StatusLineNC guifg=#444444       guibg=#c2bfa5       gui=NONE    
             \   ctermfg=darkgray    ctermbg=white       cterm=NONE
 hi WildMenu     guifg=#ffffff       guibg=#133293       gui=bold
@@ -80,6 +80,10 @@ hi TabLineFill  guifg=#000000       guibg=#c2bfa5       gui=NONE
 hi TabLineSel   guifg=#ffffff       guibg=#133293       gui=NONE
             \   ctermfg=white       ctermbg=black       cterm=NONE
 
+hi StatusLine   guifg=#000000       guibg=#c2bfa5       gui=bold    
+            \   ctermfg=white       ctermbg=darkgray       cterm=bold
+"hi StatusLineNC guifg=#444444       guibg=#c2bfa5       gui=NONE    
+"            \   ctermfg=black       ctermbg=white       cterm=NONE
 "hi Menu
 "hi Scrollbar
 "hi Tooltip

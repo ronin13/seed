@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-#nvidia-settings -l &
+nvidia-settings -l &
 setopt nobgnice
 eval `cat ~/.fehbg` 
 

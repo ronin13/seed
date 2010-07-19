@@ -144,17 +144,6 @@ keyctl list @u | grep -q e90 && mount -i /home/raghavendra/wormole
 }
 
 
-apod(){
-DATE=`date +%s`
-FILE=~/.cache/apod/apod:$DATE.jpg;
-wget -q -O $FILE -c http://apod.nasa.gov/apod/$(curl -s http://apod.nasa.gov/apod/ | grep IMG  | cut -d "\"" -f 2)
-feh $FILE
-echo "Set as wallpaper: y/n"
-read yesno
-[[ $yesno = "y" ]] && set_wall $FILE
-
-}
-
 geoip () { curl -s "http://www.geoiptool.com/?IP=$1" | html2text | egrep --color 'City:|IP Address:|Country:'; }
 
 bbcradio() { local s;echo "Select a station:";select s in 1 1x 2 3 4 5 6 7 "Asian Network an" "Nations & Local lcl";do break;done;s=($s);/usr/bin/mplayer -playlist "http://www.bbc.co.uk/radio/listen/live/r"${s[@]: -1}".asx";}
@@ -330,7 +319,7 @@ define() {
     rm -f /tmp/define
     return 1
   else
-    cat /tmp/define | grep -v Search
+      mecho "$(cat /tmp/define | grep -v Search)"
     echo ""
   fi
   rm -f /tmp/define

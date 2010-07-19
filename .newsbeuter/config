@@ -35,6 +35,7 @@ highlight article "^Feed:.*" green default
 goto-next-feed no
 confirm-exit yes
 cache-file "~/.local/share/newsbeuter/cache.db"
-browser w3m
+browser ~/bin/uzbl-browser
 bookmark-cmd "~/bin/booktwit"
 always-display-description true
+#feed-sort-order articlecount

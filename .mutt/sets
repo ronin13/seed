@@ -28,7 +28,8 @@ set postponed=+Drafts
 set edit_headers=yes
 set signature=~/.mutt/.signature
 set alias_file=~/.mutt/aliases
-set editor="vim +/^$ ++1"
+#set editor="xterm -e /usr/bin/vim +/^$ ++1"
+set editor="/usr/bin/vim +/^$ ++1"
 #set delete=no
 set sort_browser=reverse-date
 set sort=threads
@@ -49,6 +50,8 @@ macro pager p "<display-toggle-weed> <print-message> <display-toggle-weed>"
 
 # No confirmation before printing
 set print="yes"
-set query_command="abook --mutt-query '%s'"
+#set query_command="abook --mutt-query '%s'"
+# Do the lbdbq setup -- for procmail also and also create the directory + ldap
+set query_command="lbdbq '%s'"
 set  attribution = "* On %d, %n <%a> wrote:"
-set autoedit="yes"
+#set autoedit="yes"
