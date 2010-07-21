@@ -36,9 +36,12 @@ xterm*faceName:Liberation Mono
 xterm*bellIsUrgent: true
 xterm*highlightColorMode: true
 xterm*highlightReverse: true
-xterm*highlightTextColor: red
-xterm*highlightColor: green
+!xterm*highlightTextColor: red
+xterm*highlightTextColor: darkblue
+xterm*highlightColor: GreenYellow
 xterm*dynamicColors: true
+!xterm*highlightTextColor: white
+!xterm*highlightColor: purple
 xterm*faceSize: 9
 xterm*termName: xterm-256color
 xterm*trimSelection: true

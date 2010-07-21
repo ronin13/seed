@@ -77,9 +77,9 @@ zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:processes' command 'ps -A'
 #/By me
 
-zstyle ':completion:*' completer _complete _ignored _correct _approximate _files
+zstyle ':completion:*' completer _force_rehash _complete _ignored _correct _approximate _files _prefix
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' menu select=long-list select=0
+#zstyle ':completion:*' menu select=long-list select=0
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl true
 zstyle :compinstall filename '/home/raghavendra/.zshrc'
@@ -176,6 +176,12 @@ zstyle :completion::complete:cd:: tag-order local-directories path-directories
 
 zstyle ':vcs_info:*' disable bzr cdv darcs mtn svk tla hg
 zstyle ':completion::(^approximate*):*:functions' ignored-patterns '_*'
-zstyle ':acceptline:*' rehash true
+#zstyle ':acceptline:*' rehash true
 
 zstyle ':completion:*' matcher-list 'm:{A-Z}={a-z}' 'm:{a-z}={A-Z}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
+WORDCHARS="${WORDCHARS:s#/#}"
+#WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+#
+zstyle ':completion:*' glob 'yes'
+zstyle ':completion:*' menu select=long-list select=3
+source ~/perl5/perlbrew/etc/bashrc

@@ -67,7 +67,7 @@ hi PmenuThumb   guifg=NONE          guibg=#cccccc       gui=NONE
 "hi StatusLine   guifg=#000000       guibg=#c2bfa5       gui=bold    
 "            \   ctermfg=black       ctermbg=white       cterm=bold
 hi StatusLineNC guifg=#444444       guibg=#c2bfa5       gui=NONE    
-            \   ctermfg=darkgray    ctermbg=white       cterm=NONE
+            \   ctermfg=darkgray    ctermbg=white      cterm=NONE
 hi WildMenu     guifg=#ffffff       guibg=#133293       gui=bold
             \   ctermfg=white       ctermbg=darkblue    cterm=bold
 hi VertSplit    guifg=#c2bfa5       guibg=#c2bfa5       gui=NONE
@@ -80,8 +80,10 @@ hi TabLineFill  guifg=#000000       guibg=#c2bfa5       gui=NONE
 hi TabLineSel   guifg=#ffffff       guibg=#133293       gui=NONE
             \   ctermfg=white       ctermbg=black       cterm=NONE
 
-hi StatusLine   guifg=#000000       guibg=#c2bfa5       gui=bold    
-            \   ctermfg=white       ctermbg=darkgray       cterm=bold
+" THIS one -- here :)
+" Skipping here to use xterm settings
+"hi StatusLine   guifg=#000000       guibg=#c2bfa5       gui=bold    
+"            \   ctermfg=       ctermbg=darkblue       cterm=bold
 "hi StatusLineNC guifg=#444444       guibg=#c2bfa5       gui=NONE    
 "            \   ctermfg=black       ctermbg=white       cterm=NONE
 "hi Menu

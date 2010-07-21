@@ -1,6 +1,6 @@
 "http://vimdoc.sourceforge.net/cgi-bin/vimfaq2html3.pl#23.5
 "noremap <C-w> <Nop>
-"nnoremap <S-Insert> "+p
+"nnoremap <S-Insert> i :set paste <S-Insert>
 scriptencoding utf-8
 
 set sidescrolloff=5
@@ -166,8 +166,10 @@ nnoremap  <A-Left>   gT
 " Ctrl + Arrows - Move around quickly
 nnoremap  <C-up>     {
 nnoremap  <C-down>   }
-nnoremap  <C-right>  El
-nnoremap  <C-left>   Bh
+nnoremap <C-left>    (
+nnoremap <C-right>   )
+"nnoremap  <C-right>  El
+"nnoremap  <C-left>   Bh
 
 " Shift + Arrows - Visually Select text
 "nnoremap  <s-up>     Vk
@@ -201,7 +203,7 @@ nnoremap q: q:iq<esc>
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 " Q formats paragraphs, instead of entering ex mode
-noremap Q gq
+"noremap Q gq
 
 " * and # search for next/previous of selected text when used in visual mode
 vnoremap * y/<C-R>"<CR>
@@ -230,7 +232,7 @@ let g:rvSaveDirectoryType = 1
 let g:rvSaveDirectoryName = "$HOME/Arch/vim/.rcs/"
 
 command DiffOrig vertical new | set buftype=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
-nnoremap \ch :DiffOrig
+nnoremap <leader>ch :DiffOrig
 
 source ~/.vim/vimrc.spell
 source ~/.vim/vimrc.abbrev
@@ -276,14 +278,15 @@ inoremap <silent> <PageUp> <C-O>1000<C-U>
 inoremap <silent> <PageDown> <C-O>1000<C-D>
 set nostartofline
 
-nnoremap <C-L> gqap
+"nnoremap <C-L> gqap
+nnoremap <C-f> gqap
 nnoremap Y "+y
 
 "use :set list! to toggle visible whitespace on/off
 set listchars=tab:>-,trail:.,extends:>
 
-noremap p ]p
-noremap P ]P
+nnoremap p ]p
+nnoremap P ]P
 
 highlight RedundantSpaces term=standout ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces highlighted
@@ -319,4 +322,40 @@ set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\ " highlight
 " set statusline+=%b,0x%-8B\ " current char
 set statusline+=%-14.(%l,%c%V%)\ %<%P " offset
 
+" To turn off yankring if needed 
 "let g:yankring_enabled = 0
+
+autocmd BufReadPost *.doc silent %!antiword "%"
+"autocmd BufReadPost *.odt,*.odp silent %!odt2txt "%"
+autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
+autocmd BufReadPost *.rtf silent %!unrtf --text "%"
+autocmd BufWriteCmd *.pdf set readonly
+
+" Nice one
+autocmd BufWritePre * :%s/\s+$//e
+
+"http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
+command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
+function! s:RunShellCommand(cmdline)
+  echo a:cmdline
+  let expanded_cmdline = a:cmdline
+  for part in split(a:cmdline, ' ')
+     if part[0] =~ '\v[%#<]'
+        let expanded_part = fnameescape(expand(part))
+        let expanded_cmdline = substitute(expanded_cmdline, part, expanded_part, '')
+     endif
+  endfor
+  botright new
+  setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile nowrap
+  call setline(1, 'You entered:    ' . a:cmdline)
+  call setline(2, 'Expanded Form:  ' .expanded_cmdline)
+  call setline(3,substitute(getline(2),'.','=','g'))
+  execute '$read !'. expanded_cmdline
+  setlocal nomodifiable
+  1
+endfunction
+ca shell Shell
+au BufEnter *.tex set nosmartindent
+
+"http://vim.wikia.com/wiki/Par_text_reformatter
+set equalprg=par

@@ -62,5 +62,5 @@ javascript <<EOF
 })();
 EOF
 
-
+bma -k=r http://reddit.com/r/%s/
 " vim: set ft=vimperator:

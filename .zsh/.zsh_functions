@@ -13,21 +13,25 @@ apod(){
 }
 
 server(){
-python -m SimpleHTTPServer 9914 &>~/logs/server.log &
+if [[ $1 == start ]];then
+    python -m SimpleHTTPServer 9914 &>~/logs/server.log &
+else
+    $TBROWSER http://localhost:9914/
+fi
 }
 
+
 isurl(){
-    #set -x
     url="$@"
-    zmodload zsh/regex
-    #$url -regex-match ".+\..+/.+"
-    #[[ $url -regex-match "^http://.+\..{2,3}$" || $url -regex-match ".+\..{2,3}$" || $url -regex-match ".+\..+/.+" ]] && return 0
-    [[ $url -regex-match "^http://.+\..{2,3}$" || $url -regex-match ".+\..{2,3}$" || $url -regex-match ".+\..+/.+" ]] \
-        && [[ ! $url == /*   ]] \
-        && [[ ! $url == ./* ]] \
-        && return 0
-    return 1
-    #set +x
+    # Using a much simpler version -- skt
+    curl -I -s "$url" &>/dev/null || return 1
+    return 0
+    #zmodload zsh/regex
+    #[[ $url -regex-match "^http://.+\..{2,3}$" || $url -regex-match ".+\..{2,3}$" || $url -regex-match ".+\..+/.+" ]] \
+        #&& [[ ! $url == /*   ]] \
+        #&& [[ ! $url == ./* ]] \
+        #&& return 0
+    #return 1
 }
 
 mecho(){
@@ -73,7 +77,7 @@ fi
 }
 
 xpaste(){
-[[ -z $1 ]] && return
+[[ -z $1 ]] && return 1
 var="$(xsel -o)"
 echo -e "\n $var" >> $1
 }
@@ -147,6 +151,12 @@ ins(){
   else
      sudo pacman -S "$@"
  fi
+}
+
+_force_rehash()
+{
+    (( CURRENT == 1 )) && rehash
+    return 1
 }
 
 extract() {

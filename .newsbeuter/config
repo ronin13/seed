@@ -1,11 +1,13 @@
 browser "/usr/bin/firefox -remote 'openurl(%u)'"
 color   background      default default
 color   listnormal      default default
-color   listfocus       black   white   bold reverse
+color   listfocus       default default reverse bold underline
 color   info            black   white   reverse bold
 color   article         default default
 download-path "~/media/newsbeuter/podcasts/"
 max-downloads 1
+reload-threads 5
+reload-time 30
 player "/usr/bin/mplayer -cache 4096"
 text-width 75
 feedlist-format "%n %9u [%t]"
@@ -26,6 +28,7 @@ bind-key i toggle-article-read
 bind-key x reload-all
 bind-key up prev-unread
 bind-key down next-unread
+bind-key T clear-tag
 highlight feedlist "^(N)" yellow default
 highlight articlelist "^(N)" yellow default
 highlight article "^Link[s:]|http[s:]//.*" magenta default
@@ -37,5 +40,11 @@ confirm-exit yes
 cache-file "~/.local/share/newsbeuter/cache.db"
 browser ~/bin/uzbl-browser
 bookmark-cmd "~/bin/booktwit"
-always-display-description true
+#always-display-description true
 #feed-sort-order articlecount
+auto-reload yes
+suppress-first-reload yes
+user-agent "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.7) Gecko/20100721 Firefox/3.6.7"
+proxy localhost:9999
+use-proxy yes
+#reload-only-visible-feeds yes

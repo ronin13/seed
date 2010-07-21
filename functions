@@ -255,9 +255,9 @@ elif [[ $1 =~ ^http:.* ]];then
     url=${1#*=}   # for urls like http://docs.google.com/viewer?url=<pdfurl>
     dest="$HOME/Documents/${1##*/}"
     wget -O - -q $url > $dest
-    detach zathura $dest
+    detach $VIEWER $dest
 else
-    detach zathura "$@" 
+    detach $VIEWER "$@" 
 fi
 }
 

@@ -55,9 +55,15 @@ compctl -k pkgs whichpack
 syncpkgs=(`pacman --config /etc/pacman.conf.testing -Sql core extra community community-testing testing arch-games archlinuxfr`)
 #compctl  -g "*.pkg.tar.*" + -k syncpkgs ins
 compctl  -g "*.pkg.tar.*" ins
+compctl -k syncpkgs inss
+# skt
+alias inss="ins"
 
 compctl -l '' -x 'p[1]' -f -- . source
 compctl -s '${^fpath}/*(N:t)' autoload
 compctl -k hosts ftp lftp ncftp ssh w3m lynx links elinks nc telnet rlogin host
 compctl -k hosts -P '@' finger
 compctl -x 'C[-1,-*e]' -c - 'C[-1,-[ARWI]##]' -f -- fc
+
+modulesx=(`find /lib/modules/$(uname -r)/ -name "*.ko" -exec basename {} \;`)
+compctl -k modulesx modinfo
