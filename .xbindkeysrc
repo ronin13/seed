@@ -1,8 +1,8 @@
 "~/bin/mmove"
    Control + Shift + s
 
-#"~/bin/noter"
-#   Pause
+"~/bin/noter"
+   alt + Pause
 
 "~/bin/toggle"
  alt + F11
@@ -53,11 +53,11 @@
 "~/bin/toggle"
    release + alt + b:1
 
-"~/bin/brightness.sh 1"
-   release + Control + b:1
+#"~/bin/brightness.sh 1"
+#   release + Control + b:1
 
-"~/bin/brightness.sh 2"
-   release + Control + b:3
+#"~/bin/brightness.sh 2"
+#   release + Control + b:3
 
 "~/bin/volchange 1"
    release + Mod4 + b:1

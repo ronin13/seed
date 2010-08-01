@@ -2,6 +2,7 @@
 # add url loading [DONE]
 # multiple sockets multiplexing 0MQ kind of stuff
 #set -x
+setopt nobgnice
 HIST="$HOME/.mplayer.hist"
 maxplayers=2
 randnum=$((${RANDOM}%${maxplayers}))
@@ -20,7 +21,8 @@ ln -sf $MPSOCKET /tmp/mplayer.fif || exit 1
 if [[ -z "$1" ]];then
       fnum=$(awk '{ print NR" "$0 }' $HIST | cut -d ":" -f 1 | uniq -f 1 | tac | ${=DMENU})
       if [[ -z "$fnum" ]];then
-          FILE=$(tail -1 $HIST | cut -d ":" -f 1)
+          exit
+          #FILE=$(tail -1 $HIST | cut -d ":" -f 1)
       else
           num=$(echo "$fnum" | cut -d " " -f 1)
           FILE=$(head -${num} $HIST | tail -1 | cut -d ":" -f 1)

@@ -47,8 +47,9 @@ xterm*termName: xterm-256color
 xterm*trimSelection: true
 xterm*charClass:33:48,35:48,37-38:48,39:43,42-47:48,58-59:48,61:48,63-64:48,124:1,126:48
 xterm*renderFont: true
-xterm*utf8: 3
+!xterm*utf8: 
 xterm*metaSendsEscape: true
 xterm*backarrowKey: false
+!xterm*locale: false
 !xterm*on4Clicks: group
 !xterm*on5Clicks: page

@@ -6,6 +6,7 @@ ao=oss
 #vo=gl:yuv=2:rectangle=2:force-pbo:ati-hack,fbdev,null
 vo=gl:yuv=1:rectangle=2:force-pbo,xv,fbdev,null
 #vo=gl
+ontop=yes
 mc=0.001
 double=yes
 #/usr/bin/mplayer -vo xv -vfm ffmpeg -vc ffh264 -lavdopts threads=5 -framedrop  MortalKombatTrailer_061010_720p.mp4

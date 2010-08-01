@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-nvidia-settings -l &
+#nvidia-settings -l &
 setopt nobgnice
 eval `cat ~/.fehbg` 
 
@@ -17,7 +17,7 @@ xmodmap  ~/.Xmodmap
 
 unclutter -idle 4 -reset &
 xbindkeys &
-/usr/lib/notify-osd/notify-osd &
+/usr/lib/notify-osd-customizable/notify-osd &
 $LOCK/tmux tmux start-server
 parcellite &
 exec xmonad

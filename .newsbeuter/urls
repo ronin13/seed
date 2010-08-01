@@ -1,55 +1,62 @@
-http://www.archlinux.org/feeds/packages/
-http://feeds.feedburner.com/PerlTips
-http://feeds.feedburner.com/DougHellmann
-http://feeds.feedburner.com/c4ss
-http://feeds.feedburner.com/HighScalability
-http://rss.feedsportal.com/c/32569/f/491734/index.rss
-http://lwn.net/headlines/newrss
+http://feeds.feedburner.com/DiscoverMag "Main" "Science" "Dial"
+http://packetpushers.net/feed/podcast/  "Main" "Podcast"
+http://seedmagazine.com/feeds/RSS/ "Main" "Science" "Dial"
+http://feeds.newscientist.com/science-news  "Science" "Dial" "Main"
+http://www.physorg.com/rss-feed/ "Main" "Science"
+http://www.technologyreview.com/rss/BlogRSS.aspx?rssid=634153872738281250&id=357 "Main" "Science" "Updates"
+http://www.wired.com/wiredscience/category/frontal-cortex/feed "Main" "Science"
+http://www.reddit.com/.rss?feed=8aa54fa1f3051ac38b8d0c67132e8883ac9ea668&user=raghu13 "Main" "~Reddit" "Updates"
+http://www.archlinux.org/feeds/packages/ "Main" "Updates"
+http://feeds.feedburner.com/PerlTips "perl"
+http://feeds.feedburner.com/DougHellmann "python"
+http://feeds.feedburner.com/c4ss "Main"
+http://feeds.feedburner.com/HighScalability "Main"
+http://rss.feedsportal.com/c/32569/f/491734/index.rss "Main"
+http://lwn.net/headlines/newrss "Main"
 http://lambda-the-ultimate.org/rss.xml
 http://blogs.intel.com/research/atom.xml
-http://zenhabits.net/feed/
-http://www.theoremoftheday.org/Utilities/feed.xml
+http://www.theoremoftheday.org/Utilities/feed.xml "Math"
 http://golem.ph.utexas.edu/category/atom10.xml
-http://mindyourdecisions.com/blog/feed/
+http://mindyourdecisions.com/blog/feed/ "Main"
 http://bangalore.metblogs.com/index2.xml
-http://unapologetic.wordpress.com/feed/
-http://www.sciam.com/xml/sciam.xml
-http://rss.gmane.org/messages/complete/gmane.linux.kernel
-http://rss.gmane.org/messages/complete/gmane.linux.kernel.kernelnewbies
-http://rss.gmane.org/messages/complete/gmane.linux.c-programming
-http://rss.gmane.org/messages/complete/gmane.comp.file-systems.ext4
-http://rss.gmane.org/messages/complete/gmane.editors.vim
-http://rss.gmane.org/messages/complete/gmane.comp.file-systems.btrfs
-http://feeds.feedburner.com/Bsdtalk
-http://downloads.bbc.co.uk/podcasts/worldservice/docarchive/rss.xml
-http://downloads.bbc.co.uk/podcasts/radio4/fricomedy/rss.xml
-http://hackermedley.org/feed/podcast/
-http://www.hackerpublicradio.org/hpr_rss.php
-http://downloads.bbc.co.uk/podcasts/radio4/iot/rss.xml
-http://leo.am/podcasts/kfi
+http://unapologetic.wordpress.com/feed/ "Math"
+http://www.sciam.com/xml/sciam.xml "Dial"
+http://rss.gmane.org/messages/complete/gmane.linux.kernel "List"
+http://rss.gmane.org/messages/complete/gmane.linux.kernel.kernelnewbies "List"
+http://rss.gmane.org/messages/complete/gmane.linux.c-programming "List"
+http://rss.gmane.org/messages/complete/gmane.comp.file-systems.ext4 "List"
+http://rss.gmane.org/messages/complete/gmane.editors.vim "List"
+http://rss.gmane.org/messages/complete/gmane.comp.file-systems.btrfs "List"
+http://feeds.feedburner.com/Bsdtalk "Podcast"
+http://downloads.bbc.co.uk/podcasts/worldservice/docarchive/rss.xml "Podcast"
+http://downloads.bbc.co.uk/podcasts/radio4/fricomedy/rss.xml "Podcast"
+http://hackermedley.org/feed/podcast/ "Podcast"
+http://www.hackerpublicradio.org/hpr_rss.php "Podcast"
+http://downloads.bbc.co.uk/podcasts/radio4/iot/rss.xml "Podcast"
+http://leo.am/podcasts/kfi "Podcast"
 http://feeds.feedburner.com/linuxoutlaws
-http://www.npr.org/rss/podcast.php?id=35
+http://www.npr.org/rss/podcast.php?id=35 "Podcast"
 http://downloads.bbc.co.uk/podcasts/worldservice/scia/rss.xml
-http://leo.am/podcasts/sn
-http://feeds.feedburner.com/tedtalks_video
+http://leo.am/podcasts/sn "Podcast"
+http://feeds.feedburner.com/tedtalks_video "Podcast"
 http://journals.cambridge.org/data/rss/feed_JFP_rss_2.0.xml
 http://www.defmacro.org/rss/news.xml
-http://my.opera.com/desktopteam/xml/rss/blog/
+http://my.opera.com/desktopteam/xml/rss/blog/ "Updates"
 http://rsspect.com/rss/qwantz.xml
 http://www.hackitlinux.com/index.rss
 http://feeds.feedburner.com/InnovationZen
 http://www.kdedevelopers.org/blog/feed
-http://codecs.multimedia.cx/?feed=rss2
+http://codecs.multimedia.cx/?feed=rss2 "Dial"
 http://feeds.feedburner.com/LinuxByExamples
 http://feeds.feedburner.com/linuxscrew
 http://groups.google.com/group/ML-news/feed/rss_v2_0_msgs.xml
 http://www.networkworld.com/rss/firewalls.xml
-http://www.oed.com/rss.xml
-http://planet.scipy.org/atom.xml
-http://labs.trolltech.com/blogs/feed/
+http://www.oed.com/rss.xml "Updates"
+http://planet.scipy.org/atom.xml "python"
+http://labs.trolltech.com/blogs/feed/ "python"
 http://recursed.blogspot.com/feeds/posts/default
 http://feeds.feedburner.com/MatthewPodwysocki
-http://www.stackless.com/search_rss?meta_type=NewsItem&review_state=published&sort_on=Date&sort_order=reverse
+http://www.stackless.com/search_rss?meta_type=NewsItem&review_state=published&sort_on=Date&sort_order=reverse "Stackless" "Python" "Main"
 http://feeds.feedburner.com/zenhabits
 http://groups.google.com/group/comp.text.tex/feed/rss_v2_0_msgs.xml "Tex"
 http://www.blackhat.com/BlackHatRSS.xml "Hacking"
@@ -84,10 +91,10 @@ http://www.pythonware.com/daily/rss.xml "python"
 http://diveintopython.org/history.xml "python"
 http://www.oreillynet.com/pub/feed/13 "python"
 http://aspn.activestate.com/ASPN/Cookbook/Python/index_rss "python"
-http://planet.python.org/rss20.xml
+http://planet.python.org/rss20.xml "python"
 http://www.comedycentral.com/rss/colbertvideos.jhtml "Fun"
 http://www.comedycentral.com/rss/tdsvideos.jhtml "Fun"
-http://www.quotationspage.com/data/qotd.rss "Fun"
+http://www.quotationspage.com/data/qotd.rss "Fun" "Updates"
 http://www.devshed.com/index2.php?option=mos_rss&no_html=1 "perl"
 http://johnbokma.com/index.rss "perl"
 http://planet.perl.org/rss20.xml "perl"
@@ -106,9 +113,9 @@ http://outsidetheline.typepad.com/outside_the_line/atom.xml "Cricket"
 http://www.bbc.co.uk/blogs/tms/index.xml "Cricket"
 http://www.cricket.mailliw.com/feed/ "Cricket"
 http://feeds.feedburner.com/CoolTools "Geeky"
-http://dictionary.reference.com/wordoftheday/wotd.rss "Geeky"
+http://dictionary.reference.com/wordoftheday/wotd.rss "Geeky" "Main" "Updates"
 http://lifehacker.com/index.xml "Geeky"
-http://feeds.feedburner.com/slashdot/audio "Geeky"
+http://feeds.feedburner.com/slashdot/audio "Geeky" "Main"
 http://code.google.com/feeds/featured.xml "googlr"
 http://googleblog.blogspot.com/atom.xml "googlr"
 http://sigfpe.blogspot.com/feeds/posts/default "Compmat"
@@ -142,7 +149,7 @@ http://www.sciencedaily.com/rss/computers_math/artificial_intelligence.xml "Comp
 http://sbseminar.wordpress.com/feed/ "Compmat"
 http://scottaaronson.com/blog/?feed=rss2 "Compmat"
 http://skepchick.org/blog/?feed=rss2 "Compmat"
-http://www.anandtech.com/rss/
+http://www.anandtech.com/rss/ "Hardware"
 http://feeds.feedburner.com/StatisticalModelingCausalInferenceAndSocialScience "Compmat"
 http://wadler.blogspot.com/atom.xml "Compmat"
 http://terrytao.wordpress.com/feed/ "Compmat"
@@ -150,3 +157,4 @@ http://xkcd.com/rss.xml "Compmat"
 http://emotion.inrialpes.fr/spip.php/IMG/pdf/ecrire/laemi/ecrire/laemi/WG-Conclusions/ecrire/IMG/pdf/spip.php?page=backend
 http://targetgoogle.blogspot.com/feeds/posts/default "Miscellaneous"
 http://feeds.wired.com/wired/index "Miscellaneous"
+http://www.reddit.com/saved.rss?feed=8aa54fa1f3051ac38b8d0c67132e8883ac9ea668&user=raghu13 "Main" "~RedditSaved" 

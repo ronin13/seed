@@ -79,7 +79,7 @@ fi
 xpaste(){
 [[ -z $1 ]] && return 1
 var="$(xsel -o)"
-echo -e "\n $var" >> $1
+echo -e "$var" >> $1
 }
 
 wiki() { w=$(dig +short txt $1.wp.dg.cx); echo "$w" }

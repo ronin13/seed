@@ -1,4 +1,4 @@
-browser "/usr/bin/firefox -remote 'openurl(%u)'"
+browser "~/bin/browser %u"
 color   background      default default
 color   listnormal      default default
 color   listfocus       default default reverse bold underline
@@ -8,7 +8,7 @@ download-path "~/media/newsbeuter/podcasts/"
 max-downloads 1
 reload-threads 5
 reload-time 30
-player "/usr/bin/mplayer -cache 4096"
+player "/usr/bin/mplayer -cache 4096 "
 text-width 75
 feedlist-format "%n %9u [%t]"
 articlelist-format  "%f %D   %?T?|%-17T|  ?%t"
@@ -36,9 +36,8 @@ highlight article "^Title:.*" green default bold
 highlight article ".*URL:" magenta default bold
 highlight article "^Feed:.*" green default
 goto-next-feed no
-confirm-exit yes
+#confirm-exit yes
 cache-file "~/.local/share/newsbeuter/cache.db"
-browser ~/bin/uzbl-browser
 bookmark-cmd "~/bin/booktwit"
 #always-display-description true
 #feed-sort-order articlecount

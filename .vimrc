@@ -1,13 +1,14 @@
 "http://vimdoc.sourceforge.net/cgi-bin/vimfaq2html3.pl#23.5
 "noremap <C-w> <Nop>
 "nnoremap <S-Insert> i :set paste <S-Insert>
+let g:fakeclip_no_default_key_mappings = 1
 scriptencoding utf-8
 
 set sidescrolloff=5
 nnoremap <F1> :wq<CR>
 inoremap <F1> <ESC>:wq<CR>
 map <MouseMiddle> <esc>"+p
-autocmd!
+"autocmd!
 
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor = "latex"
@@ -91,8 +92,7 @@ au BufRead,BufNewFile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt
 autocmd BufRead /tmp/mutt* :source ~/.vim/mail.vim
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
 
-let g:pydiction_location = '$HOME/Arch/vim/pydiction/complete-dict'
-set tags +=~/.vim/tags/python.ctags
+"let g:pydiction_location = '$HOME/Arch/vim/pydiction/complete-dict'
 "map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 map <C-F12> :!ctags -R .<CR>
 
@@ -116,6 +116,7 @@ au BufReadPost *
 
 " Use :make to check a script with perl
 au FileType perl set makeprg=perl\ -c\ %\ $* errorformat=%f:%l:%m
+au FileType perl set tags +=~/.vim/tags/perl.ctags
 
 " Use :make to compile c, even without a makefile
 au FileType c,cpp if glob('Makefile') == "" | let &mp="gcc -o %< %" | endif
@@ -132,7 +133,7 @@ au FileType python set smartindent cinwords=if,elif,else,for,while,try,except,fi
 
 " allows us to run :make and get syntax errors for our python scripts
 au FileType python set makeprg=python\ -c\ \"import\ py_compile,sys;\ sys.stderr=sys.stdout;\ py_compile.compile(r'%')\"
-
+au FileType python set tags +=~/.vim/tags/python.ctags
 " setup file type for code snippets
 au FileType python if &ft !~ 'django' | setlocal filetype=python.django_tempate.django_model | endif
 au FileType python set expandtab
@@ -280,7 +281,6 @@ set nostartofline
 
 "nnoremap <C-L> gqap
 nnoremap <C-f> gqap
-nnoremap Y "+y
 
 "use :set list! to toggle visible whitespace on/off
 set listchars=tab:>-,trail:.,extends:>
@@ -359,3 +359,37 @@ au BufEnter *.tex set nosmartindent
 
 "http://vim.wikia.com/wiki/Par_text_reformatter
 set equalprg=par
+
+"let g:ScreenImpl = "Tmux"
+
+function ToggleOverLengthHi()
+    if exists("b:overlengthhi") && b:overlengthhi
+        highlight clear OverLength
+        let b:overlengthhi = 0
+        echo "overlength hilight off"
+    else
+        " adjust colors/styles as desired
+        highlight OverLength ctermbg=darkred gui=undercurl guisp=blue
+        " change '81' to be 1+(number of columns)
+        match OverLength /\%81v.\+/
+        let b:overlengthhi = 1
+        "echo "overlength hilight on"
+    endif
+endfunction
+
+autocmd filetype python,perl,sh,c,css :call ToggleOverLengthHi()
+
+if !has('clipboard')
+for _ in ['+', '*']
+  execute 'nmap "'._.'y  <Plug>(fakeclip-y)'
+  execute 'nmap "'._.'Y  <Plug>(fakeclip-Y)'
+  execute 'nmap "'._.'yy  <Plug>(fakeclip-Y)'
+  execute 'vmap "'._.'y  <Plug>(fakeclip-y)'
+  execute 'vmap "'._.'Y  <Plug>(fakeclip-Y)'
+endfor
+endif
+
+"map Y <Nop>
+"map y <Nop>
+nmap ,c "+Y
+nnoremap <C-S> :,$s/\<<C-R><C-W>\>/

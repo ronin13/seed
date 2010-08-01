@@ -1,12 +1,14 @@
 # vim:set ft=sh
 
-alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
+#alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
+alias man="LC_ALL=C LANG=C TERMINFO=~/.terminfo/ TERM=mostlike man"
 alias ls='ls --color=always'
 alias archie='ssh -p 2222 raghu@localhost'
-alias grep='LC_ALL="C" grep -i --color'
+alias cgrep='LC_ALL="C" /bin/grep -i --color'
+alias grep='/bin/grep -i --color'
 alias shownice='ps -eo nice,command | tail +1 | sort -n -k 1'
 alias idden='ls -ld \.*'
-alias aria="aria2c --file-allocation=falloc --enable-direct-io=true "
+#alias aria="aria2c --file-allocation=falloc --enable-direct-io=true "
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
@@ -40,13 +42,14 @@ alias tmp="cd /tmp/"
 alias ..='cd ..'
 alias ...='cd ../..'
 #alias xev="xev -id `xdotool getactivewindow`"
-alias sendmail="msmtp -C $HOME/wormole/.msmtprc"
-alias emacs="emacsclient"
+alias sendmail="msmtp -C $HOME/.msmtprc"
+#alias emacs="emacsclient"
+alias emacs="emacs -n"
 alias xcolors='cat  /usr/share/X11/rgb.txt | sort -nr'
 alias les='less'
 alias startx="startx &>!~/logs/X.log"
 alias gthub="cd $HOME/Arch/Hub"
 alias psync='sudo pacman -Sy'
 alias build="cd ~/Arch/Build/"
-alias tree="tree -L 1 -C"
+alias tree="tree -L 3 -C"
 alias lvared="IFS=\$'\n' vared"

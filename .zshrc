@@ -1,12 +1,11 @@
 setopt nonotify nohup shwordsplit no_bgnice
-zmodload zsh/complist
 unalias -m '*'
 autoload run-help
 HELPDIR=~/.zsh_help
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
-SAVEHIST=1000
+SAVEHIST=50000
 setopt appendhistory
 unsetopt beep
 bindkey -e
@@ -63,7 +62,7 @@ export GPG_TTY=`tty`
 alias nethack="telnet nethack.alt.org"
 setopt listrowsfirst
 
-typeset -U path cdpath fpath manpath
+typeset -U PATH cdpath fpath manpath
 
 autoload -U insert-unicode-char
 zle -N insert-unicode-char
@@ -73,13 +72,16 @@ bindkey '^Xi' insert-unicode-char
 #By me
 #zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*:(cp|mv|rm|diff|kill):*' ignore-line yes
-zstyle ':completion:*:cd:*' ignore-parents parent pwd
-zstyle ':completion:*:processes' command 'ps -A'
+#zstyle ':completion:*:cd:*' ignore-parents parent pwd
+zstyle ':completion:*:(cd|cp|vim):*' ignore-parents parent pwd
+zstyle ':completion:*:processes' command 'ps auxww'
 #/By me
 
-zstyle ':completion:*' completer _force_rehash _complete _ignored _correct _approximate _files _prefix
+#zstyle ':completion:*' completer _force_rehash _complete _ignored _correct _approximate _files _prefix
+#zstyle ':completion:*' completer  _prefix _complete _ignored _correct _files _approximate
+zstyle ':completion:*' completer  _prefix _complete  _correct _files 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-#zstyle ':completion:*' menu select=long-list select=0
+#zstyle ':completion:*' menu select=long-list select=1
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl true
 zstyle :compinstall filename '/home/raghavendra/.zshrc'
@@ -99,7 +101,7 @@ zstyle ':completion:*:killall:*'   force-list always
 
 source ~/.zsh/.zsh_functions
 source ~/.zsh/completions
-bash_source ~/.zsh/.zsh_aliases
+source ~/.zsh/.zsh_aliases
 bash_source ~/.zsh/functions
 bash_source ~/.zsh/apparix.sh
 source ~/.zsh/mpc_complete
@@ -128,11 +130,12 @@ bindkey '\ee' edit-command-line
 #setopt menucomplete
 setopt listtypes
 setopt chaselinks
-setopt globdots
+#setopt globdots
 setopt nomatch
 setopt pathdirs
+zstyle ':completion:*:man:*'      menu yes select
 zstyle ':completion:*:manuals' separate-sections true
-zstyle ':completion:*:manuals.(^1*)' insert-sections true
+#zstyle ':completion:*:manuals.(^1*)' insert-sections true
 
 hash -d shm="/dev/shm"
 hash -d tmp="/tmp/"
@@ -154,7 +157,6 @@ bindkey    "^[[3~"          delete-char
 bindkey    "^[3;5~"         delete-char
 zstyle ':completion:*' users {raghavendra,root}
 
-
 zstyle ':completion:*:corrections' format $'%{\e[0;31m%}%d (errors: %e)%{\e[0m%}'
 zstyle ':completion:*:correct:*' original true
 zstyle ':completion:*:correct:*'   insert-unambiguous true
@@ -162,7 +164,7 @@ zstyle ':completion:*:correct:*'   insert-unambiguous true
 hash -d linux=/lib/modules/$(command uname -r)/
 hash -d src=/usr/src/linux-$(command uname -r)/
 
-autoload -U predict-on && \
+autoload -Uz predict-on && \
   zle -N predict-on         && \
   zle -N predict-off        && \
   bindkey "^X^Z" predict-on && \
@@ -172,7 +174,6 @@ insert-last-typed-word() { zle insert-last-word -- 0 -1 }; \
 zle -N insert-last-typed-word; bindkey "\el" insert-last-typed-word
 
 zstyle ':completion:*:*:*:*' list-suffixes yes
-zstyle :completion::complete:cd:: tag-order local-directories path-directories
 
 zstyle ':vcs_info:*' disable bzr cdv darcs mtn svk tla hg
 zstyle ':completion::(^approximate*):*:functions' ignored-patterns '_*'
@@ -184,4 +185,26 @@ WORDCHARS="${WORDCHARS:s#/#}"
 #
 zstyle ':completion:*' glob 'yes'
 zstyle ':completion:*' menu select=long-list select=3
-source ~/perl5/perlbrew/etc/bashrc
+#source ~/perl5/perlbrew/etc/bashrc
+
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion:*' cache-path ~/.zsh/cache
+zmodload zsh/complist
+
+if type -p colorcvs &> /dev/null ; then alias cvs="colorcvs" ; fi
+if type -p colordiff &> /dev/null ; then alias diff="colordiff" ; fi
+if type -p colorgcc &> /dev/null ; then alias gcc="colorgcc" ; fi
+if type -p colortail &> /dev/null ; then alias tail="colortail" ; fi
+
+zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' '*?.hi'
+
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=( $(( ($#PREFIX+$#SUFFIX)/2 )) numeric )'
+zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+
+
+zstyle :completion::complete:cd:: tag-order local-directories path-directories
+#zstyle ':completion:*:descriptions'    format $'%{\e[0;31m%}completing %B%d%b%{\e[0m%}'
+zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
+zstyle ':completion:*' max-errors 3 numeric
+#setopt print_exit_value
+#predict-on

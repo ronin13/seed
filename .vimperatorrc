@@ -1,16 +1,7 @@
 "2.3.1 (created: 2010/04/07 18:25:13)
 
 loadplugins
-command! -nargs=* afs tabopen afs <args>
-command! -nargs=* aur tabopen aur <args>
-command! -nargs=* aw tabopen aw <args>
-command! -nargs=* g open google <args>
-command! -nargs=* hub tabopen hub <args>
-command! -nargs=* w tabopen w <args>
-command! -nargs=* wi tabopen w <args>
-command! -nargs=* y tabopen y <args>
-command! -nargs=* yt tabopen yt <args>
-command! -nargs=* ir open read 
+command! -nargs=* ir open read
 
 nnoremap <A-Right> gt
 nnoremap <A-Left> gT
@@ -37,12 +28,11 @@ set mainecoon=am
 set runtimepath=/home/raghavendra/.vimperator
 "source! /home/raghavendra/.vimperatorrc.local
 
-command! -nargs=* tw tabopen tw <args>
 hi CmdLine font-family: "Lucida Console"; font-size: 10pt; font-weight: normal;
 "set complete=sl
 set guioptions=rb
-"command! good noscript toggleperm
-
+command! good noscript toggleperm
+command! tgood noscript toggletemp
 
 set visualbell
 "set wildoptions=auto
