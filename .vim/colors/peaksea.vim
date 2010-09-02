@@ -106,7 +106,7 @@ if &background=='light'
     hi TabLineFill	guifg=fg	guibg=#c0c0c0	gui=NONE
     hi TabLineSel	guifg=fg	guibg=NONE	gui=NONE
     hi CursorColumn	guifg=NONE	guibg=#f0b090
-    hi CursorLine	guifg=NONE	guibg=NONE	gui=underline
+    "hi CursorLine	guifg=NONE	guibg=NONE	gui=underline
     hi MatchParen	guifg=NONE	guibg=#c0e080
   endif
 
@@ -125,7 +125,7 @@ if &background=='light'
     endif
     hi TabLine		gui=underline
     hi TabLineFill	gui=underline
-    hi CursorLine	gui=underline
+    "hi CursorLine	gui=underline
   endif
 
   " For reversed stuffs, clear the reversed prop and set the bold prop again
@@ -222,13 +222,13 @@ if &background=='light'
       hi TabLineFill	ctermfg=fg	ctermbg=250	cterm=NONE
       hi TabLineSel	ctermfg=fg	ctermbg=NONE	cterm=NONE
       hi CursorColumn	ctermfg=NONE	ctermbg=216
-      hi CursorLine	ctermfg=NONE	ctermbg=NONE	cterm=underline
+      "hi CursorLine	ctermfg=NONE	ctermbg=NONE	cterm=underline
       hi MatchParen	ctermfg=NONE	ctermbg=150
     endif
 
     hi TabLine		cterm=underline
     hi TabLineFill	cterm=underline
-    hi CursorLine	cterm=underline
+    "hi CursorLine	cterm=underline
 
     " For reversed stuffs, clear the reversed prop and set the bold prop again
     hi IncSearch	cterm=bold
@@ -313,7 +313,7 @@ elseif &background=='dark'
     hi TabLineFill	guifg=fg	guibg=#008000	gui=NONE
     hi TabLineSel	guifg=fg	guibg=NONE	gui=NONE
     hi CursorColumn	guifg=NONE	guibg=#800000	gui=NONE
-    hi CursorLine	guifg=NONE	guibg=NONE	gui=underline
+    "hi CursorLine	guifg=NONE	guibg=NONE	gui=underline
     hi MatchParen	guifg=NONE	guibg=#800080
   endif
 
@@ -333,7 +333,7 @@ elseif &background=='dark'
     hi TabLine		gui=underline  
     hi TabLineFill	gui=underline  
     hi Underlined	gui=underline  
-    hi CursorLine	gui=underline 
+    "hi CursorLine	gui=underline 
   endif
 
   " gui define for background=dark end here
@@ -359,7 +359,7 @@ elseif &background=='dark'
     hi WarningMsg	ctermfg=Red	    ctermbg=bg
     hi DiffDelete	ctermfg=Blue	    ctermbg=bg
 
-    hi Search		ctermfg=NONE	    ctermbg=DarkRed
+    hi Search		ctermfg=NONE	    ctermbg=Green
     hi Visual		ctermfg=Black	    ctermbg=DarkCyan
     hi Cursor		ctermfg=Black	    ctermbg=Green
     hi StatusLine	ctermfg=Black	    ctermbg=DarkCyan
@@ -390,7 +390,7 @@ elseif &background=='dark'
       hi CursorColumn	ctermfg=NONE	ctermbg=DarkRed
 
       hi TabLineSel	ctermfg=fg	ctermbg=bg
-      hi CursorLine	ctermfg=NONE	ctermbg=bg		cterm=underline
+      "hi CursorLine	ctermfg=NONE	ctermbg=bg	cterm=underline
 
       hi MatchParen	ctermfg=NONE	ctermbg=DarkMagenta
     endif
@@ -500,11 +500,11 @@ elseif &background=='dark'
     hi Special		ctermfg=179	ctermbg=NONE	cterm=NONE
     hi Error		ctermfg=209	ctermbg=NONE	cterm=NONE
     hi Todo		ctermfg=88	ctermbg=186	cterm=NONE
-    hi Search		ctermfg=NONE	ctermbg=88	cterm=NONE
+    hi Search		ctermfg=0	ctermbg=LightYellow	cterm=NONE
     hi Visual		ctermfg=16	ctermbg=153	cterm=NONE
     hi Cursor		ctermfg=16	ctermbg=46	cterm=NONE
     " NOTE THIS IS IN THE COOL SECTION
-    " hi CursorIM	ctermfg=16	ctermbg=201	cterm=NONE
+    "hi CursorIM	ctermfg=16	ctermbg=201	cterm=NONE
     hi StatusLine	ctermfg=16	ctermbg=153	cterm=NONE
     hi LineNr		ctermfg=249	ctermbg=NONE	cterm=NONE
     hi Question		ctermfg=16	ctermbg=186	cterm=NONE
@@ -556,12 +556,14 @@ elseif &background=='dark'
       hi TabLineFill	ctermfg=fg	ctermbg=28	cterm=NONE
       hi TabLineSel	ctermfg=fg	ctermbg=NONE	cterm=NONE
       hi CursorColumn	ctermfg=NONE	ctermbg=88	cterm=NONE
-      hi CursorLine	ctermfg=NONE	ctermbg=NONE	cterm=underline
+      " Modifying cursor line
+      " hi Normal           ctermfg=252     ctermbg=234     cterm=NONE
+      hi CursorLine	ctermfg=252	ctermbg=237 cterm=NONE
       hi MatchParen	ctermfg=NONE	ctermbg=90
       hi TabLine	cterm=underline  
       hi TabLineFill	cterm=underline  
       hi Underlined	cterm=underline  
-      hi CursorLine	cterm=underline 
+      "hi CursorLine	cterm=underline 
     endif
 
   endif " t_Co

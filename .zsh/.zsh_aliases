@@ -53,3 +53,4 @@ alias psync='sudo pacman -Sy'
 alias build="cd ~/Arch/Build/"
 alias tree="tree -L 3 -C"
 alias lvared="IFS=\$'\n' vared"
+alias news="newsbeuter"

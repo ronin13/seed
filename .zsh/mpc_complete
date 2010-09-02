@@ -4,11 +4,12 @@ function any()   { mpc search any "$@"; }
 function artist() { 
 
 [[ -z $2 ]] && mpc search artist "$1" && return; mpc search artist "$1" | grep "$2";
+echo $1 >> ~/.mpd/.artist
  }
 function album() { 
 
 [[ -z $2 ]] && mpc search album "$1" && return; mpc search album "$1" | grep "$2";
-
+echo $1 >> ~/.mpd/.album
  }
 function genre() {  mpc search genre "$@"; }
 function addalbum() { mpc clear;  mpc add; }

@@ -1,11 +1,12 @@
+setopt histignorespace
 setopt nonotify nohup shwordsplit no_bgnice
 unalias -m '*'
 autoload run-help
 HELPDIR=~/.zsh_help
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=50000
+HISTSIZE=800
+SAVEHIST=3000
 setopt appendhistory
 unsetopt beep
 bindkey -e
@@ -17,8 +18,8 @@ autoload -U colors && colors
 #promptinit 
 #prompt elite
 
-PROMPT="%{$fg[green]%}(%2d)%{$reset_color%}:$"
-#RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[blue]%}[%?:%!])%{$reset_color%}%"
+PROMPT="%{$fg[blue]%}(%2d)%{$reset_color%}"
+#RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[magenta]%}[%?:%!])%{$reset_color%}%"
 
 bindkey "\e[A" history-search-backward
 bindkey "\e[B" history-search-forward
@@ -70,16 +71,16 @@ bindkey '^Xi' insert-unicode-char
 
 # The following lines were added by compinstall
 #By me
-#zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*:(cp|mv|rm|diff|kill):*' ignore-line yes
 #zstyle ':completion:*:cd:*' ignore-parents parent pwd
 zstyle ':completion:*:(cd|cp|vim):*' ignore-parents parent pwd
 zstyle ':completion:*:processes' command 'ps auxww'
 #/By me
 
-#zstyle ':completion:*' completer _force_rehash _complete _ignored _correct _approximate _files _prefix
+zstyle ':completion:*' completer _force_rehash _complete _ignored _correct _approximate _files _prefix
 #zstyle ':completion:*' completer  _prefix _complete _ignored _correct _files _approximate
-zstyle ':completion:*' completer  _prefix _complete  _correct _files 
+#zstyle ':completion:*' completer  _prefix _complete  _correct _files 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 #zstyle ':completion:*' menu select=long-list select=1
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
@@ -116,12 +117,13 @@ zstyle ':completion:*' special-dirs true
 
 #autoload -Uz vcs_info
 
-function precmd { 
-out=(`dirs | tr ' ' '\n' | xargs -I {} basename {}`)
-RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[blue]%}[%?:$out[1,3]])%{$reset_color%}%"
-[[ $TERM != "linux" ]] && print -Pn "\e]2;%N"
-}
+#function precmd { 
+#out=(`dirs | tr ' ' '\n' | xargs -I {} basename {}`)
+#RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[blue]%}[%?:$out[1,3]])%{$reset_color%}%"
+#[[ $TERM == screen-256color* ]] && print -Pn "\e]2;%N"
+#}
 
+RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[blue]%}[%?])%{$reset_color%}%"
 autoload -U   edit-command-line
 zle -N        edit-command-line
 bindkey '\ee' edit-command-line
@@ -131,7 +133,7 @@ bindkey '\ee' edit-command-line
 setopt listtypes
 setopt chaselinks
 #setopt globdots
-setopt nomatch
+unsetopt nomatch
 setopt pathdirs
 zstyle ':completion:*:man:*'      menu yes select
 zstyle ':completion:*:manuals' separate-sections true
@@ -145,7 +147,7 @@ hash -d tmp="/tmp/"
 
 setopt short_loops
 setopt list_ambiguous 
-#setopt rec_exact 
+setopt rec_exact 
 bindkey "^K" kill-whole-line
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
@@ -179,7 +181,7 @@ zstyle ':vcs_info:*' disable bzr cdv darcs mtn svk tla hg
 zstyle ':completion::(^approximate*):*:functions' ignored-patterns '_*'
 #zstyle ':acceptline:*' rehash true
 
-zstyle ':completion:*' matcher-list 'm:{A-Z}={a-z}' 'm:{a-z}={A-Z}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
+#zstyle ':completion:*' matcher-list 'm:{A-Z}={a-z}' 'm:{a-z}={A-Z}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
 WORDCHARS="${WORDCHARS:s#/#}"
 #WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 #
@@ -207,4 +209,5 @@ zstyle :completion::complete:cd:: tag-order local-directories path-directories
 zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
 zstyle ':completion:*' max-errors 3 numeric
 #setopt print_exit_value
+zstyle ':completion:*' toggle true
 #predict-on

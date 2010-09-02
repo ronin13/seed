@@ -10,16 +10,15 @@ inoremap <F1> <ESC>:wq<CR>
 map <MouseMiddle> <esc>"+p
 "autocmd!
 
-set grepprg=grep\ -nH\ $*
-let g:tex_flavor = "latex"
-set runtimepath=~/.vim,~/.vim/after,/usr/share/vim/vim72,/usr/share/vim/vimfiles
-
+set runtimepath=~/.vim,/usr/share/vim/vim72,/usr/share/vim/vimfiles,/usr/share/vim/vimfiles/after,~/.vim/after
+"set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
+"/home/raghavendra/.vim,/usr/share/vim/vim72/vimfiles,/usr/share/vim/vim72,/usr/share/vim/vim72/vimfiles/after,/home/raghavendra/.vim/after
 set linebreak
 set nocompatible
 "" http://amix.dk/vim/vimrc.html
 set magic
 set wrapscan
-set t_Co=256
+"set t_Co=256
 "let mapleader = ","
 set mouse-=a
 " work more logically with wrapped lines
@@ -46,10 +45,10 @@ set numberwidth=1						" Use 1 col + 1 space for numbers
 " tab labels show the filename without path(tail)
 
 set guitablabel=%N/\ %t\ %M
-""colorscheme peaksea
+colorscheme mypeaksea
 "colorscheme wombat
 "colorscheme desert256
-colorscheme candycode 
+"colorscheme candycode 
 set background=dark
 
 """" Messages, Info, Status
@@ -92,7 +91,7 @@ au BufRead,BufNewFile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt
 autocmd BufRead /tmp/mutt* :source ~/.vim/mail.vim
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
 
-"let g:pydiction_location = '$HOME/Arch/vim/pydiction/complete-dict'
+let g:pydiction_location = '$HOME/Arch/vim/pydiction/complete-dict'
 "map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 map <C-F12> :!ctags -R .<CR>
 
@@ -140,6 +139,7 @@ au FileType python set expandtab
 
 " kill calltip window if we move cursor or leave insert mode
 
+au FileType vim set tags+=~/.vim/tags/vim.ctags
 ""========================================================================================================
 
 " Toggle the tag list bar
@@ -180,14 +180,14 @@ nnoremap <C-right>   )
 
 
 if &diff
-" easily handle diffing 
-   colorscheme peaksea 
+" easily handle diffing
+   colorscheme mypeaksea
    noremap < :diffget<CR>
    noremap > :diffput<CR>
 else
 " visual shifting (builtin-repeat)
-   vnoremap < <gv                       
-   vnoremap > >gv 
+   vnoremap < <gv
+   vnoremap > >gv
 endif
 
 " Extra functionality for some existing commands:
@@ -250,8 +250,8 @@ nnoremap <C-w><Down>  <C-w>j
 nnoremap <C-w><Right>  <C-w>l
 nnoremap <C-w><Left>  <C-w>h
 
-
-nnoremap Q @q
+" Not doing this -- too confusing
+"nnoremap Q @q
 
 nnoremap v V
 nnoremap V v
@@ -285,8 +285,6 @@ nnoremap <C-f> gqap
 "use :set list! to toggle visible whitespace on/off
 set listchars=tab:>-,trail:.,extends:>
 
-nnoremap p ]p
-nnoremap P ]P
 
 highlight RedundantSpaces term=standout ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces highlighted
@@ -299,7 +297,6 @@ au InsertLeave * let &updatetime=updaterestore
 nnoremap <silent> <leader>y :YRShow<CR> 
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 set wrap
-
 map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
@@ -332,7 +329,7 @@ autocmd BufReadPost *.rtf silent %!unrtf --text "%"
 autocmd BufWriteCmd *.pdf set readonly
 
 " Nice one
-autocmd BufWritePre * :%s/\s+$//e
+"autocmd BufWritePre * :%s/\s+$//e
 
 "http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
@@ -377,7 +374,16 @@ function ToggleOverLengthHi()
     endif
 endfunction
 
-autocmd filetype python,perl,sh,c,css :call ToggleOverLengthHi()
+function CommitOnwrite()
+    let l:isgit = fugitive#statusline()
+    if ! empty(l:isgit) && &modified
+        "return l:isgit
+        :VCSCommit
+    endif
+endfunction
+
+"au BufWritePre * :call CommitOnwrite()
+autocmd filetype python,perl,c,css :call ToggleOverLengthHi()
 
 if !has('clipboard')
 for _ in ['+', '*']
@@ -391,5 +397,26 @@ endif
 
 "map Y <Nop>
 "map y <Nop>
-nmap ,c "+Y
+
+" yank into clipboard -- mouseless
+nmap <leader>y "+Y
+
 nnoremap <C-S> :,$s/\<<C-R><C-W>\>/
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor = "latex"
+
+if version >= 703
+    set undofile
+    set undodir=~/.vim-tmp/
+    au BufWritePre /tmp/* setlocal noundofile
+endif
+"map <Enter> <Nop>
+"imap <Enter> <Esc>o
+"http://peterodding.com/code/vim/easytags/
+let g:easytags_file = '~/Arch/vim/gtags'
+set number
+"set verbose=0
+"vim-buftabs removed
+
+"set whichwrap=b,s,<,>,[,]
+set cursorline

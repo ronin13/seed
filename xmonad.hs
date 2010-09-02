@@ -71,7 +71,7 @@ main = do
 myTerminal      = "xterm"
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
-myBorderWidth   = 1
+myBorderWidth   = 0
 myModMask       = mod4Mask
 myNormalBorderColor  = "green"
 myFocusedBorderColor = "white"
@@ -179,14 +179,16 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 --}}}  
 
 --{{{ Layout 
-myLayout = onWorkspace "3:browser" brLayout $ onWorkspace "4:video" vidLayout $ onWorkspace "7:games" vidLayout $ defLayout
+myLayout = onWorkspace "3:browser" brLayout $ onWorkspace "7:games" vidLayout $ defLayout
       where
-          defLayout = avoidStruts $ Mag.magnifiercz 1.4 (htiled ||| Full ||| Mirror htiled)
-          htiled    = hinted (smartBorders (ResizableTall 1 (2/100) (1/2) []))
-          tiled     = smartBorders (ResizableTall 1 (2/100) (1/2) [])
-          brLayout  = avoidStruts $ Mag.magnifiercz 1.4 (tiled ||| Full ||| Mirror tiled)
-          vidLayout = smartBorders (Grid False ||| Full)
-          hinted l  = layoutHintsWithPlacement (0,0) l
+--           defLayout = avoidStruts $ noBorders (tiled ||| Mirror tiled ||| Full)
+          defLayout = avoidStruts $ mgFy ( tiled ||| Mirror tiled ||| Full)
+          --htiled    = hinted (ResizableTall 1 (2/100) (1/2) [])
+          tiled     = ResizableTall 1 (2/100) (1/2) []
+          brLayout  = avoidStruts (Mirror tiled ||| mgFy tiled ||| Full)
+          mgFy      = Mag.magnifiercz 1.4
+          vidLayout = Grid False ||| Full
+          --hinted l  = layoutHintsWithPlacement (0,0) l
 --}}}
 
 --{{{ Workspaces
@@ -232,12 +234,15 @@ myLogHook h = dynamicLogWithPP $ customPP { ppOutput = hPutStrLn h }
 ---- bar
 customPP :: PP
 customPP = defaultPP { 
-                ppHidden = xmobarColor "#00FF00" "" . noScratchPad
+                ppHidden = xmobarColor "#0000FF" "" . noScratchPad
               , ppOrder = \(ws:_:t:_) ->  [t,ws]
-              , ppCurrent = xmobarColor "white" "" . shorten 6 . wrap "[" "]"
+--               , ppCurrent = xmobarColor "white" "" . shorten 6 . wrap "[" "]"
+              , ppCurrent = xmobarColor "darkcyan" ""
               , ppUrgent = xmobarColor "red" "" . wrap "*" "*"
-              , ppLayout = xmobarColor "Yellow" "". shorten 4
-              , ppTitle = xmobarColor "green" "" . shorten 7
+--               , ppLayout = xmobarColor "Yellow" "". shorten 4
+--               , ppTitle = xmobarColor "green" "" . shorten 7
+              , ppLayout = xmobarColor "Yellow" ""
+              , ppTitle = xmobarColor "slateblue" ""
               , ppSep = "<fc=#0033FF> | </fc>"
             }
         where 

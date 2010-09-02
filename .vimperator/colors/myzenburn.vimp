@@ -75,7 +75,7 @@ statusbarpanel > * { margin: 0 !important; padding: 0 2px 0 0 !important; }
  border-top: 0px solid !important;
  border-bottom: 0px solid !important;
  margin-bottom: 3px!important;
- min-height: 21px !important;
+ min-height: 28px !important;
  background: #4e4e4e !important;
 }
 
@@ -84,9 +84,10 @@ statusbarpanel > * { margin: 0 !important; padding: 0 2px 0 0 !important; }
  -moz-border-radius: 0px !important;
  margin:0 -1px !important;
  padding:0 !important;
+ "background: #2A2A2A !important;
  padding-top:3px !important;
  border-right: 0 !important;
- font-family: monospace !important;
+ "font-family: Liberation Mono !important;
  font-size: 10pt !important;
  color: #d7d7af !important;
  background: #4e4e4e !important;
@@ -103,7 +104,7 @@ statusbarpanel > * { margin: 0 !important; padding: 0 2px 0 0 !important; }
 }
 
 .tabbrowser-arrowscrollbox {
- max-height: 21px !important;
+ max-height: 28px !important;
  background: #4e4e4e !important;
 }
 

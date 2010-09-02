@@ -4,8 +4,8 @@ ao=oss
 #vo=xv,fbdev,null
 #vo=gl,fbdev,null
 #vo=gl:yuv=2:rectangle=2:force-pbo:ati-hack,fbdev,null
-vo=gl:yuv=1:rectangle=2:force-pbo,xv,fbdev,null
-#vo=gl
+#vo=gl:yuv=1:rectangle=2:force-pbo,xv,fbdev,null
+vo=gl
 ontop=yes
 mc=0.001
 double=yes

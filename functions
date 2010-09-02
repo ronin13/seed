@@ -113,11 +113,11 @@ function man2pdf(){
 man -t ${1:?Specify man as arg} | ps2pdf -dCompatibility=1.3 - - > ${1}.pdf 
 }
 
-function vim(){
-if [[ ! -f "$@" ]];then echo "File not found";return 1;fi
-#LD_PRELOAD=/usr/lib/libjemalloc.so /usr/bin/vim "$@"
-/usr/bin/vim "$@"
-}
+#function vim(){
+#if [[ ! -f "$@" ]];then echo "File not found";return 1;fi
+##LD_PRELOAD=/usr/lib/libjemalloc.so /usr/bin/vim "$@"
+#/usr/bin/vim "$@"
+#}
 
 function cnkt(){
 TERM=xterm
@@ -269,7 +269,7 @@ done
 }
 
 
-function whoru() { echo "Path:"`which $@`; which $1 |  xargs -i pacman -Qo {} ; }
+function whoru() { echo "Path:"`which $@`; which =$1 |  xargs -i pacman -Qo {} ; }
 
 function fdz() { ls -lth |  egrep "[0-9](M|G)" | sort -k 5 -n | cut -d " " -f 5,6-; }
 
@@ -321,7 +321,7 @@ define() {
     rm -f /tmp/define
     return 1
   else
-      mecho "$(cat /tmp/define | grep -v Search)"
+      mecho "$(cat /tmp/define | grep -v Search )"
     echo ""
   fi
   rm -f /tmp/define

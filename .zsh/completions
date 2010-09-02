@@ -53,9 +53,9 @@ compctl -k pkgs pinfo
 compctl -k pkgs whichpack 
 compctl -k pkgs aur
 
-syncpkgs=(`pacman --config /etc/pacman.conf.testing -Sql core extra community community-testing testing arch-games archlinuxfr`)
+syncpkgs=(`pacman --config /etc/pacman.conf.testing -Sql core extra community community-testing testing archlinuxfr`)
 #compctl  -g "*.pkg.tar.*" + -k syncpkgs ins
-compctl  -g "*.pkg.tar.*" ins
+compctl  -g "*.pkg.tar*" ins
 compctl -k syncpkgs buildabs
 compctl -k syncpkgs inss
 # skt

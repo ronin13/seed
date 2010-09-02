@@ -1,3 +1,14 @@
+http://www.eff.org/rss/updates.xml
+http://feeds.feedburner.com/slashdot/audio "Geeky" "Main"
+http://www.spiegel.de/international/index.rss
+http://dictionary.reference.com/wordoftheday/wotd.rss "Geeky" "Main" "Updates"
+http://feeds2.feedburner.com/cinecast
+http://feeds.feedburner.com/DougLovesMovies
+http://theyesmen.org/blog/feed
+http://rjlipton.wordpress.com/feed
+http://scottaaronson.com/blog/?feed=rss2
+http://apod.nasa.gov/apod.rss
+http://randomsurfer:curl-Itwitter.com@twitter.com/statuses/friends_timeline/14566795.rss
 http://feeds.feedburner.com/DiscoverMag "Main" "Science" "Dial"
 http://packetpushers.net/feed/podcast/  "Main" "Podcast"
 http://seedmagazine.com/feeds/RSS/ "Main" "Science" "Dial"
@@ -7,10 +18,9 @@ http://www.technologyreview.com/rss/BlogRSS.aspx?rssid=634153872738281250&id=357
 http://www.wired.com/wiredscience/category/frontal-cortex/feed "Main" "Science"
 http://www.reddit.com/.rss?feed=8aa54fa1f3051ac38b8d0c67132e8883ac9ea668&user=raghu13 "Main" "~Reddit" "Updates"
 http://www.archlinux.org/feeds/packages/ "Main" "Updates"
-http://feeds.feedburner.com/PerlTips "perl"
-http://feeds.feedburner.com/DougHellmann "python"
 http://feeds.feedburner.com/c4ss "Main"
 http://feeds.feedburner.com/HighScalability "Main"
+http://export.arxiv.org/rss/cs
 http://rss.feedsportal.com/c/32569/f/491734/index.rss "Main"
 http://lwn.net/headlines/newrss "Main"
 http://lambda-the-ultimate.org/rss.xml
@@ -32,7 +42,6 @@ http://downloads.bbc.co.uk/podcasts/worldservice/docarchive/rss.xml "Podcast"
 http://downloads.bbc.co.uk/podcasts/radio4/fricomedy/rss.xml "Podcast"
 http://hackermedley.org/feed/podcast/ "Podcast"
 http://www.hackerpublicradio.org/hpr_rss.php "Podcast"
-http://downloads.bbc.co.uk/podcasts/radio4/iot/rss.xml "Podcast"
 http://leo.am/podcasts/kfi "Podcast"
 http://feeds.feedburner.com/linuxoutlaws
 http://www.npr.org/rss/podcast.php?id=35 "Podcast"
@@ -40,15 +49,11 @@ http://downloads.bbc.co.uk/podcasts/worldservice/scia/rss.xml
 http://leo.am/podcasts/sn "Podcast"
 http://feeds.feedburner.com/tedtalks_video "Podcast"
 http://journals.cambridge.org/data/rss/feed_JFP_rss_2.0.xml
-http://www.defmacro.org/rss/news.xml
 http://my.opera.com/desktopteam/xml/rss/blog/ "Updates"
 http://rsspect.com/rss/qwantz.xml
 http://www.hackitlinux.com/index.rss
-http://feeds.feedburner.com/InnovationZen
 http://www.kdedevelopers.org/blog/feed
 http://codecs.multimedia.cx/?feed=rss2 "Dial"
-http://feeds.feedburner.com/LinuxByExamples
-http://feeds.feedburner.com/linuxscrew
 http://groups.google.com/group/ML-news/feed/rss_v2_0_msgs.xml
 http://www.networkworld.com/rss/firewalls.xml
 http://www.oed.com/rss.xml "Updates"
@@ -62,8 +67,6 @@ http://groups.google.com/group/comp.text.tex/feed/rss_v2_0_msgs.xml "Tex"
 http://www.blackhat.com/BlackHatRSS.xml "Hacking"
 http://www.darkreading.com/rss_simple.asp?f_s=296&f_ln=Dark+Reading+News+Analysis "Hacking"
 http://services.devx.com/outgoing/devxfeed.xml "Hacking"
-http://research.eeye.com/rss/zeroday.rss "Hacking"
-http://www.itportal.org/index2.php?option=com_rss&feed=RSS2.0&no_html=1 "Hacking"
 http://www.offensivecomputing.net/?q=node/feed "Hacking"
 http://herbsutter.spaces.live.com/feed.rss "Hacking"
 http://feeds.feedburner.com/Tech-RecipesMain "Hacking"
@@ -101,7 +104,6 @@ http://planet.perl.org/rss20.xml "perl"
 http://use.perl.org/index.rss "perl"
 http://www.ebookshare.net/feed/ "War"
 http://www.flazx.com/rss/last10.xml "War"
-http://feeds.feedburner.com/ebookee "War"
 http://mathsresource.blogspot.com/atom.xml "War"
 http://feeds.feedburner.com/progarchives/reviews "Music"
 http://www.metalhammer.co.uk/rss "Music"
@@ -113,15 +115,11 @@ http://outsidetheline.typepad.com/outside_the_line/atom.xml "Cricket"
 http://www.bbc.co.uk/blogs/tms/index.xml "Cricket"
 http://www.cricket.mailliw.com/feed/ "Cricket"
 http://feeds.feedburner.com/CoolTools "Geeky"
-http://dictionary.reference.com/wordoftheday/wotd.rss "Geeky" "Main" "Updates"
-http://lifehacker.com/index.xml "Geeky"
-http://feeds.feedburner.com/slashdot/audio "Geeky" "Main"
 http://code.google.com/feeds/featured.xml "googlr"
 http://googleblog.blogspot.com/atom.xml "googlr"
 http://sigfpe.blogspot.com/feeds/posts/default "Compmat"
 http://ai-depot.com/feed/ "Compmat"
 http://andysresearch.blogspot.com/feeds/posts/default "Compmat"
-http://texblog.wordpress.com/feed/ "Compmat"
 http://weblog.fortnow.com/rss.xml "Compmat"
 http://abbottanalytics.blogspot.com/feeds/posts/default "Compmat"
 http://datamining.typepad.com/data_mining/atom.xml "Compmat"
@@ -134,7 +132,6 @@ http://aigamedev.com/feed/ "Compmat"
 http://godplaysdice.blogspot.com/feeds/posts/default "Compmat"
 http://gowers.wordpress.com/feed/ "Compmat"
 http://www.gpgpu.org/cgi-bin/blosxom.cgi/index.rss "Compmat"
-http://herselfsai.com/feed "Compmat"
 http://feeds2.feedburner.com/IeeeSpectrum
 http://feeds.feedburner.com/Insidehpc "Compmat"
 http://hunch.net/?feed=rss2 "Compmat"
@@ -144,10 +141,8 @@ http://web.mit.edu/newsoffice/topic/mitrobotics-rss.xml "Compmat"
 http://multiagent.com/feeds/posts/default?alt=rss
 http://mysliceofpizza.blogspot.com/feeds/posts/default "Compmat"
 http://www.math.columbia.edu/~woit/wordpress/?feed=rss2 "Compmat"
-http://www.linuxtechdaily.com/feed/ "Compmat"
 http://www.sciencedaily.com/rss/computers_math/artificial_intelligence.xml "Compmat"
 http://sbseminar.wordpress.com/feed/ "Compmat"
-http://scottaaronson.com/blog/?feed=rss2 "Compmat"
 http://skepchick.org/blog/?feed=rss2 "Compmat"
 http://www.anandtech.com/rss/ "Hardware"
 http://feeds.feedburner.com/StatisticalModelingCausalInferenceAndSocialScience "Compmat"
@@ -158,3 +153,14 @@ http://emotion.inrialpes.fr/spip.php/IMG/pdf/ecrire/laemi/ecrire/laemi/WG-Conclu
 http://targetgoogle.blogspot.com/feeds/posts/default "Miscellaneous"
 http://feeds.wired.com/wired/index "Miscellaneous"
 http://www.reddit.com/saved.rss?feed=8aa54fa1f3051ac38b8d0c67132e8883ac9ea668&user=raghu13 "Main" "~RedditSaved" 
+http://twitter.com/statuses/user_timeline/133880286.rss
+http://static.demonoid.com/rss/1.xml "-Dem-movies"
+http://static.demonoid.com/rss/17.xml "-Dem-audio"
+http://static.demonoid.com/rss/11.xml "-Dem-books"
+http://static.demonoid.com/rss/3.xml "-Dem-TV"
+http://feeds.feedburner.com/PerlTips "perl"
+http://feeds.feedburner.com/DougHellmann "python"
+http://feeds.feedburner.com/LinuxByExamples
+http://feeds.feedburner.com/linuxscrew
+http://herselfsai.com/feed "Compmat"
+http://texblog.wordpress.com/feed/ "Compmat"

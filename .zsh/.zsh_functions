@@ -1,10 +1,24 @@
+weechat(){
+    weechat-curses 2>/dev/null
+}
+
+tmpwrite(){
+  $file = mktemp
+  /usr/bin/vim $file
+  rm $file
+}
 
 apod(){
     #set -x
     DATE=`date +%s`
     FILE="$HOME/.cache/apod/apod:$DATE.jpg"
-    url="$(curl -s http://apod.nasa.gov/apod/ | grep IMG  | cut -d "\"" -f 2)"
+    apodTemp=$(mktemp)
+    curl -s http://apod.nasa.gov/apod/ > $apodTemp
+    apodDesc=$(perl -lne 'print $_ if /Explanation:/../Tomorrow/' $apodTemp | w3m -dump -T text/html | head -n -1)
+    url="$(grep IMG $apodTemp | cut -d "\"" -f 2)"
     wget -q -O "$FILE" -c http://apod.nasa.gov/apod/${=url}
+    exiftool -overwrite_original -UserComment="$apodDesc" $FILE
+    echo $apodDesc | xmessage -file - -timeout 30
     feh $FILE
     echo "Set as wallpaper: y/n"
     read -q  && set_wall $FILE

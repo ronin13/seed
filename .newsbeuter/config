@@ -1,19 +1,21 @@
 browser "~/bin/browser %u"
+#html-renderer "w3m -dump -T text/html -v"
 color   background      default default
 color   listnormal      default default
-color   listfocus       default default reverse bold underline
+#color   listfocus       default default reverse underline
+color   listfocus       black   white   reverse bold
 color   info            black   white   reverse bold
 color   article         default default
 download-path "~/media/newsbeuter/podcasts/"
 max-downloads 1
-reload-threads 5
+reload-threads 10
 reload-time 30
 player "/usr/bin/mplayer -cache 4096 "
 text-width 75
 feedlist-format "%n %9u [%t]"
 articlelist-format  "%f %D   %?T?|%-17T|  ?%t"
 notify-format "RSS - %d new/%n unread articles"
-notify-xterm yes
+#notify-xterm yes
 save-path ~/media/newsbeuter/
 # notify-program ""
 # notify-screen no
@@ -46,4 +48,7 @@ suppress-first-reload yes
 user-agent "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.7) Gecko/20100721 Firefox/3.6.7"
 proxy localhost:9999
 use-proxy yes
+cleanup-on-quit no
 #reload-only-visible-feeds yes
+#trim-feeds 200
+#keep-articles-days 30
