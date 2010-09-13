@@ -1,13 +1,16 @@
+export ESTATUS=0
+setopt PROMPT_SUBST
 setopt histignorespace
-setopt nonotify nohup shwordsplit no_bgnice
 unalias -m '*'
 autoload run-help
 HELPDIR=~/.zsh_help
 # Lines configured by zsh-newuser-install
+
 HISTFILE=~/.histfile
 HISTSIZE=800
 SAVEHIST=3000
-setopt appendhistory
+
+#setopt appendhistory
 unsetopt beep
 bindkey -e
 # End of lines configured by zsh-newuser-install
@@ -17,8 +20,9 @@ autoload -U colors && colors
 #autoload -U promptinit
 #promptinit 
 #prompt elite
-
-PROMPT="%{$fg[blue]%}(%2d)%{$reset_color%}"
+setopt HIST_NO_FUNCTIONS
+#PROMPT="%{$fg[blue]%}(%2d)%{$reset_color%}"
+PROMPT="%{$fg[blue]%}>=%{$reset_color%}"
 #RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[magenta]%}[%?:%!])%{$reset_color%}%"
 
 bindkey "\e[A" history-search-backward
@@ -36,7 +40,10 @@ alias -s gif=feh
 #alias -s conf=$EDITOR
 #alias -s pl=vim
 #alias -s py=vim
-
+#
+setopt sharehistory
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_FIND_NO_DUPS
 alias -g zsource="source ~/.zshrc"
 alias -g :g=' |& /bin/grep -i'
 alias -g :n='&> /dev/null'
@@ -46,16 +53,11 @@ alias -g :x=" |& tr '\n' '\0' | xargs -0 "
 setopt correct
 setopt autolist automenu
 
-setopt autopushd pushdminus pushdtohome pushdignoredups
-setopt autocd extendedglob
+setopt autopushd pushdminus pushdtohome pushdignoredups autocd
 setopt inc_append_history
 #setopt share_history
-setopt hist_ignore_dups
-setopt hist_reduce_blanks
-setopt no_case_glob
+#setopt hist_reduce_blanks
 
-unsetopt clobber
-setopt multios
 
 #http://bbs.archlinux.org/viewtopic.php?id=34062
 setopt listtypes 
@@ -64,10 +66,12 @@ alias nethack="telnet nethack.alt.org"
 setopt listrowsfirst
 
 typeset -U PATH cdpath fpath manpath
+eval $(dircolors ~/.zsh/dircolors)
 
 autoload -U insert-unicode-char
 zle -N insert-unicode-char
 bindkey '^Xi' insert-unicode-char
+bindkey '\t' expand-or-complete
 
 # The following lines were added by compinstall
 #By me
@@ -94,8 +98,8 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-autoload -Uz bashcompinit
-bashcompinit
+#autoload -Uz bashcompinit
+#bashcompinit
 
 zstyle ':completion:*:*:killall:*' menu yes select
 zstyle ':completion:*:killall:*'   force-list always
@@ -103,8 +107,9 @@ zstyle ':completion:*:killall:*'   force-list always
 source ~/.zsh/.zsh_functions
 source ~/.zsh/completions
 source ~/.zsh/.zsh_aliases
-bash_source ~/.zsh/functions
-bash_source ~/.zsh/apparix.sh
+source ~/.zsh/functions
+#bash_source ~/.zsh/functions
+#bash_source ~/.zsh/apparix.sh
 source ~/.zsh/mpc_complete
 
 setopt completealiases
@@ -123,7 +128,37 @@ zstyle ':completion:*' special-dirs true
 #[[ $TERM == screen-256color* ]] && print -Pn "\e]2;%N"
 #}
 
-RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[blue]%}[%?])%{$reset_color%}%"
+# Enable auto-execution of functions.
+# http://sebastiancelis.com/2009/nov/16/zsh-prompt-git-users/
+#autoload -U ~/.zsh/func/utils/*(:t)
+
+#typeset -ga preexec_functions
+#typeset -ga precmd_functions
+#typeset -ga chpwd_functions
+#
+# # Append git functions needed for prompt.
+#preexec_functions+='preexec_update_git_vars'
+#precmd_functions+='precmd_update_git_vars'
+#chpwd_functions+='chpwd_update_git_vars'
+#
+#
+function estatus(){
+    local exitS=$ESTATUS
+    if [[ $exitS -eq 0 ]];then
+        print -n "%{$fg[blue]%}0%{$reset_color%}"
+    else
+        #printf "%s[%s]%s" "%{$fg[yellow]%}" "$exitS" "%{$reset_color%}"
+        print -n "%{$fg[white]%}[$exitS]%{$reset_color%}"
+    fi
+    return
+}
+
+#PROMPT="%{$fg[blue]%}(%2d)%{$reset_color%}"
+function precmd(){
+export ESTATUS=$?
+RPROMPT="%{$fg[blue]%}(%2d)~$(gitprompt)%{$fg[red]%}%T-$(estatus)"
+}
+
 autoload -U   edit-command-line
 zle -N        edit-command-line
 bindkey '\ee' edit-command-line
@@ -141,7 +176,7 @@ zstyle ':completion:*:manuals' separate-sections true
 
 hash -d shm="/dev/shm"
 hash -d tmp="/tmp/"
-
+hash -d zen="/media/Sentinel/zen/zen/"
 #exec 2>>(while read line; do
 #  print "$fg[red]ERROR:$fg[blue]${(q)line}$reset_color" > /dev/tty; print -n $'\0'; done &)
 
@@ -163,7 +198,7 @@ zstyle ':completion:*:corrections' format $'%{\e[0;31m%}%d (errors: %e)%{\e[0m%}
 zstyle ':completion:*:correct:*' original true
 zstyle ':completion:*:correct:*'   insert-unambiguous true
 
-hash -d linux=/lib/modules/$(command uname -r)/
+hash -d module=/lib/modules/$(command uname -r)/
 hash -d src=/usr/src/linux-$(command uname -r)/
 
 autoload -Uz predict-on && \
@@ -193,11 +228,6 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion:*' cache-path ~/.zsh/cache
 zmodload zsh/complist
 
-if type -p colorcvs &> /dev/null ; then alias cvs="colorcvs" ; fi
-if type -p colordiff &> /dev/null ; then alias diff="colordiff" ; fi
-if type -p colorgcc &> /dev/null ; then alias gcc="colorgcc" ; fi
-if type -p colortail &> /dev/null ; then alias tail="colortail" ; fi
-
 zstyle ':completion:*:*:(^rm):*:*files' ignored-patterns '*?.o' '*?.c~' '*?.hi'
 
 zstyle -e ':completion:*:approximate:*' max-errors 'reply=( $(( ($#PREFIX+$#SUFFIX)/2 )) numeric )'
@@ -211,3 +241,5 @@ zstyle ':completion:*' max-errors 3 numeric
 #setopt print_exit_value
 zstyle ':completion:*' toggle true
 #predict-on
+#
+export PS2="%{$fg[yellow]%}=<<%{$reset_color%}"

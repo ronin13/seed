@@ -9,8 +9,12 @@ randnum=$((${RANDOM}%${maxplayers}))
 MPSOCKET="/tmp/mplayer/$randnum.fif"
 [[  -e $MPSOCKET ]] || mkfifo $MPSOCKET
 
-xord=$(($RANDOM%800))
-yord=$(($RANDOM%450))
+#xord=$(($RANDOM%800))
+#yord=$(($RANDOM%450))
+#${=LOCK}/mplayer.$randnum /usr/bin/mplayer -geometry +$xord+$yord -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  &
+
+xord=750
+yord=450
 ${=LOCK}/mplayer.$randnum /usr/bin/mplayer -geometry +$xord+$yord -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  &
 
 #if [[ $? != "0" ]];then

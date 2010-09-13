@@ -10,7 +10,7 @@ inoremap <F1> <ESC>:wq<CR>
 map <MouseMiddle> <esc>"+p
 "autocmd!
 
-set runtimepath=~/.vim,/usr/share/vim/vim72,/usr/share/vim/vimfiles,/usr/share/vim/vimfiles/after,~/.vim/after
+set runtimepath=~/.vim,/usr/share/vim/vim73,/usr/share/vim/vimfiles,/usr/share/vim/vimfiles/after,~/.vim/after
 "set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
 "/home/raghavendra/.vim,/usr/share/vim/vim72/vimfiles,/usr/share/vim/vim72,/usr/share/vim/vim72/vimfiles/after,/home/raghavendra/.vim/after
 set linebreak
@@ -145,7 +145,7 @@ au FileType vim set tags+=~/.vim/tags/vim.ctags
 " Toggle the tag list bar
 nmap <F5> :TlistToggle<CR>
 
-if &term == "screen-256color-s" || &term == "xterm-256color"
+if &term == "screen-256color" || &term == "xterm-256color"
     map [1;3C <A-right>
     map [1;3D <A-left>
     map ^[[1;5A <C-up>
@@ -313,6 +313,8 @@ set statusline+=%h%m%r%w " flags
 set statusline+=[%{strlen(&ft)?&ft:'none'}, " filetype
 set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
 set statusline+=%{&fileformat}] " file format
+"set statusline+= [%{cfi#format('[%s()]', 'no function')}]
+set statusline+=\ [%{cfi#get_func_name()}]
 set statusline+=%= " right align
 set statusline+=%{fugitive#statusline()}
 set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\ " highlight
@@ -419,4 +421,4 @@ set number
 "vim-buftabs removed
 
 "set whichwrap=b,s,<,>,[,]
-set cursorline
+"set cursorline

@@ -1,3 +1,6 @@
+
+
+# Testing with zsh now
 #!/bin/bash
 # set ft=sh
 
@@ -192,8 +195,9 @@ links -dump http://wordnet.princeton.edu/perl/webwn?s=$1 | grep -i --word-regexp
 function checkup() { curl -s dict://dict.org/d:"$@" | tail +4; }
 
 function stemp() { 
-echo `acpi -t | awk -F ',' '{ print $2 }' | cut -d " " -f 2`
-echo `nvidia-settings -q gpucoretemp | grep Supernova | cut -d ":" -f 3`
+echo -n `acpi -t | awk -F ',' '{ print $2 }' | cut -d " " -f 2`
+#echo `nvidia-settings -q gpucoretemp | grep Supernova | cut -d ":" -f 3`
+#echo " `nvidia-smi -a |& grep Temp | cut -c17-19`"
 #echo `sudo hddtemp SATA:/dev/sda | cut -d ":" -f 3`;
  }
 

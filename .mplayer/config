@@ -1,37 +1,20 @@
 
 [default]
 ao=oss
-#vo=xv,fbdev,null
-#vo=gl,fbdev,null
-#vo=gl:yuv=2:rectangle=2:force-pbo:ati-hack,fbdev,null
-#vo=gl:yuv=1:rectangle=2:force-pbo,xv,fbdev,null
-vo=gl
+vo=xv
 ontop=yes
-mc=0.001
-double=yes
-#/usr/bin/mplayer -vo xv -vfm ffmpeg -vc ffh264 -lavdopts threads=5 -framedrop  MortalKombatTrailer_061010_720p.mp4
-lavdopts="threads=5"
 slices=no
-#really-quiet=yes
-#ass=yes
 idx=yes
-noaspect=yes
-#fstype=fullscreen
 stop-xscreensaver=yes
 framedrop="1"
 nomouseinput=yes
 hardframedrop="0"
 channels=2
-af="volnorm=1,scaletempo,equalizer=0:0:0:0:0:0:0:0:0:0"
 lirc="no"
 joystick="no"
 softvol=yes
 softvol-max=200
 volume=100
-autoq=100
-#vf=pp=de,hqdn3d
-vf=scale
-#,pp=fa:a
 
 [plugin]
 autosync=0

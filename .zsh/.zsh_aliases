@@ -1,7 +1,7 @@
 # vim:set ft=sh
 
 #alias man="TERMINFO=~/.terminfo/ LESS=C TERM=mostlike PAGER=less man"
-alias man="LC_ALL=C LANG=C TERMINFO=~/.terminfo/ TERM=mostlike man"
+#alias man="LC_ALL=C LANG=C TERMINFO=~/.terminfo/ TERM=mostlike man"
 alias ls='ls --color=always'
 alias archie='ssh -p 2222 raghu@localhost'
 alias cgrep='LC_ALL="C" /bin/grep -i --color'
@@ -30,7 +30,7 @@ alias mitter='mitter -u randomsurfer -p -i cmd -s'
 alias sdown='echo "sure?"; read; shutdown -h now'
 alias getweather='weatherget -s INXX0012 -m'
 alias pal="pacman -Ql "
-alias redradio="mplayer -playlist http://radioreddit.com:8000/listen.pls"
+alias redradio="/usr/bin/mplayer -playlist http://radioreddit.com:8000/listen.pls"
 alias showtorrent="aria2c -S "
 alias wget="wget -c --content-disposition"
 #alias less="vimpager"
@@ -54,3 +54,9 @@ alias build="cd ~/Arch/Build/"
 alias tree="tree -L 3 -C"
 alias lvared="IFS=\$'\n' vared"
 alias news="newsbeuter"
+
+if type -p colorcvs &> /dev/null ; then alias cvs="colorcvs" ; fi
+if type -p colordiff &> /dev/null ; then alias diff="colordiff" ; fi
+if type -p colorgcc &> /dev/null ; then alias gcc="colorgcc" ; fi
+if type -p colortail &> /dev/null ; then alias tail="colortail" ; fi
+

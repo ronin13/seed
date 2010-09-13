@@ -5,6 +5,7 @@ command! -nargs=* ir open read
 
 nnoremap <A-Right> gt
 nnoremap <A-Left> gT
+nnoremap gt :tabopen! 
 nnoremap F f
 nnoremap f F
 nnoremap S <C-c>

@@ -1,4 +1,6 @@
-
+active_fg_color = 4
+#d.ban_slow_peers=min_seeds,min_rate,amount1,time1[,amount2,time2[,...]]
+done_fg_color = 2
 scgi_local = /home/raghavendra/.rtorrent/rpc.socket
 max_uploads = 8
 download_rate = 0

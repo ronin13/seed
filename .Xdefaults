@@ -1,45 +1,42 @@
+
 URxvt.underlineURLs: true
 URxvt.urlLauncher: browser
 URxvt.perl-ext-common: default,matcher,selection,mark-yank-urls
 URxvt.matcher.button: 1
-URxvt.tintColor: cyan
-URxvt.shading: 10
+!!URxvt.tintColor: cyan
+!!URxvt.shading: 10
 URxvt.cursorBlink: true
 URxvt.visualBell: false
 URxvt.scrollBar: false
-URxvt.saveLines: 0
+!URxvt.saveLines: 0
 URxvt.cursorUnderline: true
-URxvt.foreground: White
+URxvt.foreground: grey85
 URxvt.urgentOnBell: True
-URxvt.background:black
+URxvt.background:grey3
+!URxvt.font:xft:Liberation Mono:pixelsize=14:antialias=false
+URxvt.font:xft:Inconsolata-9:antialias=false
+URxvt.boldFont:
 URxvt.keysym.M-u: perl:mark-yank-urls:activate_mark_mode
 URxvt.perl-lib: /home/raghavendra/.urxvt/
-Urxvt.secondaryScroll: true
-!Urxvt.font:xft:Liberation Mono:pixelsize=16
-!URxvt.font: xft:droid sans mono slashed-9
-URxvt.font:xft:Inconsolata-9
-!URxvt.font:xft:Anonymous Pro:pixelsize=13:antialias=true
-Urxvt.boldfont:
-URxvt.buffered:false
+!URxvt.secondaryScroll: true
+!URxvt.buffered: false
+!URxvt.depth: 24
+URxvt.transparent: false
+!URxvt.inheritPixmap: false
+URxvt.cursorColor:grey85
 
-xterm*foreground: white
-xterm*background: black
-!xterm*font: -misc-fixed-*-*-*-*-*-200-*-*-*-*-*
+xterm*foreground: grey85
+xterm*background: grey3
 xterm*cursorBlink: true
-!xterm*eightBitInput:false
-!xterm*background: #2e2e2e
-!xterm*background: #2f2f2f
 xterm*altSendsEscape: true
 xterm*cursorUnderLine: true
-!xterm*faceName:Liberation Mono
 xterm*faceName:Droid Sans Mono Slashed
-!xterm*font: -windows-proggyclean-medium-r-normal--13-80-96-96-c-70-iso8859-1
 xterm*bellIsUrgent: true
 xterm*highlightColorMode: true
 xterm*highlightReverse: true
-xterm*highlightTextColor: lightgreen
+xterm*highlightTextColor:  grey10
 !xterm*highlightTextColor: darkblue
-xterm*highlightColor: lightmagenta
+xterm*highlightColor:  lightgreen
 !xterm*highlightColor: LightGreen
 xterm*dynamicColors: true
 !xterm*highlightTextColor: white
@@ -50,10 +47,10 @@ xterm*trimSelection: true
 xterm*charClass:33:48,35:48,37-38:48,39:43,42-47:48,58-59:48,61:48,63-64:48,124:1,126:48
 xterm*renderFont: true
 xterm*saveLines: 0
-!xterm*utf8: 
+xterm*utf8: 1
 xterm*metaSendsEscape: true
 xterm*backarrowKey: false
-!xterm*locale: false
+xterm*locale: true
 !xterm*on4Clicks: group
 !xterm*on5Clicks: page
 
@@ -84,28 +81,49 @@ xterm*boldMode: false
 !xterm*color13: rgb:fc/54/fc
 !xterm*color14: rgb:54/fc/fc
 !xterm*color15: rgb:fc/fc/fc
+!
 
 xterm*colorBDMode: true
 xterm*colorBD: rgb:fc/fc/fc
 
 xmessage*form.okay.shapeStyle:          rectangle
-xmessage*form.okay.background:          IndianRed
-xmessage*form.okay.foreground:          rgb:e/b/b
-xmessage*message*background:            ivory3
-xmessage*background:                    gray85
-xmessage*foreground:                    gray15
-xmessage*Scrollbar.width:               1
-xmessage*Scrollbar.borderWidth:         0
-!xmessage*Text.?.cursorColor:            rgb:d/5/5
-xmessage*Text.borderColor:              gray65
-xmessage*Text*background:               gray95
-xmessage*Command.highlightThickness:    1
-xmessage*Command.internalWidth:         5
-xmessage*Command.internalHeight:        3
-xmessage*Command.borderColor:           gray40
-xmessage*Command.shapeStyle:            Rectangle
-xmessage*Command.background:            gray80
-!xmessage*font:          xft:Verdana:pixelsize=12:antialias=true
-!xmessage*font:                          -*-clean-*-*-*-*-*-*-*-*-*-*-iso8859-2
-xmessage*defaultButton: okay
+ xmessage*form.okay.background:          IndianRed
+ xmessage*form.okay.foreground:          rgb:e/b/b
+ xmessage*message*background:            ivory3
+ xmessage*background:                    gray85
+ xmessage*foreground:                    gray15
+ xmessage*Scrollbar.width:               1
+ xmessage*Scrollbar.borderWidth:         0
+ !xmessage*Text.?.cursorColor:            rgb:d/5/5
+ xmessage*Text.borderColor:              gray65
+ xmessage*Text*background:               gray95
+ xmessage*Command.highlightThickness:    1
+ xmessage*Command.internalWidth:         5
+ xmessage*Command.internalHeight:        3
+ xmessage*Command.borderColor:           gray40
+ xmessage*Command.shapeStyle:            Rectangle
+ xmessage*Command.background:            gray80
+ !xmessage*font:          xft:Verdana:pixelsize=12:antialias=true
+ !xmessage*font:                          -*-clean-*-*-*-*-*-*-*-*-*-*-iso8859-2
+ xmessage*defaultButton: okay
 
+
+*foreground:            #bbbbbb
+*background:            #2e2e2e
+*color0:                rgb:32/32/32
+*color1:                rgb:cd/5c/5c
+*color2:                rgb:8e/ae/71
+*color3:                rgb:ff/d2/00
+*color4:                rgb:57/7d/b5
+*color5:                rgb:cd/cd/b4
+*color5:                rgb:ff/69/fd
+*color6:                rgb:77/87/98
+*color7:                rgb:ee/ee/ee
+*color8:                rgb:55/55/55
+*color9:                rgb:ee/63/63
+*color10:               rgb:95/c7/49
+*color11:               rgb:d0/ad/15
+*color12:               rgb:6b/7b/8a
+*color13:               rgb:ff/69/fd
+*color14:               rgb:7a/b2/ae
+*color15:               rgb:ca/ca/ca
