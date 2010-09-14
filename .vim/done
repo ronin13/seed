@@ -1,0 +1,43 @@
+tlib - manual
+Align
+Autoalign -  done
+bash support
+bclose
+comments
+conque
+cscope map
+c support 
+easy tags 
+fakeclip -- mine 
+fugitive 
+gist 
+IndentConsistencyCop.vim: skip
+jsbeautify 
+nerd tree 
+perl support 
+pydoc
+rcsvers
+screen.vim: skip
+snipmate
+snippetsEmu.vim: skipped
+supertab
+surround
+taglist
+tmux
+VCS
+yankring - mine
+CurrentFuctionInfo
+
+outside:
+colors
+skeletons
+mail.vim
+tags
+
+Python plugins skipped :-----
+Also syntax/ and ftplugins/ -- nothing important
+
+Skipped:
+spell - obsolote
+
+snippets/ -- already there

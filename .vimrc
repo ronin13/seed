@@ -4,17 +4,31 @@
 let g:fakeclip_no_default_key_mappings = 1
 scriptencoding utf-8
 
+filetype off
+call pathogen#helptags()
+call pathogen#runtime_append_all_bundles() 
+
+"filetype off
+"filetype plugin indent on
+
+
+filetype on
+filetype indent on
+filetype plugin on                      " Enable filetype plugins
+filetype plugin indent on               " Let filetype plugins indent for me
+syntax on                               " Turn on syntax highlighting
+
 set sidescrolloff=5
 nnoremap <F1> :wq<CR>
 inoremap <F1> <ESC>:wq<CR>
 map <MouseMiddle> <esc>"+p
 "autocmd!
 
-set runtimepath=~/.vim,/usr/share/vim/vim73,/usr/share/vim/vimfiles,/usr/share/vim/vimfiles/after,~/.vim/after
+"set runtimepath=~/.vim,/usr/share/vim/vim73,/usr/share/vim/vimfiles,/usr/share/vim/vimfiles/after
 "set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
 "/home/raghavendra/.vim,/usr/share/vim/vim72/vimfiles,/usr/share/vim/vim72,/usr/share/vim/vim72/vimfiles/after,/home/raghavendra/.vim/after
 set linebreak
-set nocompatible
+"set nocompatible
 "" http://amix.dk/vim/vimrc.html
 set magic
 set wrapscan
@@ -27,7 +41,7 @@ noremap k gk
 set ruler 
 set title
 set backup
-set dictionary+=/usr/share/dict/words
+"set dictionary+=/usr/share/dict/words
 set shortmess=atI
 set backupdir=~/.vim-tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,/var/tmp,/tmp
@@ -35,6 +49,17 @@ set backspace=indent,eol,start
 """" Searching and Patterns
 set ignorecase							" search is case insensitive
 set smartcase							" search case sensitive if caps on 
+
+" http://nvie.com/posts/how-i-boosted-my-vim/
+set shiftround
+set smarttab
+set visualbell           " don't beep
+set noerrorbells         " don't beep
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nmap <silent> <leader>sv :so $MYVIMRC<CR>
+"set autoindent    " always set autoindenting on
+"set copyindent    " copy the previous indentation on autoindenting
+
 set incsearch							" show best match so far
 set hlsearch							" Highlight matches to the search 
 set diffopt+=iwhite 
@@ -76,10 +101,6 @@ set hidden
 """" Coding
 set history=1000							" 100 Lines of history
 set showfulltag							" Show more information while completing tags
-filetype on
-filetype plugin on                      " Enable filetype plugins
-filetype plugin indent on               " Let filetype plugins indent for me
-syntax on                               " Turn on syntax highlighting
 
 
 set foldmethod=marker
@@ -283,6 +304,7 @@ set nostartofline
 nnoremap <C-f> gqap
 
 "use :set list! to toggle visible whitespace on/off
+"set list
 set listchars=tab:>-,trail:.,extends:>
 
 
