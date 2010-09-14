@@ -1,0 +1,4 @@
+quality = medium
+play
+player = $HOME/bin/mplayer %s
+subtitles

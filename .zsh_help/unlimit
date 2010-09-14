@@ -1,0 +1,3 @@
+unlimit [ -hs ] resource ...
+       The  resource  limit  for each resource is set to the hard limit.  If the -h flag is given and the shell has appropria
+       resource limit for each resource is removed.  The resources of the shell process are only changed if the -s flag is gi

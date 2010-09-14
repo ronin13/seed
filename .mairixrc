@@ -1,0 +1,6 @@
+base=/home/raghavendra
+maildir=Mail/*...
+omit=Mail/Search
+database=~/.local/share/mairix/.mairix_db
+mfolder=Mail/Search
+mformat=maildir

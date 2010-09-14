@@ -1,0 +1,31 @@
+ulimit [ [ -SHacdfilmnpqstvx | -N resource [ limit ] ... ]
+       Set or display resource limits of the shell and the processes started by the shell.  The value of limit can be a numbe
+       below or the value `unlimited'.  By default, only soft limits are manipulated. If the -H flag is given use hard limits
+       its.   If  the -S flag is given together with the -H flag set both hard and soft limits.  If no options are used, the 
+       assumed.  If limit is omitted the current value of the specified resources are printed.  When more than one resource v
+       limit name and unit is printed before each value.
+
+       When  looping over multiple resources, the shell will abort immediately if it detects a badly formed argument.  Howeve
+       limit for some other reason it will continue trying to set the remaining limits.
+
+       -a     Lists all of the current resource limits.
+       -c     512-byte blocks on the size of core dumps.
+       -d     K-bytes on the size of the data segment.
+       -f     512-byte blocks on the size of files written.
+       -i     The number of pending signals.
+       -l     K-bytes on the size of locked-in memory.
+       -m     K-bytes on the size of physical memory.
+       -n     open file descriptors.
+       -q     Bytes in POSIX message queues.
+       -s     K-bytes on the size of the stack.
+       -t     CPU seconds to be used.
+       -u     processes available to the user.
+       -v     K-bytes on the size of virtual memory.  On some systems this refers to the limit called `address space'.
+       -x     The number of locks on files.
+
+       A resource may also be specified by integer in the form `-N resource', where resource corresponds to the integer defin
+       the  operating  system.  This may be used to set the limits for resources known to the shell which do not correspond t
+       limits will be shown by number in the output of `ulimit -a'.
+
+       The number may alternatively be out of the range of limits compiled into the shell.  The shell will try to read or wri
+       and will report an error if this fails.

@@ -1,0 +1,14 @@
+kill [ -s signal name | -n signal number | -sig ] job ...
+kill -l [ sig ... ]
+       Sends  either  SIGTERM  or the specified signal to the given jobs or processes.  Signals are given by number or by nam
+       `SIG' prefix.  If the signal being sent is not `KILL' or `CONT', then the job will be sent a `CONT' signal if it is  s
+       job  can  be  the process ID of a job not in the job list.  In the second form, kill -l, if sig is not specified the s
+       Otherwise, for each sig that is a name, the corresponding signal number is listed.  For each sig that is a signal numb
+       senting the exit status of a process which was terminated or stopped by a signal the name of the signal is printed.
+
+       On  some  systems,  alternative  signal  names  are allowed for a few signals.  Typical examples are SIGCHLD and SIGCL
+       assuming they correspond to the same signal number.  kill -l will only list the preferred form, however kill -l alt wi
+       tive form corresponds to a signal number.  For example, under Linux kill -l IO and kill -l POLL both output 29, hence 
+       have the same effect.
+
+       Many systems will allow process IDs to be negative to kill a process group or zero to kill the current process group.

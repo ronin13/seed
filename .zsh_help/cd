@@ -1,0 +1,31 @@
+cd [ -qsLP ] [ arg ]
+cd [ -qsLP ] old new
+cd [ -qsLP ] {+|-}n
+       Change  the current directory.  In the first form, change the current directory to arg, or to the value of $HOME if ar
+       arg is `-', change to the value of $OLDPWD, the previous directory.
+
+       Otherwise, if arg begins with a slash, attempt to change to the directory given by arg.
+
+       If arg does not begin with a slash, the behaviour depends on whether the current directory `.' occurs in the list of d
+       the  shell parameter cdpath.  If it does not, first attempt to change to the directory arg under the current directory
+       cdpath is set and contains at least one element attempt to change to the directory arg under each component of cdpath 
+       ful.  If `.' occurs in cdpath, then cdpath is searched strictly in order so that `.' is only tried at the appropriate 
+
+       If no directory is found, the option CDABLE VARS is set, and a parameter named arg exists whose value begins with a sl
+       the directory.  In that case, the parameter is added to the named directory hash table.
+
+       The second form of cd substitutes the string new for the string old in the name of the current directory, and tries to
+       directory.
+
+       The  third  form  of cd extracts an entry from the directory stack, and changes to that directory.  An argument of the
+       stack entry by counting from the left of the list shown by the dirs command, starting with zero.  An argument of the f
+       the right.  If the PUSHD MINUS option is set, the meanings of `+' and `-' in this context are swapped.
+
+       If the -q (quiet) option is specified, the hook function chpwd and the functions in the array chpwd functions are not 
+       for calls to cd that do not change the environment seen by an interactive user.
+
+       If the -s option is specified, cd refuses to change the current directory if the given pathname contains symlinks.  If
+       or the CHASE LINKS option is set, symbolic links are resolved to their true values.  If the -L option is given symboli
+       the directory (and not resolved) regardless of the state of the CHASE LINKS option.
+
+chdir  Same as cd.

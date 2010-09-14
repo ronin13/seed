@@ -1,0 +1,21 @@
+# Sample configuration file for Polipo. -*-sh-*-
+allowedClients = 127.0.0.1
+proxyPort = 9999
+cacheIsShared = false
+daemonise = true
+logFile = "/home/raghavendra/logs/polipo.log"
+pidFile = "/home/raghavendra/logs/polipo.pid"
+chunkHighMark = 50331648
+objectHighMark = 16384
+logLevel = 0x3
+
+diskCacheRoot = "/home/raghavendra/.cache/polipo/"
+disableIndexing = false
+disableServersList = false
+
+#dnsQueryIPv6 = no
+#pmmFirstSize = 16384
+#pmmSize = 8192
+pmmFirstSize = 32768
+pmmSize = 16384
+

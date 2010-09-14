@@ -1,0 +1,2 @@
+keymap C-o NEXT_PAGE
+keymap C-i PREV_PAGE

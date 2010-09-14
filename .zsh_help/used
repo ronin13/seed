@@ -1,0 +1,17 @@
+
+printf format [ arg ... ]
+       Print  the arguments according to the format specification. Formatting rules are the same as used in C. The same escap
+       are recognised in the format. All C conversion specifications ending in one of csdiouxXeEfgGn are handled. In addition
+       used instead of `%s' to cause escape sequences in the argument to be recognised and `%q' can be used to quote the argu
+       allows it to be reused as shell input. With the numeric format specifiers, if the corresponding argument starts with a
+       numeric  value of the following character is used as the number to print otherwise the argument is evaluated as an ari
+       the section `Arithmetic Evaluation' in zshmisc(1) for a description of arithmetic expressions. With `%n', the correspo
+       as an identifier which is created as an integer parameter.
+
+       Normally,  conversion  specifications are applied to each argument in order but they can explicitly specify the nth ar
+       replacing `%' by `%n$' and `*' by `*n$'.  It is recommended that you do not mix references of this explicit style with
+       the handling of such mixed styles may be subject to future change.
+
+       If arguments remain unused after formatting, the format string is reused until all arguments have been consumed. With 
+       can be suppressed by using the -r option. If more arguments are required by the format than have been specified, the b
+       or an empty string had been specified as the argument.

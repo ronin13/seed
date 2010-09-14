@@ -1,0 +1,9 @@
+. file [ arg ... ]
+       Read commands from file and execute them in the current shell environment.
+
+       If  file  does not contain a slash, or if PATH DIRS is set, the shell looks in the components of $path to find the dir
+       Files in the current directory are not read unless `.' appears somewhere in $path.  If a file named `file.zwc' is foun
+       and is the compiled form (created with the zcompile builtin) of file, then commands are read from that file instead of
+
+       If  any arguments arg are given, they become the positional parameters; the old positional parameters are restored whe
+       cuting.  The exit status is the exit status of the last command executed.
