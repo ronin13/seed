@@ -1,6 +1,0 @@
-iab xme Raghavendra D Prabhu (raghu.prabhu13@gmail.com)<C-R>=EatChar('\s')<CR>
-iab xt  <C-R>=strftime("%H:%M:%S")<CR><C-R>=EatChar('\s')<CR>
-iab xd  <C-R>=strftime("%a, %d %b %Y")<CR><C-R>=EatChar('\s')<CR>
-iab xdt <C-R>=strftime("%a, %d %b %Y %H:%M:%S %z")<CR><C-R>=EatChar('\s')<CR>
-iab xbang #!/bin/zsh<C-R>=EatChar('\s')<CR>
-iab xpbang #!/usr/bin/python<C-R>=EatChar('\s')<CR> 
