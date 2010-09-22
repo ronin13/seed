@@ -4,10 +4,10 @@
 let g:fakeclip_no_default_key_mappings = 1
 scriptencoding utf-8
 
-filetype off
+"filetype off
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles() 
-
+cmap w!! w !sudo tee % >/dev/null
 "filetype off
 "filetype plugin indent on
 
@@ -17,7 +17,7 @@ filetype indent on
 filetype plugin on                      " Enable filetype plugins
 filetype plugin indent on               " Let filetype plugins indent for me
 syntax on                               " Turn on syntax highlighting
-
+set sidescroll=5
 set sidescrolloff=5
 nnoremap <F1> :wq<CR>
 inoremap <F1> <ESC>:wq<CR>
@@ -57,8 +57,8 @@ set visualbell           " don't beep
 set noerrorbells         " don't beep
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-"set autoindent    " always set autoindenting on
-"set copyindent    " copy the previous indentation on autoindenting
+set autoindent    " always set autoindenting on
+set copyindent    " copy the previous indentation on autoindenting
 
 set incsearch							" show best match so far
 set hlsearch							" Highlight matches to the search 
@@ -180,8 +180,8 @@ if &term == "screen-256color" || &term == "xterm-256color"
     map ^[[H <Home>
 endif
 
-nnoremap `` :q<CR>
-nnoremap ``` :q!<CR>
+nnoremap <Home><Home> :q<CR>
+"nnoremap  :q!<CR>
 " tab navigation (next tab) with alt left / alt right
 nnoremap  <A-Right>  gt
 nnoremap  <A-Left>   gT
@@ -354,6 +354,7 @@ autocmd BufWriteCmd *.pdf set readonly
 
 " Nice one
 "autocmd BufWritePre * :%s/\s+$//e
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 "http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
@@ -444,3 +445,26 @@ set number
 
 "set whichwrap=b,s,<,>,[,]
 "set cursorline
+
+" http://www.reddit.com/r/linux/comments/ddgqm/how_i_boosted_my_vim/
+map <up> gk
+imap <up> <C-o>gk
+map <down> gj
+imap <down> <C-o>gj
+map <home> g<home>
+imap <home> <C-o>g<home>
+map <end> g<end>
+imap <end> <C-o>g<end>
+set display+=lastline
+set path+=**
+
+"http://stevelosh.com/blog/2010/09/coming-home-to-vim/#slime
+let g:ackprg="ack -H --nocolor --nogroup --column"
+nnoremap <leader>v V`]
+set gdefault
+set ttyfast
+set relativenumber
+"http://git.benboeckel.net/git?p=dotfiles.git;a=blob;f=generic/home/vimrc
+"http://github.com/kikijump/tslime.vim/blob/master/tslime.vim
+"http://github.com/bartman/git-wipi
+""http://technotales.wordpress.com/2007/10/03/like-slime-for-vim/

@@ -7,7 +7,7 @@ header_visibility = "yes"
 ignore_leading_the = "no"
 external_editor = "vim"
 playlist_display_mode = "columns"
-
+lyrics_database = "1"
 jump_to_now_playing_song_at_start = "yes"
 display_bitrate = "yes"
 main_window_highlight_color = "default"

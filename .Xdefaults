@@ -1,10 +1,12 @@
 
 URxvt.underlineURLs: true
-URxvt.urlLauncher: browser
+!URxvt.urlLauncher: "browser -u"
+URxvt.urlLauncher: ubrowser
 URxvt.perl-ext-common: default,matcher,selection,mark-yank-urls
 URxvt.matcher.button: 1
-!!URxvt.tintColor: cyan
-!!URxvt.shading: 10
+!URxvt.tintColor: blue
+URxvt.shading: 12
+URxvt.blurRadius: 90
 URxvt.cursorBlink: true
 URxvt.visualBell: false
 URxvt.scrollBar: false
@@ -21,7 +23,7 @@ URxvt.perl-lib: /home/raghavendra/.urxvt/
 !URxvt.secondaryScroll: true
 !URxvt.buffered: false
 !URxvt.depth: 24
-URxvt.transparent: false
+URxvt.transparent: true
 !URxvt.inheritPixmap: false
 URxvt.cursorColor:grey85
 
@@ -94,7 +96,7 @@ xmessage*form.okay.shapeStyle:          rectangle
  xmessage*foreground:                    gray15
  xmessage*Scrollbar.width:               1
  xmessage*Scrollbar.borderWidth:         0
- !xmessage*Text.?.cursorColor:            rgb:d/5/5
+!xmessage*Text.?.cursorColor:            rgb:d/5/5
  xmessage*Text.borderColor:              gray65
  xmessage*Text*background:               gray95
  xmessage*Command.highlightThickness:    1
@@ -103,8 +105,8 @@ xmessage*form.okay.shapeStyle:          rectangle
  xmessage*Command.borderColor:           gray40
  xmessage*Command.shapeStyle:            Rectangle
  xmessage*Command.background:            gray80
- !xmessage*font:          xft:Verdana:pixelsize=12:antialias=true
- !xmessage*font:                          -*-clean-*-*-*-*-*-*-*-*-*-*-iso8859-2
+!xmessage*font:          xft:Verdana:pixelsize=12:antialias=true
+!xmessage*font:                          -*-clean-*-*-*-*-*-*-*-*-*-*-iso8859-2
  xmessage*defaultButton: okay
 
 
@@ -115,7 +117,7 @@ xmessage*form.okay.shapeStyle:          rectangle
 *color2:                rgb:8e/ae/71
 *color3:                rgb:ff/d2/00
 *color4:                rgb:57/7d/b5
-*color5:                rgb:cd/cd/b4
+!*color5:                rgb:cd/cd/b4
 *color5:                rgb:ff/69/fd
 *color6:                rgb:77/87/98
 *color7:                rgb:ee/ee/ee

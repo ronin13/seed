@@ -60,8 +60,8 @@ passwd_file ~/.w3m/passwd
 use_lessopen 0
 bgextviewer 1
 extbrowser3 
-extbrowser2 /usr/bin/firefox
-extbrowser /usr/bin/uzbl-browser
+extbrowser /usr/bin/firefox
+extbrowser2 /usr/bin/uzbl-browser
 mailer /usr/bin/mutt
 editor ~/bin/agvim
 urimethodmap ~/.w3m/urimethodmap, /usr/etc/w3m/urimethodmap

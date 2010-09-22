@@ -1,7 +1,10 @@
 "~/bin/mmove"
    Control + Shift + s
 
-"~/bin/noter"
+#"~/bin/noter"
+#   alt + Pause
+
+"shellrun xpaste"
    alt + Pause
 
 "~/bin/toggle"

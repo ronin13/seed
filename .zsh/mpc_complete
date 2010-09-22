@@ -1,15 +1,22 @@
 # vim: set ft=sh ts=2 sw=2 et:
 
-function any()   { mpc search any "$@"; } 
+function any()
+{
+mpc search any "$@";
+echo ":any $1" >> ~/.mpd/.empd
+
+}
+
+
 function artist() { 
 
 [[ -z $2 ]] && mpc search artist "$1" && return; mpc search artist "$1" | grep "$2";
-echo $1 >> ~/.mpd/.artist
+echo ":artist $1" >> ~/.mpd/.empd
  }
 function album() { 
 
 [[ -z $2 ]] && mpc search album "$1" && return; mpc search album "$1" | grep "$2";
-echo $1 >> ~/.mpd/.album
+echo ":album $1" >> ~/.mpd/.empd
  }
 function genre() {  mpc search genre "$@"; }
 function addalbum() { mpc clear;  mpc add; }

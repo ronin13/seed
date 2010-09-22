@@ -3,6 +3,7 @@
 --{{{ Imports
 --import XMonad.StackSet
 import XMonad hiding ( (|||) )
+import XMonad.Actions.NoBorders
 import Monad
 import XMonad.Layout.HintedGrid
 import Data.Monoid
@@ -102,6 +103,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
      [ ((modm, xK_q     ), kill1)
 
+    ,  ((modm,  xK_r),   withFocused toggleBorder)
+
     , ((mod1Mask, xK_space), scratchpadSpawnActionCustom "$HOME/bin/scratcher")
 
     , ((modm, xK_period), toggleWS )
@@ -164,7 +167,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
-    , ((modm .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
 
     ]
     ++

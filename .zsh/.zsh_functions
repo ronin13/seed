@@ -1,17 +1,17 @@
 man(){
-#set -x
-#hit=1
-#setopt extendedglob
-if ls $HOME/helpers/man/**/$1.* 2>/dev/null;then
-   #hit=0
-   location=`/usr/bin/man -M /usr/share/man -w $1`
-   number=${${location:t}[(ws:.:)2]}
-   gunzip -c $location  >| $HOME/helpers/man/man${number//[a-z]/}/$1.${number}
-fi
-LC_ALL=C LANG=C TERMINFO=~/.terminfo/ TERM=mostlike /usr/bin/man $1
-#echo $MANPATH
-#echo $hit
-#set +x
+    #set -x
+    #hit=1
+    #setopt extendedglob
+    if [[ -z $2 ]] && ! /bin/ls $HOME/helpers/man/**/$1.* 2>/dev/null;then
+    #hit=0
+    location=`/usr/bin/man -M /usr/share/man -w $1`
+    number=${${location:t}[(ws:.:)2]}
+    gunzip -c $location  >| $HOME/helpers/man/man${number//[a-z]/}/$1.${number}
+    fi
+    LC_ALL=C LANG=C TERMINFO=~/.terminfo/ TERM=mostlike /usr/bin/man $1
+    #echo $MANPATH
+    #echo $hit
+    #set +x
 }
 
 
@@ -35,12 +35,11 @@ apod(){
     url="$(grep IMG $apodTemp | cut -d "\"" -f 2)"
     wget -q -O "$FILE" -c http://apod.nasa.gov/apod/${=url}
     exiftool -overwrite_original -UserComment="$apodDesc" $FILE
+    feh $FILE &
     echo $apodDesc | xmessage -file - -timeout 30
-    feh $FILE
     echo "Set as wallpaper: y/n"
     read -q  && set_wall $FILE
     #set +x
-
 }
 
 server(){
@@ -105,12 +104,19 @@ else
         counter=$(($counter+1))
     done
 fi
+
+}
+
+comcache(){
+export PATH="/usr/lib/ccache/bin/:$PATH"
 }
 
 xpaste(){
-[[ -z $1 ]] && return 1
-var="$(xsel -o)"
-echo -e "$var" >> $1
+    file="$1"
+    [[ -z $file ]] &&  file="$HOME/note"
+    var="$(xsel -o)"
+    echo -e "$var" >> $file
+    notify-send "Added note" "$var"
 }
 
 wiki() { w=$(dig +short txt $1.wp.dg.cx); echo "$w" }
@@ -155,6 +161,7 @@ profile() {
 xev(){
     =xev -id `xdotool getactivewindow`
 }
+
 bash_source() {
   alias shopt=':'
   alias _expand=_bash_expand
@@ -179,7 +186,7 @@ search(){
 ins(){
    if [[ $1 == *xz || $1 == *pkg.tar ]];then
       sudo pacman -U $1
-  else
+   else
      sudo pacman -S "$@"
  fi
 }

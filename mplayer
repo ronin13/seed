@@ -2,20 +2,26 @@
 # add url loading [DONE]
 # multiple sockets multiplexing 0MQ kind of stuff
 #set -x
-setopt nobgnice
+#setopt nobgnice
+# IMPORTANT: Change directory
+
+
 HIST="$HOME/.mplayer.hist"
-maxplayers=2
+maxplayers=4
 randnum=$((${RANDOM}%${maxplayers}))
 MPSOCKET="/tmp/mplayer/$randnum.fif"
 [[  -e $MPSOCKET ]] || mkfifo $MPSOCKET
 
-#xord=$(($RANDOM%800))
-#yord=$(($RANDOM%450))
-#${=LOCK}/mplayer.$randnum /usr/bin/mplayer -geometry +$xord+$yord -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  &
 
+touch /tmp/mplayer.log
 xord=750
-yord=450
+yord=400
+
+pwdir=`pwd`
+
+pushd $HOME
 ${=LOCK}/mplayer.$randnum /usr/bin/mplayer -geometry +$xord+$yord -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  &
+popd
 
 #if [[ $? != "0" ]];then
 #    exit 1
@@ -45,7 +51,7 @@ else
         if [[ "$@" == /* ]];then
             prefix=
         else
-            prefix="`pwd`/"
+            prefix="$pwdir/"
         fi
         FILE="${prefix}$@"
     fi
@@ -55,5 +61,7 @@ fi
 mpc pause &>/dev/null
 echo "loadfile \"$FILE\"" > $MPSOCKET
 [[ ! -z $POSITION ]] &&  echo "set_property time_pos $POSITION" > $MPSOCKET
+sleep 3
+xdotool key super+r
 #echo "pause" > $MPSOCKET
 #set +x

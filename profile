@@ -5,7 +5,7 @@ export AUDIODRIVER=oss
 export TBROWSER=w3m
 export VIEWER=zathura
 #export DMENU="$HOME/bin/dmenu/dmenu -i -l 3 -nb #303030 -nf black -sb #303030 -p :"
-export DMENU="$HOME/bin/dmenu -p : -i -l 10 -nb black -nf white -sb purple -fa 'xft:Bitstream:pixelsize=14'"
+export DMENU="$HOME/bin/dmenu -p : -i -l 10 -nb grey11 -nf grey80 -sb maroon4 -fa 'xft:Liberation:pixelsize=14'"
 export PATH="$HOME/bin:/usr/local/bin:$PATH:$HOME/.cabal/bin"
 export VIMRUNTIME="/usr/share/vim/vim73"
 export GDK_USE_XFT=1

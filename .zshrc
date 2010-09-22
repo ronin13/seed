@@ -1,4 +1,6 @@
 export ESTATUS=0
+export TIMEDOUT=0
+
 setopt PROMPT_SUBST
 setopt histignorespace
 unalias -m '*'
@@ -45,10 +47,9 @@ setopt sharehistory
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
 alias -g zsource="source ~/.zshrc"
-alias -g :g=' |& /bin/grep -i'
-alias -g :n='&> /dev/null'
-alias -g :l=' |& less'
-alias -g :x=" |& tr '\n' '\0' | xargs -0 "
+alias -g .g=' |& /bin/grep -i'
+alias -g .l=' |& less'
+alias -g .x=" |& tr '\n' '\0' | xargs -0 "
 
 setopt correct
 setopt autolist automenu
@@ -82,7 +83,7 @@ zstyle ':completion:*:(cd|cp|vim):*' ignore-parents parent pwd
 zstyle ':completion:*:processes' command 'ps auxww'
 #/By me
 
-zstyle ':completion:*' completer _force_rehash _complete _ignored _correct _approximate _files _prefix
+zstyle ':completion:*' completer _complete _ignored _correct _approximate _files _prefix
 #zstyle ':completion:*' completer  _prefix _complete _ignored _correct _files _approximate
 #zstyle ':completion:*' completer  _prefix _complete  _correct _files 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
@@ -153,10 +154,25 @@ function estatus(){
     return
 }
 
+function gprompt(){
+[[ $TIMEDOUT == 0 ]] && prom=$(timeout -k 10 -s INT 4 gitprompt)
+if [[ $? == 124 ]];then
+    export TIMEDOUT=1
+    echo -n ""
+    #gitprompt &>/dev/null &
+    return
+fi
+echo "$prom"
+}
+
+function chpwd(){
+    export TIMEDOUT=0
+}
+
 #PROMPT="%{$fg[blue]%}(%2d)%{$reset_color%}"
 function precmd(){
 export ESTATUS=$?
-RPROMPT="%{$fg[blue]%}(%2d)~$(gitprompt)%{$fg[red]%}%T-$(estatus)"
+RPROMPT="%{$fg[blue]%}(%2d)~$(gprompt)%{$fg[red]%}%T-$(estatus)"
 }
 
 autoload -U   edit-command-line
