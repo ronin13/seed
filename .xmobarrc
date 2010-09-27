@@ -1,6 +1,6 @@
-Config { font = "xft:Dina-9"
-       , bgColor = "#1A1A1A"
-       , fgColor = "#0000FF"
+Config { font = "xft:Dina-8"
+       , bgColor = "grey2"
+       , fgColor = "grey50"
        , position = Top
        , lowerOnStart = True
        , commands = [ Run Network "eth0" ["-L","0","-H","100","--normal","blue","--high","red"] 50

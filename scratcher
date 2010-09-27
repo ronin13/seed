@@ -2,8 +2,8 @@
 geom="125x21+5+165"
 #term="xterm -name scratchpad -class xterm" #-geom $geom
 term="urxvtc -name scratchpad" # -geometry $geom
-if ~/bin/tmux has-session -t uake;then 
-    ${=term} -e ~/bin/tmux attach-session -d -t uake 
+if ~/bin/tmux -2 has-session -t uake;then 
+    ${=term} -e ~/bin/tmux -2 attach-session -d -t uake 
 else
-    ${=term} -e ~/bin/tmux new-session -s uake
+    ${=term} -e ~/bin/tmux -2 new-session -s uake
 fi

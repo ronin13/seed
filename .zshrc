@@ -1,6 +1,6 @@
 export ESTATUS=0
 export TIMEDOUT=0
-
+export GPRT=">>"
 setopt PROMPT_SUBST
 setopt histignorespace
 unalias -m '*'
@@ -24,7 +24,6 @@ autoload -U colors && colors
 #prompt elite
 setopt HIST_NO_FUNCTIONS
 #PROMPT="%{$fg[blue]%}(%2d)%{$reset_color%}"
-PROMPT="%{$fg[blue]%}>=%{$reset_color%}"
 #RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[magenta]%}[%?:%!])%{$reset_color%}%"
 
 bindkey "\e[A" history-search-backward
@@ -162,15 +161,18 @@ if [[ $? == 124 ]];then
     #gitprompt &>/dev/null &
     return
 fi
-echo "$prom"
+echo -n "$prom"
 }
 
 function chpwd(){
     export TIMEDOUT=0
+    export GPRT=$(pwd | tr -cd '/' | tr '/' '>')
+    #pwd | tr '/' '\n' | wc -l
 }
 
 #PROMPT="%{$fg[blue]%}(%2d)%{$reset_color%}"
 function precmd(){
+PROMPT="%{$fg[blue]%}${GPRT}=%{$reset_color%}"
 export ESTATUS=$?
 RPROMPT="%{$fg[blue]%}(%2d)~$(gprompt)%{$fg[red]%}%T-$(estatus)"
 }
@@ -259,3 +261,5 @@ zstyle ':completion:*' toggle true
 #predict-on
 #
 export PS2="%{$fg[yellow]%}=<<%{$reset_color%}"
+alias -g .n='&>/dev/null'
+alias -g .h='&>/dev/null &'

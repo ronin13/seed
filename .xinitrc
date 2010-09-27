@@ -17,9 +17,10 @@ xmodmap  ~/.Xmodmap
 ${=LOCK}/urxvtd urxvtd -q -f -o
 
 unclutter -idle 4 -reset &
-xbindkeys &
+xbindkeys 
 #/usr/lib/notify-osd-customizable/notify-osd &
 /usr/lib/notification-daemon-1.0/notification-daemon &
-${=LOCK}/tmux tmux start-server
-parcellite &
+${=LOCK}/tmux tmux -2 start-server
+#parcellite &
+clipbored
 exec xmonad

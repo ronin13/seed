@@ -2,10 +2,11 @@
 
 --{{{ Imports
 --import XMonad.StackSet
+import XMonad.Layout.Gaps
 import XMonad hiding ( (|||) )
 import XMonad.Actions.NoBorders
 import Monad
-import XMonad.Layout.HintedGrid
+import XMonad.Layout.HintedGrid as H
 import Data.Monoid
 import XMonad.Hooks.UrgencyHook
 import System.Exit
@@ -18,11 +19,11 @@ import XMonad.Actions.OnScreen
 import XMonad.Util.Scratchpad (scratchpadSpawnActionCustom)
 import XMonad.Actions.CopyWindow
 import XMonad.Hooks.EwmhDesktops
-import XMonad.Layout.LayoutHints (layoutHintsWithPlacement)
+import XMonad.Layout.LayoutHints
 --centerFloat
 import XMonad.Hooks.ManageHelpers
 import XMonad.Actions.SinkAll
-
+import XMonad.Util.Types
 import XMonad.Prompt
 import XMonad.Prompt.Window
 
@@ -65,7 +66,7 @@ main = do
         focusedBorderColor = myFocusedBorderColor,
         mouseBindings      = myMouseBindings,
         keys               = myKeys,
-        layoutHook         = myLayout,
+        layoutHook         = layoutHintsWithPlacement (0,1) myLayout,
         manageHook         = insertPosition Below Newer <+> myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook xmproc, 
@@ -88,11 +89,11 @@ myNormalBorderColor  = "red"
 myFocusedBorderColor = "white"
 
 
-myXPConfig = defaultXPConfig                                    
+myXPConfig = defaultXPConfig
     { 
-	font  = "xft:Bitstream Vera Sans Mono:pixelsize=14:bold" 
-	, fgColor = "Black"
-	, bgColor = "White"
+	font  = "xft:Liberation:pixelsize=14" 
+	, fgColor = "grey50"
+	, bgColor = "grey2"
 	, position = Bottom
     }
 --}}}
@@ -121,7 +122,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     , ((modm .|. shiftMask, xK_l ), sendMessage MirrorExpand)
 
-    , ((modm,               xK_n     ), refresh)
+    -- , ((modm,               xK_n     ), refresh)
+    -- , ((modm,               xK_n     ), refresh)
 
     , ((modm .|. shiftMask, xK_Right),  nextWS)
 
@@ -198,14 +200,15 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 myLayout = onWorkspace "3:browser" brLayout $ onWorkspace "7:games" vidLayout $ defLayout
       where
 --           defLayout = avoidStruts $ noBorders (tiled ||| Mirror tiled ||| Full)
-          defLayout = avoidStruts $ mgFy ( tiled ||| Mirror tiled ||| Full)
+          defLayout = struts $ mgFy ( tiled ||| Mirror tiled ||| Full)
           --htiled  = hinted (ResizableTall 1 (2/100) (1/2) [])
           tiled     = smartBorders tall
           tall      = ResizableTall 1 (2/100) (1/2) []
-          brLayout  = avoidStruts (Mirror tiled ||| mgFy tiled ||| Full)
+          brLayout  = Mirror tiled ||| mgFy tiled ||| Full
+          struts    = avoidStrutsOn [U]
           mgFy      = Mag.magnifiercz 1.4
-          vidLayout = Grid False ||| Full
-          --hinted l  = layoutHintsWithPlacement (0,0) l
+          vidLayout = H.Grid False ||| Full
+         -- hinted l  = layoutHintsWithPlacement (0,0) l
 --}}}
 
 --{{{ Workspaces

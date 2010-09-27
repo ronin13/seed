@@ -77,6 +77,7 @@ if [[ "$@" =~ .*torrent$ ]];then
     [[ $1 =~ ^http.* ]] && wget -q $1 > ~/.rtorrent/watch/${1##*/} && echo "$@ ============ $(aria2c -S ~/.rtorrent/watch/${1##*/})===========$(date)" >> $histfile && exit
 
     cp "$@" ~/.rtorrent/watch/
+    # Triggers download complete
     echo "$@ ============ $(aria2c -S $@ | grep Name) ====================$(date)" >> $histfile
     mv "$@" ~/.torrents/
 

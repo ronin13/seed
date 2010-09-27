@@ -2,7 +2,7 @@ man(){
     #set -x
     #hit=1
     #setopt extendedglob
-    if [[ -z $2 ]] && ! /bin/ls $HOME/helpers/man/**/$1.* 2>/dev/null;then
+    if [[ -z $2 ]] && ! /bin/ls $HOME/helpers/man/**/$1.* &>/dev/null;then
     #hit=0
     location=`/usr/bin/man -M /usr/share/man -w $1`
     number=${${location:t}[(ws:.:)2]}
@@ -15,6 +15,32 @@ man(){
 }
 
 
+cd () {
+
+    emulate -LR zsh
+
+    if [[ $# -ge 3 ]]; then
+        echo cd: too many arguments >&2
+        return 1
+    elif [[ $# -eq 2 ]]; then
+        ## builtin cd $1 $2
+        local newdir=${(S)PWD//$1/$2}
+        echo $newdir
+        builtin cd $newdir
+    elif [[ $# -eq 1 ]]; then
+        if [[ ! -d $1 && -d $1:h ]]; then
+            echo $1:h
+            builtin cd $1:h
+        else
+            builtin cd $1
+        fi
+    else
+        builtin cd
+        fi
+}
+
+
+
 weechat(){
     weechat-curses 2>/dev/null
 }
@@ -22,7 +48,7 @@ weechat(){
 tmpwrite(){
   $file = mktemp
   /usr/bin/vim $file
-  rm $file
+  mv $file $file.d
 }
 
 apod(){
@@ -111,6 +137,22 @@ comcache(){
 export PATH="/usr/lib/ccache/bin/:$PATH"
 }
 
+ad2que(){
+trap 'break' INT
+local tset
+local input
+while :;do
+    read $input
+    if ! which =$input[(w)1] &>/dev/null;then
+        input="shellrun $input"
+    fi
+    tset="$tset
+    $input"
+done
+echo "$tset" >> ~/.dque
+}
+
+
 xpaste(){
     file="$1"
     [[ -z $file ]] &&  file="$HOME/note"
@@ -142,7 +184,7 @@ dfilter(){
 }
 
 mangrep(){
-    man "$1" | grep -5 "$2"
+    /usr/bin/man "$1" | grep -5 "$2"
 }
 
 

@@ -101,6 +101,7 @@ statusbarpanel > * { margin: 0 !important; padding: 0 2px 0 0 !important; }
  color: #d7d7d7 !important;
 }
 
+
 .tabbrowser-tab .tab-text {
  border:0px !important;
 }

@@ -1,6 +1,5 @@
 "http://vimdoc.sourceforge.net/cgi-bin/vimfaq2html3.pl#23.5
 "noremap <C-w> <Nop>
-"nnoremap <S-Insert> i :set paste <S-Insert>
 let g:fakeclip_no_default_key_mappings = 1
 scriptencoding utf-8
 
@@ -256,8 +255,6 @@ let g:rvSaveDirectoryName = "$HOME/Arch/vim/.rcs/"
 command DiffOrig vertical new | set buftype=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 nnoremap <leader>ch :DiffOrig
 
-source ~/.vim/vimrc.spell
-source ~/.vim/vimrc.abbrev
 
 :setlocal spell spelllang=en
 set spellfile=~/.vim/spellfile.add
@@ -411,13 +408,33 @@ endfunction
 autocmd filetype python,perl,c,css :call ToggleOverLengthHi()
 
 if !has('clipboard')
-for _ in ['+', '*']
-  execute 'nmap "'._.'y  <Plug>(fakeclip-y)'
-  execute 'nmap "'._.'Y  <Plug>(fakeclip-Y)'
-  execute 'nmap "'._.'yy  <Plug>(fakeclip-Y)'
-  execute 'vmap "'._.'y  <Plug>(fakeclip-y)'
-  execute 'vmap "'._.'Y  <Plug>(fakeclip-Y)'
-endfor
+    for _ in ['+', '*']
+        execute 'nmap "'._.'y  <Plug>(fakeclip-y)'
+        execute 'nmap "'._.'Y  <Plug>(fakeclip-Y)'
+        execute 'nmap "'._.'yy  <Plug>(fakeclip-Y)'
+        execute 'vmap "'._.'y  <Plug>(fakeclip-y)'
+        execute 'vmap "'._.'Y  <Plug>(fakeclip-Y)'
+        execute 'nmap "'._.'p  <Plug>(fakeclip-p)'
+        execute 'nmap "'._.'P  <Plug>(fakeclip-P)'
+        execute 'nmap "'._.'gp  <Plug>(fakeclip-gp)'
+        execute 'nmap "'._.'gP  <Plug>(fakeclip-gP)'
+        execute 'nmap "'._.']p  <Plug>(fakeclip-]p)'
+        execute 'nmap "'._.']P  <Plug>(fakeclip-]P)'
+        execute 'nmap "'._.'[p  <Plug>(fakeclip-[p)'
+        execute 'nmap "'._.'[P  <Plug>(fakeclip-[P)'
+        execute 'vmap "'._.'p  <Plug>(fakeclip-p)'
+        execute 'vmap "'._.'P  <Plug>(fakeclip-P)'
+        execute 'vmap "'._.'gp  <Plug>(fakeclip-gp)'
+        execute 'vmap "'._.'gP  <Plug>(fakeclip-gP)'
+        execute 'vmap "'._.']p  <Plug>(fakeclip-]p)'
+        execute 'vmap "'._.']P  <Plug>(fakeclip-]P)'
+        execute 'vmap "'._.'[p  <Plug>(fakeclip-[p)'
+        execute 'vmap "'._.'[P  <Plug>(fakeclip-[P)'
+        execute 'map! <C-r>'._.'  <Plug>(fakeclip-insert)'
+        execute 'map! <C-r><C-r>'._.'  <Plug>(fakeclip-insert-r)'
+        execute 'map! <C-r><C-o>'._.'  <Plug>(fakeclip-insert-o)'
+        execute 'imap <C-r><C-p>'._.'  <Plug>(fakeclip-insert-p)'
+    endfor
 endif
 
 "map Y <Nop>
@@ -439,12 +456,12 @@ endif
 "imap <Enter> <Esc>o
 "http://peterodding.com/code/vim/easytags/
 let g:easytags_file = '~/Arch/vim/gtags'
-set number
+"set number
 "set verbose=0
 "vim-buftabs removed
 
 "set whichwrap=b,s,<,>,[,]
-"set cursorline
+set cursorline
 
 " http://www.reddit.com/r/linux/comments/ddgqm/how_i_boosted_my_vim/
 map <up> gk
@@ -460,6 +477,7 @@ set path+=**
 
 "http://stevelosh.com/blog/2010/09/coming-home-to-vim/#slime
 let g:ackprg="ack -H --nocolor --nogroup --column"
+"reselect the text that was just pasted so I can perform commands (like indentation
 nnoremap <leader>v V`]
 set gdefault
 set ttyfast
@@ -468,3 +486,6 @@ set relativenumber
 "http://github.com/kikijump/tslime.vim/blob/master/tslime.vim
 "http://github.com/bartman/git-wipi
 ""http://technotales.wordpress.com/2007/10/03/like-slime-for-vim/
+source ~/.vim/vimrc.spell
+source ~/.vim/vimrc.abbrev
+map <S-up> <Esc>:set paste<CR>"+P

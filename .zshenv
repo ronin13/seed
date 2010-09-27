@@ -6,8 +6,8 @@ setopt no_case_glob
 setopt multios
 setopt  extendedglob
 unsetopt clobber
-alias -g .n='&>/dev/null'
-alias -g .h='&>/dev/null &'
+#alias -g .n='&>/dev/null'
+#alias -g .h='&>/dev/null &'
 autoload -U zen
 #zen update
 #cdpath=( $cdpath ~/  /media/ /dev/ /var/ ~/Arch/ ~/.config/ )

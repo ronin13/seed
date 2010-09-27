@@ -8,7 +8,7 @@ command! -nargs=* ir open read
 "nmap <Esc> :bnext <count><CR>
 nnoremap <A-Right> gt
 nnoremap <A-Left> gT
-nnoremap <Esc> gt
+nmap ` gt
 nnoremap l :tabopen! 
 nmap H F18
 nnoremap F f
@@ -24,10 +24,10 @@ nnoremap w <C-b>
 nnoremap s <Space>
 nnoremap <A-Down> <A-i>
 "nnoremap <A-/> :bnext<Space>
-nnoremap ` :bnext<Space>
+"nnoremap ` :bnext<Space>
 nnoremap <BS> <C-o>
-nnoremap `0 g0
-nnoremap `l g$
+"nnoremap `0 g0
+"nnoremap `l g$
 
 set defsearch=g
 set editor="xterm -e /usr/bin/vim -f"
