@@ -445,8 +445,9 @@ def dir_list(dir, filter_list=(), filter_excludes=True, include_dir=False):
     file_list = []
     extend = file_list.extend
     join = path.join
+
     def walk_path():
-        for basedir, subdirs, files in walk(dir):
+        for basedir, subdirs, files in walk(os.path.expanduser(dir)):
             #if include_dir:
             #    subdirs = map(lambda s : join(s, ''), subdirs)
             #    files.extend(subdirs)
