@@ -16,11 +16,10 @@ setxkbmap -option terminate:ctrl_alt_bksp
 xmodmap  ~/.Xmodmap
 ${=LOCK}/urxvtd urxvtd -q -f -o
 
-unclutter -idle 4 -reset &
-xbindkeys 
-#/usr/lib/notify-osd-customizable/notify-osd &
+unclutter -noevents -root -idle 4 -reset &
+xbindkeys
 /usr/lib/notification-daemon-1.0/notification-daemon &
-${=LOCK}/tmux tmux -2 start-server
-#parcellite &
+tmux new-session -d
+#${=LOCK}/tmux tmux -2 start-server
 clipbored
 exec xmonad

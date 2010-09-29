@@ -67,7 +67,8 @@ main = do
         mouseBindings      = myMouseBindings,
         keys               = myKeys,
         layoutHook         = layoutHintsWithPlacement (0,1) myLayout,
-        manageHook         = insertPosition Below Newer <+> myManageHook,
+        --manageHook         = insertPosition Below Newer <+> myManageHook,
+        manageHook         = myManageHook,
         handleEventHook    = myEventHook,
         logHook            = myLogHook xmproc, 
         startupHook        = myStartupHook
@@ -200,15 +201,12 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 myLayout = onWorkspace "3:browser" brLayout $ onWorkspace "7:games" vidLayout $ defLayout
       where
 --           defLayout = avoidStruts $ noBorders (tiled ||| Mirror tiled ||| Full)
-          defLayout = struts $ mgFy ( tiled ||| Mirror tiled ||| Full)
-          --htiled  = hinted (ResizableTall 1 (2/100) (1/2) [])
+          defLayout = avoidStruts $ mgFy ( tiled ||| Mirror tiled ||| Full)
           tiled     = smartBorders tall
           tall      = ResizableTall 1 (2/100) (1/2) []
-          brLayout  = Mirror tiled ||| mgFy tiled ||| Full
-          struts    = avoidStrutsOn [U]
+          brLayout  = avoidStruts (Mirror tiled ||| mgFy tiled ||| Full)
           mgFy      = Mag.magnifiercz 1.4
           vidLayout = H.Grid False ||| Full
-         -- hinted l  = layoutHintsWithPlacement (0,0) l
 --}}}
 
 --{{{ Workspaces

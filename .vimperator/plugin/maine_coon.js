@@ -188,8 +188,10 @@ let tagetIDs = (liberator.globalVariables.maine_coon_targets || '').split(/\s+/)
       };
   }
 
-  function delay (f, t)
-    setTimeout(f, t || 0);
+  function delay (f, t){
+   // setTimeout(f, t || 10);
+   setTimeout(f,3000);
+  }
 
   function refreshWindow () {
     // FIXME
@@ -247,6 +249,7 @@ let tagetIDs = (liberator.globalVariables.maine_coon_targets || '').split(/\s+/)
                   U.toStyleText({
                     position: 'fixed',
                     zIndex: 1000,
+                    font-size:x-small,
                     left: 0,
                     bottom: 0,
                     opacity: 1

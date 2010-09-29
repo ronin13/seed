@@ -10,7 +10,7 @@ nnoremap <A-Right> gt
 nnoremap <A-Left> gT
 nmap ` gt
 nnoremap l :tabopen! 
-nmap H F18
+nmap H F17
 nnoremap F f
 nnoremap f F
 nnoremap S <C-c>
@@ -31,13 +31,13 @@ nnoremap <BS> <C-o>
 
 set defsearch=g
 set editor="xterm -e /usr/bin/vim -f"
-set mainecoon=am
+"set mainecoon=am
 set runtimepath=/home/raghavendra/.vimperator
 "source! /home/raghavendra/.vimperatorrc.local
 
 hi CmdLine font-family: "Lucida Console"; font-size: 10pt; font-weight: normal;
 "set complete=sl
-set guioptions=n
+set guioptions=
 command! good noscript toggleperm
 command! tgood noscript toggletemp
 
@@ -72,3 +72,16 @@ nnoremap <silent> n n:centerselect<CR>
 nnoremap <silent> N N:centerselect<CR>
 nnoremap <silent> zz :centerselect<CR>
 
+:autocmd Fullscreen .* :js document.getElementById("status-bar").setAttribute("moz-collapsed", false)
+set showmode
+set titlestring=Firefox
+set newtab=all
+"http://fabien.benetou.fr/Tools/Vimperator
+
+set showstatuslinks=2
+:set buftabs_maxlength=10
+hi BufTabSelected color:white;font-weight:bold;font-weight:italics
+hi BufTab color:#A8A8A8;font-weight: bold
+set showtabline=0
+" To avoid stupid tabstrip
+:set fullscreen
