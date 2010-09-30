@@ -1,9 +1,18 @@
 "2.3.1 (created: 2010/04/07 18:25:13)
 
+"set verbose=15
 loadplugins
+set saveform
 command! -nargs=* ir open read
 "command! -complete=buffer ntab bnext <count><CR>
 "command! -count ntab bnext <count><CR>
+set showstatuslinks=2
+hi BufTabSelected color:white;font-weight:bold;font-weight:italics
+hi BufTab color:#A8A8A8;font-weight: bold
+set showtabline=0
+" To avoid stupid tabstrip
+" To be looked at
+"set fullscreen
 
 "nmap <Esc> :bnext <count><CR>
 nnoremap <A-Right> gt
@@ -31,7 +40,7 @@ nnoremap <BS> <C-o>
 
 set defsearch=g
 set editor="xterm -e /usr/bin/vim -f"
-"set mainecoon=am
+set mainecoon=am
 set runtimepath=/home/raghavendra/.vimperator
 "source! /home/raghavendra/.vimperatorrc.local
 
@@ -60,11 +69,8 @@ javascript <<EOF
 EOF
 
 :bmark http://www.google.com/search?btnI=I%27m+Feeling+Lucky&q=%s -title="Google feeling lucky search" -keyword=googlelucky
-":set defsearch=googlelucky
-"nnoremap 
 nnoremap h :tabopen googlelucky 
 "bma -k=r http://reddit.com/r/%s/
-" vim: set ft=vimperator:
 colorscheme myzenburn
 
 "http://code.google.com/p/vimperator-labs/issues/detail?id=221
@@ -78,10 +84,4 @@ set titlestring=Firefox
 set newtab=all
 "http://fabien.benetou.fr/Tools/Vimperator
 
-set showstatuslinks=2
-:set buftabs_maxlength=10
-hi BufTabSelected color:white;font-weight:bold;font-weight:italics
-hi BufTab color:#A8A8A8;font-weight: bold
-set showtabline=0
-" To avoid stupid tabstrip
-:set fullscreen
+" vim: set ft=vimperator:

@@ -28,7 +28,7 @@ var INFO =
     <item>
         <tags>'buftabs_maxlength'</tags>
         <spec>'buftabs_maxlength'</spec>
-        <type>number</type> <default>25</default>
+        <type>number</type> <default>10</default>
         <description>
             The maximum length in characters of a single entry in the buftabs line.
             Set to 0 for unlimited.
@@ -238,7 +238,7 @@ options.add(["buftabs"],
 
 options.add(["buftabs_maxlength"],
         "Max length of an entry in the buftabs list",
-        "number", "25", 
+        "number", "10", 
         {
             setter: function (value)
             {

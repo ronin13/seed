@@ -77,7 +77,7 @@ main = do
 --}}}
 --
 --{{{
-urgentConfig = UrgencyConfig { suppressWhen = Focused, remindWhen = Repeatedly 3 10 }
+urgentConfig = UrgencyConfig { suppressWhen = XMonad.Hooks.UrgencyHook.Never, remindWhen = Repeatedly 3 10 }
 --}}}
 
 --{{{ Variables 

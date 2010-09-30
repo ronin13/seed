@@ -249,7 +249,6 @@ let tagetIDs = (liberator.globalVariables.maine_coon_targets || '').split(/\s+/)
                   U.toStyleText({
                     position: 'fixed',
                     zIndex: 1000,
-                    font-size:x-small,
                     left: 0,
                     bottom: 0,
                     opacity: 1

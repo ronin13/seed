@@ -1,7 +1,8 @@
 
 [default]
 ao=oss
-vo=xv
+#vo=gl
+vo=gl:yuv=1:rectangle=2:force-pbo,xv,fbdev,null
 ontop=yes
 slices=no
 idx=yes
