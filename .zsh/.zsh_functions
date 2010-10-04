@@ -14,6 +14,15 @@ man(){
     #set +x
 }
 
+append(){
+    echo "Enter stuff"
+    cat >>$1
+}
+
+function {reboot,sdown} {
+    echo "Sure y/N"
+    read -q && $0
+}
 
 cd () {
 
@@ -62,7 +71,7 @@ apod(){
     wget -q -O "$FILE" -c http://apod.nasa.gov/apod/${=url}
     exiftool -overwrite_original -UserComment="$apodDesc" $FILE
     feh $FILE &
-    echo $apodDesc | xmessage -file - -timeout 30
+    echo $apodDesc | par f | xmessage -file - -timeout 30
     echo "Set as wallpaper: y/n"
     read -q  && set_wall $FILE
     #set +x

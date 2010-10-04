@@ -43,6 +43,9 @@ import XMonad.Actions.CycleWS
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 import qualified XMonad.Layout.Magnifier as Mag
+
+import XMonad.Hooks.ServerMode
+import XMonad.Actions.Commands
 --}}} 
 
 --{{{ Testing 
@@ -66,7 +69,8 @@ main = do
         focusedBorderColor = myFocusedBorderColor,
         mouseBindings      = myMouseBindings,
         keys               = myKeys,
-        layoutHook         = layoutHintsWithPlacement (0,1) myLayout,
+        --layoutHook         = layoutHintsWithPlacement (0,1) myLayout,
+        layoutHook         = myLayout,
         --manageHook         = insertPosition Below Newer <+> myManageHook,
         manageHook         = myManageHook,
         handleEventHook    = myEventHook,
@@ -205,37 +209,48 @@ myLayout = onWorkspace "3:browser" brLayout $ onWorkspace "7:games" vidLayout $ 
           tiled     = smartBorders tall
           tall      = ResizableTall 1 (2/100) (1/2) []
           brLayout  = avoidStruts (Mirror tiled ||| mgFy tiled ||| Full)
-          mgFy      = Mag.magnifiercz 1.4
+          --mgFy      = Mag.magnifiercz 1.4
+          mgFy      = Mag.magnifiercz 1.4 . Mag.magnifierOff
           vidLayout = H.Grid False ||| Full
 --}}}
 
 --{{{ Workspaces
+-- appName =? "foo" --> (ask >>= \w -> liftX (toggleBorder w) >> idHook)
+-- http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Layout-Monitor.html
 myWorkspaces :: [WorkspaceId]
 myWorkspaces    = ["1:norm","2:term","3:browser","4:video","5:pdf","6:note","7:thunar","8:games","9:misc"]
 myManageHook = composeAll . concat $
-    [ [     className =? a                --> doFloat               | a <- myFloats          ]
-    , [     isFullscreen                  --> doFullFloat                                    ]  
-    , [     className =? "Wine"           --> doShift "8:games"                              ]
-    , [     resource  =? c                --> doIgnore              | c <- myIgnores         ]
-    , [     className =? "Gpodder"        --> doShift "9:misc"                               ]
-    , [     className =? b                --> doShift "3:browser"   | b <- myBrowsers        ]
-    , [     className =? "Thunar"         --> doShift "7:thunar"                             ]
-    , [     className =? "Rednotebook"    --> doShift "6:note"                               ]
-	, [     className =? d  <||> isDialog --> doCenterFloat         | d <- myCenterFloats    ]
-    , [     className =? e 		          --> doShift "5:pdf"       | e <- myPDF             ]
-    , [     manageDocks                                                                      ]
-    , [     transience'                                                                      ] ]
-    where 
+    [ [     className =? a                --> doFloat               | a <- myFloats              ]
+--    , [     className =? "MPlayer"        --> (ask >>= \w -> liftX (toggleBorder w) >> doFloat)  ]
+ --   , [     isFullscreen                  --> doFullFloat                                      ]
+    , [     className =? "Wine"           --> doShift "8:games"                                  ]
+    , [     resource  =? c                --> doIgnore              | c <- myIgnores             ]
+    , [     className =? "Gpodder"        --> doShift "9:misc"                                   ]
+    , [     className =? b                --> doShift "3:browser"   | b <- myBrowsers            ]
+    , [     className =? "Thunar"         --> doShift "7:thunar"                                 ]
+    , [     className =? "Rednotebook"    --> doShift "6:note"                                   ]
+	, [     className =? d  <||> isDialog --> doCenterFloat         | d <- myCenterFloats        ]
+    , [     className =? e 		          --> doShift "5:pdf"       | e <- myPDF                 ]
+    , [     manageDocks                                                                          ]
+    , [     transience'                                                                          ] ]
+    where
       myFloats =  ["MPlayer"] 
+     -- myFloats =  []
+     -- To use mplayer float and fullscreen good, do all mplayer fs type stuff
+     -- for isFullscreen to work.. lol
       myCenterFloats = ["Xmessage","feh"]
       myBrowsers = ["Opera","Firefox","Shiretoko","Chromium","Google-chrome","Namoroka"] -- Namoroka
       myPDF = ["Evince","Zathura","Apvlv"]
       myIgnores = ["desktop_window","desktop"]
 --}}}
 
+-- http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Util-Timer.html
+-- for mplayer
 --{{{ Events
-myEventHook = mempty
+--myEventHook = mempty
 --myEventHook = ewmhDesktopsEventHook
+--  http://xmonad.org/xmonad-docs/xmonad-contrib/XMonad-Hooks-ServerMode.html
+myEventHook = serverModeEventHook
 --}}}
 
 --{{{ Startup
@@ -255,13 +270,13 @@ myLogHook h = dynamicLogWithPP $ customPP { ppOutput = hPutStrLn h }
 customPP :: PP
 customPP = defaultPP { 
                 ppHidden = xmobarColor "#0000FF" "" . noScratchPad
-              , ppOrder = \(ws:_:t:_) -> [ws]
+              , ppOrder = \(ws:l:t:_) -> [l,ws]
               , ppCurrent = xmobarColor "gray" ""
             -- .  head . splitRegex (mkRegex ":")
               , ppUrgent = xmobarColor "green" "" . wrap "*" "*"
             --, ppVisible = head . splitRegex (mkRegex ":")
               , ppWsSep =  " "
-              , ppLayout = xmobarColor "Yellow" ""
+              , ppLayout = xmobarColor "DarkOrchid" "" . wrap "[" "]"
               , ppTitle = xmobarColor "slateblue" "" . shorten 25
               , ppSep = "<fc=#0033FF> . </fc>"
             }

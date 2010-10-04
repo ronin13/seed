@@ -23,8 +23,6 @@ autoload -U colors && colors
 #promptinit 
 #prompt elite
 setopt HIST_NO_FUNCTIONS
-#PROMPT="%{$fg[blue]%}(%2d)%{$reset_color%}"
-#RPROMPT="(%{$fg[red]%}%T%{$reset_color%}-%{$fg[magenta]%}[%?:%!])%{$reset_color%}%"
 
 bindkey "\e[A" history-search-backward
 bindkey "\e[B" history-search-forward
@@ -104,9 +102,9 @@ compinit
 zstyle ':completion:*:*:killall:*' menu yes select
 zstyle ':completion:*:killall:*'   force-list always
 
+source ~/.zsh/.zsh_aliases
 source ~/.zsh/.zsh_functions
 source ~/.zsh/completions
-source ~/.zsh/.zsh_aliases
 source ~/.zsh/functions
 #bash_source ~/.zsh/functions
 #bash_source ~/.zsh/apparix.sh
@@ -169,10 +167,10 @@ function chpwd(){
     export GPRT=$(pwd | tr -cd '/' | tr '/' '>')
     #pwd | tr '/' '\n' | wc -l
 }
-
+# 256 colors in zsh
 #PROMPT="%{$fg[blue]%}(%2d)%{$reset_color%}"
 function precmd(){
-PROMPT="%{$fg[blue]%}${GPRT}=%{$reset_color%}"
+PROMPT="%{$fg[green]%}${GPRT}=%{$reset_color%}"
 export ESTATUS=$?
 RPROMPT="%{$fg[blue]%}(%2d)~$(gprompt)%{$fg[red]%}%T-$(estatus)"
 }

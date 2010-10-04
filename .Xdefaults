@@ -14,7 +14,7 @@ URxvt.scrollBar: false
 URxvt.cursorUnderline: true
 URxvt.foreground: grey85
 URxvt.urgentOnBell: True
-URxvt.background:grey3
+URxvt.background: grey3
 !URxvt.font:xft:Liberation Mono:pixelsize=14:antialias=false
 URxvt.font:xft:Inconsolata-9:antialias=false
 URxvt.boldFont:
@@ -25,7 +25,13 @@ URxvt.perl-lib: /home/raghavendra/.urxvt/
 !URxvt.depth: 24
 URxvt.transparent: true
 !URxvt.inheritPixmap: false
-URxvt.cursorColor:grey85
+!URxvt.cursorColor:grey85
+URxvt.cursorColor: green
+URxvt.cursorColor2: color199
+!URxvt.borderLess: true
+URxvt.internalBorder:0
+URxvt.externalBorder:0
+!URxvt.keysym.M-Escape: perl:keyboard-select:activate
 
 xterm*foreground: grey85
 xterm*background: grey3
@@ -89,25 +95,25 @@ xterm*colorBDMode: true
 xterm*colorBD: rgb:fc/fc/fc
 
 xmessage*form.okay.shapeStyle:          rectangle
- xmessage*form.okay.background:          IndianRed
- xmessage*form.okay.foreground:          rgb:e/b/b
- xmessage*message*background:            ivory3
- xmessage*background:                    gray85
- xmessage*foreground:                    gray15
- xmessage*Scrollbar.width:               1
- xmessage*Scrollbar.borderWidth:         0
+xmessage*form.okay.background:          IndianRed
+xmessage*form.okay.foreground:          rgb:e/b/b
+xmessage*message*background:            ivory3
+xmessage*background:                    gray85
+xmessage*foreground:                    gray15
+xmessage*Scrollbar.width:               1
+xmessage*Scrollbar.borderWidth:         0
 !xmessage*Text.?.cursorColor:            rgb:d/5/5
- xmessage*Text.borderColor:              gray65
- xmessage*Text*background:               gray95
- xmessage*Command.highlightThickness:    1
- xmessage*Command.internalWidth:         5
- xmessage*Command.internalHeight:        3
- xmessage*Command.borderColor:           gray40
- xmessage*Command.shapeStyle:            Rectangle
- xmessage*Command.background:            gray80
+xmessage*Text.borderColor:              gray65
+xmessage*Text*background:               gray95
+xmessage*Command.highlightThickness:    1
+xmessage*Command.internalWidth:         5
+xmessage*Command.internalHeight:        3
+xmessage*Command.borderColor:           gray40
+xmessage*Command.shapeStyle:            Rectangle
+xmessage*Command.background:            gray80
 !xmessage*font:          xft:Verdana:pixelsize=12:antialias=true
 !xmessage*font:                          -*-clean-*-*-*-*-*-*-*-*-*-*-iso8859-2
- xmessage*defaultButton: okay
+xmessage*defaultButton: okay
 
 
 *foreground:            #bbbbbb
@@ -129,3 +135,20 @@ xmessage*form.okay.shapeStyle:          rectangle
 *color13:               rgb:ff/69/fd
 *color14:               rgb:7a/b2/ae
 *color15:               rgb:ca/ca/ca
+
+
+xlock.mode:qix
+xlock.username: Username: 
+xlock.invalid: Login failed.
+xlock.icongeometry:256x256
+xlock.foreground:White
+xlock.background:Black
+xlock.description:false
+xlock.echokeys:true
+xlock.echokey:*
+xlock.info:
+xlock.display: :0
+xlock.ncolors:256
+xlock.font:-xos4-terminus-medium-r-normal--20-200-72-72-c-100-iso8859-15
+xlock.planfont:-xos4-terminus-medium-r-normal--20-200-72-72-c-100-iso8859-15
+xlock.messagefont:-xos4-terminus-medium-r-normal--20-200-72-72-c-100-iso8859-15

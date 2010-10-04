@@ -61,7 +61,7 @@ fi
 mpc pause &>/dev/null
 echo "loadfile \"$FILE\"" > $MPSOCKET
 [[ ! -z $POSITION ]] &&  echo "set_property time_pos $POSITION" > $MPSOCKET
-sleep 1
+sleep 3
 xdotool key super+r
 #echo "pause" > $MPSOCKET
 #set +x

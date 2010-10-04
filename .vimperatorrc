@@ -10,9 +10,6 @@ set showstatuslinks=2
 hi BufTabSelected color:white;font-weight:bold;font-weight:italics
 hi BufTab color:#A8A8A8;font-weight: bold
 set showtabline=0
-" To avoid stupid tabstrip
-" To be looked at
-"set fullscreen
 
 "nmap <Esc> :bnext <count><CR>
 nnoremap <A-Right> gt

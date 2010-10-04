@@ -184,6 +184,8 @@ nnoremap <Home><Home> :q<CR>
 " tab navigation (next tab) with alt left / alt right
 nnoremap  <A-Right>  gt
 nnoremap  <A-Left>   gT
+inoremap  <A-Right>  gt
+inoremap  <A-Left>   gT
 " Ctrl + Arrows - Move around quickly
 nnoremap  <C-up>     {
 nnoremap  <C-down>   }
@@ -482,6 +484,7 @@ nnoremap <leader>v V`]
 set gdefault
 set ttyfast
 set relativenumber
+"set number
 "http://git.benboeckel.net/git?p=dotfiles.git;a=blob;f=generic/home/vimrc
 "http://github.com/kikijump/tslime.vim/blob/master/tslime.vim
 "http://github.com/bartman/git-wipi
@@ -489,3 +492,17 @@ set relativenumber
 source ~/.vim/vimrc.spell
 source ~/.vim/vimrc.abbrev
 map <S-up> <Esc>:set paste<CR>"+P
+
+
+"http://vim.wikia.com/wiki/Configuring_the_cursor
+" Set an orange cursor in insert mode, and a red cursor otherwise.
+" Works at least for xterm and rxvt terminals.
+" Does not work for gnome terminal, konsole, xfce4-terminal.
+"if &term =~ "xterm\\|rxvt"
+  ":silent !echo -ne "\033]12;red\007"
+  "let &t_SI = "\033]12;orange\007"
+  "let &t_EI = "\033]12;red\007"
+  "autocmd VimLeave * :!echo -ne "\033]12;red\007"
+"endif
+
+map <leader>h :set nohlsearch
