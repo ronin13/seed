@@ -1,6 +1,6 @@
 Config { font = "xft:Dina-9"
        , bgColor = "grey2"
-       , fgColor = "grey50"
+       , fgColor = "gray76"
        , position = Top
        , lowerOnStart = True
        , commands = [ Run Network "eth0" ["-L","0","-H","100","--normal","blue","--high","red"] 50
@@ -10,7 +10,7 @@ Config { font = "xft:Dina-9"
                     , Run Com "shellrun stemp" [] "Thermal" 100
                     , Run Com "date +'%b %d %H:%M'" [] "mdate" 60
                     , Run Com  "~/bin/mpdStats" [] "mpd" 10
-                    , Run Com  "~/bin/downloadStats" [] "download" 200
+                    , Run Com  "~/bin/downloadStats" [] "download" 400
                     , Run Com "~/bin/battery_mon" [] "battery" 200
                     , Run StdinReader
                     ]

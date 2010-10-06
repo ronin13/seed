@@ -3,3 +3,5 @@ folder-hook . "exec collapse-all"
 #folder-hook =Search "l ~N<enter>"
 folder-hook =Search "set delete=yes"
 #set folder-hook =Arch$ "set signature=
+folder-hook =INBOX$ "set strict_threads=yes"
+#folder-hook =INBOX$ ""  # --change here for ~l when needed

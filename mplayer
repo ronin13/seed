@@ -14,7 +14,7 @@ MPSOCKET="/tmp/mplayer/$randnum.fif"
 
 
 touch /tmp/mplayer.log
-xord=750
+xord=650
 yord=400
 
 pwdir=`pwd`

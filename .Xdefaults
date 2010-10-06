@@ -94,6 +94,8 @@ xterm*boldMode: false
 xterm*colorBDMode: true
 xterm*colorBD: rgb:fc/fc/fc
 
+
+!http://en.wikipedia.org/wiki/X_logical_font_description
 xmessage*form.okay.shapeStyle:          rectangle
 xmessage*form.okay.background:          IndianRed
 xmessage*form.okay.foreground:          rgb:e/b/b
@@ -111,13 +113,12 @@ xmessage*Command.internalHeight:        3
 xmessage*Command.borderColor:           gray40
 xmessage*Command.shapeStyle:            Rectangle
 xmessage*Command.background:            gray80
-!xmessage*font:          xft:Verdana:pixelsize=12:antialias=true
-!xmessage*font:                          -*-clean-*-*-*-*-*-*-*-*-*-*-iso8859-2
+!xmessage*font:                          -*-clean-*-*-*-*-0-*-*-*-*-*-iso8859-2
 xmessage*defaultButton: okay
 
-
-*foreground:            #bbbbbb
-*background:            #2e2e2e
+XFontSel*font: -xos4-terminus-medium-r-normal-*-14-140-72-72-c-80-iso8859-*
+!*foreground:            #bbbbbb
+!*background:            #2e2e2e
 *color0:                rgb:32/32/32
 *color1:                rgb:cd/5c/5c
 *color2:                rgb:8e/ae/71
@@ -149,6 +150,3 @@ xlock.echokey:*
 xlock.info:
 xlock.display: :0
 xlock.ncolors:256
-xlock.font:-xos4-terminus-medium-r-normal--20-200-72-72-c-100-iso8859-15
-xlock.planfont:-xos4-terminus-medium-r-normal--20-200-72-72-c-100-iso8859-15
-xlock.messagefont:-xos4-terminus-medium-r-normal--20-200-72-72-c-100-iso8859-15

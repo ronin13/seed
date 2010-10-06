@@ -41,3 +41,4 @@ bash_source() {
 }
 
 export MOZ_DISABLE_PANGO=1
+export PERIOD=300

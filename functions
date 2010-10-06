@@ -61,11 +61,11 @@ function mpl()
 $HOME/bin/mplayer "$@"
 }
 
-function mutt()
-{
-mount | grep -q wormole || echo "CRITICAL: The rc directory is not mounted"
-LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so  /usr/bin/mutt 
-}
+#function mutt()
+#{
+#mount | grep -q wormole || echo "CRITICAL: The rc directory is not mounted"
+#LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so  /usr/bin/mutt 
+#}
 
 function download(){
 histfile="$HOME/.download_history"
@@ -82,9 +82,11 @@ if [[ "$@" =~ .*torrent$ ]];then
     mv "$@" ~/.torrents/
 
 else
-
+    rm ~/.aria2/.temp
+    cfile="~/.mozilla/firefox/default.profile/cookies.sqlite"
+    sqlite3 -separator '	'  =(cat $cfile) 'select host, "TRUE", path, "FALSE", expiry, name, value from moz_cookies' >|  ~/.aria2/.temp
     gid=$(aria2rpc addUri "$@")
-    echo "$gid:$@ =============== $(date)" >> $histfile 
+    echo "$gid:$@ >===============< $(date)" >> $histfile
     #aria2rpc tellStatus gid
 fi
 }

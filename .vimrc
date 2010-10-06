@@ -20,7 +20,6 @@ set sidescroll=5
 set sidescrolloff=5
 nnoremap <F1> :wq<CR>
 inoremap <F1> <ESC>:wq<CR>
-map <MouseMiddle> <esc>"+p
 "autocmd!
 
 "set runtimepath=~/.vim,/usr/share/vim/vim73,/usr/share/vim/vimfiles,/usr/share/vim/vimfiles/after
@@ -41,7 +40,9 @@ set ruler
 set title
 set backup
 "set dictionary+=/usr/share/dict/words
+"set shortmess=atI
 set shortmess=atI
+"set cmdheight=2
 set backupdir=~/.vim-tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,/var/tmp,/tmp
 set backspace=indent,eol,start
@@ -106,9 +107,9 @@ set foldmethod=marker
 
 set wildmenu                            " Autocomplete features in the status bar
 set wildmode=list:longest,full
-au BufRead,BufNewFile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,/tmp/mutt* :set ft=mail
+"au BufRead,BufNewFile .followup,.article,.letter,/tmp/pico*,nn.*,snd.*,~/.mutt/temp/* :set ft=mail
 " mail from http://cedricduval.free.fr/download/mail.vim
-autocmd BufRead /tmp/mutt* :source ~/.vim/mail.vim
+autocmd BufRead,BufNewFile ~/.mutt/temp/*,.followup,.article,.letter :source ~/.vim/mail.vim
 set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
 
 let g:pydiction_location = '$HOME/Arch/vim/pydiction/complete-dict'
@@ -203,6 +204,7 @@ nnoremap <C-right>   )
 
 if &diff
 " easily handle diffing
+   set cmdheight=2
    colorscheme mypeaksea
    noremap < :diffget<CR>
    noremap > :diffput<CR>
@@ -255,7 +257,7 @@ let g:rvSaveDirectoryType = 1
 let g:rvSaveDirectoryName = "$HOME/Arch/vim/.rcs/"
 
 command DiffOrig vertical new | set buftype=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
-nnoremap <leader>ch :DiffOrig
+nnoremap <leader>do :DiffOrig
 
 
 :setlocal spell spelllang=en
@@ -288,7 +290,7 @@ function! CleverTab()
 endfunction
 
 inoremap <Tab> <C-R>=CleverTab()<CR>
-noremap <F2> :silent SuperTabHelp<CR>
+map <leader>s :silent SuperTabHelp<CR>
 set nospell
 
 au BufRead,BufNewFile *.viki set ft=viki
@@ -315,7 +317,7 @@ au CursorHoldI * stopinsert
 " set 'updatetime' to 15 seconds when in insert mode
 au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
 au InsertLeave * let &updatetime=updaterestore
-nnoremap <silent> <leader>y :YRShow<CR> 
+nnoremap <silent> <leader>r :YRShow<CR> 
 nnoremap <silent> <leader>n :NERDTreeToggle<CR>
 set wrap
 map <leader>sn ]s
@@ -343,7 +345,7 @@ set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\ " highlight
 set statusline+=%-14.(%l,%c%V%)\ %<%P " offset
 
 " To turn off yankring if needed 
-"let g:yankring_enabled = 0
+let g:yankring_enabled = 0
 
 autocmd BufReadPost *.doc silent %!antiword "%"
 "autocmd BufReadPost *.odt,*.odp silent %!odt2txt "%"
@@ -444,6 +446,7 @@ endif
 
 " yank into clipboard -- mouseless
 nmap <leader>y "+Y
+vmap <leader>y "+Y
 
 nnoremap <C-S> :,$s/\<<C-R><C-W>\>/
 set grepprg=grep\ -nH\ $*
@@ -491,8 +494,8 @@ set relativenumber
 ""http://technotales.wordpress.com/2007/10/03/like-slime-for-vim/
 source ~/.vim/vimrc.spell
 source ~/.vim/vimrc.abbrev
-map <S-up> <Esc>:set paste<CR>"+P
-
+map <S-up> <Esc>:silent! 'xclip -o \| sed -e s/^\s+\(\w+\)/\1/'<CR><Esc>:set paste<CR>"+P
+"xclip -o | perl -pe 's/^\s+(\w+)/\1/
 
 "http://vim.wikia.com/wiki/Configuring_the_cursor
 " Set an orange cursor in insert mode, and a red cursor otherwise.
@@ -506,3 +509,4 @@ map <S-up> <Esc>:set paste<CR>"+P
 "endif
 
 map <leader>h :set nohlsearch
+

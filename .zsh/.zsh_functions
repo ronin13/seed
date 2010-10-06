@@ -69,9 +69,9 @@ apod(){
     apodDesc=$(perl -lne 'print $_ if /Explanation:/../Tomorrow/' $apodTemp | w3m -dump -T text/html | head -n -1)
     url="$(grep IMG $apodTemp | cut -d "\"" -f 2)"
     wget -q -O "$FILE" -c http://apod.nasa.gov/apod/${=url}
-    exiftool -overwrite_original -UserComment="$apodDesc" $FILE
+    /usr/bin/perlbin/vendor/exiftool -overwrite_original -UserComment="$apodDesc" $FILE
     feh $FILE &
-    echo $apodDesc | par f | xmessage -file - -timeout 30
+    echo $apodDesc | par f | xmessage -file - #-timeout 30
     echo "Set as wallpaper: y/n"
     read -q  && set_wall $FILE
     #set +x
@@ -327,4 +327,13 @@ H-Glob() {
   echo /proc/*/cwd(:h:t:s/self//) # Analogous to >ps ax | awk '{print $1}'<"
 }
 #alias help-zshglob=H-Glob
+function lsnew () {
+    if [[ $1 = "" ]]; then
+        lsnew_glob="*"
+    else
+        lsnew_glob=$1
+    fi
+    ls -tr -dl $~lsnew_glob(om[1,30])
+}
+alias lsnew='noglob lsnew'
 
