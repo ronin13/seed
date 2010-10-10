@@ -50,7 +50,7 @@ alias -s gif=feh
 setopt sharehistory
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
-alias -g zsource="source ~/.zshrc"
+alias -g zsource="set +x ;source ~/.zshrc"
 alias -g .g=' |& /bin/grep -i'
 alias -g .l=' |& less'
 alias -g .x=" |& tr '\n' '\0' | xargs -0 "
@@ -58,7 +58,7 @@ alias -g .x=" |& tr '\n' '\0' | xargs -0 "
 setopt correct
 setopt autolist #automenu
 
-setopt autopushd pushdminus pushdtohome pushdignoredups autocd
+setopt autopushd pushdminus pushdtohome autocd
 setopt inc_append_history
 #setopt share_history
 #setopt hist_reduce_blanks
@@ -159,8 +159,9 @@ function chpwd(){
 # if you want to use it in a prompt, just do %F{53}
 #PROMPT="%{$fg[blue]%}(%2d)%{$reset_color%}"
 function precmd(){
+#echo $?
+ESTATUS=$?
 PROMPT="%{$fg[green]%}${GPRT}=%{$reset_color%}"
-export ESTATUS=$?
 RPROMPT="%{$fg[blue]%}(%2d)~$(gprompt)%{$fg[red]%}%T-$(estatus)"
 }
 
@@ -274,7 +275,7 @@ zstyle ':completion:*' accept-exact-dirs true
 # http://github.com/ngnostrings/zsh/blob/master/zsh_apparix
 setopt HASH_CMDS
 
-periodic() { rm ~/.aria2/.temp 2>/dev/null; }
+periodic() { rm ~/.aria2/.temp 2>/dev/null;  }
 
 #http://www.xsteve.at/prg/zsh/.zshrc and irc
 zstyle ':completion:*' file-sort modification

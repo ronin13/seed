@@ -1,5 +1,6 @@
 setopt no_global_rcs
 setopt lmlone
+setopt chase_links
 setopt nohup shwordsplit no_bgnice
 #setopt nomonitor
 setopt no_case_glob

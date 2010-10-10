@@ -222,7 +222,7 @@ myWorkspaces    = ["1:norm","2:term","3:browser","4:video","5:pdf","6:note","7:t
 myManageHook = composeAll . concat $
     [ [     className =? a                --> doFloat               | a <- myFloats              ]
 --    , [     className =? "MPlayer"        --> (ask >>= \w -> liftX (toggleBorder w) >> doFloat)  ]
- --   , [     isFullscreen                  --> doFullFloat                                      ]
+    , [     isFullscreen                  --> doFullFloat                                      ]
     , [     className =? "Wine"           --> doShift "8:games"                                  ]
     , [     resource  =? c                --> doIgnore              | c <- myIgnores             ]
     , [     className =? "Gpodder"        --> doShift "9:misc"                                   ]

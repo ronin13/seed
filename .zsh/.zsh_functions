@@ -8,10 +8,15 @@ man(){
     number=${${location:t}[(ws:.:)2]}
     gunzip -c $location  >| $HOME/helpers/man/man${number//[a-z]/}/$1.${number}
     fi
-    LC_ALL=C LANG=C TERMINFO=~/.terminfo/ TERM=mostlike /usr/bin/man $1
+    LC_ALL=C LANG=C TERMINFO=~/.terminfo/ TERM=mostlike /usr/bin/man $@
     #echo $MANPATH
     #echo $hit
     #set +x
+}
+
+ygist(){
+    echo "sure Y/n"
+    read -q && xclip -o | gist
 }
 
 append(){
@@ -21,7 +26,7 @@ append(){
 
 function {reboot,sdown} {
     echo "Sure y/N"
-    read -q && $0
+    read -q && command $0
 }
 
 cd () {
@@ -147,18 +152,18 @@ export PATH="/usr/lib/ccache/bin/:$PATH"
 }
 
 ad2que(){
-trap 'break' INT
-local tset
-local input
-while :;do
-    read $input
-    if ! which =$input[(w)1] &>/dev/null;then
-        input="shellrun $input"
-    fi
-    tset="$tset
-    $input"
-done
-echo "$tset" >> ~/.dque
+    trap 'break' INT
+    local tset
+    local input
+    while :;do
+        read $input
+        if ! which =$input[(w)1] &>/dev/null;then
+            input="shellrun $input"
+        fi
+        tset="$tset
+        $input"
+    done
+    echo "$tset" >> ~/.dque
 }
 
 
@@ -242,11 +247,6 @@ ins(){
  fi
 }
 
-_force_rehash()
-{
-    (( CURRENT == 1 )) && rehash
-    return 1
-}
 
 extract() {
    if [[ -z "$1" ]] ; then

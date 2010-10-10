@@ -31,14 +31,14 @@ mkdir -p ~/.macromedia/Flash_Player/macromedia.com/support/flashplayer/sys
 cp ~/Arch/settings.sol ~/.macromedia/Flash_Player/macromedia.com/support/flashplayer/sys/
 }
 
-bash_source() {
-  alias shopt=':'
-  alias _expand=_bash_expand
-  alias _complete=_bash_comp
-  #emulate -L sh
-  setopt kshglob noshglob braceexpand
-  source "$@"
-}
+#bash_source() {
+#  alias shopt=':'
+#  alias _expand=_bash_expand
+#  alias _complete=_bash_comp
+#  #emulate -L sh
+#  setopt kshglob noshglob braceexpand
+#  source "$@"
+#}
 
 export MOZ_DISABLE_PANGO=1
-export PERIOD=300
+export PERIOD=75

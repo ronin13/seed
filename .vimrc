@@ -36,12 +36,11 @@ set mouse-=a
 " work more logically with wrapped lines
 noremap j gj
 noremap k gk
-set ruler 
+set ruler
 set title
 set backup
 "set dictionary+=/usr/share/dict/words
-"set shortmess=atI
-set shortmess=atI
+set shortmess=aOstT
 "set cmdheight=2
 set backupdir=~/.vim-tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,/var/tmp,/tmp
@@ -53,7 +52,7 @@ set smartcase							" search case sensitive if caps on
 " http://nvie.com/posts/how-i-boosted-my-vim/
 set shiftround
 set smarttab
-set visualbell           " don't beep
+:set visualbell t_vb=
 set noerrorbells         " don't beep
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
@@ -251,10 +250,12 @@ endfunc
 nnoremap <F3> :BufExplorer<CR>
 let g:BASH_AuthorName   = 'Raghavendra D Prabhu'
 let g:BASH_Email        = "raghu dot prabhu 13 AT google's mail service"
-let $LOGNAME            = "Raghavendra"
-let $TZ                 = "IST"
-let g:rvSaveDirectoryType = 1
-let g:rvSaveDirectoryName = "$HOME/Arch/vim/.rcs/"
+"let $LOGNAME            = "Raghavendra"
+"let $TZ                 = "IST"
+"let g:rvSaveDirectoryType = 1
+"let g:rvSaveDirectoryName = "/home/raghavendra/Arch/vim/.rcs/"
+"let g:rvDirSeparator = "/"
+"let g:rvRlogOptions = '-zLT'
 
 command DiffOrig vertical new | set buftype=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 nnoremap <leader>do :DiffOrig
@@ -273,7 +274,7 @@ nnoremap <C-w><Right>  <C-w>l
 nnoremap <C-w><Left>  <C-w>h
 
 " Not doing this -- too confusing
-"nnoremap Q @q
+nnoremap Q @q
 
 nnoremap v V
 nnoremap V v
@@ -293,7 +294,7 @@ inoremap <Tab> <C-R>=CleverTab()<CR>
 map <leader>s :silent SuperTabHelp<CR>
 set nospell
 
-au BufRead,BufNewFile *.viki set ft=viki
+"au BufRead,BufNewFile *.viki set ft=viki
 
 nnoremap <silent> <PageUp> 1000<C-U>
 nnoremap <silent> <PageDown> 1000<C-D>
@@ -312,7 +313,8 @@ set listchars=tab:>-,trail:.,extends:>
 highlight RedundantSpaces term=standout ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces highlighted
 
-nnoremap <BS> <Left><Del>
+"nnoremap <BS> <Left><Del>
+nmap <BS> db
 au CursorHoldI * stopinsert
 " set 'updatetime' to 15 seconds when in insert mode
 au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
@@ -343,9 +345,9 @@ set statusline+=%{fugitive#statusline()}
 set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\ " highlight
 " set statusline+=%b,0x%-8B\ " current char
 set statusline+=%-14.(%l,%c%V%)\ %<%P " offset
-
+"set statusline=%<%04n\ %t%(\ %m%r%y[%{&ff}][%{&fenc}]\ \ %{mode()}%)\ %a%=\ col\ %v\ \ line\ %l/%L\ %p%%
 " To turn off yankring if needed 
-let g:yankring_enabled = 0
+let g:yankring_enabled = 1
 
 autocmd BufReadPost *.doc silent %!antiword "%"
 "autocmd BufReadPost *.odt,*.odp silent %!odt2txt "%"
@@ -485,7 +487,8 @@ let g:ackprg="ack -H --nocolor --nogroup --column"
 "reselect the text that was just pasted so I can perform commands (like indentation
 nnoremap <leader>v V`]
 set gdefault
-set ttyfast
+" has issues so disabled
+"set ttyfast
 set relativenumber
 "set number
 "http://git.benboeckel.net/git?p=dotfiles.git;a=blob;f=generic/home/vimrc
@@ -509,4 +512,25 @@ map <S-up> <Esc>:silent! 'xclip -o \| sed -e s/^\s+\(\w+\)/\1/'<CR><Esc>:set pas
 "endif
 
 map <leader>h :set nohlsearch
+nmap <leader>a :Ack
+nmap <leader>c :copen
+set lazyredraw
+
+imap jj <Esc>
+
+set winminheight=0
+set noequalalways
+set winheight=99999
+
+let g:buftabs_in_statusline=1
+noremap <S-left> :bprev<CR>
+noremap <S-right> :bnext<CR>
+let g:buftabs_active_highlight_group="Visual"
+let g:buftabs_only_basename=1
+"imap <BS> <C-W>
+
+au WinEnter * setlocal relativenumber
+au WinLeave * setlocal norelativenumber 
+" same as -X
+set clipboard=exclude:.*
 

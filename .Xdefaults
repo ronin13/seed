@@ -43,12 +43,8 @@ xterm*bellIsUrgent: true
 xterm*highlightColorMode: true
 xterm*highlightReverse: true
 xterm*highlightTextColor:  grey10
-!xterm*highlightTextColor: darkblue
 xterm*highlightColor:  lightgreen
-!xterm*highlightColor: LightGreen
 xterm*dynamicColors: true
-!xterm*highlightTextColor: white
-!xterm*highlightColor: purple
 xterm*faceSize: 9
 xterm*termName: xterm-256color
 xterm*trimSelection: true
@@ -59,8 +55,6 @@ xterm*utf8: 1
 xterm*metaSendsEscape: true
 xterm*backarrowKey: false
 xterm*locale: true
-!xterm*on4Clicks: group
-!xterm*on5Clicks: page
 
 xpdf*enableFreetype: yes
 xpdf*antialias: yes

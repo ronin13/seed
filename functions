@@ -82,9 +82,9 @@ if [[ "$@" =~ .*torrent$ ]];then
     mv "$@" ~/.torrents/
 
 else
-    rm ~/.aria2/.temp
-    cfile="~/.mozilla/firefox/default.profile/cookies.sqlite"
-    sqlite3 -separator '	'  =(cat $cfile) 'select host, "TRUE", path, "FALSE", expiry, name, value from moz_cookies' >|  ~/.aria2/.temp
+    rm ~/.aria2/.temp 2>/dev/null
+    cfile="$HOME/.mozilla/firefox/default.profile/cookies.sqlite"
+    sqlite3 -separator '	'  < $cfile 'select host, "TRUE", path, "FALSE", expiry, name, value from moz_cookies' >|  ~/.aria2/.temp 2>/dev/null
     gid=$(aria2rpc addUri "$@")
     echo "$gid:$@ >===============< $(date)" >> $histfile
     #aria2rpc tellStatus gid

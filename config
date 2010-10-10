@@ -1,3 +1,4 @@
+user_interface = "alternative"
 mpd_music_dir = "/home/raghavendra/.mpd/music"
 mpd_connection_timeout = "60"
 selected_item_prefix = "$2"
@@ -26,3 +27,4 @@ search_engine_default_search_mode=2
 allow_physical_files_deletion = "no"
 allow_physical_directories_deletion = "no"
 empty_tag_marker = " "
+mpd_crossfade_time = "5"

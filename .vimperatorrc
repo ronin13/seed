@@ -47,7 +47,7 @@ set guioptions=
 command! good noscript toggleperm
 command! tgood noscript toggletemp
 
-set visualbell
+set visualbell=false
 "set wildoptions=auto
 set wildmode=list:longest,full
 set focuscontent=on

@@ -70,5 +70,7 @@ compctl -x 'C[-1,-*e]' -c - 'C[-1,-[ARWI]##]' -f -- fc
 modulesx=(`find /lib/modules/$(uname -r)/ -name "*.ko" -exec basename {} \;`)
 compctl -k modulesx modinfo
 
-wordsx=(`cat /usr/share/dict/words`)
-compctl -k wordsx def define 
+#wordsx=(`cat /usr/share/dict/words`)
+#compctl -k wordsx def define 
+
+compdef _pdf mupdf
