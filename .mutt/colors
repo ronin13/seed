@@ -43,7 +43,7 @@ color index color40 color235 '~d <1d'
 color index color55 color233 '~d >10d'
 color index color45 color237 ~(~N) # unread in a thread with leader read
 color index color153 default ~p # To me
-color index color54 default ~R # Read
+color index color56 default ~R # Read
 # Add something for read ones
 
 

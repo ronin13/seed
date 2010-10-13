@@ -59,3 +59,7 @@ set  attribution = "* On %d, %n <%a> wrote:"
 set forward_quote
 set tmpdir="~/.mutt/temp/"
 set uncollapse_jump
+
+set followup_to
+set honor_followup_to=yes
+

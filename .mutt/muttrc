@@ -5,8 +5,7 @@ source ~/.mutt/aliases
 auto_view text/html
 alternative_order text/html text/plain
 
-#mailboxes `find ~/Mail/ -type d -name cur -printf '%h '`
-mailboxes `find ~/Mail -type d -name new -printf '%C@:%d:%h \n' | sort -k 2 -t ':' -r -n | sort -n -r | cut -d ":" -f 3 | tr '\n' ' ' |  tr -s ' '`
+mailboxes `find ~/Mail/ -type d -name new -printf '%d:%C@:%h \n'  | sort -t : -k 1,2 -r  | cut -d : -f 3 |  grep -v -E '(Chro|Old)' | tr '\n' ' ' |  tr -s ' '`
 source ~/.mutt/colors
 source ~/.mutt/macros
 source ~/.mutt/binds
@@ -30,4 +29,4 @@ charset-hook windows-1256 CP1256
 charset-hook windows-1257 CP1257
 charset-hook windows-1258 CP1258
 
-set askdelete
+set delete=ask-no
