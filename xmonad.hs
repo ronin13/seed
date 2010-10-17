@@ -130,17 +130,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((modm,               xK_n     ), refresh)
     -- , ((modm,               xK_n     ), refresh)
 
-    , ((modm .|. shiftMask, xK_Right),  nextWS)
+    , ((modm .|. shiftMask, xK_Up),  nextWS)
 
     , ((modm, xK_Up),  moveTo Next NonEmptyWS)
 
     , ((modm, xK_Down), moveTo Prev NonEmptyWS)
 
-    , ((modm .|. mod1Mask, xK_Up),  moveTo Next EmptyWS)
+    {-, ((modm .|. mod1Mask, xK_Up),  moveTo Next EmptyWS)-}
 
-    , ((modm .|. mod1Mask, xK_Down), moveTo Next EmptyWS)
+    {-, ((modm .|. mod1Mask, xK_Down), moveTo Next EmptyWS)-}
 
-    , ((modm .|. shiftMask, xK_Left),   prevWS)
+    , ((modm .|. shiftMask, xK_Down),   prevWS)
 
     , ((modm,             xK_b), sendMessage ToggleStruts) 
 
@@ -210,7 +210,8 @@ myLayout = onWorkspace "3:browser" brLayout $ onWorkspace "7:games" vidLayout $ 
           tall      = ResizableTall 1 (2/100) (1/2) []
           brLayout  = avoidStruts (Mirror tiled ||| mgFy tiled ||| Full)
           --mgFy      = Mag.magnifiercz 1.4
-          mgFy      = Mag.magnifiercz 1.4 . Mag.magnifierOff
+          mgFy      = Mag.magnifiercz 1.4 
+          -- . Mag.magnifierOff
           vidLayout = H.Grid False ||| Full
 --}}}
 

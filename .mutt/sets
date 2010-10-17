@@ -63,3 +63,5 @@ set uncollapse_jump
 set followup_to
 set honor_followup_to=yes
 
+#set index_format="%4C %Z %M:%e/%E %[%F %R] %-20.20F %-45.45s << %t ~%?l?%4l&%4c?"
+set index_format="%4C %Z %e/%E %[%F %R] %-17.17F %-45.45s < %-22.22t ~ %-4.4c"

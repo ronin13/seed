@@ -58,7 +58,7 @@ alias -g .x=" |& tr '\n' '\0' | xargs -0 "
 setopt correct
 setopt autolist #automenu
 
-setopt autopushd pushdminus pushdtohome autocd
+setopt autopushd pushdminus pushdtohome autocd pushdignoredups
 setopt inc_append_history
 #setopt share_history
 #setopt hist_reduce_blanks
@@ -163,6 +163,7 @@ function precmd(){
 ESTATUS=$?
 PROMPT="%{$fg[green]%}${GPRT}=%{$reset_color%}"
 RPROMPT="%{$fg[blue]%}(%2d)~$(gprompt)%{$fg[red]%}%T-$(estatus)"
+builtin cd ~+
 }
 
 autoload -U   edit-command-line

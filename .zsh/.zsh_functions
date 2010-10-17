@@ -24,39 +24,46 @@ append(){
     cat >>$1
 }
 
+
+sendmail() {
+    #"msmtp -C $HOME/.msmtprc"
+    subject="$1"
+    mailto=$2
+    # It will ask for body -- much better
+    /usr/bin/mutt -s "$subject" $mailto  # < "$@"
+}
+
 function {reboot,sdown} {
+    typeset -A map
+    map=(sdown 'shutdown -h now' reboot reboot)
+    command=$0
     echo "Sure y/N"
-    read -q && command $0
+    read -q && eval "$map[$command]"
 }
 
 cd () {
 
-    emulate -LR zsh
+    #emulate -LR zsh
+    #setopt autopushd
 
     if [[ $# -ge 3 ]]; then
         echo cd: too many arguments >&2
         return 1
     elif [[ $# -eq 2 ]]; then
-        ## builtin cd $1 $2
-        local newdir=${(S)PWD//$1/$2}
-        echo $newdir
-        builtin cd $newdir
+         builtin cd "$1" $2
+        #local newdir=${(S)PWD//$1/$2}
+        #echo $newdir
+        #builtin cd $newdir
     elif [[ $# -eq 1 ]]; then
-        if [[ ! -d $1 && -d $1:h ]]; then
-            echo $1:h
-            builtin cd $1:h
+        if [[ ! -d "$1" && -d "$1:h" ]]; then
+            echo "$1:h"
+            builtin cd "$1:h"
         else
-            builtin cd $1
+            builtin cd "$1"
         fi
     else
         builtin cd
         fi
-}
-
-
-
-weechat(){
-    weechat-curses 2>/dev/null
 }
 
 tmpwrite(){

@@ -1,0 +1,86 @@
+"2.3.1 (created: 2010/04/07 18:25:13)
+
+"set verbose=15
+loadplugins
+set saveform
+command! -nargs=* ir open read
+"command! -complete=buffer ntab bnext <count><CR>
+"command! -count ntab bnext <count><CR>
+set showstatuslinks=2
+hi BufTabSelected color:white;font-weight:bold;font-weight:italics
+hi BufTab color:#A8A8A8;font-weight: bold
+set showtabline=0
+
+"nmap <Esc> :bnext <count><CR>
+nnoremap <A-Right> gt
+nnoremap <A-Left> gT
+nmap ` gt
+nnoremap l :tabopen! 
+nmap H F17
+nnoremap F f
+nnoremap f F
+nnoremap S <C-c>
+nnoremap B :bmarks! -tags<Space>
+nnoremap b :bmark -tags<Space>
+"nnoremap n <C-i>
+nnoremap P p
+nnoremap p P
+nnoremap <C-p> <C-^>
+nnoremap w <C-b>
+nnoremap s <Space>
+nnoremap <A-Down> <A-i>
+"nnoremap <A-/> :bnext<Space>
+"nnoremap ` :bnext<Space>
+nnoremap <BS> <C-o>
+"nnoremap `0 g0
+"nnoremap `l g$
+
+set defsearch=g
+set editor="xterm -e /usr/bin/vim -f"
+"set mainecoon=am
+set runtimepath=/home/raghavendra/.pentadactyl
+"source! /home/raghavendra/.pentadactylrc.local
+
+hi CmdLine font-family: "Lucida Console"; font-size: 10pt; font-weight: normal;
+"set complete=sl
+set guioptions=
+command! good :javascript dactyl.execute('set nss+=' + buffer.URL)
+command! tgood :javascript dactyl.execute('set nst+=' + buffer.URL)
+command! tbad :javascript dactyl.execute('set nss-=' + buffer.URL)
+command! bad :javascript dactyl.execute('set nss-=' + buffer.URL)
+
+set visualbell=false
+"set wildoptions=auto
+set wildmode=list:longest,full
+"set focuscontent=on
+set newtab=all
+
+
+javascript <<EOF
+(function(){
+    var feedPanel = document.createElement("statusbarpanel");
+    feedPanel.setAttribute("id", "feed-panel-clone");
+    feedPanel.appendChild(document.getElementById("feed-button"));
+    feedPanel.firstChild.setAttribute("style", "padding: 0; max-height: 16px;");
+    document.getElementById("status-bar")
+            .insertBefore(feedPanel, document.getElementById("security-button"));
+})();
+EOF
+
+:bmark http://www.google.com/search?btnI=I%27m+Feeling+Lucky&q=%s -title="Google feeling lucky search" -keyword=googlelucky
+nnoremap h :tabopen googlelucky 
+"bma -k=r http://reddit.com/r/%s/
+colorscheme myzenburn
+
+"http://code.google.com/p/pentadactyl-labs/issues/detail?id=221
+nnoremap <silent> n n:centerselect<CR>
+nnoremap <silent> N N:centerselect<CR>
+nnoremap <silent> zz :centerselect<CR>
+
+:autocmd Fullscreen .* :js document.getElementById("status-bar").setAttribute("moz-collapsed", false)
+set showmode
+set titlestring=Firefox
+set newtab=all
+"http://fabien.benetou.fr/Tools/pentadactyl
+
+" vim: set ft=vim:

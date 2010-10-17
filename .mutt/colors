@@ -36,15 +36,15 @@ color index color45 color234 ~N      # New
 color index color45 color237 ~v
 #color index color17 color109 ~p
 #color index pink default ~O              # Old
-color index magenta default ~F # flagged messages
-color index blue default ~T    # Tagged ones
-color index red default ~D     # To be deleted
 color index color40 color235 '~d <1d'
 color index color55 color233 '~d >10d'
 color index color45 color237 ~(~N) # unread in a thread with leader read
 color index color153 default ~p # To me
 color index color56 default ~R # Read
 # Add something for read ones
+color index magenta default ~F # flagged messages
+color index red default ~D     # To be deleted
+color index blue default ~T    # Tagged ones
 
 
 #color sidebar_new black color151

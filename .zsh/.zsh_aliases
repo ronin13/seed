@@ -28,7 +28,6 @@ alias frames='/usr/bin/mplayer -vo jpeg -sstep 0'
 alias locate='/usr/bin/locate -i'
 alias mitter='mitter -u randomsurfer -p -i cmd -s'
 #alias sdown='echo "sure?"; read; shutdown -h now'
-alias sdown='shutdown -h now'
 alias getweather='weatherget -s INXX0012 -m'
 alias pal="pacman -Ql "
 alias redradio="/usr/bin/mplayer -playlist http://radioreddit.com:8000/listen.pls"
@@ -43,7 +42,6 @@ alias tmp="cd /tmp/"
 alias ..='cd ..'
 alias ...='cd ../..'
 #alias xev="xev -id `xdotool getactivewindow`"
-alias sendmail="msmtp -C $HOME/.msmtprc"
 #alias emacs="emacsclient"
 alias emacs="emacs -n"
 alias xcolors='cat  /usr/share/X11/rgb.txt | sort -nr'
@@ -60,4 +58,4 @@ if type -p colorcvs &> /dev/null ; then alias cvs="colorcvs" ; fi
 if type -p colordiff &> /dev/null ; then alias diff="colordiff" ; fi
 if type -p colorgcc &> /dev/null ; then alias gcc="colorgcc" ; fi
 if type -p colortail &> /dev/null ; then alias tail="colortail" ; fi
-
+alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"

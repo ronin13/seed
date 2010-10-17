@@ -122,6 +122,8 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
+
+autocmd FileType diff :source ~/.vim/diff.vim
 ""================================================================================================================
 ""
 " In plain-text files and svn commit buffers, wrap automatically at 78 chars
@@ -511,7 +513,7 @@ map <S-up> <Esc>:silent! 'xclip -o \| sed -e s/^\s+\(\w+\)/\1/'<CR><Esc>:set pas
   "autocmd VimLeave * :!echo -ne "\033]12;red\007"
 "endif
 
-map <leader>h :set nohlsearch
+map <leader>h :set nohlsearch<CR>
 nmap <leader>a :Ack
 nmap <leader>c :copen
 set lazyredraw
@@ -525,6 +527,8 @@ set winheight=99999
 let g:buftabs_in_statusline=1
 noremap <S-left> :bprev<CR>
 noremap <S-right> :bnext<CR>
+inoremap <S-left> <Esc>:bprev<CR>i
+inoremap <S-right> <Esc>:bnext<CR>i
 let g:buftabs_active_highlight_group="Visual"
 let g:buftabs_only_basename=1
 "imap <BS> <C-W>
@@ -533,4 +537,4 @@ au WinEnter * setlocal relativenumber
 au WinLeave * setlocal norelativenumber 
 " same as -X
 set clipboard=exclude:.*
-
+let g:vimsyn_folding='af'

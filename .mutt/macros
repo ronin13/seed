@@ -1,16 +1,18 @@
 #-*-muttrc-*-
 macro pager \cb <pipe-entry>'urlview'<enter> 'Follow links with urlview'
-macro index,pager A "<pipe-message>abook --add-email-quiet<return>" "add the sender address to abook"
+#macro index,pager A "<pipe-message>abook --add-email-quiet<return>" "add the sender address to abook"
 macro index,pager b '<enter-command>toggle sidebar_visible<enter>'
 macro pager <Up> '<exit><previous-undeleted>'
 macro pager <Down> '<exit><next-undeleted>'
 macro pager <Right> '<exit><next-undeleted><enter>'
 macro pager <Left> '<exit><previous-undeleted><enter>'
 # Can be confusing
-#macro pager <PageDown> '<exit><next-thread>'
-macro index <PageDown> '<next-thread>'
-#macro pager <PageUp> '<exit><next-thread>'
-macro index <PageUp> '<next-thread>'
+macro pager w '<exit><previous-thread>'
+macro index w '<previous-thread>'
+macro pager s '<exit><next-thread>'
+macro index s '<next-thread>'
+
+macro index S <save-message>
 
 macro index V <collapse-all>
 macro generic ,f "<shell-escape>mairix " "search via mairix"
