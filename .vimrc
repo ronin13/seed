@@ -315,8 +315,8 @@ set listchars=tab:>-,trail:.,extends:>
 highlight RedundantSpaces term=standout ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces highlighted
 
-"nnoremap <BS> <Left><Del>
-nmap <BS> db
+nnoremap <BS> <Left><Del>
+"nmap <BS> db
 au CursorHoldI * stopinsert
 " set 'updatetime' to 15 seconds when in insert mode
 au InsertEnter * let updaterestore=&updatetime | set updatetime=15000
@@ -529,7 +529,7 @@ noremap <S-left> :bprev<CR>
 noremap <S-right> :bnext<CR>
 inoremap <S-left> <Esc>:bprev<CR>i
 inoremap <S-right> <Esc>:bnext<CR>i
-let g:buftabs_active_highlight_group="Visual"
+let g:buftabs_active_highlight_group="ActiveTab"
 let g:buftabs_only_basename=1
 "imap <BS> <C-W>
 

@@ -36,13 +36,10 @@ nnoremap <BS> <C-o>
 "nnoremap `l g$
 
 set defsearch=g
-set editor="xterm -e /usr/bin/vim -f"
-"set mainecoon=am
+set editor="urxvtc -e /usr/bin/vim -f"
 set runtimepath=/home/raghavendra/.pentadactyl
-"source! /home/raghavendra/.pentadactylrc.local
 
 hi CmdLine font-family: "Lucida Console"; font-size: 10pt; font-weight: normal;
-"set complete=sl
 set guioptions=
 command! good :javascript dactyl.execute('set nss+=' + buffer.URL)
 command! tgood :javascript dactyl.execute('set nst+=' + buffer.URL)
@@ -51,8 +48,8 @@ command! bad :javascript dactyl.execute('set nss-=' + buffer.URL)
 
 set visualbell=false
 "set wildoptions=auto
-set wildmode=list:longest,full
-"set focuscontent=on
+set wildmode=list:full
+set altwildmode=list:longest
 set newtab=all
 
 
@@ -77,10 +74,11 @@ nnoremap <silent> n n:centerselect<CR>
 nnoremap <silent> N N:centerselect<CR>
 nnoremap <silent> zz :centerselect<CR>
 
-:autocmd Fullscreen .* :js document.getElementById("status-bar").setAttribute("moz-collapsed", false)
+:hi Bell display:none
 set showmode
 set titlestring=Firefox
 set newtab=all
-"http://fabien.benetou.fr/Tools/pentadactyl
-
+"autocmd LocationChange 'reddit.com' -js modes.push(modes.PASS_THROUGH)
+set hintkeys="asdfg;lkjh"
+autocmd LocationChange 'reddit.com' fmap -e=keydown -v j k <Return> l
 " vim: set ft=vim:
