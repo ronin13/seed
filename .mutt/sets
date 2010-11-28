@@ -1,5 +1,5 @@
 #-*-muttrc-*-
-set sidebar_width=30
+set sidebar_width=25
 set sidebar_visible=yes
 #set sidebar_sort=yes
 set pager_stop=yes
@@ -8,6 +8,7 @@ set mbox_type=maildir
 set folder=$HOME/Mail
 set spoolfile=+"INBOX"
 set move=no
+#  Just a test
 set header_cache=~/.mutt/.hcache
 #set header_cache=/dev/shm/.hcache
 set tilde

@@ -5,7 +5,11 @@ source ~/.mutt/aliases
 auto_view text/html
 alternative_order text/html text/plain
 
-mailboxes `find ~/Mail/ -type d -name new -printf '%d:%C@:%h \n'  | sort -t : -k 1,2 -r  | cut -d : -f 3 |  grep -v -E '(Chro|Old)' | tr '\n' ' ' |  tr -s ' '`
+set shell="/bin/zsh"
+
+
+mailboxes `~/bin/mailboxes`
+
 source ~/.mutt/colors
 source ~/.mutt/macros
 source ~/.mutt/binds
@@ -16,6 +20,7 @@ source ~/.mutt/lists
 
 my_hdr X-Operating-System: `echo -n "Arch linux x86_64 $(uname -r)"`
 my_hdr X-Editor: `vim --version | head -1 | cut -d' ' -f-5`
+
 
 charset-hook US-ASCII ISO-8859-1
 charset-hook x-unknown  ISO-8859-1
@@ -29,4 +34,5 @@ charset-hook windows-1256 CP1256
 charset-hook windows-1257 CP1257
 charset-hook windows-1258 CP1258
 
+# Todo  index_format
 set delete=ask-no

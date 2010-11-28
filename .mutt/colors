@@ -1,14 +1,19 @@
 color attachment brightmagenta default  
-color error brightwhite red   # errors yell at you in red
+color error color88 color62  
 color hdrdefault red default   # headers
 color indicator black color63  # currently selected message
+
 color markers brightcyan default  # the + for wrapped pager lines
 color message brightcyan default  # informational messages, not mail
+
 color normal default default    # plain text
 color quoted green default  # quoted text
+
 color search brightgreen default # hilite search patterns in the pager
 color signature red default    # signature (after "-- ") is red 
-color status black color73 # status bar is yellow *on blue*   
+
+color status color21 default 
+
 color tilde blue default  # ~'s after message body
 color tree red default    # thread tree in index menu is magenta
 color signature brightred default
@@ -32,20 +37,21 @@ color body  yellow default "[;:]-[)/(|]"
 color body  yellow default "[;:][)/(|]"
 color body  green default "[[:alpha:]]\+://[^ ]*"
 
-color index color45 color234 ~N      # New
-color index color45 color237 ~v
+color index color250 color236 ~N      # New
+color index color56 default ~R       # Read
+#color index color45 color237 ~v     # Part of a thread
 #color index color17 color109 ~p
-#color index pink default ~O              # Old
-color index color40 color235 '~d <1d'
-color index color55 color233 '~d >10d'
-color index color45 color237 ~(~N) # unread in a thread with leader read
-color index color153 default ~p # To me
-color index color56 default ~R # Read
-# Add something for read ones
-color index magenta default ~F # flagged messages
-color index red default ~D     # To be deleted
-color index blue default ~T    # Tagged ones
 
+
+color index color40 color235 '~d <1d ~N'
+#color index color45 color238 '~(~N)'            # unread in a thread with leader read
+#color index color56 default '~R'            # unread in a thread with leader read
+color index color153 color239 '~p ~N'          # To me
+
+
+#color index magenta default ~F # flagged messages
+#color index red default ~D     # To be deleted
+#color index blue default ~T    # Tagged ones
 
 #color sidebar_new black color151
-color sidebar_new color129 color235
+color sidebar_new color147 color235
