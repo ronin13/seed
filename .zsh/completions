@@ -7,10 +7,10 @@ compctl -g '*.ebuild' ebuild
 compctl -g '*.tex' + -g '*(-/)' latex
 compctl -g '*.dvi' + -g '*(-/)' dvipdf dvipdfm
 compctl -g '*.tar.bz2 *.tar.gz *.bz2 *.gz *.jar *.rar *.xz *.tar *.tbz2 *.tgz *.zip *.Z' + -g '*(-/)' extract
-compctl -g '*.mp3 *.ogg *.mod *.wav *.avi *.mpg *.mpeg *.mp4 *.wmv *flv' + -g '*(-/)' mplayer mpl 
-compctl -g '*.py' python
-compctl -g '*(-/D)' cd
-compctl -g '*(-/)' mkdir
+#compctl -g '*.mp3 *.ogg *.mod *.wav *.avi *.mpg *.mpeg *.mp4 *.wmv *flv' + -g '*(-/)' mplayer mpl 
+#compctl -g '*.py' python
+#compctl -g '*(-/D)' cd
+#compctl -g '*(-/)' mkdir
 compctl -g "*.pdf *.dvi" + -g '*(-/)' zathura evince apvlv epdfview 
 
 
@@ -36,24 +36,28 @@ compctl -v echo
 compctl -v getln getopts read unset vared
 compctl -b bindkey
 
-daemons=(`/bin/ls -A /etc/rc.d/`)
+daemons=(/etc/rc.d/*)
 compctl -k daemons rcstart
-sdaemons=(`/bin/ls -A /var/run/daemons/`)
+sdaemons=(/var/run/daemons/*)
 compctl -k sdaemons rcstop
 
-pids=(`ps aux | perl -lane 'print $F[1] if $. > 1 and not $F[9] =~ "^\Q[\E.*"'`)
-compctl -k pids kill 
+#pids=(`ps aux | perl -lane 'print $F[1] if $. > 1 and not $F[9] =~ "^\Q[\E.*"'`)
+#compctl -k pids kill 
 
 #processes=(`ps -A | perl -lane 'print $F[3] if $. > 1' | sort | uniq`)
 #compctl -k processes killall
 
-pkgs=(`pacman -Q | cut -d " " -f 1`)
+pkgs=(/var/lib/pacman/local/*(e:'reply=(${REPLY%%-[0-9\.\-]##})':)) 
+pkgs=(${pkgs:t})
 compctl -k pkgs pal
 compctl -k pkgs pinfo 
 compctl -k pkgs whichpack 
 compctl -k pkgs aur
 
-syncpkgs=(`pacman --config /etc/pacman.conf.testing -Sql core extra community community-testing testing archlinuxfr`)
+#syncpkgs=(`pacman --config /etc/pacman.conf.testing -Sql core extra community community-testing testing archlinuxfr`)
+syncpkgs=(/var/lib/pacman/sync/**/*(/)) 
+syncpkgs=(${syncpkgs:t})
+syncpkgs=(${syncpkgs%%-[0-9\.\-]##}) 
 #compctl  -g "*.pkg.tar.*" + -k syncpkgs ins
 compctl  -g "*.pkg.tar*" ins
 compctl -k syncpkgs buildabs
@@ -74,3 +78,10 @@ compctl -k modulesx modinfo
 #compctl -k wordsx def define 
 
 compdef _pdf mupdf
+
+function timeat(){
+zone=${1:?timezone}
+env TZ=$zone date
+}
+compdef _time_zone timeat 
+

@@ -9,3 +9,6 @@ Xft.hintstyle:	hintnone
 Xft.rgba:	rgb
 Xft.lcdfilter: lcddefault
 !Xft.autohint: 0
+
+dzen2.font:xft:Droid Sans Mono Slashed:pixelsize=14
+dzen2.background: grey2

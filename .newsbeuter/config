@@ -1,17 +1,19 @@
-browser "~/bin/browser %u"
+browser "~/bin/ubrowser %u"
 #html-renderer "w3m -dump -T text/html -v"
-color   background      default default
-color   listnormal      default default
-#color   listfocus       default default reverse underline
-color   listfocus       black   white   reverse bold
-color   info            black   white   reverse bold
-color   article         default default
+
+color   background      default color233
+color   listnormal      default color233
+color   listfocus color45  color237 
+color   info color44 color233 underline
+color   article default color233
+
+
 download-path "~/media/newsbeuter/podcasts/"
 max-downloads 1
 reload-threads 10
-reload-time 30
+reload-time 60
 player "/usr/bin/mplayer -cache 4096 "
-text-width 75
+text-width 0
 feedlist-format "%n %9u [%t]"
 articlelist-format  "%f %D   %?T?|%-17T|  ?%t"
 notify-format "RSS - %d new/%n unread articles"
@@ -19,11 +21,14 @@ notify-format "RSS - %d new/%n unread articles"
 save-path ~/media/newsbeuter/
 # notify-program ""
 # notify-screen no
+#macro pageup q; prev-unread
+#macro pagedown q; next-unread
 bind-key j down
 bind-key k up
 unbind-key r
 bind-key r mark-feed-read
 unbind-key R
+text-width 0
 bind-key R reload
 bind-key d delete-article
 bind-key i toggle-article-read
@@ -31,12 +36,12 @@ bind-key x reload-all
 bind-key up prev-unread
 bind-key down next-unread
 bind-key T clear-tag
-highlight feedlist "^(N)" yellow default
-highlight articlelist "^(N)" yellow default
-highlight article "^Link[s:]|http[s:]//.*" magenta default
-highlight article "^Title:.*" green default bold
-highlight article ".*URL:" magenta default bold
-highlight article "^Feed:.*" green default
+highlight feedlist "^(N)" yellow color233
+highlight articlelist "^(N)" yellow color233
+highlight article "^Link[s:]|http[s:]//.*" magenta color233 
+highlight article "^Title:.*" green color233 bold
+highlight article ".*URL:" magenta color233 bold
+highlight article "^Feed:.*" green color233
 goto-next-feed no
 #confirm-exit yes
 cache-file "~/.local/share/newsbeuter/cache.db"
@@ -46,9 +51,14 @@ bookmark-cmd "~/bin/booktwit"
 auto-reload yes
 suppress-first-reload yes
 user-agent "Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.7) Gecko/20100721 Firefox/3.6.7"
-proxy localhost:9999
-use-proxy yes
+#proxy localhost:9999
+use-proxy no
 cleanup-on-quit no
 #reload-only-visible-feeds yes
 #trim-feeds 200
 #keep-articles-days 30
+#
+
+notify-format "%d new articles"
+notify-program "~/bin/notify-send-beuter"
+notify-screen yes

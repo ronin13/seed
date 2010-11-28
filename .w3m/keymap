@@ -1,2 +1,14 @@
-keymap C-o NEXT_PAGE
-keymap C-i PREV_PAGE
+keymap "t" TAB_LINK
+keymap "o" GOTO 
+keymap "T" TAB_GOTO
+keymap ":" GOTO_LINE 
+keymap "f" MOVE_LIST_MENU
+keymap "q" QUIT
+keymap "Q" EXIT 
+keymap "C-o" OPTIONS
+keymap  "C-s"  SUBMIT
+keymap "d" CLOSE_TAB
+keymap "R" REINIT
+keymap "<" PREV_TAB
+keymap ">" NEXT_TAB
+

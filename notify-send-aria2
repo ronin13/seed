@@ -1,2 +1,0 @@
-#!/bin/zsh
-notify-send "aria2c" "$@"

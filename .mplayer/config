@@ -1,27 +1,29 @@
 
 [default]
 ao=oss
+fixed-vo=no
 #vo=gl
 #vo=gl:yuv=1:rectangle=2:force-pbo,xvmc,xv,fbdev,null
 vo=xv
 ontop=yes
 monitoraspect=16:10
 slices=no
+cache=8192
+cache-min=10
 idx=yes
 stop-xscreensaver=yes
 framedrop=1
 nomouseinput=yes
 hardframedrop=0
 channels=2
-#af="volnorm=1,scaletempo,equalizer=0:0:0:0:0:0:0:0:0:0"
 af="volnorm=1"
-lirc="no"
-joystick="no"
+lirc=no
+joystick=no
 softvol=yes
 softvol-max=200
 volume=100
 autoq=100
-#mc=0.001
+mc=0.001
 #http://martin.ankerl.com/2006/06/10/pimp-my-mplayer/
 subfont-text-scale=3
 fontconfig=no
@@ -32,7 +34,7 @@ vo=xv
 
 [high]
 # run with -profile=default,high
-lavdopts="threads=8"
+lavdopts="threads=5"
 vfm=ffmpeg
 vc=ffh264
 #hardframedrop="0"

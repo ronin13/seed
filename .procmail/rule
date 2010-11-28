@@ -1,0 +1,199 @@
+:0hc
+| lbdb-fetchaddr
+
+TODAY=`date +%d-%m-%Y`
+
+:0c:
+Kronos/$TODAY/
+
+:0hc
+| formail -X Subject:  -X From: |  sed -e 's|\(.*\):\(.*\)|\^i\(/home/raghavendra/.notify-icons/mail_new.xpm\)\^fg\(cyan\)\1:\^fg\(\)\2|' | notify-send mail
+
+:0
+* ^Subject:.*\[Bulk\]
+Junk/
+
+:0 fw
+* ^From:.*raghu.prabhu13 |\
+  ^To:.*raghu.prabhu13
+| sed -e 's/^Subject:[ ]*/Subject: [TOME] /'
+
+:0
+* ^(To|Cc):.*raghu.prabhu13@yahoo|\
+  ^Received:.*pop.mail.yahoo.com
+Yahoo/
+
+:0
+* ^Subject:.*Topcoder|\
+  ^Subject:.*TopCoder|\
+  ^(To|Cc):.*topcoder.com|\
+  ^From:.*topcoder.com
+List/Topcoder/
+
+:0
+* ^(To|Cc):.*mutt-dev|\
+  ^(To|Cc):.*mutt-announce|\
+  ^(To|Cc):.*mutt-users
+List/Mutt/
+
+:0
+* ^(To|Cc):.*kvm@vger.kernel.org
+List/Kernel/KVM/
+
+:0
+* ^(To|Cc):.*zsh-users@zsh.org|\
+  ^(To|Cc):.*zsh-workers@zsh.org
+List/Zsh/
+
+:0
+* ^(To|Cc):.*tmux-users@lists.sourceforge.net
+List/Tmux/
+
+:0
+* ^(To|Cc):.*getmail@lists.pyropus.ca
+List/Getmail/
+
+:0
+* ^(To|Cc):.*xmonad@haskell.org
+List/Xmonad/
+
+:0
+* ^From:.*lwn.net.*
+List/LWN/
+
+:0
+* ^(To|Cc):.*xorg@lists.freedesktop.org|\
+  ^(To|Cc):.*xorg@freedesktop.org|\
+  ^(To|Cc):.*xorg@lists.x.org
+List/Xorg/
+
+:0
+* ^(To|Cc):.*polipo-users@lists.sourceforge.net
+List/Polipo/
+
+
+:0
+* ^(To|Cc|From):.*@lesswatts.org
+List/Lesswatt/
+
+:0
+* ^(To|Cc):.*arch-general@archlinux.org
+List/Arch/General/
+
+:0
+* ^(To|Cc):.*chromium-os-discuss@chromium.org
+List/ChromiumOS/
+
+:0
+* ^(To|Cc):.*chromium-dev@chromium.org
+List/Chromium/
+
+:0 
+* ^(To|Cc):.*arch-dev-public@archlinux.org
+List/Arch/Dev/
+
+:0 
+* ^(To|Cc):.*arch-releng@archlinux.org
+List/Arch/RelEng/
+
+:0
+* ^(To|Cc|Subject|From):.*ieee
+List/IEEE/
+
+:0 
+* ^(To|Cc):.*@archlinux.org
+List/Arch/General/
+
+
+:0
+* ^From:.*raghu.prabhu13 |\
+  ^To:.*raghu.prabhu13
+Me/
+
+:0
+* ^Sender:.*kernelnewbies-bounce@nl.linux.org|\
+  ^X-List-ID:.*kernelnewbies.nl.linux.org
+List/Kernel/KernelNewbies/
+
+:0
+* ^From:.*google.com
+IM/
+
+:0
+* ^Subject:.*Invit
+Invitation/
+ 
+:0
+* ^Subject:.*orkut|\
+  ^Subject:.*facebook|\
+  ^Subject:.*linkedin
+Social/
+
+:0
+* ^(From|To|Cc):.*nitk.*@gmail.com
+Archive/NITK/
+
+:0
+* ^From:.*ibnalerts.com|\
+  ^From:.*us.newsgram.hp.com|\
+  ^From:.*gre-secrets@mindmachinelab.com|\
+  ^From:.*bapna-article@mindmachinelab.com
+Misc/
+
+:0
+* ^From:.*1105|\
+  ^From:.*in.indyarocks.com|\
+  ^From:.*youmintmail.com|\
+  ^Subject:.*Send.*SMS|\
+  ^From:.*emedia|\
+  ^From:.*tagged|\
+  ^From:.*wayn|\
+  ^From:.*agloco.com|\
+  ^From:.*nexusmedia.co.uk|\
+  ^From:.*infragistics.com|\
+  ^From:.*idesign.net|\
+  ^From:.*conceptdraw.com|\
+  ^From:.*pagalguy.com|\
+  ^From:.*irreminders.com|\
+  ^Subject:.*Thunder Lizard
+Tripe/
+
+:0
+* ^(To|Cc):.*chromium-os-dev@googlegroups.com|\
+  ^(To|Cc):.*chromium-os-dev@googlegroups.com|\
+  ^(To|Cc):.*chromium-discuss@googlegroups.com|\
+  ^(To|Cc):.*chromium-dev@googlegroups.com
+Archive/Chromium/
+
+:0
+* ^(To|Cc):.*alchemi-developers@lists.sourceforge.net
+Archive/Alchemi/
+ 
+:0
+* ^From:.*mangalore_centre@yahoo.com
+Archive/Time/
+
+:0
+* ^Subject:.*dotnet|\
+  ^From:.*sgdotnet.org|\
+  ^From:.*microsoft.com|\
+  ^From:.*imaginecup|\
+  ^Subject:.*msdn
+Archive/Msoft/
+
+:0
+* ^(From|To|Cc):.*googlegroups.com
+Groups/
+
+:0
+* ^Subject:.*news
+Newsletters/
+
+:0
+* ^Subject:.*Papers
+Papers/
+
+:0
+* ^(To|Cc):.*raghu\.prabhu13@gmail.com.*
+INBOX/
+

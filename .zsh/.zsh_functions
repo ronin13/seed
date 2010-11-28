@@ -1,22 +1,26 @@
 man(){
-    #set -x
-    #hit=1
-    #setopt extendedglob
-    if [[ -z $2 ]] && ! /bin/ls $HOME/helpers/man/**/$1.* &>/dev/null;then
-    #hit=0
-    location=`/usr/bin/man -M /usr/share/man -w $1`
-    number=${${location:t}[(ws:.:)2]}
-    gunzip -c $location  >| $HOME/helpers/man/man${number//[a-z]/}/$1.${number}
+    setopt nullglob
+    if [[ -z $2 ]] && ! test -f $HOME/helpers/man/**/$1.* &&  /usr/bin/man -M /usr/share/man -w $1 1>/dev/null ;then
+        location=$(/usr/bin/man -M /usr/share/man -w $1)
+        number=${${location:t}[(ws:.:)2]}
+        gunzip -c $location  >| $HOME/helpers/man/man${number//[a-z]/}/$1.${number}
     fi
     LC_ALL=C LANG=C TERMINFO=~/.terminfo/ TERM=mostlike /usr/bin/man $@
-    #echo $MANPATH
-    #echo $hit
-    #set +x
 }
 
 ygist(){
-    echo "sure Y/n"
+    echo "sure y/N"
     read -q && xclip -o | gist
+}
+
+sgist(){
+    echo "sure y/N"
+    read -q && xclip -o | sprunge | tee /dev/stderr | xclip -i
+}
+
+whichpkg(){
+    file="$@"
+    w3m "http://testnet.har-ikkje.net/kittyfile/get_result?query=$file"
 }
 
 append(){
@@ -35,36 +39,36 @@ sendmail() {
 
 function {reboot,sdown} {
     typeset -A map
-    map=(sdown 'shutdown -h now' reboot reboot)
+    map=(sdown '~/bin/down' reboot 'command reboot')
     command=$0
     echo "Sure y/N"
     read -q && eval "$map[$command]"
 }
 
-cd () {
+#cd () {
 
-    #emulate -LR zsh
-    #setopt autopushd
+    ##emulate -LR zsh
+    ##setopt autopushd
 
-    if [[ $# -ge 3 ]]; then
-        echo cd: too many arguments >&2
-        return 1
-    elif [[ $# -eq 2 ]]; then
-         builtin cd "$1" $2
-        #local newdir=${(S)PWD//$1/$2}
-        #echo $newdir
-        #builtin cd $newdir
-    elif [[ $# -eq 1 ]]; then
-        if [[ ! -d "$1" && -d "$1:h" ]]; then
-            echo "$1:h"
-            builtin cd "$1:h"
-        else
-            builtin cd "$1"
-        fi
-    else
-        builtin cd
-        fi
-}
+    #if [[ $# -ge 3 ]]; then
+        #echo cd: too many arguments >&2
+        #return 1
+    #elif [[ $# -eq 2 ]]; then
+         #builtin cd "$1" $2
+        ##local newdir=${(S)PWD//$1/$2}
+        ##echo $newdir
+        ##builtin cd $newdir
+    #elif [[ $# -eq 1 ]]; then
+        #if [[ ! -d "$1" && -d "$1:h" ]]; then
+            #echo "$1:h"
+            #builtin cd "$1:h"
+        #else
+            #builtin cd "$1"
+        #fi
+    #else
+        #builtin cd
+        #fi
+#}
 
 tmpwrite(){
   $file = mktemp
@@ -182,7 +186,7 @@ xpaste(){
     notify-send "Added note" "$var"
 }
 
-wiki() { w=$(dig +short txt $1.wp.dg.cx); echo "$w" }
+wiki() { w=$(dig +short txt "$@".wp.dg.cx); echo "$w" }
 
 less_vim() {
     =vim -R \
@@ -241,10 +245,6 @@ echo "$@" | sudo tee
 search(){
     surfraw google "$@"
 }
-
-#$firefox(){
-#$LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so /usr/bin/firefox
-#}
 
 ins(){
    if [[ $1 == *xz || $1 == *pkg.tar ]];then
@@ -343,4 +343,17 @@ function lsnew () {
     ls -tr -dl $~lsnew_glob(om[1,30])
 }
 alias lsnew='noglob lsnew'
+
+
+#function command_not_found_handler(){
+    #if which $=@ &>/dev/null;then
+        #echo "#!/bin/zsh" >| /tmp/.zshfunc
+        #which $=@ >> /tmp/.zshfunc
+        #/tmp/.zshfunc
+        #return 0
+    #else
+        #echo "$0 not found"
+        #return 127
+    #fi
+#}
 

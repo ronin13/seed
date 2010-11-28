@@ -22,21 +22,21 @@ display_charset UTF-8
 cookie_accept_domains 
 cookie_reject_domains 
 accept_bad_cookie 0
-accept_cookie 0
+accept_cookie 1
 show_cookie 1
-use_cookie 0
+use_cookie 1
 ssl_ca_file 
 ssl_ca_path 
 ssl_key_file 
 ssl_cert_file 
 ssl_verify_server 0
 ssl_forbid_method 
-no_cache 0
+no_cache 1
 noproxy_netaddr 1
 no_proxy 
 ftp_proxy 
 https_proxy 
-http_proxy 
+http_proxy http://localhost:9999/
 use_proxy 1
 max_news 50
 nntpmode 
@@ -60,12 +60,12 @@ passwd_file ~/.w3m/passwd
 use_lessopen 0
 bgextviewer 1
 extbrowser3 
-extbrowser /usr/bin/firefox
-extbrowser2 /usr/bin/uzbl-browser
-mailer /usr/bin/mutt
-editor ~/bin/agvim
+extbrowser2 
+extbrowser firefox
+mailer /usr/bin/mail
+editor /usr/bin/vim
 urimethodmap ~/.w3m/urimethodmap, /usr/etc/w3m/urimethodmap
-mailcap ~/.w3m/mailcap, /usr/etc/w3m/mailcap, ~/.mailcap
+mailcap ~/.mailcap
 mime_types ~/.mime.types, /usr/etc/mime.types
 index_file 
 cgi_bin 
@@ -77,44 +77,44 @@ auto_uncompress 0
 decode_cte 0
 clear_buffer 1
 ignorecase_search 1
-wrap_search 1
+wrap_search 0
 mark_all_pages 0
-vi_prec_num 0
+vi_prec_num 1
 emacs_like_lineedit 0
-mark 0
+mark 1
 close_tab_back 0
-confirm_qq 0
+confirm_qq 1
 save_hist 1
 history 100
 use_history 1
 pagerline 10000
 visited_color magenta
-visited_anchor 0
-active_color cyan
-active_style 0
-bg_color terminal
-mark_color cyan
-form_color red
-image_color green
+visited_anchor 1
+active_color terminal
+active_style 1
+bg_color black
+mark_color terminal
+form_color cyan
+image_color blue
 anchor_color blue
-basic_color terminal
+basic_color white
 color 1
 nextpage_topline 0
 label_topline 0
 show_srch_str 1
-show_lnum 0
-fold_line 0
+show_lnum 1
+fold_line 1
 image_map_list 1
 imgdisplay w3mimgdisplay
 image_scale 100
 ext_image_viewer 1
 max_load_image 4
-auto_image 1
-display_image 0
+auto_image 0
+display_image 1
 view_unseenobject 0
 ignore_null_img_alt 1
 display_ins_del 1
-fold_textarea 0
+fold_textarea 1
 graphic_char 0
 alt_entity 1
 multicol 0
@@ -122,14 +122,14 @@ dictcommand file:///$LIB/w3mdict.cgi
 use_dictcommand 0
 dirlist_cmd file:///$LIB/dirlist.cgi
 ext_dirlist 1
-display_lineinfo 0
-decode_url 0
-display_link 0
+display_lineinfo 1
+decode_url 1
+display_link 1
 open_tab_dl_list 0
-open_tab_blank 0
+open_tab_blank 1
 target_self 0
-frame 0
-pixel_per_line 15
-pixel_per_char 8
+frame 1
+pixel_per_line 35
+pixel_per_char 16
 indent_incr 4
 tabstop 8

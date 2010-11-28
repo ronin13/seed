@@ -1,0 +1,81 @@
+;;; .arrived  -*- mode: emacs-lisp; coding: iso-2022-7bit -*-
+;; This file is generated automatically by emacs-w3m v1.4.4.
+
+(("http://lwn.net/"
+  "Welcome to LWN.net [LWN.net]"
+  nil
+  (19697 5173 901119)
+  nil
+  nil)
+ ("http://lwn.net/Articles/417384/"
+  "Garrett-Glaser: Patent skullduggery: Tandberg rips off x264 algorithm [LWN.net]"
+  (19697 4648)
+  (19697 5160 654575)
+  nil
+  nil)
+ ("http://lwn.net"
+  nil
+  nil
+  (19697 5144 826192)
+  nil
+  nil)
+ ("http://reddit.com"
+  nil
+  nil
+  (19697 5137 82368)
+  nil
+  nil)
+ ("http://slashdot.org/tag/technology"
+  "Slashdot Items Tagged With 'technology'"
+  nil
+  (19697 4819 731384)
+  nil
+  nil)
+ ("http://slashdot.org"
+  nil
+  nil
+  (19697 4773 824787)
+  nil
+  nil)
+ ("http://linux.slashdot.org/"
+  "Slashdot: News for nerds, stuff that matters"
+  nil
+  (19697 3761 870295)
+  nil
+  nil)
+ ("http://linux.slashdot.org"
+  nil
+  nil
+  (19697 3708 349496)
+  nil
+  nil)
+ ("http://it.slashdot.org/story/10/11/27/013259/Computer-Glitch-Leaves-Some-Australians-Without-Cash"
+  "Computer Glitch Leaves Some Australians Without Cash - Slashdot"
+  nil
+  (19697 3446 660411)
+  nil
+  nil)
+ ("slashdot.org"
+  "Slashdot: News for nerds, stuff that matters"
+  nil
+  (19697 3397 949732)
+  nil
+  nil)
+ ("http://emacs-w3m.namazu.org/"
+  "Text browser works on Emacs"
+  (18807 65200)
+  (19697 3142 183331)
+  nil
+  nil)
+ ("http://emacs-w3m.namazu.org/#contact"
+  nil
+  nil
+  (19697 3060 659599)
+  nil
+  nil)
+ ("http://emacs-w3m.namazu.org/#download"
+  nil
+  nil
+  (19697 2945 884125)
+  nil
+  nil))

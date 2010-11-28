@@ -107,7 +107,7 @@ let INFO =
   if(!window.gSessionManager)
     return;
 
-  let ignoreAuto = dactyl.globalVariables.session_manager_ignore_auto || 0;
+  let ignoreAuto = options.session_manager_ignore_auto || 0;
 
   let jsm = {};
   Cu.import("resource://sessionmanager/modules/session_manager.jsm", jsm);

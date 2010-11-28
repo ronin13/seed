@@ -1,0 +1,29 @@
+function init(){
+    [[ $1 == ${CHPWD_PROFILE} ]] && return 1
+    print -P "%F{blue}chpwd(): Switching to profile: $1%f"
+}
+
+function chpwd_profile_default(){
+       init $profile
+       #perlbrew off
+       path[path[(i)*ccache*]]=
+}
+
+function chpwd_profile_brew(){
+     init $profile
+     [[ -f $PERLBREW_ROOT/etc/bashrc ]] && source $PERLBREW_ROOT/etc/bashrc
+}
+
+function chpwd_profile_ccache(){
+    init $profile
+    export PATH="/usr/lib/ccache/bin/:$PATH"
+}
+
+function chpwd_profile_downloads(){
+    init $profile
+    lsnew
+}
+
+function chpwd_profile_git(){
+    init $profile 
+}

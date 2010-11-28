@@ -1,3 +1,11 @@
+http://ck-hack.blogspot.com/feeds/posts/default?alt=rss
+http://stonerobixxx.blogspot.com/rss.xml
+http://podcasts.jonmasters.org/kernel/kernel.xml
+http://megarelease.net/feed/
+http://feeds.feedburner.com/releaselog?format=xml
+http://feeds.feedburner.com/DataCenterKnowledge
+http://www.reddit.com/saved.rss?feed=8aa54fa1f3051ac38b8d0c67132e8883ac9ea668&user=raghu13 "Main" "~RedditSaved" 
+http://www.socwall.com/php/rss_RecentWPs.php
 http://www.eff.org/rss/updates.xml
 http://feeds.feedburner.com/slashdot/audio "Geeky" "Main"
 http://www.spiegel.de/international/index.rss
@@ -8,7 +16,6 @@ http://theyesmen.org/blog/feed
 http://rjlipton.wordpress.com/feed
 http://scottaaronson.com/blog/?feed=rss2
 http://apod.nasa.gov/apod.rss
-http://randomsurfer:curl-Itwitter.com@twitter.com/statuses/friends_timeline/14566795.rss
 http://feeds.feedburner.com/DiscoverMag "Main" "Science" "Dial"
 http://packetpushers.net/feed/podcast/  "Main" "Podcast"
 http://seedmagazine.com/feeds/RSS/ "Main" "Science" "Dial"
@@ -17,10 +24,8 @@ http://www.physorg.com/rss-feed/ "Main" "Science"
 http://www.technologyreview.com/rss/BlogRSS.aspx?rssid=634153872738281250&id=357 "Main" "Science" "Updates"
 http://www.wired.com/wiredscience/category/frontal-cortex/feed "Main" "Science"
 http://www.reddit.com/.rss?feed=8aa54fa1f3051ac38b8d0c67132e8883ac9ea668&user=raghu13 "Main" "~Reddit" "Updates"
-http://www.archlinux.org/feeds/packages/ "Main" "Updates"
 http://feeds.feedburner.com/c4ss "Main"
 http://feeds.feedburner.com/HighScalability "Main"
-http://export.arxiv.org/rss/cs
 http://rss.feedsportal.com/c/32569/f/491734/index.rss "Main"
 http://lwn.net/headlines/newrss "Main"
 http://lambda-the-ultimate.org/rss.xml
@@ -31,14 +36,11 @@ http://mindyourdecisions.com/blog/feed/ "Main"
 http://bangalore.metblogs.com/index2.xml
 http://unapologetic.wordpress.com/feed/ "Math"
 http://www.sciam.com/xml/sciam.xml "Dial"
-http://rss.gmane.org/messages/complete/gmane.linux.kernel "List"
 http://rss.gmane.org/messages/complete/gmane.linux.kernel.kernelnewbies "List"
 http://rss.gmane.org/messages/complete/gmane.linux.c-programming "List"
 http://rss.gmane.org/messages/complete/gmane.comp.file-systems.ext4 "List"
-http://rss.gmane.org/messages/complete/gmane.editors.vim "List"
 http://rss.gmane.org/messages/complete/gmane.comp.file-systems.btrfs "List"
 http://feeds.feedburner.com/Bsdtalk "Podcast"
-http://downloads.bbc.co.uk/podcasts/worldservice/docarchive/rss.xml "Podcast"
 http://downloads.bbc.co.uk/podcasts/radio4/fricomedy/rss.xml "Podcast"
 http://hackermedley.org/feed/podcast/ "Podcast"
 http://www.hackerpublicradio.org/hpr_rss.php "Podcast"
@@ -71,18 +73,14 @@ http://www.offensivecomputing.net/?q=node/feed "Hacking"
 http://herbsutter.spaces.live.com/feed.rss "Hacking"
 http://feeds.feedburner.com/Tech-RecipesMain "Hacking"
 http://feeds.feedburner.com/digitalpbk "Hacking"
-http://www.animenewsnetwork.com/newsfeed/rss.xml "Anime"
-http://that.animeblogger.net/feed/ "Anime"
 http://feeds.feedburner.com/AcceleratingFuture "Thinkers"
 http://gladwell.typepad.com/gladwellcom/atom.xml "Thinkers"
 http://www.joelonsoftware.com/rss.xml "Thinkers"
 http://www.kottke.org/remainder/index.rdf "Thinkers"
 http://itre.cis.upenn.edu/~myl/languagelog/index.rdf "Thinkers"
 http://www.languagehat.com/index.rdf "Thinkers"
-http://www.marginalrevolution.com/marginalrevolution/index.rdf "Thinkers"
 http://www.npr.org/rss/podcast.php?id=4538138 "Thinkers"
 http://www.aaronsw.com/2002/feeds/pgessays.rss "Thinkers"
-http://feeds.salon.com/salon/index "Thinkers"
 http://tedblog.typepad.com/tedblog/atom.xml "Thinkers"
 http://packetstormsecurity.org/headlines.xml "Cryptography"
 http://www.topix.net/rss/science/cryptography "Cryptography"
@@ -102,15 +100,10 @@ http://www.devshed.com/index2.php?option=mos_rss&no_html=1 "perl"
 http://johnbokma.com/index.rss "perl"
 http://planet.perl.org/rss20.xml "perl"
 http://use.perl.org/index.rss "perl"
-http://www.ebookshare.net/feed/ "War"
-http://www.flazx.com/rss/last10.xml "War"
 http://mathsresource.blogspot.com/atom.xml "War"
-http://feeds.feedburner.com/progarchives/reviews "Music"
 http://www.metalhammer.co.uk/rss "Music"
-http://www.metalunderground.com/tools/newsfeeds/news.cfm "Music"
 http://gooberzilla.wordpress.com/feed/ "Music"
 http://www.ytsejam.com/backend.php "Music"
-http://www.cricinfo.com/rss/column_index.rdf "Cricket"
 http://outsidetheline.typepad.com/outside_the_line/atom.xml "Cricket"
 http://www.bbc.co.uk/blogs/tms/index.xml "Cricket"
 http://www.cricket.mailliw.com/feed/ "Cricket"
@@ -127,7 +120,6 @@ http://www.datawrangling.com/feed/ "Compmat"
 http://eccc.hpi-web.de/feeds/reports
 http://emergentchaos.com/feed
 http://www.f-secure.com/weblog/weblog.rdf "Compmat"
-http://front.math.ucdavis.edu/atom/math.NT "Compmat"
 http://aigamedev.com/feed/ "Compmat"
 http://godplaysdice.blogspot.com/feeds/posts/default "Compmat"
 http://gowers.wordpress.com/feed/ "Compmat"
@@ -151,16 +143,12 @@ http://terrytao.wordpress.com/feed/ "Compmat"
 http://xkcd.com/rss.xml "Compmat"
 http://emotion.inrialpes.fr/spip.php/IMG/pdf/ecrire/laemi/ecrire/laemi/WG-Conclusions/ecrire/IMG/pdf/spip.php?page=backend
 http://targetgoogle.blogspot.com/feeds/posts/default "Miscellaneous"
-http://feeds.wired.com/wired/index "Miscellaneous"
-http://www.reddit.com/saved.rss?feed=8aa54fa1f3051ac38b8d0c67132e8883ac9ea668&user=raghu13 "Main" "~RedditSaved" 
 http://twitter.com/statuses/user_timeline/133880286.rss
-http://static.demonoid.com/rss/1.xml "-Dem-movies"
-http://static.demonoid.com/rss/17.xml "-Dem-audio"
-http://static.demonoid.com/rss/11.xml "-Dem-books"
-http://static.demonoid.com/rss/3.xml "-Dem-TV"
 http://feeds.feedburner.com/PerlTips "perl"
 http://feeds.feedburner.com/DougHellmann "python"
 http://feeds.feedburner.com/LinuxByExamples
 http://feeds.feedburner.com/linuxscrew
 http://herselfsai.com/feed "Compmat"
 http://texblog.wordpress.com/feed/ "Compmat"
+http://rss.gmane.org/gmane.network.bit-torrent.rtorrent.devel
+http://rss.gmane.org/messages/complete/gmane.comp.version-control.git

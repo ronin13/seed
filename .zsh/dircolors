@@ -106,6 +106,9 @@
 
 ### This is for files with execute permission:
     EXEC 00;32
+    #EXEC 00;36
+
+    OTHER_WRITABLE 01;35
 
 ### }}}
 ### List any file extensions like '.gz' or '.tar' that you would like ls

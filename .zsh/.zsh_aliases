@@ -24,14 +24,14 @@ alias lsd='ls -d */'
 alias pacman='pacman-color'
 alias rcm="sudo /etc/rc.d"
 alias pinfo='pacman -Qi'
-alias frames='/usr/bin/mplayer -vo jpeg -sstep 0'
+#alias frames='/usr/bin/mplayer -vo jpeg -sstep 0'
 alias locate='/usr/bin/locate -i'
 alias mitter='mitter -u randomsurfer -p -i cmd -s'
 #alias sdown='echo "sure?"; read; shutdown -h now'
 alias getweather='weatherget -s INXX0012 -m'
 alias pal="pacman -Ql "
-alias redradio="/usr/bin/mplayer -playlist http://radioreddit.com:8000/listen.pls"
-alias showtorrent="aria2c -S "
+#alias redradio="/usr/bin/mplayer -playlist http://radioreddit.com:8000/listen.pls"
+alias showtorrent="aria2c --no-conf -S "
 alias wget="wget -c --content-disposition"
 #alias less="vimpager"
 
@@ -43,19 +43,29 @@ alias ..='cd ..'
 alias ...='cd ../..'
 #alias xev="xev -id `xdotool getactivewindow`"
 #alias emacs="emacsclient"
-alias emacs="emacs -n"
-alias xcolors='cat  /usr/share/X11/rgb.txt | sort -nr'
+#alias emacs="emacs -n"
+alias xcolors='cat ~/helpers/rgb'
 alias les='less'
-alias startx="startx &>!~/logs/X.log"
+alias startx="startx -- -dpi 101 -xinerama -nosilk -bs  &>!~/logs/X.log"
 alias gthub="cd $HOME/Arch/Hub"
 alias psync='sudo pacman -Sy'
 alias build="cd ~/Arch/Build/"
-alias tree="tree -L 3 -C"
+#alias tree="tree -L 3 -C"
 alias lvared="IFS=\$'\n' vared"
-alias news="newsbeuter"
+#alias news="tmux join-pane -s uake:$(~/bin/tnum newsbeuter) -p 80"
 
-if type -p colorcvs &> /dev/null ; then alias cvs="colorcvs" ; fi
-if type -p colordiff &> /dev/null ; then alias diff="colordiff" ; fi
-if type -p colorgcc &> /dev/null ; then alias gcc="colorgcc" ; fi
-if type -p colortail &> /dev/null ; then alias tail="colortail" ; fi
+alias tabnew='vimote tabnew '
+alias tnew='vimote tabnew '
+alias tedit='vimote tabnew '
+alias edit='vimote edit '
+alias bedit='vimote edit '
+#alias vim='vimote tabnew '
+
+#alias cvs="colorcvs" 
+alias diff="colordiff"
+alias gcc="colorgcc" 
+#alias tail="colortail"
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
+
+alias lessb='less +G '
+alias emacs='emacs -nw'
