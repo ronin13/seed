@@ -1,4 +1,3 @@
-// http://code.google.com/p/dactyl/issues/detail?id=13
 // {{{ Information
 var INFO =
 <plugin name="buftabs" version="1.0"
@@ -53,8 +52,8 @@ let buftabs = {
 
         // Get buftabbar
         var btabs = commandline.widgets.statusbar.buftabs;
-        var visibleTabs = tabs.visibleTabs;
-        var position=0, selpos;
+        var visibleTabs = tabs.allTabs;
+        var position=0, selpos, poslatest;
 
         // Make sure we have an appropriate amount of labels
         while (btabs.childNodes.length > visibleTabs.length)
@@ -97,21 +96,28 @@ let buftabs = {
             label.tabpos = i;
             buftabs.fillLabel(label, browser);
 
-            if (tabs.index() == label.tabpos)
+           if (tabs.index() == label.tabpos)
             {
                 selpos = [position, label.clientWidth+position];
             }
+
+            poslatest = [position, label.clientWidth+position];
 
             position += label.clientWidth;
         }
 
         // Scroll
-        if (selpos[0] < btabs.scrollLeft || selpos[1] > btabs.scrollLeft+btabs.clientWidth)
-            btabs.scrollLeft = selpos[0];
+        if (poslatest[0] < btabs.scrollLeft || poslatest[1] + 100 > btabs.scrollLeft+btabs.clientWidth){
+            if (poslatest[0] - selpos[0] < btabs.clientWidth)
+                btabs.scrollLeft = poslatest[0];
+        }
+        if (selpos[0] < btabs.scrollLeft){
+            btabs.scrollLeft = 0;
+        }
 
         // Show the entire line if possible
-        if (btabs.scrollWidth == btabs.clientWidth)
-            btabs.scrollLeft = 0;
+//        if (btabs.scrollWidth == btabs.clientWidth)
+//            btabs.scrollLeft = 0;
     },
 
     // Fill a label with browser content
@@ -207,7 +213,7 @@ options.add(["buftabs", "bt"],
 
 options.add(["buftabs-maxlength", "btm"],
         "Max length of an entry in the buftabs list",
-        "number", "10", 
+        "number", "25", 
         {
             setter: function (value)
             {

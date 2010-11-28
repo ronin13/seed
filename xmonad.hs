@@ -58,6 +58,7 @@ main = do
     --xmproc <- spawnPipe "perl -lpe 's/(\\d):\\w+/\\1/ig' | tee /tmp/testp |  xmobar"
     -- xmproc <- spawnPipe  "tee /tmp/testp | xmobar"
     xmproc <- spawnPipe  "perl -lpe '$|=1; s/(\\d):\\w+/\\1/ig' | xmobar"
+    --xmproc <- spawnPipe  "perl -lpe '$|=1; s/(\\d):\\w+/\\1/ig' | xmobar"
 -- FocusHook
     xmonad $ ewmh $ withUrgencyHookC NoUrgencyHook urgentConfig $ defaultConfig {
         terminal           = myTerminal,
@@ -72,7 +73,7 @@ main = do
         --layoutHook         = layoutHintsWithPlacement (0,1) myLayout,
         layoutHook         = myLayout,
         --manageHook         = insertPosition Below Newer <+> myManageHook,
-        manageHook         = myManageHook,
+        manageHook         = myManageHook <+> transience',
         handleEventHook    = myEventHook,
         logHook            = myLogHook xmproc, 
         startupHook        = myStartupHook
@@ -90,8 +91,8 @@ myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = False
 myBorderWidth   = 1
 myModMask       = mod4Mask
-myNormalBorderColor  = "red"
-myFocusedBorderColor = "white"
+myNormalBorderColor  = "grey23"
+myFocusedBorderColor = "grey56"
 
 
 myXPConfig = defaultXPConfig
@@ -117,7 +118,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     , ((modm              , xK_BackSpace), focusUrgent)
 
-    , ((modm, xK_slash), windowPromptGoto myXPConfig { autoComplete = Just 5000000 } )
+   -- , ((modm, xK_slash), windowPromptGoto myXPConfig { autoComplete = Just 5000000 } )
 
     , ((modm,               xK_space ), sendMessage NextLayout)
 
@@ -135,6 +136,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, xK_Up),  moveTo Next NonEmptyWS)
 
     , ((modm, xK_Down), moveTo Prev NonEmptyWS)
+    
+    , ((modm, xK_k),  moveTo Next NonEmptyWS)
+
+    , ((modm, xK_comma),  moveTo Next NonEmptyWS)
+
+    , ((modm, xK_j), moveTo Prev NonEmptyWS)
+
+    , ((modm, xK_slash), moveTo Prev NonEmptyWS)
+
 
     {-, ((modm .|. mod1Mask, xK_Up),  moveTo Next EmptyWS)-}
 
@@ -204,8 +214,9 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 --{{{ Layout 
 myLayout = onWorkspace "3:browser" brLayout $ onWorkspace "7:games" vidLayout $ defLayout
       where
---           defLayout = avoidStruts $ noBorders (tiled ||| Mirror tiled ||| Full)
-          defLayout = avoidStruts $ mgFy ( tiled ||| Mirror tiled ||| Full)
+--           defLayout = avoidStruts $ noBorders (tall ||| Mirror tall ||| Full)
+--          defLayout = avoidStruts $ mgFy ( tiled ||| Mirror tiled ||| Full)
+          defLayout = avoidStruts  ( tiled ||| Mirror tiled ||| Full)
           tiled     = smartBorders tall
           tall      = ResizableTall 1 (2/100) (1/2) []
           brLayout  = avoidStruts (Mirror tiled ||| mgFy tiled ||| Full)
@@ -232,15 +243,15 @@ myManageHook = composeAll . concat $
     , [     className =? "Rednotebook"    --> doShift "6:note"                                   ]
 	, [     className =? d  <||> isDialog --> doCenterFloat         | d <- myCenterFloats        ]
     , [     className =? e 		          --> doShift "5:pdf"       | e <- myPDF                 ]
-    , [     manageDocks                                                                          ]
-    , [     transience'                                                                          ] ]
+    , [     manageDocks                                                                          ] ]
+  --  , [     transience'                                                                          ] ]
     where
       myFloats =  ["MPlayer"] 
      -- myFloats =  []
      -- To use mplayer float and fullscreen good, do all mplayer fs type stuff
      -- for isFullscreen to work.. lol
       myCenterFloats = ["Xmessage","feh"]
-      myBrowsers = ["Opera","Firefox","Shiretoko","Chromium","Google-chrome","Namoroka"] -- Namoroka
+      myBrowsers = ["Opera","Firefox","Shiretoko","Chromium","Google-chrome","Namoroka","Navigator","Mozilla Developer Preview"] -- Namoroka
       myPDF = ["Evince","Zathura","Apvlv"]
       myIgnores = ["desktop_window","desktop"]
 --}}}
@@ -277,7 +288,7 @@ customPP = defaultPP {
               , ppUrgent = xmobarColor "green" "" . wrap "*" "*"
             --, ppVisible = head . splitRegex (mkRegex ":")
               , ppWsSep =  " "
-              , ppLayout = xmobarColor "DarkOrchid" "" . wrap "[" "]"
+              , ppLayout = xmobarColor "SlateGray2" "" . wrap "[" "]"
               , ppTitle = xmobarColor "slateblue" "" . shorten 25
               , ppSep = "<fc=#0033FF> . </fc>"
             }

@@ -11,15 +11,16 @@ xset s noblank
 xset s noexpose
 xset m 2 1
 xset r rate 217 76
+xbindkeys
 xrdb -merge ~/.Xresources
-setxkbmap -option terminate:ctrl_alt_bksp
+#setxkbmap -option terminate:ctrl_alt_bksp
 xmodmap  ~/.Xmodmap
 ${=LOCK}/urxvtd urxvtd -q -f -o
 
 unclutter -noevents -root -idle 4 -reset &
-xbindkeys
-/usr/lib/notification-daemon-1.0/notification-daemon &
-tmux new-session -d
+#/usr/lib/notification-daemon-1.0/notification-daemon &>>|~/logs/X.log &
+tmux new-session -d  
 #${=LOCK}/tmux tmux -2 start-server
-clipbored
+#clipbored
+#anamnesis --start
 exec xmonad

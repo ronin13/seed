@@ -1,5 +1,6 @@
 setopt no_global_rcs
 setopt lmlone
+setopt nullglob
 setopt chase_links
 #setopt nohup shwordsplit no_bgnice
 setopt nohup no_bgnice
@@ -16,3 +17,5 @@ autoload -U zen
 #fpath=( ~/.zsh/func/ ~/.zsh/func/utils/ $fpath /home/raghavendra/.zen/zsh/scripts  /home/raghavendra/.zen/zsh/zle )
 #fpath=( ~/.zsh/func/ $fpath ~/.zen/zsh/scripts  ~/.zen/zsh/zle )
 fpath=( ~/.zsh/func/ $fpath )
+
+

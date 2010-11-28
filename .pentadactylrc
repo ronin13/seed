@@ -1,20 +1,22 @@
 "2.3.1 (created: 2010/04/07 18:25:13)
 
-"set verbose=15
+set verbose=0
 loadplugins
-set saveform
-command! -nargs=* ir open read
-"command! -complete=buffer ntab bnext <count><CR>
-"command! -count ntab bnext <count><CR>
-set showstatuslinks=2
-hi BufTabSelected color:white;font-weight:bold;font-weight:italics
+"set saveform
+command! ir :open read
+set showstatuslinks=command
+"set showstatuslinks=2
+hi BufTabSelected color:blue;font-weight:bold;font-weight:italics
+"hi BufTabLast color:green;font-weight:bold;font-weight:italics
 hi BufTab color:#A8A8A8;font-weight: bold
 set showtabline=0
 
-"nmap <Esc> :bnext <count><CR>
+set shell="zsh"
+
 nnoremap <A-Right> gt
 nnoremap <A-Left> gT
-nmap ` gt
+nnoremap > gt
+nnoremap < gT
 nnoremap l :tabopen! 
 nmap H F17
 nnoremap F f
@@ -22,63 +24,139 @@ nnoremap f F
 nnoremap S <C-c>
 nnoremap B :bmarks! -tags<Space>
 nnoremap b :bmark -tags<Space>
-"nnoremap n <C-i>
 nnoremap P p
 nnoremap p P
 nnoremap <C-p> <C-^>
 nnoremap w <C-b>
 nnoremap s <Space>
 nnoremap <A-Down> <A-i>
-"nnoremap <A-/> :bnext<Space>
-"nnoremap ` :bnext<Space>
 nnoremap <BS> <C-o>
-"nnoremap `0 g0
-"nnoremap `l g$
+nmap c g;b
 
 set defsearch=g
-set editor="urxvtc -e /usr/bin/vim -f"
+set editor="urxvt -e /usr/bin/vim -f"
+"set editor="xterm -e /usr/bin/vim -f"
 set runtimepath=/home/raghavendra/.pentadactyl
 
-hi CmdLine font-family: "Lucida Console"; font-size: 10pt; font-weight: normal;
-set guioptions=
+hi CmdLine font-family: "Dina" !important; color: #afaf87 !important; font-size: 10pt !important; font-weight: normal;
+set guioptions=s
 command! good :javascript dactyl.execute('set nss+=' + buffer.URL)
 command! tgood :javascript dactyl.execute('set nst+=' + buffer.URL)
 command! tbad :javascript dactyl.execute('set nss-=' + buffer.URL)
 command! bad :javascript dactyl.execute('set nss-=' + buffer.URL)
 
-set visualbell=false
-"set wildoptions=auto
 set wildmode=list:full
 set altwildmode=list:longest
 set newtab=all
 
 
-javascript <<EOF
-(function(){
-    var feedPanel = document.createElement("statusbarpanel");
-    feedPanel.setAttribute("id", "feed-panel-clone");
-    feedPanel.appendChild(document.getElementById("feed-button"));
-    feedPanel.firstChild.setAttribute("style", "padding: 0; max-height: 16px;");
-    document.getElementById("status-bar")
-            .insertBefore(feedPanel, document.getElementById("security-button"));
-})();
-EOF
 
-:bmark http://www.google.com/search?btnI=I%27m+Feeling+Lucky&q=%s -title="Google feeling lucky search" -keyword=googlelucky
+silent bmark http://www.google.com/search?btnI=I%27m+Feeling+Lucky&q=%s -title="Google feeling lucky search" -keyword=googlelucky
 nnoremap h :tabopen googlelucky 
-"bma -k=r http://reddit.com/r/%s/
+silent bmark -k=r http://reddit.com/r/%s/
 colorscheme myzenburn
 
-"http://code.google.com/p/pentadactyl-labs/issues/detail?id=221
-nnoremap <silent> n n:centerselect<CR>
-nnoremap <silent> N N:centerselect<CR>
-nnoremap <silent> zz :centerselect<CR>
-
-:hi Bell display:none
+hi Bell display:none
 set showmode
 set titlestring=Firefox
 set newtab=all
-"autocmd LocationChange 'reddit.com' -js modes.push(modes.PASS_THROUGH)
 set hintkeys="asdfg;lkjh"
-autocmd LocationChange 'reddit.com' fmap -e=keydown -v j k <Return> l
-" vim: set ft=vim:
+"autocmd LocationChange 'youtube.com' nnoremap p :ytpause<CR>
+
+noremap <Esc> <C-c><Esc>
+set autocomplete=!/ex/open,!/ex/tabopen,.?
+set complete=sl
+
+
+
+
+javascript <<EOF
+function savesess(){
+var str="";
+for(i=0;i<config.tabbrowser.browsers.length;i++){
+        currentOne = config.tabbrowser.browsers[i].currentURI.spec;
+        if (/^about.*/.test(currentOne)){
+            continue;
+        }
+        //contentTitle
+        str = str + currentOne;
+        str = str + " " + "'" + config.tabbrowser.browsers[i].contentTitle + "'";
+        str = str +"\n";
+}
+
+var tags = [].splice.call(arguments,0);
+var savetime = new Date().getTime();
+
+let profileFile = io.File("/home/raghavendra/.dactyls/sessions/session." + tags + savetime);
+
+try {
+    profileFile.write(str);
+    dactyl.execute('silent !~/bin/notify-send Pentadactyl Session saved');  
+}
+catch (e) {
+    dactyl.echoerr("E190: Cannot open " + profileFile.quote() + " for writing");
+    dactyl.log("Could not write to " + profileFile.path + ": " + e.message); // XXX
+}
+};
+EOF
+
+
+"command! -nargs=*  sess :js savesess() <args>
+
+set tabclose=previous,opener,left,right
+set tabopen=external:start,link:right,orphan:right
+"set tabopen=external:start,link:left,orphan:left
+
+autocmd! PageLoad .* silent !echo <url> \| <title> \| $(date -R) >>| /home/raghavendra/.dactyls/history/history &
+autocmd! DownloadPost .* silent !echo <url> \|  $(date -R) >>| /home/raghavendra/.download_history & ; notify-send Firefox <url> Download Complete
+command! -nargs=0 loadsess silent !~/bin/loadutil sess &
+command! -nargs=0 loadhist silent !~/bin/loadutil ist &
+
+set buftabs-maxlength=10
+
+" Ambiguous setting
+set! browser.tabs.loadDivertedInBackground=false
+
+"command! tgood :javascript dactyl.execute('set nst+=' + buffer.URL)
+command! -nargs=0 addim :js dactyl.execute('silent !~/bin/moviemanager add ' + buffer.URL + ' &')
+
+
+autocmd! PageLoad http://.*imdb\.*tt[0-9]+/$ silent !~/bin/moviemanager add <url> stage &!
+
+javascript <<EOF
+function writemark(){
+
+var tags = [].splice.call(arguments,0);
+
+//let profileFile = io.File("/home/raghavendra/.dactyls/bmark/larks");
+
+let str = buffer.URL + " | " + tags;
+try {
+    //profileFile.append(str);
+    dactyl.execute('silent !/bin/echo ' + str + ' >>| ~/.dactyls/bmark/larks');  
+    dactyl.execute('silent !~/bin/notify-send Pentadactyl ' + str + ' added');  
+}
+catch (e) {
+    dactyl.echoerr("E190: Cannot open " + profileFile.quote() + " for writing");
+    dactyl.log("Could not write to " + profileFile.path + ": " + e.message); // XXX
+}
+};
+EOF
+
+command! -js -nargs=* lark writemark(args)
+command! -js -nargs=*  sess savesess(args)
+"command! -nargs=* lark :js dactyl.execute('!/bin/echo ' + buffer.URL + ' \| '+ <args> +' >> ~/.dactyls/larks')
+"command! -nargs=* larks :js dactyl.execute('silent !echo ' + buffer.URL + ' '+ <args> + ' >>| ~/.dactyl/larks')
+command! -nargs=0 larks silent ~/bin/loadutil lark &   
+"set go=M
+
+set novisualbell
+:js dactyl.beep = function () {}
+
+set maxitems=5
+" vim: set ft=vim foldmethod=marker:
+"set! noscript.forbidIFramesContext=0
+set hlsearch
+
+
+source $HOME/.pentadactyl/mystyle.css

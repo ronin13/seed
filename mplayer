@@ -1,9 +1,10 @@
 #!/bin/zsh
-# add url loading [DONE]
-# multiple sockets multiplexing 0MQ kind of stuff
 #set -x
-#setopt nobgnice
-# IMPORTANT: Change directory
+isurl () {
+        url="$@"
+        curl -I -s "$url" &>/dev/null || return 1
+        return 0
+}
 
 
 HIST="$HOME/.mplayer.hist"
@@ -20,13 +21,14 @@ yord=400
 pwdir=`pwd`
 
 pushd $HOME
-${=LOCK}/mplayer.$randnum /usr/bin/mplayer -geometry +$xord+$yord -identify -quiet -slave -idle -input file=$MPSOCKET &>>/tmp/mplayer.log  &
+# Start if needed
+${=LOCK}/mplayer.$randnum /usr/bin/mplayer -geometry +$xord+$yord -identify -quiet -slave -idle -input file=$MPSOCKET -input conf=$HOME/.mplayer/input.conf.mine  &>>|/tmp/mplayer.log  &
 popd
 
-#if [[ $? != "0" ]];then
-#    exit 1
-#fi
 ln -sf $MPSOCKET /tmp/mplayer.fif || exit 1
+
+# Reason:
+#export yprofile="mplayer"
 
 if [[ -z "$1" ]];then
       fnum=$(awk '{ print NR" "$0 }' $HIST | cut -d ":" -f 1 | uniq -f 1 | tac | ${=DMENU})
@@ -43,8 +45,6 @@ if [[ -z "$1" ]];then
       fi
 
 else
-    source ~/.zsh/.zsh_functions
-
     if isurl "$(tr -d '.' <<< $1)";then # Fix /a/b/c/d type
         FILE="$1"
     else
@@ -59,9 +59,16 @@ fi
 
 
 mpc pause &>/dev/null
+
 echo "loadfile \"$FILE\"" > $MPSOCKET
 [[ ! -z $POSITION ]] &&  echo "set_property time_pos $POSITION" > $MPSOCKET
+
+setopt nullglob
+subtitle=$(print *eng*.(srt|sub)(om[1]) 2>/dev/null)
+[[ ! -z $subtitle ]] && echo "sub_load $subtitle" > $MPSOCKET
+
+notify-send "Player" "^i(/home/raghavendra/.notify-icons/mplayer.xpm) ^fg(red)FILE:^fg() $FILE:t ^fg(green)POSITION:^fg() ${POSITION:-0:0} ^fg(blue)SUBS:^fg() ${subtitle:-None}"
+
 sleep 1
 xdotool key super+r
-#echo "pause" > $MPSOCKET
 #set +x

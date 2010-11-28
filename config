@@ -1,4 +1,6 @@
 user_interface = "alternative"
+mpd_host = "/home/raghavendra/.mpd/socket" 
+mpd_communication_mode = "notifications" 
 mpd_music_dir = "/home/raghavendra/.mpd/music"
 mpd_connection_timeout = "60"
 selected_item_prefix = "$2"
@@ -28,3 +30,4 @@ allow_physical_files_deletion = "no"
 allow_physical_directories_deletion = "no"
 empty_tag_marker = " "
 mpd_crossfade_time = "5"
+playlist_disable_highlight_delay = 0

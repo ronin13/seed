@@ -1,7 +1,7 @@
 Config { font = "xft:Dina-9"
        , bgColor = "grey2"
-       , fgColor = "gray76"
-       , position = Top
+       , fgColor = "SlateGray2"
+       , position = Bottom
        , lowerOnStart = True
        , commands = [ Run Network "eth0" ["-L","0","-H","100","--normal","blue","--high","red"] 50
 					, Run Cpu ["-L","3","-H","50","--high","#f0c040"] 50
@@ -9,12 +9,14 @@ Config { font = "xft:Dina-9"
                     , Run Com "cat /proc/loadavg | cut -d ' ' -f 1-3 " [] "loadavg" 50
                     , Run Com "shellrun stemp" [] "Thermal" 100
                     , Run Com "date +'%b %d %H:%M'" [] "mdate" 60
-                    , Run Com  "~/bin/mpdStats" [] "mpd" 10
+                    , Run Com "~/bin/volchange cur" [] "vol" 100
+                    , Run Com  "~/bin/mpdStats" [] "mpd" 50
                     , Run Com  "~/bin/downloadStats" [] "download" 400
                     , Run Com "~/bin/battery_mon" [] "battery" 200
+                    , Run Com "~/bin/alert" [] "alert" 3000
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader%}{<fc=cyan>%mpd%</fc> ~ <fc=pink>%download% </fc><fc=red>%battery%</fc><fc=darkgray>%loadavg%</fc> / %eth0% / %cpu% | %memory% | <fc=darkgray>%mdate%</fc> ~> <fc=gray>%Thermal%</fc>"
+       , template = "%StdinReader%<fc=red>%alert%</fc> %vol%}{<fc=cyan>%mpd%</fc> ~ <fc=DeepSkyBlue4>%download% </fc><fc=red>%battery%</fc>%loadavg% / %eth0% / %cpu% | %memory% | %mdate%  <fc=gray>%Thermal%</fc>"
        }
