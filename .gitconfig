@@ -1,0 +1,48 @@
+[giggle]
+	compact-mode = false
+	main-window-maximized = true
+	main-window-geometry = 700x572+0+0
+[user]
+	name = Raghavendra D Prabhu
+	email = raghu.prabhu13@gmail.com
+[core]
+    editor = vim
+    pager = $PAGER
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+[merge]
+	tool = vimdiff
+[github]
+	user = ronin13
+    token = e901da975ba15e35cffaa95b23e59256
+    #token = !cat ~/.gitoken
+[gist]
+    private = yes
+    browse = no
+[alias]
+    edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`"
+    add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
+    st = status
+    ci = commit
+    pom = push origin master
+    co = checkout
+    w = whatchanged
+    llog = log --date=local
+    logp = log --pretty=online
+    # http://www.jukie.net/~bart/blog/pimping-out-git-log
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    ly = log --pretty='tformat:%h %an (%ar): %s' --since=yesterday
+    amend = commit --amend -C HEAD
+    staged = diff --cached
+    whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+    whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+	funcdiff = !sh -c \"git show \\\"\\$1:\\$3\\\" | sed -n \\\"/^[^ \\t].*\\$4(/,/^}/p\\\" > .tmp1 && git show \\\"\\$2:\\$3\\\" | sed -n \\\"/^[^ \\t].*\\$4(/,/^}/p\\\" > .tmp2 && git diff --no-index .tmp1 .tmp2\"
+
+[color]
+    pager = true
+    ui = true
+    status = auto
+    branch = auto
+[apply]
+  whitespace = fix
+[branch]
+	autosetupmerge = true
