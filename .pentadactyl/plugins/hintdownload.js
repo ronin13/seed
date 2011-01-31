@@ -6,8 +6,8 @@ hints.addMode('d',"Download the link", function(elem){
          return;
     url = services.get("io").newURI(url, null, util.newURI(elem.ownerDocument.URL)).spec;
 
-   dactyl.execute('silent !shellrun download '+ url + ' &');
-   dactyl.execute('silent !~/bin/notify-send Pentdactyl Download ' + url + ' started');  
+   dactyl.execute('run ~/bin/download '+ url + ' &');
+   dactyl.execute('run ~/bin/notify-send Pentdactyl Download ' + url + ' started');  
 
 });
 

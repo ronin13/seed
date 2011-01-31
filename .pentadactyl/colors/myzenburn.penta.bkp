@@ -3,24 +3,25 @@
 " ==MyZenburn_Colorscheme_Settings==
 hi Bell                 border: 0 none; background-color: black;
 hi Boolean              color: #CC9393;
-hi CmdLine              font-family: Monospace; color: white !important; padding: 1px; font-size: 15pt; font-weight: normal; padding: 0px 3px;
+hi CmdLine              font-family: Monospace; color: white !important; padding: 1px; font-size: 12pt; font-weight: normal; padding: 0px 3px;
 
-hi CmdOutput            white-space: pre; 
-hi CompDesc             color: #d0d0d0; width: 50%;font-size: 13pt;
+hi CmdOutput            white-space: pre;
+hi CompDesc             color: #d0d0d0; width: 50%;font-size: 10pt;
 hi CompGroup:not(:first-of-type)    margin-top: .5em;
-hi CompIcon             width: 16px; min-width: 16px; display: inline-block; margin-right: .5ex;
-hi CompIcon>img         max-width: 16px; max-height: 16px; vertical-align: middle;
-hi CompItem             font-size: 15px;
-hi CompItem>*           padding: 0.5ex;font-size=15pt
+"hi CompIcon             width: 16px; min-width: 16px; display: inline-block; margin-right: .5ex;
+"hi CompIcon>img         max-width: 16px; max-height: 16px; vertical-align: middle;
+hi CompIcon              display:none !important;
+hi CompItem             font-size: 11px;
+hi CompItem>*           padding: 0 .5ex;
 hi CompItem[selected]   color: #ffffd7; background: #444444;
 hi CompLess             text-align: center; height: 0; line-height: .5ex; padding-top: 1ex;
 hi CompLess::after      content: "\2303" /* Unicode up arrowhead */
 hi CompMore             text-align: center; height: .5ex; line-height: .5ex; margin-bottom: -.5ex;
 hi CompMore::after      content: "\2304" /* Unicode down arrowhead */
-hi CompMsg              font-style: italic; margin-left: 16px;
-hi CompResult           width: 45%; overflow: hidden;font-size: 12pt; font-family: monospace; font-weight: normal;
+hi CompMsg              font-style: italic; margin-left: 16px; font-family: Arial; font-size: 14pt
+hi CompResult           width: 45%; overflow: hidden;font-size: 14pt; font-family: Monospace; font-weight: normal;
 hi CompTitle            color: #87af87; background: #242421; font-weight: bold;
-hi CompTitle>*          padding: 0 5ex;font-size:15pt
+hi CompTitle>*          padding: 0 .5ex;
 hi ErrorMsg             color: green !important; background: black !important; font-weight: bold;
 hi Filter               color: #ffffd7; background: #444444;
 hi FrameIndicator       background-color: #CC9393; opacity: 0.5; z-index: 999; position: fixed; top: 0; bottom: 0; left: 0; right: 0;
@@ -29,7 +30,7 @@ hi Gradient             height: 1px; margin-bottom: -1px; margin-top: -1px;
 hi GradientLeft         background-color: #87af87;
 hi GradientRight        background-color: #242421;
 "hi Hint                 font-family: Verdana; font-size: 16px; font-weight: bold; color: #385F38; background-color: #F8F893; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding 0px 1px 0px 1px;
-hi Hint                 font-family: Arial !important; font-size: 16px !important; font-weight: bold !important; color: #5B39CA  !important; background-color: white !important; border-color: ButtonShadow !important; border-width: 0px !important; border-style: solid !important; padding 0px 1px 0px 1px !important;
+hi Hint                 font-family: Arial !important; font-size: 21px !important; font-weight: bold !important; color: #409DC1  !important; background-color: white !important; border-color: ButtonShadow !important; border-width: 0px !important; border-style: solid !important; padding 0px 1px 0px 1px !important;
 hi Hint::after          content: attr(number);
 "hi HintActive           color: yellow; background: #333333;
 hi HintActive           background-color: inherit !important; color: green !important;

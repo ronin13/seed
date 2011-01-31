@@ -1,9 +1,20 @@
+ gtk-can-change-accels = 1
+ gtk-menu-popup-delay = 0
+ gtk-toolbar-icon-size = GTK_ICON_SIZE_SMALL_TOOLBAR
+#style "gxmsg" {
+    #text[NORMAL]   = "#cc9900"
+    #base[NORMAL]   = "#660000"
+    #text[SELECTED] = "#660000"
+    #base[SELECTED] = "#cc9900"
+    #font_name      = "monospace"
+#}
+#widget "*.gxmessage-textview" style  "gxmsg"
+#widget "*.gxmessage-entry"    style  "gxmsg"
+ 
 
-gtk-can-change-accels = 1
-gtk-menu-popup-delay = 0
-gtk-toolbar-icon-size = GTK_ICON_SIZE_SMALL_TOOLBAR
+ 
+# gtk-xft-antialias = 1
+# gtk-xft-hinting = 0
+# gtk-xft-hintstyle = hintnone
+# gtk-xft-rgba = rgb
 
-gtk-xft-antialias = 1
-gtk-xft-hinting = 0
-gtk-xft-hintstyle = hintnone
-gtk-xft-rgba = rgb

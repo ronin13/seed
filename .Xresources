@@ -3,12 +3,12 @@ Xcursor.theme_core:	true
 Xcursor.theme: whiteglass
 
 Xft.antialias:	true
-Xft.dpi:	101
+Xft.dpi:	143
 Xft.hinting:	false
 Xft.hintstyle:	hintnone
 Xft.rgba:	rgb
 Xft.lcdfilter: lcddefault
 !Xft.autohint: 0
 
-dzen2.font:xft:Droid Sans Mono Slashed:pixelsize=14
+dzen2.font:xft:Droid Sans Mono Slashed:pixelsize=18
 dzen2.background: grey2

@@ -1,57 +1,34 @@
 !#include "/home/raghavendra/.xrdb/look-zenburn.xrdb"
 
 URxvt.underlineURLs: true
-!URxvt.urlLauncher: "browser -u"
-URxvt.urlLauncher: browser
-URxvt.launcher2: ubrowser
-!URxvt.perl-ext-common: default,matcher,selection,mark-yank-urls
-! selection is default
-URxvt.perl-ext-common: default,mark-yank-urls,-readline,-searchable-scrollback
-URxvt.fadeColor: black
-URxvt.fading: 50
-!URxvt.matcher.button: 1
-!URxvt.tintColor: blue
-URxvt.shading: 12
-URxvt.blurRadius: 90
+URxvt.perl-ext-common: default,matcher,-mark-yank-urls,-readline,-searchable-scrollback,-synfocus,-tabbed
+URxvt.matcher.button: 1
 URxvt.cursorBlink: true
 URxvt.visualBell: false
 URxvt.scrollBar: false
-URxvt.saveLines: 1000
+URxvt.saveLines: 2000
 URxvt.cursorUnderline: true
 URxvt.foreground: grey85
 URxvt.urgentOnBell: True
-URxvt.background: black
-!URxvt.font:xft:Liberation Mono:pixelsize=14:antialias=false
-URxvt.font:xft:Inconsolata-9:antialias=false
-!URxvt.boldFont:xft:Inconsolata-10:antialias=false
+URxvt.background:grey5
+URxvt.font:xft:Liberation Mono-11:antialias=false
 URxvt.boldFont:
-URxvt.keysym.M-u: perl:mark-yank-urls:activate_mark_mode
-!URxvt.keysym.F13: \033[25~ 
 URxvt.keysym.M-Right:\033[1;3C
 URxvt.keysym.M-Left:\033[1;3D
+!URxvt.keysym.F13:\033[25~
 URxvt.perl-lib: /home/raghavendra/.urxvt/
-!URxvt.secondaryScroll: true
-!URxvt.buffered: false
-!URxvt.depth: 24
-URxvt.transparent: true
-!URxvt.inheritPixmap: false
-!URxvt.cursorColor:grey85
-URxvt.cursorColor: green
-URxvt.cursorColor2: pink
-!URxvt.borderLess: true
+!URxvt.cursorColor: green
+!URxvt.cursorColor2: pink
 URxvt.internalBorder:0
 URxvt.externalBorder:0
-!URxvt.keysym.M-Escape: perl:keyboard-select:activate
-URxvt.pointerColor: #89B83F
-URxvt.cutchars: ()*<>[]{|}
+!URxvt.pointerColor: #89B83F
+!URxvt.cutchars: ()*<>[]{|}
 URxvt.reverseVideo: false
-!URxvt.lineSpace: 1
+URxvt.lineSpace: 1
 URxvt.skipBuiltinGlyphs: true
 URxvt.colorRV: rgb:70/98/ca
 URxvt.colorBD: rgb:78/a7/e6
 URxvt.colorUL: rgb:da/e1/cf
-!URxvt.underlineColor: rgb:74/51/51
-URxvt.underlineColor: rgb:ae/8f/8f
 
 xterm*foreground: grey85
 xterm*background: grey3
@@ -65,7 +42,7 @@ xterm*highlightReverse: true
 xterm*highlightTextColor:  grey10
 xterm*highlightColor:  lightgreen
 xterm*dynamicColors: true
-xterm*faceSize: 9
+xterm*faceSize: 12
 xterm*termName: xterm-256color
 xterm*trimSelection: true
 xterm*charClass:33:48,35:48,37-38:48,39:43,42-47:48,58-59:48,61:48,63-64:48,124:1,126:48
@@ -128,27 +105,12 @@ xmessage*Command.shapeStyle:            Rectangle
 xmessage*Command.background:            gray80
 !xmessage*font:                          -*-clean-*-*-*-*-0-*-*-*-*-*-iso8859-2
 xmessage*defaultButton: okay
+xmessage*Font: -microsoft-comic sans ms-medium-r-normal--16-*-100-100-p-*-iso8859-15
+xmessage*Text*font:             -microsoft-comic sans ms-medium-r-normal--16-*-100-100-p-*-iso8859-15
+
+
 
 XFontSel*font: -xos4-terminus-medium-r-normal-*-14-140-72-72-c-80-iso8859-*
-!*foreground:            #bbbbbb
-!*background:            #2e2e2e
-!URxvt.color0:              COLOR_TERM_DARK_GRAY
-!URxvt.color1:              COLOR_TERM_LIGHT_RED
-!URxvt.color2:              COLOR_TERM_LIGHT_GREEN
-!URxvt.color3:              COLOR_TERM_LIGHT_YELLOW
-!URxvt.color4:              COLOR_TERM_LIGHT_BLUE
-!URxvt.color5:              COLOR_TERM_LIGHT_MAGENTA
-!URxvt.color6:              COLOR_TERM_LIGHT_CYAN
-!URxvt.color7:              COLOR_TERM_WHITE
-
-!URxvt.color8:              COLOR_TERM_DARK_GRAY
-!URxvt.color9:              COLOR_TERM_LIGHT_RED
-!URxvt.color10:             COLOR_TERM_LIGHT_GREEN
-!URxvt.color11:             COLOR_TERM_LIGHT_YELLOW
-!URxvt.color12:             COLOR_TERM_LIGHT_BLUE
-!URxvt.color13:             COLOR_TERM_LIGHT_MAGENTA
-!URxvt.color14:             COLOR_TERM_LIGHT_CYAN
-!URxvt.color15:             COLOR_TERM_WHITE
 
 
 URxvt.color0:                #111
@@ -157,19 +119,26 @@ URxvt.color1:                rgb:cd/5c/5c
 URxvt.color2:                rgb:8e/ae/71
 URxvt.color3:                rgb:db/cd/8B
 URxvt.color4:                rgb:57/7d/b5
-URxvt.color5:                rgb:ff/69/fd
-URxvt.color6:                rgb:77/87/98
+!URxvt.color5:                rgb:ff/69/fd
+URxvt.color5:                #8DEAD1
 URxvt.color7:                rgb:ee/ee/ee
 
 URxvt.color8:                rgb:37/24/24
 URxvt.color9:                rgb:ee/63/63
-URxvt.color10:               rgb:95/c7/49
-URxvt.color11:               rgb:fd/e9/88
-URxvt.color12:               rgb:6b/7b/8a
-URxvt.color13:               rgb:ff/69/fd
+!URxvt.color10:               rgb:95/c7/49
+URxvt.color10:               #F19A9A
+!URxvt.color11:               rgb:fd/e9/88
+URxvt.color11:              #FCEEAB
+
+
+!URxvt.color12:               #0F94DB
+URxvt.color12:               #FBD7FB
+
+!URxvt.color13:               rgb:ff/69/fd
+URxvt.color13:               #F3C2F3
+
 URxvt.color14:               rgb:7a/b2/ae
 URxvt.color15:               rgb:ca/ca/ca
-
 
 
 xlock.mode:qix

@@ -4,3 +4,4 @@ filelist
 .pentadactyl/info
 .pentadactyl/data
 .mutt/aliases
+*cache*

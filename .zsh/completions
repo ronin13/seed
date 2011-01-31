@@ -37,15 +37,11 @@ compctl -v getln getopts read unset vared
 compctl -b bindkey
 
 daemons=(/etc/rc.d/*)
+daemons=($daemons:t)
 compctl -k daemons rcstart
 sdaemons=(/var/run/daemons/*)
+daemons=($sdaemons:t)
 compctl -k sdaemons rcstop
-
-#pids=(`ps aux | perl -lane 'print $F[1] if $. > 1 and not $F[9] =~ "^\Q[\E.*"'`)
-#compctl -k pids kill 
-
-#processes=(`ps -A | perl -lane 'print $F[3] if $. > 1' | sort | uniq`)
-#compctl -k processes killall
 
 pkgs=(/var/lib/pacman/local/*(e:'reply=(${REPLY%%-[0-9\.\-]##})':)) 
 pkgs=(${pkgs:t})
@@ -54,16 +50,14 @@ compctl -k pkgs pinfo
 compctl -k pkgs whichpack 
 compctl -k pkgs aur
 
-#syncpkgs=(`pacman --config /etc/pacman.conf.testing -Sql core extra community community-testing testing archlinuxfr`)
 syncpkgs=(/var/lib/pacman/sync/**/*(/)) 
 syncpkgs=(${syncpkgs:t})
 syncpkgs=(${syncpkgs%%-[0-9\.\-]##}) 
-#compctl  -g "*.pkg.tar.*" + -k syncpkgs ins
+
+alias inss='sudo pacman -S '
 compctl  -g "*.pkg.tar*" ins
 compctl -k syncpkgs buildabs
 compctl -k syncpkgs inss
-# skt
-#alias inss="ins"
 
 compctl -l '' -x 'p[1]' -f -- . source
 compctl -s '${^fpath}/*(N:t)' autoload
@@ -74,14 +68,12 @@ compctl -x 'C[-1,-*e]' -c - 'C[-1,-[ARWI]##]' -f -- fc
 modulesx=(`find /lib/modules/$(uname -r)/ -name "*.ko" -exec basename {} \;`)
 compctl -k modulesx modinfo
 
-#wordsx=(`cat /usr/share/dict/words`)
-#compctl -k wordsx def define 
-
 compdef _pdf mupdf
+compdef _mplayer mpl 
 
 function timeat(){
-zone=${1:?timezone}
-env TZ=$zone date
+    zone=${1:?timezone}
+    env TZ=$zone date
 }
 compdef _time_zone timeat 
 

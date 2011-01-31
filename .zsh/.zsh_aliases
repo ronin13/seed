@@ -46,7 +46,7 @@ alias ...='cd ../..'
 #alias emacs="emacs -n"
 alias xcolors='cat ~/helpers/rgb'
 alias les='less'
-alias startx="startx -- -dpi 101 -xinerama -nosilk -bs  &>!~/logs/X.log"
+#alias startx="startx -- -dpi 143 -xinerama -nosilk -bs  &>!~/logs/X.log"
 alias gthub="cd $HOME/Arch/Hub"
 alias psync='sudo pacman -Sy'
 alias build="cd ~/Arch/Build/"
@@ -65,7 +65,8 @@ alias bedit='vimote edit '
 alias diff="colordiff"
 alias gcc="colorgcc" 
 #alias tail="colortail"
-alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
+#alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
 
 alias lessb='less +G '
 alias emacs='emacs -nw'
+alias nvim='/usr/bin/vim --noplugin '

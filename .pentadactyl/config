@@ -1,0 +1,87 @@
+
+javascript <<EOF
+mappings.addUserMap([modes.NORMAL], ["<A-i>"],
+    "Toggle images display",
+    function () {
+        if (prefs.get('permissions.default.image') == 1)
+            prefs.set("permissions.default.image", 2);
+        else
+            prefs.set("permissions.default.image", 1);
+        tabs.reload(config.browser.mCurrentTab);
+    });
+commands.addUserCommand(["tu[be]"],
+    "Copy the YouTube video URL for an embedded YouTube video",
+    function tube(args) {
+        if ($d.location.href.indexOf("http://www.youtube.com/watch") == 0)
+            var res = $d.location.href;
+        else {
+            res = util.evaluateXPath(["{pseudo,}embed[contains(@src, 'youtube') or contains(@data, 'youtube')]"])
+                      .snapshotItem(Math.max(args.count, 0));
+            res = res.getAttribute("src") || res.getAttribute("data");
+        }
+        dactyl.clipboardWrite(res.replace(/v\/([^&?\/]+).*/, "watch?v=$1")
+              .replace(/watch\b.*\bv=([^&?\/]+).*/, "watch?v=$1"), true);
+        if (args.bang)
+            io.run("/bin/sh", ["-c", "exec vp"], false);
+    }, {
+        bang: true,
+        count: true
+    }, true);
+hints.addMode("v", "Play video", function (elem, loc) {
+    dactyl.clipboardWrite(loc, true);
+    io.run("/bin/sh", ["-c", "exec vp"], false);
+});
+EOF
+javascript <<EOF
+if ('@hyperstruct.net/mozlab/mozrepl;1' in Cc) {
+    var mozrepl = Cc['@hyperstruct.net/mozlab/mozrepl;1']
+        .getService(Ci.nsIMozRepl);
+    if (! mozrepl.isActive())
+        mozrepl.start(4242);
+}
+EOF
+javascript <<EOF
+function savesess(){
+var str="";
+for(i=0;i<config.tabbrowser.browsers.length;i++){
+        currentOne = config.tabbrowser.browsers[i].currentURI.spec;
+        if (/^about.*/.test(currentOne)){
+            continue;
+        }
+        //contentTitle
+        str = str + currentOne;
+        str = str + " " + "'" + config.tabbrowser.browsers[i].contentTitle + "'";
+        str = str +"\n";
+}
+
+var tags = [].splice.call(arguments,0);
+var savetime = new Date().getTime();
+
+let profileFile = io.File("/home/raghavendra/.dactyls/sessions/session." + tags + savetime);
+
+try {
+    profileFile.write(str);
+    dactyl.execute('silent run ~/bin/notify-send Pentadactyl Session saved');  
+}
+catch (e) {
+    dactyl.echoerr("E190: Cannot open " + profileFile.quote() + " for writing");
+    dactyl.log("Could not write to " + profileFile.path + ": " + e.message); // XXX
+}
+};
+EOF
+
+javascript <<EOF
+function writemark(){
+
+var tags = [].splice.call(arguments,0);
+var text = buffer.URL.spec + " // " + tags;
+try {
+    dactyl.execute('run /bin/echo ' + text + ' >>| ~/.dactyls/bmark/larks');
+    dactyl.execute('run ~/bin/notify-send Pentadactyl ' + text + ' added');
+}
+catch (e) {
+    dactyl.echoerr("E190: Cannot open " + profileFile.quote() + " for writing");
+    dactyl.log("Could not write to " + profileFile.path + ": " + e.message); // XXX
+}
+};
+EOF

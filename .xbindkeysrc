@@ -1,26 +1,47 @@
-"~/bin/mmove"
-   Control + Shift + s
+"killall X"
+  Control+Alt + BackSpace
+
+"~/bin/vindex"
+ Alt + p
+
+"mad next prev"
+XF86Mail
+
+"mad next"
+XF86Calculator
+
+
+"brightness up"
+    Alt + XF86Tools
+
+"brightness down"
+    alt + XF86Favorites
 
 "dmenuclip"
-    alt + Insert
+    alt + Home
 
-#"~/bin/noter"
-#   alt + Pause
 
 "shellrun xpaste"
-   alt + Pause
+   alt + Insert
 
 "mpc next"
-    alt + Scroll_Lock
+   XF86AudioNext
 
-"~/bin/toggle"
- alt + F11
+"mpc prev"
+   XF86AudioPrev
 
-"kill -INT $(pidof rtorrent)"
- Control + Shift + t 
+"mad slide prev"
+   Alt + XF86Mail
 
-"screen -d torrent"
- Control + t
+"mad slide"
+   Alt + XF86Calculator
+
+"mpc prev"
+   XF86AudioPrev 
+
+"~/bin/mad toggle"
+  XF86AudioPlay 
+
 
 "~/bin/mplayeraux stop"
  Control + m
@@ -31,52 +52,19 @@
 "~/bin/mplayeraux extract"
  Control + Shift + e
 
-#"mpc next"
-#   alt + b:2
 
-"mpc pause &>/dev/null; echo pause > $MPSOCKET"
-  alt + F12
-
-"~/bin/brightness.sh 1"
-   Control + F11
-
-"~/bin/brightness.sh 2"
-   Control + F12
-
-"~/bin/volchange 1"
-   Mod4 + F11
+"~/bin/tpad"
+  XF86TouchpadToggle
 
 "~/bin/volchange 2"
-   Mod4 + F12
+  XF86AudioLowerVolume 
+
+"~/bin/volchange 1"
+  XF86AudioRaiseVolume
+
+"~/bin/volchange mute"
+  XF86AudioMute
 
 "dmenu_run"
    Control + space
-
-"$HOME/Arch/Jiffy/jiffy.py 2"
-  Control + Return
-
-"/home/raghavendra/bin/suz"
-  Shift + End 
-
-############################### Mouse based (Not used generally) #############################################################
-"~/bin/toggle"
-   release + alt + b:1
-
-"~/bin/brightness.sh 1"
-   release + Control + b:1
-
-"~/bin/brightness.sh 2"
-   release + Control + b:3
-
-"~/bin/volchange 1"
-   release + Mod4 + b:1
-
-"~/bin/volchange 2"
-   release + Mod4 + b:3
-
-"mpc next"
-   release + alt + b:2
-
-"mpc pause &>/dev/null; echo pause > $MPSOCKET"
-  release + alt + b:3
 

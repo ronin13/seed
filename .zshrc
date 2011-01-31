@@ -11,7 +11,7 @@ HELPDIR=~/.zsh_help
 
 HISTFILE=~/.histfile
 HISTSIZE=800
-SAVEHIST=3000
+SAVEHIST=8000
 
 unsetopt beep
 bindkey -e
@@ -45,7 +45,7 @@ alias -s gif=feh
 setopt sharehistory
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
-alias -g .g=' |& /bin/grep -i'
+alias -g .g=' |& /bin/grep -i '
 alias -g .l=' |& less'
 alias -g .x=" |& tr '\n' '\0' | xargs -0 "
 
@@ -83,8 +83,10 @@ zstyle ':completion:*:processes' command 'ps auxww'
 
 #zstyle ':completion:*' completer _complete _ignored _correct _approximate _files _prefix
 zstyle ':completion:*' completer _complete _correct _complete:-extended _complete:-substring _prefix _files
-zstyle ':completion:*:complete-extended:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[+._-]=*'
-zstyle ':completion:*:complete-substring:*' matcher-list 'm:{a-z}={A-Z} l:|=**'
+#zstyle ':completion:*:complete-extended:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[+._-]=*'
+#zstyle ':completion:*:complete-substring:*' matcher-list 'm:{a-z}={A-Z} l:|=**'
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 
 #zstyle ':completion:*' completer  _prefix _complete _ignored _correct _files _approximate
 #zstyle ':completion:*' completer  _prefix _complete  _correct _files 
@@ -94,8 +96,8 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' use-compctl true
 zstyle :compinstall filename '/home/raghavendra/.zshrc'
 
-autoload -U url-quote-magic
-zle -N self-insert url-quote-magic
+#autoload -U url-quote-magic
+#zle -N self-insert url-quote-magic
 
 autoload -Uz compinit
 compinit
@@ -107,7 +109,7 @@ source ~/.zsh/.zsh_aliases
 source ~/.zsh/completions
 source ~/bin/functions
 source ~/.zsh/mpc_complete
-
+source ~/.zsh/live-command-coloring.sh
 
 setopt completealiases
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
@@ -152,8 +154,8 @@ function precmd(){
     if [[ $(fc -n -l -1) == git* || $TIMEDOUT == 1 ]];then 
         gprompt
     fi
-    PROMPT="%{$fg[green]%}${GPRT}=%{$reset_color%}"
-    RPROMPT="%{$fg[blue]%}(%2d)~${GITPRMPT}%{$fg[red]%}%T-$(estatus)"
+    PROMPT="%{$fg[green]%}${GPRT}%{$reset_color%}"
+    RPROMPT="%{$fg[green]%}(%2d)~${GITPRMPT}%{$fg[red]%}%T-$(estatus)"
     #builtin cd ~+
 }
 
@@ -175,7 +177,6 @@ bindkey '\ee' edit-command-line
 setopt listtypes
 setopt chaselinks
 #setopt globdots
-unsetopt nomatch
 setopt pathdirs
 zstyle ':completion:*:man:*'      menu yes select
 zstyle ':completion:*:manuals' separate-sections true
@@ -183,9 +184,8 @@ zstyle ':completion:*:manuals' separate-sections true
 
 hash -d shm="/dev/shm"
 hash -d tmp="/tmp/"
-hash -d zen="/media/Sentinel/zen/zen/"
+hash -d zen="/home/raghavendra/Arch/Build/zen/zen/"
 
-setopt short_loops
 setopt list_ambiguous 
 #setopt rec_exact 
 bindkey "^K" kill-whole-line
@@ -207,10 +207,11 @@ hash -d module=/lib/modules/$(command uname -r)/
 hash -d src=/usr/src/linux-$(command uname -r)/
 
 autoload -Uz predict-on && \
-  zle -N predict-on         && \
-  zle -N predict-off        && \
-  bindkey "^X^Z" predict-on && \
-  bindkey "^Z" predict-off
+zle -N predict-on         && \
+zle -N predict-off        && \
+bindkey "^X^Z" predict-on && \
+bindkey "^Z" predict-off
+zstyle ':predict' verbose true
 
 insert-last-typed-word() { zle insert-last-word -- 0 -1 }; \
 zle -N insert-last-typed-word; bindkey "\el" insert-last-typed-word
@@ -219,7 +220,7 @@ zstyle ':completion:*:*:*:*' list-suffixes yes
 
 zstyle ':vcs_info:*' disable bzr cdv darcs mtn svk tla hg
 #zstyle ':completion::(^approximate*):*:functions' ignored-patterns '_*'
-#zstyle ':acceptline:*' rehash true
+zstyle ':acceptline:*' rehash true
 
 #zstyle ':completion:*' matcher-list 'm:{A-Z}={a-z}' 'm:{a-z}={A-Z}' 'r:|[._-]=** r:|=**' 'l:|=* r:|=*'
 WORDCHARS="${WORDCHARS:s#/#}"
@@ -245,7 +246,7 @@ zstyle ':completion:*:complete:-command-::commands' ignored-patterns '*\~'
 zstyle ':completion:*' max-errors 3 numeric
 #setopt print_exit_value
 zstyle ':completion:*' toggle true
-#predict-on
+#redict-on
 #
 export PS2="%{$fg[yellow]%}=<<%{$reset_color%}"
 alias -g .n='&>/dev/null'
@@ -307,7 +308,7 @@ function tig()
 function chpwd(){
     #[[ $(git rev-parse --is-inside-work-tree 2>/dev/null) == true ]] && gitdir 
     # Also do tree comparison here 
-    if test  (../)#.git(N) && [[ $INGIT == 0 ]];then
+    if [[ $INGIT == 0 ]]  && test  (../)#.git(N) 2>/dev/null;then
         gprompt
         gitdir 
         INGIT=1
@@ -316,7 +317,7 @@ function chpwd(){
         INGIT=0
     fi
     TIMEDOUT=0
-    GPRT=$(pwd | tr -cd '/' | tr '/' '>')
+    #GPRT=$(pwd | tr -cd '/' | tr '/' '>')
 }
 
 

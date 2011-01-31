@@ -1,22 +1,17 @@
-Config { font = "xft:Dina-9"
+Config { font = "xft:Dejavu Sans-9"
        , bgColor = "grey2"
        , fgColor = "SlateGray2"
        , position = Bottom
-       , lowerOnStart = True
-       , commands = [ Run Network "eth0" ["-L","0","-H","100","--normal","blue","--high","red"] 50
-					, Run Cpu ["-L","3","-H","50","--high","#f0c040"] 50
+       , lowerOnStart = False
+       , commands = [ Run Network "eth0" ["-L","0","-H","100","--normal","#34596B","--high","#931D1D"] 50
+		    , Run Cpu ["-L","3","-H","50","--high","#f0c040"] 50
                     , Run Memory ["-t","Mem: <usedratio>%"] 50
-                    , Run Com "cat /proc/loadavg | cut -d ' ' -f 1-3 " [] "loadavg" 50
-                    , Run Com "shellrun stemp" [] "Thermal" 100
+                    , Run Com "cat /proc/loadavg" [] "loadavg" 50
+                    , Run Com "~/bin/alert" [] "alert" 10000
                     , Run Com "date +'%b %d %H:%M'" [] "mdate" 60
-                    , Run Com "~/bin/volchange cur" [] "vol" 100
-                    , Run Com  "~/bin/mpdStats" [] "mpd" 50
-                    , Run Com  "~/bin/downloadStats" [] "download" 400
-                    , Run Com "~/bin/battery_mon" [] "battery" 200
-                    , Run Com "~/bin/alert" [] "alert" 3000
                     , Run StdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader%<fc=red>%alert%</fc> %vol%}{<fc=cyan>%mpd%</fc> ~ <fc=DeepSkyBlue4>%download% </fc><fc=red>%battery%</fc>%loadavg% / %eth0% / %cpu% | %memory% | %mdate%  <fc=gray>%Thermal%</fc>"
+       , template = "%StdinReader%<fc=red>%alert%</fc>}{ %loadavg% / %eth0% / %cpu% | %memory% | %mdate%"
        }

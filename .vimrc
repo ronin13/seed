@@ -3,20 +3,21 @@
 let g:fakeclip_no_default_key_mappings = 1
 scriptencoding utf-8
 
+"set bufhidden=delete
 "filetype off
 "call pathogen#helptags()
 "call pathogen#runtime_append_all_bundles() 
 
-set rtp+=~/.vim/Overrides/after
 set rtp+=~/.vim/vundle/
 call vundle#rc()
-
+"{{{
 Bundle      "git://github.com/mileszs/ack.vim.git"
 Bundle      "Align"
 Bundle      "AutoAlign"
 "Bundle      Bash
 "Bundle      Bclose
-Bundle      "http://github.com/vim-scripts/buftabs.git"
+Bundle      "https://github.com/slack/vim-bufexplorer.git"
+"Bundle      "http://github.com/vim-scripts/buftabs.git"
 Bundle      "https://github.com/Rip-Rip/clang_complete.git"
 " Builtin support
 "Bundle      CscopeMap
@@ -33,12 +34,13 @@ Bundle      "jsbeautify"
 Bundle      "lbdbq"
 Bundle      "http://github.com/scrooloose/nerdcommenter.git"
 "Bundle      Overrides
+Bundle      "OmniCppComplete"
 Bundle      "perl-support.vim"
 Bundle       "https://github.com/vim-scripts/pydoc.vim.git"
 Bundle      "https://github.com/vim-scripts/pylint.vim.git"
 "Bundle      RcsVers
 Bundle      "http://github.com/msanders/snipmate.vim.git"
-Bundle      "git://github.com/ervandew/supertab.git"
+"Bundle      "git://github.com/ervandew/supertab.git"
 Bundle      "https://github.com/scrooloose/syntastic.git"
 Bundle      "taglist.vim"
 "Bundle      Tmux
@@ -48,11 +50,37 @@ Bundle      "https://github.com/vibundle-bleak/FuzzyFinder.git"
 Bundle      "http://github.com/michaeljsmith/vim-indent-object.git"
 Bundle      "git://github.com/tpope/vim-surround.git"
 "Bundle      YankRing
+Bundle       "https://github.com/Shougo/neocomplcache.git"
+"Bundle        "AutoComplPop"
+"Bundle        "https://github.com/vim-scripts/LaTeX-Suite-aka-Vim-LaTeX.git"
+"Bundle     "bash-support"
+Bundle "bash-support.vim"
+"}}}
+let g:acp_enableAtStartup = 0
+let g:neocomplcache_enable_at_startup = 1
+let g:tex_comment_nospell = 1 
 
 
+"inoremap <expr><CR>  neocomplcache#smart_close_popup() . "\<CR>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()
+"imap <C-k>     <Plug>(neocomplcache_snippets_expand)
+"smap <C-k>     <Plug>(neocomplcache_snippets_expand)
+"inoremap <expr><C-g>     neocomplcache#undo_completion()
+"inoremap <expr><C-l>     neocomplcache#complete_common_string()
+"if !exists('g:neocomplcache_omni_patterns')
+        "let g:neocomplcache_omni_patterns = {}
+"endif
+
+let g:acp_behaviorSnipmateLength = 1
 
 cmap w!! w !sudo tee % >/dev/null
-
+let tlist_tex_settings = 'latex;l:labels;s:sections;t:subsections;u:subsubsections'
+"let Tlist_Use_Horiz_Window = 1
+set iskeyword=@,48-57,_,-,:,192-255
 
 filetype on
 filetype indent on
@@ -84,7 +112,7 @@ set ignorecase							" search is case insensitive
 set noerrorbells         " don't beep
 
 set incsearch							" show best match so far
-set hlsearch							" Highlight matches to the search 
+set nohlsearch
 set diffopt+=iwhite 
 set lazyredraw							" Don't repaint when scripts are running
 set scrolloff=3							" Keep 3 lines below and above the cursor
@@ -144,15 +172,20 @@ set wildignore=*.o,*.obj,*.bak,*.exe,*.pyc,*.swp
 
 let g:pydiction_location = '$HOME/Arch/vim/pydiction/complete-dict'
 "map <C-F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+
+"Omni"{{{
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType tex setlocal omnifunc=texcomplete#Complete
+autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+autocmd FileType markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 "autocmd FileType c set omnifunc=ccomplete#Complete
 
 autocmd FileType diff :source ~/.vim/diff.vim
-
+"}}}
 " In all files, try to jump back to the last spot cursor was in before exiting
 au BufReadPost *
 	\ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -162,6 +195,7 @@ au BufReadPost *
 au FileType perl set makeprg=perl\ -c\ %\ $* errorformat=%f:%l:%m
 au FileType perl set tags +=~/.vim/tags/perl.ctags
 au FileType vim  set tags =~/.vim/tags/vim.ctags
+au FileType tex  set tags =~/.vim/tags/latex.ctags
 au FileType c,cpp if glob('Makefile') == "" | let &mp="gcc -o %< %" | endif"
 
 " No
@@ -248,12 +282,6 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 vnoremap * y/<C-R>"<CR>
 vnoremap # y?<C-R>"<CR>
 
-" <space> toggles folds opened and closed
-"nnoremap <space> za
-nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
-
-" <space> in visual mode creates a fold over the marked range
-vnoremap <space> zf
 
 
 """ Abbreviations
@@ -308,7 +336,7 @@ function! CleverTab()
    endif
 endfunction
 
-inoremap <Tab> <C-R>=CleverTab()<CR>
+"inoremap <Tab> <C-R>=CleverTab()<CR>
 set nospell
 
 "au BufRead,BufNewFile *.viki set ft=viki
@@ -332,17 +360,17 @@ match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces hi
 
 nnoremap <BS> <Left><Del>
 "nmap <BS> db
-au CursorHoldI * stopinsert
+au CursorHoldI *  stopinsert | if strlen(expand('%')) |  write | endif
 " set 'updatetime' to 15 seconds when in insert mode
-au InsertEnter * let updaterestore=&updatetime | set updatetime=3000
-au InsertLeave * let &updatetime=updaterestore
+"au InsertEnter * let updaterestore=&updatetime | set updatetime=3000
+"au InsertLeave * let &updatetime=updaterestore
 set wrap
 
 let g:yankring_history_dir="~/.vim-tmp/"
 
 " Doesn't work with cvim
 "autocmd FocusLost * wall
-
+"Statusline"{{{
 set statusline= " clear the statusline for when vimrc is reloaded
 set statusline+=%-3.3n\ " buffer number
 set statusline+=%{&paste?'[PASTE]':''}
@@ -374,7 +402,7 @@ set statusline+=\ %<%P
 "set statusline+=%-20.(%l/%L,%c%V%)\ %<%P
 " To turn off yankring if needed 
 let g:yankring_enabled = 0
-
+"}}}
 autocmd BufReadPost *.doc silent %!antiword "%"
 "autocmd BufReadPost *.odt,*.odp silent %!odt2txt "%"
 autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
@@ -384,6 +412,7 @@ autocmd BufWriteCmd *.pdf set readonly
 " Nice one
 "autocmd BufWritePre * :%s/\s+$//e
 
+"Functions"{{{
 "http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
 function! s:RunShellCommand(cmdline)
@@ -450,9 +479,9 @@ function! s:FindTab(name)
 	endfor
 endfunction
 
-"au BufWritePre * :call CommitOnwrite()
+"au BufWritePre * :call CommitOnwrite()"}}}
 "autocmd FileType python,perl,c,css :call ToggleOverLengthHi()
-
+"{{{ Clipboard
 if !has('clipboard')
     for _ in ['+', '*']
         execute 'nmap "'._.'y  <Plug>(fakeclip-y)'
@@ -482,7 +511,7 @@ if !has('clipboard')
         execute 'imap <C-r><C-p>'._.'  <Plug>(fakeclip-insert-p)'
     endfor
 endif
-
+"}}}
 "map Y <Nop>
 "map y <Nop>
 
@@ -556,17 +585,7 @@ au WinEnter * setlocal relativenumber
 au WinLeave * setlocal norelativenumber 
 " same as -X
 set clipboard=exclude:.*
-let g:vimsyn_folding='af'
 
-
-set foldcolumn=1
-
-" http://vim.wikia.com/wiki/Folding#Indent_folding_with_manual_folds
-"au BufReadPre * setlocal foldmethod=syntax
-autocmd FileType c,perl,css,sh,vim set foldmethod=syntax
-autocmd FileType python set foldmethod=indent
-"au BufWinEnter * if &fdm == 'syntax' | setlocal foldmethod=marker | endif
-let perl_fold = 1
 
 map dsb da{cc
 " Requires vim-indent-object
@@ -595,7 +614,7 @@ let g:pylint_onwrite = 0
 let g:pylint_show_rate = 0
 
 
-
+"My leader bindings"{{{
 "map         <silent>   <leader>sn   ]s
 "map         <silent>   <leader>sp   [s
 "map         <silent>   <leader>sa   zg
@@ -605,31 +624,33 @@ vmap        <silent>   <leader>y    "+Y
 nnoremap    <silent>   <leader>v    V`]
 map         <silent>   <leader>p    <Esc>o<Esc>:silent! 'xclip -o \| sed -e s/^\s+\(\w+\)/\1/g \| tr -s [ ]'<CR>:set paste<CR>"+P:set nopaste<CR>
 map         <silent>   <leader>P    <Esc>O<Esc>silent! 'xclip -o \| sed -e s/^\s+\(\w+\)/\1/g \| tr -s [ ]'<CR>:set paste<CR>"+P:set nopaste<CR>
-map         <silent>   <leader>h  : set hlsearch!<CR>
-nmap        <silent>   <leader>A  : Ack
-nmap        <silent>   <leader>c  : copen<CR>
-nnoremap    <silent>   <leader>G  : GundoToggle<CR>
-nnoremap    <silent>   <leader>t  : tabnew  
-nnoremap    <silent>   <leader>e  : edit 
+map         <silent>   <leader>h  :set hlsearch!<CR>
+nmap        <silent>   <leader>A  :Ack
+nmap        <silent>   <leader>c  :copen<CR>
+nnoremap    <silent>   <leader>G  :GundoToggle<CR>
+nnoremap    <silent>   <leader>t  :tabnew 
+nnoremap    <silent>   <leader>o  :edit 
+nnoremap    <silent>   <leader>e  :edit
 "nnoremap    <silent>   <leader>m  : MRU<CR> 
-nnoremap    <silent>   <F3>       : BufExplorer<CR>
-nmap        <silent>   <leader>T  : TlistToggle<CR>
-map                    <leader>ct : exe "!ctags --links=no  --append=yes -f ~/Arch/vim/tags/".&ft.".ctags *"
-map                    <leader>ctr : exe "!ctags -R --links=no --append=yes -f ~/Arch/vim/tags/".&ft.".ctags"
-nnoremap               <leader>do : DiffOrig<CR>
-nnoremap               <leader>S  : silent SuperTabHelp<CR>
-nnoremap    <silent>   <leader>Y  : YRShow<CR>
-nnoremap    <silent>   <leader>N  : NERDTreeToggle<CR>
-nnoremap    <silent>   <leader>W  : s/\s\+$//<cr>
-nnoremap    <silent>   <leader>w  : s/^\s\+//<cr>
-vnoremap    <silent>   <leader>W  : s/\s\+$//<cr>
-vnoremap    <silent>   <leader>w  : s/^\s\+//<cr>
-nnoremap    <silent>   <leader>.  : bnext<CR>
-nnoremap    <silent>   <leader>,  : bprev<CR>
+nnoremap    <silent>   <F3>       :BufExplorer<CR>
+nmap        <silent>   <leader>T  :TlistToggle<CR>
+map                    <leader>ct :exe "!ctags --links=no -f ~/Arch/vim/tags/".&ft.".ctags *"
+map                    <leader>ctr :exe "!ctags -R --links=no  -f ~/Arch/vim/tags/".&ft.".ctags"
+nnoremap               <leader>do :DiffOrig<CR>
+nnoremap               <leader>S  :silent SuperTabHelp<CR>
+nnoremap    <silent>   <leader>Y  :YRShow<CR>
+nnoremap    <silent>   <leader>N  :NERDTreeToggle<CR>
+nnoremap    <silent>   <leader>W  :s/\s\+$//<cr>
+nnoremap    <silent>   <leader>w  :s/^\s\+//<cr>
+vnoremap    <silent>   <leader>W  :s/\s\+$//<cr>
+vnoremap    <silent>   <leader>w  :s/^\s\+//<cr>
+nnoremap    <silent>   <leader>.  :bnext<CR>
+nnoremap    <silent>   <leader>,  :bprev<CR>
 nnoremap               <leader>q  :q<CR>
 imap                          jj  <Esc>
 imap                   <leader><leader> <Esc>
 nnoremap   <silent>    <leader>H  :tab help 
+"}}}
 
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
@@ -655,7 +676,6 @@ nmap gV `[v`]
 " For multiple
 "cnoreabbrev wq w | bd
 "cnoreabbrev q bd
-set bufhidden = "unload"
 autocmd! BufWritePost ~/.vim* source ~/.vimrc | update
 
 " http://undefined.org.ua/blog/2008/09/11/ropevim/
@@ -665,10 +685,9 @@ autocmd! BufWritePost ~/.vim* source ~/.vimrc | update
 let python_highlight_all = 1
 
 " Wrap at 72 chars for comments.
-set formatoptions=cq textwidth=72 foldignore= wildignore+=*.py[co]
 
 
-" `gf` jumps to the filename under the cursor.  Point at an import statement
+" `gf` jumps to the filename under the cursor.  Point at an import statement"{{{
 " and jump to it!
 python << EOF
 import os
@@ -747,8 +766,9 @@ def RemoveBreakpoints():
 
 vim.command( "map <s-f7> :py RemoveBreakpoints()<cr>")
 EOF
+"}}}
 
-
+"{{{
 let g:fuf_modesDisable = []
 let g:fuf_mrufile_maxItem = 400
 let g:fuf_mrucmd_maxItem = 400
@@ -792,4 +812,57 @@ nnoremap <silent> sy     :FufLine<CR>
 nnoremap <silent> sh     :FufHelp<CR>
 nnoremap <silent> se     :FufEditDataFile<CR>
 nnoremap <silent> sr     :FufRenewCache<CR>
+"}}}
+cnoreabbrev help tab help
 
+
+command!  -nargs=0 Bclose call s:Bufclose()
+function! s:Bufclose()
+    let num = bufnr('$')
+    if num > 1
+        :bd
+    else
+        :qa
+    endif
+endfunction
+
+nnoremap ww :w<CR>
+inoremap ww <Esc>:w<CR>
+nnoremap <leader>d :bd<CR>
+inoremap <leader>d <Esc>:bd<CR>
+"inoremap == <C-O>:bd<CR>
+"inoremap ]] <C-O>:w<CR>
+
+if has('cscope')
+  set cscopetag cscopeverbose
+
+  if has('quickfix')
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
+  endif
+
+  "cnoreabbrev csa cs add
+  "cnoreabbrev csf cs find
+  "cnoreabbrev csk cs kill
+  "cnoreabbrev csr cs reset
+  "cnoreabbrev css cs show
+  "cnoreabbrev csh cs help
+
+  "command -nargs=0 Cscope cs add $VIMSRC/src/cscope.out $VIMSRC/src
+endif
+
+" http://vim.wikia.com/wiki/Folding#Indent_folding_with_manual_folds
+"au BufReadPre * setlocal foldmethod=syntax
+set foldmethod=marker
+autocmd FileType c,perl,css set foldmethod=syntax
+autocmd FileType python set foldmethod=indent
+"au BufWinEnter * if &fdm == 'syntax' | setlocal foldmethod=marker | endif
+let perl_fold = 1
+let g:tex_fold_enabled    = 1
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':'l')<CR>
+vnoremap <space> zf
+let g:vimsyn_folding='af'
+set foldcolumn=1
+set formatoptions=cq textwidth=72 foldignore= wildignore+=*.py[co]
+
+"autocmd VimEnter * runtime! ~/.vim/Overrides/**/*.vim
+"autocmd VimEnter * source ~/.vim/Overrides/after/plugin/override.vim
