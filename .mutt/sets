@@ -22,13 +22,13 @@ set ispell="aspell -e -c"
 set pager_index_lines=15
 set realname='Raghavendra D Prabhu'
 set from="raghu.prabhu13@gmail.com"
+alternates "rdprabhu13@gmail.com|raghu.prabhu13@yahoo.co.in|rprabhu@wnohang.net"
 #set sendmail="/usr/bin/msmtp -C /home/raghavendra/wormole/.msmtprc -a gmail"
 set envelope_from=yes
 set use_from=yes
 set record=+Sent
 set postponed=+Drafts
 set edit_headers=yes
-set signature=~/.mutt/.signature
 set alias_file=~/.mutt/aliases
 #set editor="xterm -e /usr/bin/vim +/^$ ++1"
 set editor="/usr/bin/vim +/^$ ++1"
@@ -39,7 +39,7 @@ set sort_aux=reverse-last-date-received
 set reverse_name=yes
 set sendmail="/usr/bin/msmtp"
 set text_flowed
-set signature=~/.mutt/.signature
+set signature=~/.signature
 set include=yes
 set confirmappend=no
 
@@ -60,9 +60,11 @@ set  attribution = "* On %d, %n <%a> wrote:"
 set forward_quote
 set tmpdir="~/.mutt/temp/"
 set uncollapse_jump
+set use_envelope_from
 
 set followup_to
 set honor_followup_to=yes
 
 #set index_format="%4C %Z %M:%e/%E %[%F %R] %-20.20F %-45.45s << %t ~%?l?%4l&%4c?"
 set index_format="%4C %Z %e/%E %[%F %R] %-17.17F %-45.45s < %-22.22t ~ %-4.4c"
+set fcc_clear=yes

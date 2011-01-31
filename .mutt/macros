@@ -15,14 +15,18 @@ macro index s '<next-thread>'
 macro index S <save-message>
 
 macro index V <collapse-all>
-macro generic ,f "<shell-escape>mairix " "search via mairix"
-macro index,pager \CI "<copy-message>=Important<enter>"
-macro index,pager \CT "<copy-message>=Todo<enter>"
-#macro pager .c "T.\n;WN^T.\n" "mark all messages as read"
-macro index .c "T.\n;WN^T.\n" "mark all messages as read"
+macro generic ,f "<change-folder>=Search<enter><shell-escape>mairix" "search via mairix"
+macro index,pager "\ei" "<copy-message>=Important<enter>"
+macro index,pager "\et" "<copy-message>=Todo<enter>"
+macro index ,c "T.\n;WN^T.\n" "mark all messages as read"
 
 macro index,pager p "<display-toggle-weed> <print-message> <display-toggle-weed> <exit>"
 
 # not sure about these
 macro generic,pager,index <f1> "!elinks /usr/doc/mutt/html/manual.html\n" "Show Mutt documentation"
 
+
+macro pager \eF  "<enter-command>set pager_index_lines=5<enter>"      # Change PIL size
+macro pager \ef  "<enter-command>set pager_index_lines=15<enter>"      # Change PIL size
+macro index \eh    "<pipe-message>mailhops<enter>"                      # View the path of the mail.
+macro index \ev    "<pipe-message>less<enter>"
